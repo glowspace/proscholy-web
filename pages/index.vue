@@ -3,7 +3,7 @@
     <div>
       <logo />
       <h1 class="title">
-        zpevnik-proscholy-spa
+        Hello World!
       </h1>
       <h2 class="subtitle">
          User frontend of zpevnik.proscholy.cz written in Nuxt.js
@@ -16,13 +16,12 @@
         >
           Documentation
         </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
+        <nuxt-link
+          to="second"
           class="button--grey"
         >
-          GitHub
-        </a>
+          Working example
+        </nuxt-link>
       </div>
     </div>
   </div>

@@ -39,7 +39,37 @@ export default {
   */
   modules: [
     '@nuxtjs/pwa',
+    '@nuxtjs/apollo',
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
+  apollo: {  
+    clientConfigs: {
+      default: {
+        httpEndpoint: "http://localhost:3000/api"
+      }
+    }
+  },
+  proxy: {
+    '/api': {
+      target: 'https://zpevnik.proscholy.cz/graphql',
+      pathRewrite: {
+        '^/api' : '/'
+        }
+      }
+  },
+  /*
+  ** Router
+  */
+  router: {
+    extendRoutes (routes, resolve) {
+      routes.push({
+        name: 'search',
+        path: '/search',
+        component: resolve(__dirname, 'pages/index.vue')
+      })
+    }
+  },
   /*
   ** Build configuration
   */
