@@ -17,10 +17,34 @@
           Documentation
         </a>
         <nuxt-link
-          to="second"
+          to="example"
           class="button--grey"
         >
           Working example
+        </nuxt-link>
+        <nuxt-link
+          to="o-zpevniku"
+          class="button--grey"
+        >
+          About songbook
+        </nuxt-link>
+        <nuxt-link
+          to="muj-ucet"
+          class="button--grey"
+        >
+          My account
+        </nuxt-link>
+        <nuxt-link
+          to="autor/21"
+          class="button--grey"
+        >
+          Author
+        </nuxt-link>
+        <nuxt-link
+          to="pisen/1"
+          class="button--grey"
+        >
+          Song
         </nuxt-link>
       </div>
     </div>

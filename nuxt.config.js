@@ -63,11 +63,8 @@ export default {
   */
   router: {
     extendRoutes (routes, resolve) {
-      routes.push({
-        name: 'search',
-        path: '/search',
-        component: resolve(__dirname, 'pages/index.vue')
-      })
+      routes.push({name: 'search', path: '/search', component: resolve(__dirname, 'pages/index.vue')}),
+      routes.push({name: 'song', path: '/pisen/:id/:slug', component: resolve(__dirname, 'pages/pisen/_id.vue')})
     }
   },
   /*
