@@ -411,6 +411,7 @@
 
 <script>
     import {store} from "../../store.js";
+    import {clone} from 'lodash';
 
     import FontSizer from "./FontSizer";
     import ChordMode from "./ChordMode";
