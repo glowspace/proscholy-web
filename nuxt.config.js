@@ -9,10 +9,16 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/png', 'sizes':'32x32', href: '~/static/img/favicon/favicon-32x32.png' },
+      { rel: 'icon', type: 'image/png', 'sizes':'16x16', href: '~/static/img/favicon/favicon-16x16.png' },
+      { rel: 'stylesheet', type: 'text/css', 'href': "https://fonts.googleapis.com/css?family=Nunito:200,600" },
+      { rel: 'stylesheet', 'href': "https://fonts.googleapis.com/icon?family=Material+Icons" },
+      { rel: 'stylesheet', type: 'text/css', 'href': "https://use.fontawesome.com/releases/v5.8.1/css/all.css", 'integrity':"sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf", 'crossorigin':"anonymous" }
+      
+      // todo: google analytics
     ]
   },
   /*

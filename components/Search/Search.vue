@@ -161,9 +161,9 @@ body.dark {
 </style>
 
 <script>
-import AuthorsList from "~/components/Search/AuthorsList";
-import SongsList from "~/components/Search/SongsList";
-import Filters from "~/components/Search/Filters";
+import AuthorsList from "./AuthorsList";
+import SongsList from "./SongsList";
+import Filters from "./Filters";
 
 export default {
     props: {
