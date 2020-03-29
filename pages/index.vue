@@ -1,5 +1,7 @@
 <template>
     <div :class="[init?'home-init':'home-afterinit']">
+        <navbar></navbar>
+
         <div class="logo-wrapper">
             <div class="logo"></div>
             <span class="caption noselect">Zpěvník</span>
@@ -164,6 +166,7 @@ body.dark {
 import AuthorsList from "~/components/Search/AuthorsList";
 import SongsList from "~/components/Search/SongsList";
 import Filters from "~/components/Search/Filters";
+import Navbar from "~/components/Navbar";
 
 export default {
     props: {
@@ -296,7 +299,8 @@ export default {
     components: {
         AuthorsList,
         SongsList,
-        Filters
+        Filters,
+        Navbar
     },
 
     computed: {
