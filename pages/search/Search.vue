@@ -154,12 +154,12 @@
                     return;
 
                 let url = "/search?";
-                let params = [];
-
-                params.push("q=" + this.search_string);
-                params.push("tags=" + Object.keys(this.selected_tags));
-                params.push("langs=" + Object.keys(this.selected_languages));
-                params.push("songbooks=" + Object.keys(this.selected_songbooks));
+                let params = [
+                    "q=" + this.search_string,
+                    "tags=" + Object.keys(this.selected_tags),
+                    "langs=" + Object.keys(this.selected_languages),
+                    "songbooks=" + Object.keys(this.selected_songbooks)
+                ];
 
              //   history.pushState(null, "", url + params.join("&"));
 

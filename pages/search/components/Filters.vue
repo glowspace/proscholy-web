@@ -42,6 +42,7 @@
 
 <script>
 import gql from "graphql-tag";
+import Vue from "vue";
 
 const fetch_items = gql`
     query {
