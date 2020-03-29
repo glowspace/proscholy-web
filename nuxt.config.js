@@ -18,7 +18,6 @@ export default {
       { rel: 'stylesheet', 'href': "https://fonts.googleapis.com/icon?family=Material+Icons" },
       { rel: 'stylesheet', type: 'text/css', 'href': "https://use.fontawesome.com/releases/v5.8.1/css/all.css", 'integrity':"sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf", 'crossorigin':"anonymous" }
       
-      // todo: google analytics
     ]
   },
   /*
@@ -42,6 +41,9 @@ export default {
   ** Nuxt.js dev-modules
   */
   buildModules: [
+    ['@nuxtjs/google-analytics', {
+      id: 'UA-94042414-8'
+    }]
   ],
   /*
   ** Nuxt.js modules
