@@ -41,9 +41,8 @@ export default {
   ** Nuxt.js dev-modules
   */
   buildModules: [
-    ['@nuxtjs/google-analytics', {
-      id: 'UA-94042414-8'
-    }]
+    ['@nuxtjs/google-analytics', { id: 'UA-94042414-8' }],
+    '@nuxtjs/router',
   ],
   /*
   ** Nuxt.js modules
@@ -68,17 +67,6 @@ export default {
         '^/api' : '/'
         }
       }
-  },
-  /*
-  ** Router
-  */
-  router: {
-    extendRoutes (routes, resolve) {
-      routes.push({name: 'search', path: '/search', component: '~/pages/search/Search.vue'}),
-      routes.push({name: 'song', path: '/pisen/:id/:slug', component: '~/pages/song/Song.vue'}),
-      routes.push({name: 'about', path: '/o-zpevniku', component: '~/pages/about/AboutSongBook.vue'}),
-      routes.push({name: 'account', path: '/login', component: '~/pages/account/Login.vue'})
-    }
   },
   /*
   ** Build configuration
