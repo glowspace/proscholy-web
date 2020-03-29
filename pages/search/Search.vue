@@ -108,6 +108,8 @@
     import AppLinks from "./components/AppLinks";
     import Logo from "./components/Logo";
 
+    import { isEmpty } from "lodash";
+
     /**
      * Root search component.
      *
@@ -153,68 +155,45 @@
                 if (this.init)
                     return;
 
-                let url = "/search?";
-                let params = [
-                    "q=" + this.search_string,
-                    "tags=" + Object.keys(this.selected_tags),
-                    "langs=" + Object.keys(this.selected_languages),
-                    "songbooks=" + Object.keys(this.selected_songbooks)
-                ];
+                this.$router.replace({
+                    path: '/search',
+                    query: {
+                        q: this.search_string,
+                        tags: Object.keys(this.selected_tags),
+                        langs: Object.keys(this.selected_languages),
+                        songbooks: Object.keys(this.selected_songbooks)
+                    }
+                });
 
-             //   history.pushState(null, "", url + params.join("&"));
-
-                this.$router.push({path: url + params.join("&")})
+                console.log('replaced url');
             },
 
             applyStateChange(event) {
-                let fragments = decodeURIComponent(window.location.href).split('?');
+                let query = this.$route.query;
 
-                if (fragments.length === 1) {
+                if (isEmpty(query)) {
                     this.resetState(false);
                     return;
                 }
 
-                let params = fragments[1].split('&');
+                this.search_string = query.q || this.search_string;
 
-                for (let param of params) {
-                    let param_fragments = param.split('=');
-
-                    if (param_fragments[0] === "searchString") {
-                        this.search_string = param_fragments[1];
-                    }
-                    if (param_fragments[0] === "tags") {
-                        let obj = {};
-
-                        for (let id of this.getSplittedParam(param_fragments[1])) {
-                            obj[id] = true;
-                        }
-
-                        this.selected_tags = obj;
-                    }
-                    if (param_fragments[0] === "langs") {
-                        let obj = {};
-
-                        for (let lang of this.getSplittedParam(param_fragments[1])) {
-                            obj[lang] = true;
-                        }
-
-                        this.selected_languages = obj;
-                    }
-                    if (param_fragments[0] === "songbooks") {
-                        let obj = {};
-
-                        for (let id of this.getSplittedParam(param_fragments[1])) {
-                            obj[id] = true;
-                        }
-
-                        this.selected_songbooks = obj;
-                    }
+                // a helper function
+                const getObjFormat = function(str) {
+                    if (!str)
+                        return {};
+                    return str.split(',').filter(str => str.length)
+                                            .reduce((obj, key, _) => {
+                                                obj[key] = true;
+                                                return obj;
+                                            }, {});
                 }
+
+                this.selected_tags = getObjFormat(query.tags);
+                this.selected_languages = getObjFormat(query.langs);
+                this.selected_songbooks = getObjFormat(query.songbooks);
             },
 
-            getSplittedParam(param) {
-                return param.split(',').filter(str => str.length > 0)
-            },
 
             resetState(update_url) {
                 this.search_string = "";
@@ -234,7 +213,8 @@
             },
 
             currentUrl() {
-                return encodeURIComponent(window.location.href);
+                // return encodeURIComponent(window.location.href);
+                return this.$route.fullPath;
             }
         },
 
@@ -242,7 +222,7 @@
             this.search_string = this.strPrefill ? this.strPrefill : "";
             window.onpopstate = this.applyStateChange;
 
-            if (window.location.href.indexOf('?search') > 0) {
+            if (this.$route.path == "/search") {
                 // this.applyStateChange();
                 this.init = false;
             }
