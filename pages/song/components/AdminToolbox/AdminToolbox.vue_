@@ -8,7 +8,7 @@
            href="#">Nástěnka</a>
         <br>
 
-        @if (App\SongLyric::restricted()->where('id', $song_l->id)->count() > 0)
+        <!-- @if (App\SongLyric::restricted()->where('id', $song_l->id)->count() > 0) -->
         <a class="btn btn-secondary"
            href="{{route('admin.song.edit', ['song_lyric' => $song_l->id])}}">
             <i class="fas fa-edit"></i>

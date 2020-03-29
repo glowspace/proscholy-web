@@ -75,9 +75,9 @@ export default {
   router: {
     extendRoutes (routes, resolve) {
       routes.push({name: 'search', path: '/search', component: '~/pages/search/Search.vue'}),
-      routes.push({name: 'song', path: '/pisen/:id/:slug', component: '~pages/song/Song.vue'}),
-      routes.push({name: 'about', path: '/about', component: '~pages/about/AboutSongBook.vue'}),
-      routes.push({name: 'account', path: '/login', component: '~pages/account/Login.vue'}),
+      routes.push({name: 'song', path: '/pisen/:id/:slug', component: '~/pages/song/Song.vue'}),
+      routes.push({name: 'about', path: '/o-zpevniku', component: '~/pages/about/AboutSongBook.vue'}),
+      routes.push({name: 'account', path: '/login', component: '~/pages/account/Login.vue'})
     }
   },
   /*

@@ -23,7 +23,6 @@
 </template>
 
 <script>
-    import {GoogleProvider, auth} from 'Public/helpers/firebase_auth'
 
     import gql from 'graphql-tag'
 

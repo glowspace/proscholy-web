@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    import { store } from "Public/components/store.js";
+    import { store } from "~/pages/song/store.js";
 
     export default {
         data() {

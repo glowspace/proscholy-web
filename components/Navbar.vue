@@ -66,7 +66,7 @@
 </template>
 
 <script>
-    import DarkModeButton from "../../components/DarkModeButton";
+    import DarkModeButton from "~/components/DarkModeButton";
 
     export default {
         name: "Navbar",
