@@ -1,3 +1,4 @@
+require('dotenv').config();
 
 export default {
   mode: 'spa',
@@ -43,6 +44,7 @@ export default {
   buildModules: [
     ['@nuxtjs/google-analytics', { id: 'UA-94042414-8' }],
     '@nuxtjs/router',
+    '@nuxtjs/dotenv',
   ],
   /*
   ** Nuxt.js modules
@@ -56,13 +58,13 @@ export default {
   apollo: {  
     clientConfigs: {
       default: {
-        httpEndpoint: "http://localhost:3000/api"
+        httpEndpoint: process.env.APP_URL
       }
     }
   },
   proxy: {
-    '/api': {
-      target: 'https://zpevnik.proscholy.cz/graphql',
+    '/api': { 
+      target: process.env.GRAPHQL_TARGET,
       pathRewrite: {
         '^/api' : '/'
         }
