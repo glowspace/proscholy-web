@@ -158,10 +158,10 @@
                 this.$router.replace({
                     path: '/search',
                     query: {
-                        q: this.search_string,
-                        tags: Object.keys(this.selected_tags),
-                        langs: Object.keys(this.selected_languages),
-                        songbooks: Object.keys(this.selected_songbooks)
+                        q: this.search_string || null,
+                        tags: Object.keys(this.selected_tags).join(','),
+                        langs: Object.keys(this.selected_languages).join(','),
+                        songbooks: Object.keys(this.selected_songbooks).join(',')
                     }
                 });
 
@@ -180,8 +180,11 @@
 
                 // a helper function
                 const getObjFormat = function(str) {
-                    if (!str)
+                    if (isEmpty(str))
                         return {};
+
+                    console.log(str);
+
                     return str.split(',').filter(str => str.length)
                                             .reduce((obj, key, _) => {
                                                 obj[key] = true;
