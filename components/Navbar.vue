@@ -2,27 +2,27 @@
     <div>
         <nav class="navbar navbar-expand-lg navbar-dark absolute-top">
             <div class="container d-flex">
-                <router-link to="/"
+                <nuxt-link to="/"
                              class="navbar-brand">
                     <img src="/img/logo_v2.png"
                          style="padding: 0 10px 0 0;"
                          width="60"
                          alt="logo">Zpěvník pro scholy
-                </router-link>
+                </nuxt-link>
 
                 <div class="d-flex flex-grow-1">
                     <ul class="navbar-nav flex-nowrap">
                         <li class="nav-item">
-                            <router-link to="/"
+                            <nuxt-link to="/"
                                          class="btn btn-secondary"><i class="fas fa-search"></i> Vyhledávání
-                            </router-link>
+                            </nuxt-link>
                         </li>
 
                         <li class="nav-item">
-                            <router-link to="/o-zpevniku"
+                            <nuxt-link to="/o-zpevniku"
                                          class="btn btn-secondary">
                                 <i class="fas fa-info"></i> O zpěvníku
-                            </router-link>
+                            </nuxt-link>
                         </li>
 
                         <dark-mode-button v-cloak> Tmavý mód</dark-mode-button>
@@ -32,9 +32,9 @@
                 <div class="d-flex flex-grow-1">
                     <ul class="navbar-nav ml-auto flex-nowrap">
                         <li class="nav-item">
-                            <router-link to="/muj-ucet"
+                            <nuxt-link to="/muj-ucet"
                                          class="btn btn-secondary nav-item"><i class="fas fa-user"></i> Přihlásit se
-                            </router-link>
+                            </nuxt-link>
                         </li>
                     </ul>
                 </div>
@@ -48,16 +48,16 @@
 
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
             <div class="container">
-                <router-link to="/"
+                <nuxt-link to="/"
                              class="btn">
                     <img src="/img/logo_v2.png"
                          height="24"
-                         alt="logo"></router-link>
-                <router-link to="/"
-                             class="btn btn-secondary"><i class="fas fa-search"></i></router-link>
+                         alt="logo"></nuxt-link>
+                <nuxt-link to="/"
+                             class="btn btn-secondary"><i class="fas fa-search"></i></nuxt-link>
 
-                <router-link to="/o-zpevniku"
-                             class="btn btn-secondary"><i class="fas fa-info"></i></router-link>
+                <nuxt-link to="/o-zpevniku"
+                             class="btn btn-secondary"><i class="fas fa-info"></i></nuxt-link>
 
                 <dark-mode-button></dark-mode-button>
             </div>
