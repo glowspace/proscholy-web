@@ -1,5 +1,6 @@
 // /plugins/firebase.js
-import firebase from 'firebase'
+import firebase from 'firebase';
+import Vue from 'vue';
 
 var firebaseConfig = {
     apiKey: "AIzaSyC3jFunEGoCxoGdmp6wPfy8sJikU5Dxvwc",
@@ -18,6 +19,8 @@ if (!firebase.apps.length) {
 }
 
 
-// export const GoogleProvider = new firebase.auth.GoogleAuthProvider()
+Vue.prototype.$auth = firebase.auth()
+
+export const GoogleProvider = new firebase.auth.GoogleAuthProvider()
 // export const auth = firebase.auth()
 // export default firebase

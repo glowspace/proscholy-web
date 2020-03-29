@@ -23,7 +23,7 @@
 </template>
 
 <script>
-
+    import { GoogleProvider } from '~/plugins/firebase';
     import gql from 'graphql-tag'
 
     const fetch_items = gql`
@@ -99,7 +99,7 @@
         },
 
         mounted() {
-            auth.onAuthStateChanged(this.performUserQuery);
+            this.$auth.onAuthStateChanged(this.performUserQuery);
         },
 
         methods: {
@@ -134,7 +134,7 @@
             async signin() {
                 this.provider = GoogleProvider;
 
-                var user = auth.currentUser;
+                var user = this.$auth.currentUser;
 
                 let token = "";
 
@@ -142,7 +142,7 @@
                 //     token = await user.getIdToken();
                 //     console.log(token);
                 // } else {
-                let creds = await auth.signInWithPopup(this.provider);
+                let creds = await this.$auth.signInWithPopup(this.provider);
 
                 console.log({creds});
                 token = await creds.user.getIdToken();
