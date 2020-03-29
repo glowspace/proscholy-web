@@ -18,9 +18,7 @@ if (!firebase.apps.length) {
   app = firebase.initializeApp(firebaseConfig)
 }
 
-
+// to be accessed in .Vue files via   this.$auth
 Vue.prototype.$auth = firebase.auth()
 
 export const GoogleProvider = new firebase.auth.GoogleAuthProvider()
-// export const auth = firebase.auth()
-// export default firebase
