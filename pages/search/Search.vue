@@ -156,7 +156,7 @@
                     return;
 
                 this.$router.replace({
-                    path: '/search',
+                    path: '/',
                     query: {
                         q: this.search_string || null,
                         tags: Object.keys(this.selected_tags).join(','),
@@ -218,14 +218,17 @@
             currentUrl() {
                 // return encodeURIComponent(window.location.href);
                 return this.$route.fullPath;
+            }, 
+
+            isEmpty(obj) {
+                return Object.keys(obj).length === 0 && obj.constructor === Object;
             }
         },
 
         mounted() {
             this.search_string = this.strPrefill ? this.strPrefill : "";
             window.onpopstate = this.applyStateChange;
-
-            if (this.$route.path == "/search") {
+            if (this.search_string || !isEmpty(this.selected_tags) || !isEmpty(this.selected_languages) || !isEmpty(this.selected_songbook)) {
                 // this.applyStateChange();
                 this.init = false;
             }
