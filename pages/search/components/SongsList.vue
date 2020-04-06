@@ -285,7 +285,10 @@
             },
 
             currentUrl() {
-                return encodeURIComponent(window.location.href);
+                if (process.client)
+                    return encodeURIComponent(window.location.href);
+                
+                return ""
             }
         },
 

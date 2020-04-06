@@ -139,11 +139,13 @@
 
 
         beforeCreate: function () {
-            document.body.className = 'home';
+            if (process.client)
+                document.body.className = 'home';
         },
 
         beforeDestroy() {
-            document.body.className = '';
+            if (process.client)
+                document.body.className = '';
         },
 
         methods: {
@@ -223,7 +225,8 @@
 
         mounted() {
             this.search_string = this.strPrefill ? this.strPrefill : "";
-            window.onpopstate = this.applyStateChange;
+            if (process.client)
+                window.onpopstate = this.applyStateChange;
 
             if (this.$route.path == "/search") {
                 // this.applyStateChange();

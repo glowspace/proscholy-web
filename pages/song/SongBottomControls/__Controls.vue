@@ -21,8 +21,10 @@
         },
         methods:{
             controlsToggle: function() {
-				this.controlsDisplay = !(this.controlsDisplay);
-				document.querySelector(".navbar.fixed-top").classList.toggle("d-none");
+                if (process.client) {
+                    this.controlsDisplay = !(this.controlsDisplay);
+                    document.querySelector(".navbar.fixed-top").classList.toggle("d-none");
+                }
             }
         }
     }

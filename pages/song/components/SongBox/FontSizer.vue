@@ -16,14 +16,14 @@
         data() { 
             return {
                 fontSizePercent: 100,
-                sl_doc: document.getElementById("song-lyrics"),
+                sl_doc: process.client ? document.getElementById("song-lyrics") : null,
                 sl_refresh_handler: null
             }
         },
 
         methods:{
             setFontSizePercent: function(val) {
-                let sl = document.getElementById("song-lyrics");
+                let sl = process.client ? document.getElementById("song-lyrics") : null;
 
                 if (!sl.style.height) {
                     sl.style.height = sl.clientHeight + "px";
