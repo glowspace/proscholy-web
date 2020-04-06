@@ -79,7 +79,6 @@ export default {
     */
     extend (config, ctx) {
     },
-    vendor: ['axios', 'bootstrap', 'bootstrap-material-design', 'bowser', 'core-js', 'firebase', 'graphql', 'graphql-tag', 'lodash', 'nosleep.js'],
     extractCSS: true
   }
 }
