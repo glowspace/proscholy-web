@@ -1,4 +1,6 @@
 <template>
+    <!-- todo: refactor so that it does not need client-only wrapper -->
+    <client-only>
     <div class="songs-list">
         <table class="table m-0">
             <template v-if="song_lyrics && song_lyrics.length && results_loaded">
@@ -123,6 +125,7 @@
             </div>
         </div>
     </div>
+    </client-only>
 </template>
 
 <script>
