@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 export default {
-  mode: 'spa',
+  mode: 'universal',
   /*
   ** Headers of the page
   */
@@ -78,6 +78,8 @@ export default {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
-    }
+    },
+    vendor: ['axios', 'bootstrap', 'bootstrap-material-design', 'bowser', 'core-js', 'firebase', 'graphql', 'graphql-tag', 'lodash', 'nosleep.js'],
+    extractCSS: true
   }
 }
