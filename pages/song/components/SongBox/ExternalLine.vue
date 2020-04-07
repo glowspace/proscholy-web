@@ -46,7 +46,7 @@ export default {
                 8: "pdf/text_chords",
                 9: "pdf/text",
             },
-            browser: proces.client ? Bowser.getParser(window.navigator.userAgent) : null,
+            browser: process.client ? Bowser.getParser(window.navigator.userAgent) : null,
             supportPdfIframesCondition: {
                 mobile: {
                     chrome: '>1000',
@@ -64,7 +64,7 @@ export default {
             if ([4,8,9].includes(this.type)) {
                 // pdf file
                 // decide if the browser can display that directly in iframe
-                if (this.browser.satisfies(this.supportPdfIframesCondition)) {
+                if (this.browser !== null && this.browser.satisfies(this.supportPdfIframesCondition)) {
                     return this.url;
                 } else {
                     return "https://docs.google.com/viewer?url=" + this.url;

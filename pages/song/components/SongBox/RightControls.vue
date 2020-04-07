@@ -43,7 +43,7 @@
                 fullscreen: false,
                 nosleep: false,
 
-                noSleeper: new NoSleep()
+                noSleeper: process.client ? new NoSleep() : null
             }
         },
 

@@ -66,7 +66,7 @@ export default {
                 8: "pdf/text_chords",
                 9: "pdf/text",
             },
-            browser: proces.client ? Bowser.getParser(window.navigator.userAgent) : null,
+            browser: process.client ? Bowser.getParser(window.navigator.userAgent) : null,
             supportPdfIframesCondition: {
                 mobile: {
                     chrome: '>1000',
