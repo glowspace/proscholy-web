@@ -50,7 +50,7 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/pwa',
+    // '@nuxtjs/pwa',
     '@nuxtjs/apollo',
     '@nuxtjs/axios',
     '@nuxtjs/proxy'
