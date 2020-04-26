@@ -157,28 +157,37 @@
                 if (this.init)
                     return;
 
+                let GETparameters = {};
+                if (this.search_string) {
+                    GETparameters.vyhledavani = this.search_string;
+                }
+                if (Object.keys(this.selected_tags).length) {
+                    GETparameters.stitky = Object.keys(this.selected_tags).join(',');
+                }
+                if (Object.keys(this.selected_languages).length){
+                    GETparameters.jazyky = Object.keys(this.selected_languages).join(',');
+                }
+                if (Object.keys(this.selected_songbooks).length) {
+                    GETparameters.zpevniky = Object.keys(this.selected_songbooks).join(',');
+                }
+
                 this.$router.replace({
-                    path: '/search',
-                    query: {
-                        q: this.search_string || null,
-                        tags: Object.keys(this.selected_tags).join(','),
-                        langs: Object.keys(this.selected_languages).join(','),
-                        songbooks: Object.keys(this.selected_songbooks).join(',')
-                    }
+                    path: '/',
+                    query: GETparameters
                 });
 
                 console.log('replaced url');
             },
 
             applyStateChange(event) {
-                let query = this.$route.query;
+                let GETparameters = this.$route.query;
 
-                if (isEmpty(query)) {
+                if (isEmpty(GETparameters)) {
                     this.resetState(false);
                     return;
                 }
 
-                this.search_string = query.q || this.search_string;
+                this.search_string = GETparameters.vyhledavani || this.search_string;
 
                 // a helper function
                 const getObjFormat = function(str) {
@@ -194,9 +203,9 @@
                                             }, {});
                 }
 
-                this.selected_tags = getObjFormat(query.tags);
-                this.selected_languages = getObjFormat(query.langs);
-                this.selected_songbooks = getObjFormat(query.songbooks);
+                this.selected_tags = getObjFormat(GETparameters.stitky);
+                this.selected_languages = getObjFormat(GETparameters.jayzky);
+                this.selected_songbooks = getObjFormat(GETparameters.zpevniky);
             },
 
 

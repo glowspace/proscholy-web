@@ -12,7 +12,7 @@ export function createRouter() {
   return new Router({
     mode: 'history',
     routes: [
-        {path: '/', alias: '/search', component: Search},
+        {path: '/', component: Search},
         // {path: '/search', component: Search},
     
         {path: '/o-zpevniku', component: AboutSongBook},
