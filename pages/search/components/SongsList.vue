@@ -190,7 +190,9 @@
                 let query = {
                     'bool': {
                         'must': [],
-                        'filter': []
+                        'filter': [
+                            {'term': {'is_arrangement': {'value': false}}}
+                        ]
                     }
                 };
 
@@ -271,6 +273,8 @@
             },
 
             getSongNumber(song_lyric, getfirstPart) {
+                console.log(song_lyric);
+
                 if (this.preferred_songbook_id === null) {
                     if (getfirstPart) {
                         return "";
@@ -279,6 +283,9 @@
                     }
                 } else {
                     let rec = song_lyric.songbook_records.filter(record => record.songbook.id === this.preferred_songbook_id)[0];
+                    if (!rec) // when mocking the search data, the record is not always available
+                        return;
+
                     if (getfirstPart) {
                         return rec.songbook.shortcut + " ";
                     } else {
