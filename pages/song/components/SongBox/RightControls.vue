@@ -7,33 +7,6 @@
 		</div>
 </template>
 
-<style>
-    .nosleep-caption {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        margin-right: calc(2.875rem);
-        margin-bottom: -0.46875rem;
-        padding: 0.46875rem 10px;
-        background-color: rgba(255, 255, 255, 0.8) !important;
-        border-radius: 10px;
-        z-index: 4;
-        visibility: hidden;
-        opacity: 0;
-        transition: opacity 600ms, visibility 600ms;
-        pointer-events: none;
-    }
-
-    body.dark .nosleep-caption {
-        background-color: rgba(0, 0, 0, 0.8) !important;
-    }
-
-    .nosleep:hover + .nosleep-caption {
-        visibility: visible;
-        opacity: 1;
-    }
-</style>
-
 <script>
     import NoSleep from 'nosleep.js';
 
@@ -76,7 +49,7 @@
                 this.fullscreen = !(this.fullscreen);
             }
         },
-        
+
         mounted() {
             if (process.client) {
                 document.addEventListener("fullscreenchange", this.fullscreenChanged);

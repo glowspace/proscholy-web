@@ -181,7 +181,7 @@ span.song-part-tag {
   .songbook-tag {
     padding: 0;
     display: flex;
-    
+
     .songbook-name {
       padding: 0.1em 0.7em;
       padding-right: 0.6em;
@@ -198,3 +198,27 @@ span.song-part-tag {
   }
 }
 
+.nosleep-caption {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-right: calc(2.875rem);
+  margin-bottom: -0.46875rem;
+  padding: 0.46875rem 10px;
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border-radius: 10px;
+  z-index: 4;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 600ms, visibility 600ms;
+  pointer-events: none;
+}
+
+body.dark .nosleep-caption {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.nosleep:hover + .nosleep-caption {
+  visibility: visible;
+  opacity: 1;
+}
