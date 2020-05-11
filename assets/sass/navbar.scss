@@ -1,52 +1,52 @@
-
 .navbar.absolute-top {
-  z-index: 201;
+    z-index: 201;
 
-  @media screen and (max-width: 350px) {
-    display: none;
-  }
+    @media screen and (max-width: 350px) {
+        display: none;
+    }
 }
 
 .mobile-padding-button {
-  display: none;
+    display: none;
 
-  @media screen and (max-width: 350px) {
-    display: block;
-  }
+    @media screen and (max-width: 350px) {
+        display: block;
+    }
 }
 
 
 .navbar {
-  padding: 0.5rem 0;
+    padding: 0.5rem 0;
 }
 
-.navbar > div {
-  width: 100%;
-  /* max-width: 994px; */
-  margin: 0 auto;
-  padding: 0;
+.navbar>div {
+    width: 100%;
+    /* max-width: 994px; */
+    margin: 0 auto;
+    padding: 0;
 }
 
 .navbar .container {
-  // override bootstrap flex behaviour
-  display: block;
+    // override bootstrap flex behaviour
+    display: block;
 }
 
-.navbar.absolute-top a i, .card-header i {
-  padding-right: 5px;
+.navbar.absolute-top a i,
+.card-header i {
+    padding-right: 5px;
 }
 
 .navbar.fixed-top {
-  padding-top: 0;
-  padding-bottom: 0;
-  line-height: initial;
-  min-height: auto;
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: initial;
+    min-height: auto;
 }
 
 .navbar a {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .navbar .btn.btn-secondary {
-  color: #aaa;
+    color: #aaa;
 }

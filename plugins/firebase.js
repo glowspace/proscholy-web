@@ -16,7 +16,7 @@ var firebaseConfig = {
 
 let app = null
 if (!firebase.apps.length) {
-  app = firebase.initializeApp(firebaseConfig)
+    app = firebase.initializeApp(firebaseConfig)
 }
 
 // to be accessed in .Vue files via   this.$auth

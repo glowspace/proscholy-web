@@ -7,18 +7,18 @@ import Song from "~/pages/song/Song";
 import Login from "~/pages/account/Login";
 
 Vue.use(Router)
- 
+
 export function createRouter() {
-  return new Router({
-    mode: 'history',
-    routes: [
-        {path: '/', component: Search},
-        // {path: '/search', component: Search},
-    
-        {path: '/o-zpevniku', component: AboutSongBook},
-        {path: '/pisen/:id/:slug', component: Song},
-    
-        {path: '/muj-ucet', component: Login}
-    ]
-  })
+    return new Router({
+        mode: 'history',
+        routes: [
+            { path: '/', component: Search },
+            // {path: '/search', component: Search},
+
+            { path: '/o-zpevniku', component: AboutSongBook },
+            { path: '/pisen/:id/:slug', component: Song },
+
+            { path: '/muj-ucet', component: Login }
+        ]
+    })
 }
