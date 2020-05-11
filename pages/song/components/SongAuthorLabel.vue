@@ -1,13 +1,9 @@
-<template>
-
-</template>
+<template> </template>
 
 <script>
-    export default {
-        name: "SongAuthorLabel"
-    }
+export default {
+    name: 'SongAuthorLabel'
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

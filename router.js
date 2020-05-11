@@ -1,12 +1,12 @@
 import Vue from 'vue';
-import Router from "vue-router";
+import Router from 'vue-router';
 
-import Search from "~/pages/search/Search";
-import AboutSongBook from "~/pages/about/AboutSongBook";
-import Song from "~/pages/song/Song";
-import Login from "~/pages/account/Login";
+import Search from '~/pages/search/Search';
+import AboutSongBook from '~/pages/about/AboutSongBook';
+import Song from '~/pages/song/Song';
+import Login from '~/pages/account/Login';
 
-Vue.use(Router)
+Vue.use(Router);
 
 export function createRouter() {
     return new Router({
@@ -20,5 +20,5 @@ export function createRouter() {
 
             { path: '/muj-ucet', component: Login }
         ]
-    })
+    });
 }
