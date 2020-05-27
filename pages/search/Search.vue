@@ -59,8 +59,7 @@
                         >
                             <a
                                 class="btn btn-outline-light display-all-songs font-weight-bold"
-                                ><i class="fas fa-chevron-down pr-1"></i>
-                                ZOBRAZIT VŠECHNY PÍSNĚ</a
+                                ><i class="fas fa-chevron-down pr-1"></i>ZOBRAZIT VŠECHNY PÍSNĚ</a
                             >
                         </div>
                         <div

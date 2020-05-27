@@ -44,7 +44,3 @@
         props: ['song'],
     }
 </script>
-
-<style scoped>
-
-</style>

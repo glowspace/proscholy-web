@@ -60,5 +60,3 @@ export default {
     props: ['song']
 };
 </script>
-
-<style scoped></style>

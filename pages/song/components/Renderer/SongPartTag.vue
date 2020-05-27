@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { store } from '../store.js';
+import { store } from '../../store.js';
 
 export default {
     data() {
@@ -18,12 +18,3 @@ export default {
     }
 };
 </script>
-
-<style lang="scss">
-.song-part-tag {
-    display: inline-block;
-    position: relative;
-    z-index: 2;
-    margin-right: 0.1rem;
-}
-</style>

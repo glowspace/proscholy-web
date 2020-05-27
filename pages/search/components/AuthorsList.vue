@@ -1,22 +1,24 @@
 <template>
     <table class="table">
-        <template v-if="authors && authors.length && !$apollo.loading">
-            <tr v-for="author in authors" v-bind:key="author.id">
-                <td>
-                    <a :href="author.public_url"
-                        >{{ author.name }} - {{ author.type_string }}</a
-                    >
+        <tbody>
+            <template v-if="authors && authors.length && !$apollo.loading">
+                <tr v-for="author in authors" v-bind:key="author.id">
+                    <td>
+                        <a :href="author.public_url"
+                            >{{ author.name }} - {{ author.type_string }}</a
+                        >
+                    </td>
+                </tr>
+            </template>
+            <tr v-else>
+                <td v-if="$apollo.loading">
+                    <i>Načítání</i>
+                </td>
+                <td v-else>
+                    <i>Žádný autor s tímto jménem nebyl nalezen.</i>
                 </td>
             </tr>
-        </template>
-        <tr v-else>
-            <td v-if="$apollo.loading">
-                <i>Načítání</i>
-            </td>
-            <td v-else>
-                <i>Žádný autor s tímto jménem nebyl nalezen.</i>
-            </td>
-        </tr>
+        </tbody>
     </table>
 </template>
 

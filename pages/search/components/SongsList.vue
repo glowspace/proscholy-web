@@ -1,8 +1,9 @@
 <template>
     <!-- todo: refactor so that it does not need client-only wrapper -->
     <client-only>
-        <div class="songs-list">
-            <table class="table m-0">
+    <div class="songs-list">
+        <table class="table m-0">
+            <tbody>
                 <template
                     v-if="song_lyrics && song_lyrics.length && results_loaded"
                 >
@@ -27,6 +28,7 @@
                                     getSongNumber(song_lyric, false)
                                 }}</span>
                             </nuxt-link>
+                            <!-- todo: opravit url -->
                         </td>
                         <td
                             :class="[
@@ -39,12 +41,14 @@
                                 :to="'/pisen/' + song_lyric.id + '/slug'"
                                 >{{ song_lyric.name }}
                             </nuxt-link>
+                            <!-- todo: opravit url -->
                         </td>
                         <td
                             :class="[
                                 { 'border-top-0': !index },
                                 'p-1 align-middle'
                             ]"
+                            :colspan="song_lyric.lang != 'cs' ? 1 : 2"
                         >
                             <span
                                 v-for="(author,
@@ -62,6 +66,7 @@
                         <td
                             class="no-left-padding text-right text-uppercase small align-middle pr-3"
                             :class="{ 'border-top-0': !index }"
+                            v-if="song_lyric.lang != 'cs'"
                         >
                             <span
                                 :class="[
@@ -70,7 +75,6 @@
                                     },
                                     'pr-sm-0 pr-1'
                                 ]"
-                                v-if="song_lyric.lang != 'cs'"
                                 :title="song_lyric.lang_string"
                                 >{{ song_lyric.lang.substring(0, 3) }}</span
                             >
@@ -138,10 +142,10 @@
                             ></i>
                         </td>
                     </tr>
-                    <scroll-trigger
+                    <tr><td><scroll-trigger
                         @triggerIntersected="loadMore"
                         :enabled="enable_more"
-                    />
+                    /></td></tr>
                 </template>
                 <tr v-else>
                     <td v-if="!results_loaded" class="border-top-0 p-1">
@@ -171,23 +175,23 @@
                         </a>
                     </td>
                 </tr>
-            </table>
-
-            <div class="text-center">
-                <div
-                    class="btn btn-primary"
-                    v-if="enable_more && results_loaded"
-                >
-                    <span
-                        class="spinner-border spinner-border-sm"
-                        role="status"
-                        aria-hidden="true"
-                    ></span>
-                    Načítám další výsledky (celkem
-                    {{ song_lyrics_paginated.paginatorInfo.total }})
-                </div>
+            </tbody>
+        </table>
+        <div class="text-center">
+            <div
+                class="btn btn-primary"
+                v-if="enable_more && results_loaded"
+            >
+                <span
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                ></span>
+                Načítám další výsledky (celkem
+                {{ song_lyrics_paginated.paginatorInfo.total }})
             </div>
         </div>
+    </div>
     </client-only>
 </template>
 
@@ -395,8 +399,6 @@ export default {
         },
 
         getSongNumber(song_lyric, getfirstPart) {
-            console.log(song_lyric);
-
             if (this.preferred_songbook_id === null) {
                 if (getfirstPart) {
                     return '';

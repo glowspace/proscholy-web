@@ -16,5 +16,3 @@ export default {
     name: 'SongLoading'
 };
 </script>
-
-<style scoped></style>

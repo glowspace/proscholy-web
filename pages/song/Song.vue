@@ -14,6 +14,12 @@ const FETCH_SONG_LYRIC = gql`
         song_lyric(id: $id) {
             id
             name
+            type
+            authors {
+                id
+                name
+                public_url
+            }
             externals(orderBy: { field: "type", order: ASC }) {
                 id
                 public_name
@@ -49,8 +55,8 @@ const FETCH_SONG_LYRIC = gql`
                         name
                         public_url
                     }
-                    lang
-                    lang_string
+                    # lang
+                    # lang_string
                 }
             }
             capo
@@ -87,5 +93,3 @@ export default {
     methods: {}
 };
 </script>
-
-<style scoped></style>

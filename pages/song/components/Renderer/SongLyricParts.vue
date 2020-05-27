@@ -11,20 +11,21 @@
                 v-bind:key="key2"
             >
                 <!-- todo: song part tag -->
-
-                <chord
-                    v-for="(chord, key3) in line.chords"
-                    v-bind:key="key3"
-                    :base="chord.base"
-                    :variant="chord.variant"
-                    :extension="chord.extension"
-                    :bass="chord.bass"
-                    :isDivided="chord.isDivided"
-                    :isOptional="chord.isOptional"
-                    :isSubstitute="chord.isSubstitute"
-                >
-                    {{ chord.text }}
-                </chord>
+                <song-part-tag v-if="!key2">{{ part.type + (part.type ? (part.isVerse ? '.' : ':') : '') }}&nbsp;</song-part-tag
+                ><template v-for="(chord, key3) in line.chords">
+                    <chord
+                        v-bind:key="key3"
+                        :base="chord.base"
+                        :variant="chord.variant"
+                        :extension="chord.extension"
+                        :bass="chord.bass"
+                        :isDivided="chord.isDivided"
+                        :isOptional="chord.isOptional"
+                        :isSubstitute="chord.isSubstitute"
+                        :hasNextSibling="hasNextSibling(chord)"
+                    >{{ chord.text }}</chord
+                    ><template v-if="!chord.isDivided && line.chords[key3 + 1]"><span>&nbsp;</span></template>
+                </template>
             </div>
         </div>
     </div>
@@ -33,6 +34,7 @@
 <script>
 import gql from 'graphql-tag';
 import Chord from './Chord';
+import SongPartTag from './SongPartTag';
 
 const FETCH_SONG_LYRIC_PARTS = gql`
     query($id: ID!) {
@@ -64,7 +66,8 @@ export default {
     props: ['songId'],
 
     components: {
-        Chord
+        Chord,
+        SongPartTag
     },
 
     apollo: {
@@ -88,6 +91,9 @@ export default {
             if (part.isInline) cl += ' song-part-inline';
 
             return cl;
+        },
+        hasNextSibling(chord) {
+
         }
     }
 };

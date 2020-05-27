@@ -54,17 +54,19 @@
                             </a>
                             <div class="row ml-0" v-if="!$apollo.loading">
                                 <table class="table m-0 w-auto">
-                                    <external-line
-                                        v-for="(score, index) in scores"
-                                        v-bind:key="index"
-                                        :index="index"
-                                        :url="score.url"
-                                        :download-url="score.download_url"
-                                        :song-name="song_lyric.name"
-                                        :name="score.public_name"
-                                        :type="score.type"
-                                        :authors="score.authors"
-                                    ></external-line>
+                                    <tbody>
+                                        <external-line
+                                            v-for="(score, index) in scores"
+                                            v-bind:key="index"
+                                            :index="index"
+                                            :url="score.url"
+                                            :download-url="score.download_url"
+                                            :song-name="song_lyric.name"
+                                            :name="score.public_name"
+                                            :type="score.type"
+                                            :authors="score.authors"
+                                        ></external-line>
+                                    </tbody>
                                 </table>
                             </div>
                             <div class="row" v-else>
@@ -89,44 +91,46 @@
                             </a>
                             <div class="row ml-0" v-if="!$apollo.loading">
                                 <table class="table m-0 w-auto">
-                                    <tr>
-                                        <th class="border-top-0"></th>
-                                        <th class="border-top-0">Název</th>
-                                        <th class="border-top-0">Typ</th>
-                                        <th class="border-top-0">
-                                            Autor (překladu)
-                                        </th>
-                                    </tr>
-                                    <translation-line
-                                        v-for="(translation,
-                                        index) in song_lyric.song.song_lyrics.filter(
-                                            lyric => lyric.type == 0
-                                        )"
-                                        :translation="translation"
-                                        :original_name="song_lyric.name"
-                                        :key="index + '0'"
-                                    >
-                                    </translation-line>
-                                    <translation-line
-                                        v-for="(translation,
-                                        index) in song_lyric.song.song_lyrics.filter(
-                                            lyric => lyric.type == 2
-                                        )"
-                                        :translation="translation"
-                                        :original_name="song_lyric.name"
-                                        :key="index + '1'"
-                                    >
-                                    </translation-line>
-                                    <translation-line
-                                        v-for="(translation,
-                                        index) in song_lyric.song.song_lyrics.filter(
-                                            lyric => lyric.type == 1
-                                        )"
-                                        :translation="translation"
-                                        :original_name="song_lyric.name"
-                                        :key="index + '2'"
-                                    >
-                                    </translation-line>
+                                    <tbody>
+                                        <tr>
+                                            <th class="border-top-0"></th>
+                                            <th class="border-top-0">Název</th>
+                                            <th class="border-top-0">Typ</th>
+                                            <th class="border-top-0">
+                                                Autor (překladu)
+                                            </th>
+                                        </tr>
+                                        <translation-line
+                                            v-for="(translation,
+                                            index) in song_lyric.song.song_lyrics.filter(
+                                                lyric => lyric.type == 0
+                                            )"
+                                            :translation="translation"
+                                            :original_name="song_lyric.name"
+                                            :key="index + '0'"
+                                        >
+                                        </translation-line>
+                                        <translation-line
+                                            v-for="(translation,
+                                            index) in song_lyric.song.song_lyrics.filter(
+                                                lyric => lyric.type == 2
+                                            )"
+                                            :translation="translation"
+                                            :original_name="song_lyric.name"
+                                            :key="index + '1'"
+                                        >
+                                        </translation-line>
+                                        <translation-line
+                                            v-for="(translation,
+                                            index) in song_lyric.song.song_lyrics.filter(
+                                                lyric => lyric.type == 1
+                                            )"
+                                            :translation="translation"
+                                            :original_name="song_lyric.name"
+                                            :key="index + '2'"
+                                        >
+                                        </translation-line>
+                                    </tbody>
                                 </table>
                             </div>
 
