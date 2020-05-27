@@ -6,7 +6,7 @@
             ></a>
             <span v-for="(author, index) in authors" v-bind:key="author.id"
                 ><span v-if="index">,</span>
-                <a :href="author.public_url">{{ author.name }}</a>
+                <a :href="author.public_route">{{ author.name }}</a>
             </span>
             <a
                 v-if="downloadUrl"

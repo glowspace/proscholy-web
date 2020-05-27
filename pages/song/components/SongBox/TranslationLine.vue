@@ -11,7 +11,7 @@
         </td>
         <td class="align-middle">
             <a
-                :href="translation.public_url"
+                :href="translation.public_route"
                 :class="{
                     'font-weight-bolder': translation.name == original_name
                 }"
@@ -27,7 +27,7 @@
                 v-for="(author, authorIndex) in translation.authors"
                 :key="authorIndex"
                 ><span v-if="authorIndex">,</span>
-                <a :href="author.public_url" class="text-secondary">{{
+                <a :href="author.public_route" class="text-secondary">{{
                     author.name
                 }}</a>
             </span>

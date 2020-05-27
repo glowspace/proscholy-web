@@ -9,8 +9,7 @@
                     <span v-if="original.authors.length == 1">Autor:</span>
                     <span v-else>Autoři:</span>
                     <span v-for="(author, key) in original.authors" v-bind:key="key">
-                        <nuxt-link :to="author.public_url.split('/').slice(3).join('/')">{{ author.name }}</nuxt-link><span>,</span>
-                        <!-- todo: opravit url -->
+                        <nuxt-link :to="author.public_route">{{ author.name }}</nuxt-link><span>, </span>
                     </span>
                 </span>
             </span>
@@ -20,9 +19,7 @@
                 <span v-if="song.authors.length == 1">{{original?'a':'A'}}utor překladu:</span>
                 <span v-else>{{original?'a':'A'}}utoři překladu:</span>
                 <span v-for="(author, key2) in song.authors" v-bind:key="key2">
-                    <span v-if="key2">,</span>
-                    <nuxt-link :to="author.public_url.split('/').slice(3).join('/')">{{ author.name }}</nuxt-link>
-                    <!-- todo: opravit url -->
+                    <span v-if="key2">,</span> <nuxt-link :to="author.public_route">{{ author.name }}</nuxt-link>
                 </span>
             </span>
         </span>
@@ -32,9 +29,7 @@
                 <span v-if="song.authors.length == 1">Autor:</span>
                 <span v-else>Autoři:</span>
                 <span v-for="(author, key3) in original.authors" v-bind:key="key3">
-                    <span v-if="key3">,</span>
-                    <nuxt-link :to="author.public_url.split('/').slice(3).join('/')">{{ author.name }}</nuxt-link>
-                    <!-- todo: opravit url -->
+                    <span v-if="key3">,</span> <nuxt-link :to="author.public_route">{{ author.name }}</nuxt-link>
                 </span>
             </span>
         </span>
@@ -54,8 +49,7 @@ export default {
                 if(!element.type) {
                     return {
                         name: element.name,
-                        url: '/' + element.public_url.split('/').slice(3).join('/'),
-                        // todo: opravit url
+                        url: element.public_route,
                         authors: element.authors
                     };
                 }

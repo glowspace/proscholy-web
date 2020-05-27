@@ -19,7 +19,7 @@
                         >
                             <nuxt-link
                                 class="p-2 pl-3 w-100 d-flex justify-content-between text-secondary"
-                                :to="'/pisen/' + song_lyric.id + '/slug'"
+                                :to="song_lyric.public_route"
                             >
                                 <span>{{
                                     getSongNumber(song_lyric, true)
@@ -28,7 +28,6 @@
                                     getSongNumber(song_lyric, false)
                                 }}</span>
                             </nuxt-link>
-                            <!-- todo: opravit url -->
                         </td>
                         <td
                             :class="[
@@ -38,10 +37,9 @@
                         >
                             <nuxt-link
                                 class="p-2 w-100 d-inline-block"
-                                :to="'/pisen/' + song_lyric.id + '/slug'"
+                                :to="song_lyric.public_route"
                                 >{{ song_lyric.name }}
                             </nuxt-link>
-                            <!-- todo: opravit url -->
                         </td>
                         <td
                             :class="[
@@ -57,7 +55,7 @@
                             >
                                 <span v-if="authorIndex">,</span>
                                 <a
-                                    :href="author.public_url"
+                                    :href="author.public_route"
                                     class="text-secondary"
                                     >{{ author.name }}</a
                                 >
@@ -210,6 +208,7 @@ const fetch_items = gql`
             data {
                 id
                 name
+                public_route
                 lang
                 lang_string
                 scoreExternals: externals(type: 4) {
@@ -233,7 +232,7 @@ const fetch_items = gql`
                 authors {
                     id
                     name
-                    public_url
+                    public_route
                 }
                 tags {
                     id

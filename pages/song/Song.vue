@@ -18,7 +18,7 @@ const FETCH_SONG_LYRIC = gql`
             authors {
                 id
                 name
-                public_url
+                public_route
             }
             externals(orderBy: { field: "type", order: ASC }) {
                 id
@@ -29,7 +29,7 @@ const FETCH_SONG_LYRIC = gql`
                 authors {
                     id
                     name
-                    public_url
+                    public_route
                 }
             }
             files {
@@ -41,19 +41,19 @@ const FETCH_SONG_LYRIC = gql`
                 authors {
                     id
                     name
-                    public_url
+                    public_route
                 }
             }
             song {
                 song_lyrics {
                     id
                     name
-                    public_url
+                    public_route
                     type
                     authors {
                         id
                         name
-                        public_url
+                        public_route
                     }
                     # lang
                     # lang_string

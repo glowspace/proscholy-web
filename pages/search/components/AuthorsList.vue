@@ -4,7 +4,7 @@
             <template v-if="authors && authors.length && !$apollo.loading">
                 <tr v-for="author in authors" v-bind:key="author.id">
                     <td>
-                        <a :href="author.public_url"
+                        <a :href="author.public_route"
                             >{{ author.name }} - {{ author.type_string }}</a
                         >
                     </td>
@@ -31,7 +31,7 @@ const fetch_items = gql`
         authors(search_string: $search_str, order_abc: true) {
             id
             name
-            public_url
+            public_route
             type_string
         }
     }
