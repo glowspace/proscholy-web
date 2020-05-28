@@ -28,7 +28,7 @@
             <span v-else>
                 <span v-if="song.authors.length == 1">Autor:</span>
                 <span v-else>Autoři:</span>
-                <span v-for="(author, key3) in original.authors" v-bind:key="key3">
+                <span v-for="(author, key3) in song.authors" v-bind:key="key3">
                     <span v-if="key3">,</span> <nuxt-link :to="author.public_route">{{ author.name }}</nuxt-link>
                 </span>
             </span>

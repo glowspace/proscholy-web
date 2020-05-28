@@ -14,9 +14,6 @@
         </div>
         <song-view
             :song_lyric="song"
-            :render-media="false"
-            :render-scores="false"
-            :render-translations="false"
         ></song-view>
         <!-- admin-toolbox :song="song" v-if="false"></admin-toolbox -->
     </div>

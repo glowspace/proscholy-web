@@ -10,7 +10,7 @@
                         @click="topMode = topMode == 1 ? 0 : 1"
                     >
                         <i class="fas fa-file-alt"></i>
-                        <span class="d-none d-sm-inline">Noty</span>clie
+                        <span class="d-none d-sm-inline">Noty</span>
                     </a>
                     <a
                         v-if="renderTranslations"
@@ -158,50 +158,40 @@
                                     chordSharedStore.chordMode == 2
                             }"
                         >
-                            <a
-                                class="btn btn-secondary bg-transparent p-0 mb-3"
-                                v-if="
-                                    chordSharedStore.nChordModes != 1 &&
-                                        chordSharedStore.chordMode == 0
-                                "
-                                @click="chordSharedStore.chordMode = 2"
-                                >Zobrazit akordy</a
-                            >
-                            <a
-                                class="btn btn-secondary bg-transparent p-0 mb-3"
-                                v-if="chordSharedStore.chordMode != 0"
-                                @click="chordSharedStore.chordMode = 0"
-                                >Skrýt akordy</a
-                            >
-                            <div
-                                v-if="
-                                    !$apollo.loading &&
-                                        song_lyric.capo > 0 &&
-                                        chordSharedStore.chordMode != 0
-                                "
-                                class="mb-2"
-                            >
-                                <i>capo: {{ song_lyric.capo }}</i>
-                            </div>
-                            <!-- here goes the song lyrics (vue components generated as a string by Laravel) -->
-                            <!-- <slot></slot> -->
-                            <song-lyric-parts
-                                :song-id="song_lyric.id"
-                            ></song-lyric-parts>
+                            <span v-if="song_lyric.has_lyrics">
+                                <a
+                                    class="btn btn-secondary bg-transparent p-0 mb-3"
+                                    v-if="
+                                        chordSharedStore.nChordModes != 1 &&
+                                            chordSharedStore.chordMode == 0
+                                    "
+                                    @click="chordSharedStore.chordMode = 2"
+                                    >Zobrazit akordy</a
+                                >
+                                <a
+                                    class="btn btn-secondary bg-transparent p-0 mb-3"
+                                    v-if="chordSharedStore.chordMode != 0"
+                                    @click="chordSharedStore.chordMode = 0"
+                                    >Skrýt akordy</a
+                                >
+                                <div
+                                    v-if="
+                                        !$apollo.loading &&
+                                            song_lyric.capo > 0 &&
+                                            chordSharedStore.chordMode != 0
+                                    "
+                                    class="mb-2"
+                                >
+                                    <i>capo: {{ song_lyric.capo }}</i>
+                                </div>
+                                <!-- here goes the song lyrics -->
+                                <song-lyric-parts
+                                    :song-id="song_lyric.id"
+                                ></song-lyric-parts>
+                            </span>
+                            <span v-else :style="{ fontSize: chordSharedStore.fontSizePercent + '%' }">Text písně připravujeme.</span>
                         </div>
                         <right-controls></right-controls>
-
-                        <!-- todo: preparing for two-column view -->
-                        <!-- <div id="song-lyrics" class="song-lyrics-divided">
-                                          <div class="row">
-                                              <div class="col-sm-6 song-lyrics-refrains">
-                                                  <slot></slot>
-                                              </div>
-                                              <div class="col-sm-6 song-lyrics-verses">
-                                                  <slot></slot>
-                                              </div>
-                                          </div>
-                        </div>-->
                     </div>
                 </div>
 
@@ -414,14 +404,24 @@
                 v-on:click="topMode = 1"
                 v-if="renderScores"
             >
-                <slot name="score"></slot>
+                <div class="card-header media-opener py-2 rounded">
+                    <i class="fas fa-file-alt"></i>
+                    Zobrazit notové zápisy
+                </div>
             </div>
             <div
                 class="card card-green mb-3 d-none d-lg-flex"
                 v-on:click="bottomMode = 2"
                 v-if="renderMedia"
             >
-                <slot name="media"></slot>
+                <div class="card-header media-opener py-2">
+                    <i class="fas fa-headphones"></i>
+                    Dostupné nahrávky<span class="d-none d-xl-inline"> a videa</span>
+                </div>
+                <div class="media-opener" v-if="mediaTypes[0]"><i class="fab fa-spotify text-success"></i> Spotify</div>
+                <div class="media-opener" v-if="mediaTypes[1]"><i class="fab fa-soundcloud" style="color: orangered;"></i> SoundCloud</div>
+                <div class="media-opener" v-if="mediaTypes[3]"><i class="fas fa-music"></i> MP3</div>
+                <div class="media-opener" v-if="mediaTypes[2]"><i class="fab fa-youtube text-danger"></i> YouTube</div>
             </div>
             <div class="card mb-3 d-none d-lg-flex" v-on:click="bottomMode = 1">
                 <div
@@ -468,79 +468,6 @@
     </div>
 </template>
 
-<style lang="scss">
-.cross {
-    z-index: 5;
-}
-
-.toolbox {
-    padding: 0.25rem !important;
-    margin-bottom: 0.25rem !important;
-
-    background: white;
-
-    .dark & {
-        background: black;
-    }
-
-    &.toolbox-u {
-        margin-top: 0.25rem !important;
-        margin-bottom: 0 !important;
-    }
-
-    .toolbox-item {
-        text-align: center;
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-        padding-bottom: 0.25rem;
-        padding-top: 0.25rem;
-        margin: 0.25rem;
-        display: inline-block;
-        border-radius: 0.125rem;
-        border: 1px solid #dee2e6;
-
-        &.hidden-toolbox-item {
-            opacity: 0.3;
-            pointer-events: none;
-        }
-
-        .dark & {
-            border-color: #211d19;
-        }
-    }
-}
-
-.select-themed {
-    background-color: white;
-    padding: 0.5em;
-    width: 100%;
-}
-
-.song-part-hidden {
-    display: none;
-}
-
-.song-lyrics-extended .song-part-hidden {
-    display: block;
-}
-
-.song-part-hidden-text {
-    margin-bottom: 1em;
-
-    .chord {
-        display: none;
-    }
-}
-
-.song-lyrics-extended .song-part-hidden-text {
-    margin-bottom: 0;
-
-    .chord {
-        display: inline-block;
-    }
-}
-</style>
-
 <script>
 import { store } from '../../store.js';
 import { clone } from 'lodash';
@@ -562,10 +489,7 @@ import ExternalLine from './ExternalLine.vue';
  */
 export default {
     props: [
-        'song_lyric',
-        'render-media',
-        'render-scores',
-        'render-translations'
+        'song_lyric'
     ],
 
     components: {
@@ -656,6 +580,36 @@ export default {
 
                 return [...filteredExternals, ...filteredFiles];
             }
+        },
+
+        renderTranslations: {
+            get() {
+                return (this.song_lyric.song.song_lyrics.length > 1);
+            }
+        },
+
+        renderMedia: {
+            get() {
+                return this.mediaExternals.length + this.mediaFiles.length > 0;
+            }
+        },
+
+        renderScores: {
+            get() {
+                return this.scores.length > 0;
+            }
+        },
+
+        mediaTypes: {
+            get() {
+                var arrayOfTypes = [1, 2, 3, 7];
+                var returnArray = [];
+                for (let i = 0; i < arrayOfTypes.length; i++) {
+                    returnArray[i] = this.mediaExternals.filter(ext => ext.type == arrayOfTypes[i]).length
+                    + this.mediaFiles.filter(file => this.fileTypeConvert(file.type) == arrayOfTypes[i]).length;
+                }
+                return returnArray;
+            }
         }
     },
 
@@ -686,6 +640,19 @@ export default {
                 this.scrolldelay = setInterval(function() {
                     window.scrollBy(0, 1);
                 }, (21 - num) * 10);
+            }
+        }
+    },
+
+    mounted() {
+        if (!this.song_lyric.has_lyrics) {
+            if (this.renderMedia) {
+                this.bottomMode = 2;
+            }
+            if (this.renderScores) {
+                this.topMode = 1;
+            } else if (this.renderTranslations) {
+                this.topMode = 2;
             }
         }
     }

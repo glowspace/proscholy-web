@@ -12,6 +12,7 @@ import gql, { disableFragmentWarnings } from 'graphql-tag';
 const FETCH_SONG_LYRIC = gql`
     query($id: ID!) {
         song_lyric(id: $id) {
+            has_lyrics
             id
             name
             type
