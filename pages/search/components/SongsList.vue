@@ -140,7 +140,7 @@
                             ></i>
                         </td>
                     </tr>
-                    <tr><td><scroll-trigger
+                    <tr><td class="p-0 border-top-0"><scroll-trigger
                         @triggerIntersected="loadMore"
                         :enabled="enable_more"
                     /></td></tr>
