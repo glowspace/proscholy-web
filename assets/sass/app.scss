@@ -34,6 +34,14 @@ h4 {
     margin: 0.7em 0;
 }
 
+a:focus {
+    text-decoration: underline;
+
+    &.btn {
+        text-decoration: none;
+    }
+}
+
 /**
 SPA body variants
  */
@@ -158,14 +166,14 @@ Home page specific elements
  */
 
 .home {
-    & > div, & > div > div, #app {
+    #__nuxt, #__layout, #app {
         min-height: inherit;
     }
 
-    & > div {
+    #__nuxt {
         height: 1px;
 
-        & > div {
+        #__layout {
             height: 100%;
         }
     }
@@ -279,6 +287,20 @@ Home page specific elements
     span.btn {
         background-color: transparent !important;
         cursor: initial !important;
+    }
+}
+
+.btn.search-report {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    color: #292929;
+    opacity: 0.5;
+    transition: 0.2s;
+
+    &:hover {
+        color: #292929;
+        opacity: 1;
     }
 }
 

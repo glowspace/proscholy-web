@@ -326,27 +326,3 @@ export default {
     }
 };
 </script>
-
-<style lang="scss">
-.filter-panel {
-    display: block;
-}
-
-.btn.search-report {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    color: #292929;
-    opacity: 0.5;
-    transition: 0.2s;
-}
-
-.btn.search-report:hover {
-    color: #292929;
-    opacity: 1;
-}
-
-.home {
-    position: relative;
-}
-</style>
