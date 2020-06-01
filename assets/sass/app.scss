@@ -47,7 +47,6 @@ body.home {
     min-height: 100%;
     padding: 0;
     margin: 0;
-    position: relative;
 }
 
 body.dark {
@@ -159,9 +158,23 @@ Home page specific elements
  */
 
 .home {
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
+    & > div, & > div > div, #app {
+        min-height: inherit;
+    }
+
+    & > div {
+        height: 1px;
+
+        & > div {
+            height: 100%;
+        }
+    }
+
+    #app {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
 
     .card {
         opacity: 0.9;
@@ -183,8 +196,6 @@ Home page specific elements
         margin-bottom: 0;
     }
 }
-
-
 
 .logo-wrapper {
     text-align: center;
@@ -254,6 +265,26 @@ Home page specific elements
         }
     }
 }
+
+.app-download {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    div * {
+        color: white !important;
+    }
+
+    span.btn {
+        background-color: transparent !important;
+        cursor: initial !important;
+    }
+}
+
+/**
+Other elements
+ */
 
 .card-blue {
     border-radius: 3px;

@@ -164,19 +164,3 @@ export default {
     components: { UserCard }
 };
 </script>
-
-<style scoped lang="scss">
-.our-team {
-    h4 {
-        transition: padding 0.2s;
-    }
-
-    &:hover h4 {
-        padding-left: 0.5rem;
-    }
-
-    .flex-wrap {
-        margin: 0 -10px;
-    }
-}
-</style>
