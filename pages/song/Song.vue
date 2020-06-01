@@ -61,7 +61,20 @@ const FETCH_SONG_LYRIC = gql`
                 }
             }
             capo
-            # songbook_records{number, songbook{id, name, shortcut}}
+            songbook_records {
+                number
+                songbook {
+                    id
+                    name
+                    shortcut
+                }
+            }
+            liturgy_approval_status
+            liturgy_approval_status_string_values
+            tags_liturgy_part   {id name}
+            tags_generic        {id name}
+            tags_liturgy_period {id name}
+            tags_saints         {id name}
         }
     }
 `;
