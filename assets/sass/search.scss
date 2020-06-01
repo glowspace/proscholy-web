@@ -56,7 +56,7 @@ $search-wrapper-height: 47px;
     }
 }
 
-body.dark .btn.display-all-songs {
+body[data-dark] .btn.display-all-songs {
     background-color: rgba(255, 255, 255, 0.15);
 
     &:hover {

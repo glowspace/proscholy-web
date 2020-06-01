@@ -50,10 +50,11 @@ body.home {
     min-height: 100%;
     padding: 0;
     margin: 0;
-}
 
-body.dark {
-    background-image: url("/img/bg_center_dark.svg");
+    &[data-dark] {
+        background-image: url("/img/bg_center_dark.svg");
+        background-color: black;
+    }
 }
 
 

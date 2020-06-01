@@ -1,4 +1,4 @@
-body.dark {
+body[data-dark] {
     background-color: #000;
 
     h1 {
@@ -34,11 +34,6 @@ body.dark {
 
     .border {
         border-color: #222 !important;
-    }
-
-    .background-home {
-        background-image: url("/img/bg_center_dark.svg");
-        background-color: transparent;
     }
 
     .search-home {

@@ -16,14 +16,12 @@
                                 to="/"
                                 class="btn btn-secondary"
                             ><i class="fas fa-search"></i> Vyhledávání</nuxt-link>
-                        </li>
-                        <li class="nav-item">
+                        </li>&nbsp;<li class="nav-item">
                             <nuxt-link
                                 to="/o-zpevniku"
                                 class="btn btn-secondary"
                             ><i class="fas fa-info"></i> O zpěvníku</nuxt-link>
-                        </li>
-                        <dark-mode-button v-cloak> Tmavý mód</dark-mode-button>
+                        </li>&nbsp;<dark-mode-button v-cloak> Tmavý mód</dark-mode-button>
                     </ul>
                 </div>
                 <div class="d-flex flex-grow-1">
