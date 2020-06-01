@@ -1,7 +1,7 @@
 /**
 Imports
  */
-@import url("https://fonts.googleapis.com/css?family=Nunito");
+@import url("https://fonts.googleapis.com/css?family=Nunito:200,400,600");
 
 @font-face {
     font-family: "Cocogoose";
@@ -162,14 +162,14 @@ Home page specific elements
  */
 
 .home {
-    #__nuxt, #__layout, #app {
+    & > div, & > div > div:last-child, #app {
         min-height: inherit;
     }
 
-    #__nuxt {
+    & > div {
         height: 1px;
 
-        #__layout {
+        & > div:last-child {
             height: 100%;
         }
     }

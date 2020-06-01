@@ -1,4 +1,7 @@
 require('dotenv').config();
+import PurgecssPlugin from 'purgecss-webpack-plugin'
+import glob from 'glob-all'
+import path from 'path'
 
 export default {
     mode: 'universal',
@@ -96,7 +99,20 @@ export default {
         /*
          ** You can extend webpack config here
          */
-        extend(config, ctx) {},
+        extend(config, { isDev, isClient }) {
+            if (!isDev) {
+                config.plugins.push(
+                    new PurgecssPlugin({
+                        paths: glob.sync([
+                            path.join(__dirname, './pages/**/*.vue'),
+                            path.join(__dirname, './layouts/**/*.vue'),
+                            path.join(__dirname, './components/**/*.vue')
+                        ]),
+                        whitelist: ['html', 'body']
+                    })
+                )
+            }
+        },
         extractCSS: true
     }
 };
