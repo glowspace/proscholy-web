@@ -421,9 +421,7 @@ export default {
         },
 
         currentUrl() {
-            if (process.client) return encodeURIComponent(window.location.href);
-
-            return '';
+            return encodeURIComponent(this.$route.fullPath);
         }
     },
 

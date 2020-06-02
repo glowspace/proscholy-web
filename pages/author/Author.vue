@@ -1,0 +1,121 @@
+<template>
+    <div class="container" v-if="!$apollo.loading">
+        <h2 style="margin-bottom: 0">{{ author.name }}</h2>
+
+        <span style="color:dimgrey" v-if="author.type == 0">autor</span>
+        <span style="color:dimgrey" v-else-if="author.type == 1">hudební uskupení</span>
+        <span style="color:dimgrey" v-else-if="author.type == 2">schola</span>
+        <span style="color:dimgrey" v-else-if="author.type == 3">kapela</span>
+        <span style="color:dimgrey" v-else-if="author.type == 4">sbor</span>
+
+        <br><br>
+
+        <div class="card" v-if="author.description">
+            <div class="card-header p-1">
+                <div class="px-3 py-2 d-inline-block">
+                    <span>O&nbsp;</span>
+                    <span v-if="author.type == 0">autorovi</span>
+                    <span v-else-if="author.type == 1">hudebním uskupení</span>
+                    <span v-else-if="author.type == 2">schole</span>
+                    <span v-else-if="author.type == 3">kapele</span>
+                    <span v-else-if="author.type == 4">sboru</span>
+                </div>
+            </div>
+            <div class="card-body">{{ author.description }}</div>
+        </div>
+
+        <div class="card" v-if="author.members.length">
+            <div class="card-body">
+                <span>Členové:</span>
+                <span v-for="(members, key) in author.members" :key="key">
+                    <span v-if="key">,</span> <nuxt-link :to="members.public_route">{{ members.name }}</nuxt-link>
+                </span>
+            </div>
+        </div>
+
+        <div class="card" v-if="author.memberships.length">
+            <div class="card-body">
+                <span>Skupiny:</span>
+                <span v-for="(membership, key2) in author.memberships" :key="key2">
+                    <span v-if="key2">,</span> <nuxt-link :to="membership.public_route">{{ membership.name }}</nuxt-link>
+                </span>
+            </div>
+        </div>
+
+        <!-- todo: implement missing api features -->
+        <author-songs-list text="Autorské písně" v-if="author.song_lyrics.length" :songs="author.song_lyrics" />
+        <author-songs-list text="Překlady" v-if="author.song_lyrics.length" :songs="author.song_lyrics" />
+        <author-songs-list text="Interpretace písní" v-if="author.song_lyrics.length" :songs="author.song_lyrics" />
+
+        <div class="p-1 mb-3 mt-n2">
+            <div class="px-3 py-2 d-inline-block">Zpěvník ProScholy.cz <img
+                src="/img/logo_v2.png" width="20px" /> {{ new Date().getFullYear() }}</div>
+            <a class="btn btn-secondary float-right m-0" target="_blank"
+            :href="'https://docs.google.com/forms/d/e/1FAIpQLScmdiN_8S_e8oEY_jfEN4yJnLq8idxUR5AJpFmtrrnvd1NWRw/viewform?usp=pp_url&entry.1025781741='
+            + encodeURIComponent(author.public_route)">Nahlásit</a>
+        </div>
+    </div>
+</template>
+
+<script>
+import AuthorSongsList from './AuthorSongsList';
+import gql from 'graphql-tag';
+
+const FETCH_AUTHOR = gql`
+    query($id: ID!) {
+        author(id: $id) {
+            name
+            type
+            description
+            public_route
+            members {
+                name
+                public_route
+            }
+            memberships {
+                name
+                public_route
+            }
+            song_lyrics {
+                type
+                name
+                public_route
+                authors {
+                    name
+                    public_route
+                }
+                song {
+                    song_lyrics {
+                        type
+                        name
+                        public_route
+                        authors {
+                            name
+                            public_route
+                        }
+                    }
+                }
+            }
+        }
+    }
+`;
+
+export default {
+    name: 'Author',
+
+    components: {
+        AuthorSongsList
+    },
+
+    apollo: {
+        author: {
+            query: FETCH_AUTHOR,
+            variables() {
+                return {
+                    id: this.$route.params.id
+                };
+            }
+        }
+    },
+};
+</script>

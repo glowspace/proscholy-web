@@ -285,8 +285,7 @@ export default {
         },
 
         currentUrl() {
-            // return encodeURIComponent(window.location.href);
-            return this.$route.fullPath;
+            return encodeURIComponent(this.$route.fullPath);
         }
     },
 
@@ -327,11 +326,10 @@ export default {
     watch: {
         init(val) {
             if (!val) {
-                document.getElementsByTagName('body')[0].style.overflowY =
-                    'scroll';
+                document.getElementsByTagName('body')[0].classList.remove('home-scroll');
+                setTimeout(() => {document.getElementsByTagName('body')[0].classList.add('home-scroll');}, 200);
             } else {
-                document.getElementsByTagName('body')[0].style.overflowY =
-                    'auto';
+                document.getElementsByTagName('body')[0].classList.remove('home-scroll');
                 document.getElementsByClassName('search-home')[0].focus();
             }
         }

@@ -373,7 +373,6 @@
                     </a>
                 </div>
                 <div class="card-footer p-1 song-links">
-                    <!-- todo: asset img -->
                     <div class="px-3 py-2 d-inline-block">Zpěvník ProScholy.cz <img
                     src="/img/logo_v2.png" width="20px" /> {{ new Date().getFullYear() }}</div>
                     <a

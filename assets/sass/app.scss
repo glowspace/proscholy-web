@@ -66,6 +66,10 @@ body.home {
         background-image: url("/img/bg_center_dark.svg");
         background-color: black;
     }
+
+    &.home-scroll {
+        overflow-y: scroll;
+    }
 }
 
 

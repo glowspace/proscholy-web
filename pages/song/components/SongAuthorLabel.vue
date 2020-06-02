@@ -3,7 +3,7 @@
         <span v-if="song.type">
             <span v-if="original">
                 <span>Originál: </span>
-                <nuxt-link :to="original.url">{{ original.name }}</nuxt-link><br>
+                <nuxt-link :to="original.public_route">{{ original.name }}</nuxt-link><br>
                 <span v-if="!original.authors.length">Autor neznámý,</span>
                 <span v-else>
                     <span v-if="original.authors.length == 1">Autor:</span>
@@ -49,7 +49,7 @@ export default {
                 if(!element.type) {
                     return {
                         name: element.name,
-                        url: element.public_route,
+                        public_route: element.public_route,
                         authors: element.authors
                     };
                 }

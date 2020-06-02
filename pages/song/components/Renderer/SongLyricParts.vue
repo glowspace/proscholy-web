@@ -10,7 +10,6 @@
                 v-for="(line, key2) in part.songLines"
                 v-bind:key="key2"
             >
-                <!-- todo: song part tag -->
                 <song-part-tag v-if="!key2">{{ part.type + (part.type ? (part.isVerse ? '.' : ':') : '') }}&nbsp;</song-part-tag
                 ><template v-for="(chord, key3) in line.chords">
                     <chord
