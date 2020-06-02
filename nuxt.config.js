@@ -27,13 +27,13 @@ export default {
                 rel: 'icon',
                 type: 'image/png',
                 sizes: '32x32',
-                href: '~/static/img/favicon/favicon-32x32.png'
+                href: '/favicon/favicon-32x32.png'
             },
             {
                 rel: 'icon',
                 type: 'image/png',
                 sizes: '16x16',
-                href: '~/static/img/favicon/favicon-16x16.png'
+                href: '/favicon/favicon-16x16.png'
             },
             {
                 rel: 'stylesheet',
@@ -44,6 +44,18 @@ export default {
                 crossorigin: 'anonymous'
             }
         ]
+    },
+    messages: {
+        loading: 'Načítání…',
+        error_404: 'Error 404 – stránka nebyla nalezena',
+        server_error: 'Chyba serveru',
+        nuxtjs: '',
+        back_to_home: 'Zpět na úvodní stránku',
+        server_error_details:
+          'Ajajaj, na našem serveru se někde stala chyba. <br>Zkuste <u><a href="/">použít vyhledávání</a></u>. <br>Chybu také můžete <u><a href="https://docs.google.com/forms/d/e/1FAIpQLSfry7CQD0vPpuC_VB7xGR6NUF2WdPUytQwX8KipKoZcIYxbdA/viewform?usp=pp_url&entry.1025781741=–&entry.456507920=500" target="_blank">nahlásit</a></u>.',
+        client_error: 'Chyba',
+        client_error_details:
+          'Během renderování stránky došlo k chybě. Více informací najdeš v konzoli nástrojů pro vývojáře.'
     },
     /*
      ** Customize the progress-bar color
@@ -111,6 +123,9 @@ export default {
                         whitelist: ['html', 'body', 'nuxt-progress']
                     })
                 )
+            }
+            if (isClient) {
+                config.optimization.splitChunks.maxSize = 500000;
             }
         },
         extractCSS: true

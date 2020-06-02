@@ -145,7 +145,7 @@
                     title="Nahlásit"
                     :href="
                         'https://docs.google.com/forms/d/e/1FAIpQLScmdiN_8S_e8oEY_jfEN4yJnLq8idxUR5AJpFmtrrnvd1NWRw/viewform?usp=pp_url&entry.1025781741=' +
-                            currentUrl()
+                            encodeURIComponent($route.fullPath)
                     "
                 >
                     <i class="fas fa-exclamation-triangle p-0"></i>
@@ -282,10 +282,6 @@ export default {
             if (update_url) {
                 this.updateHistoryState();
             }
-        },
-
-        currentUrl() {
-            return encodeURIComponent(this.$route.fullPath);
         }
     },
 

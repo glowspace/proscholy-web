@@ -153,7 +153,7 @@
                             target="_blank"
                             :href="
                                 'https://docs.google.com/forms/d/e/1FAIpQLScmdiN_8S_e8oEY_jfEN4yJnLq8idxUR5AJpFmtrrnvd1NWRw/viewform?usp=pp_url&entry.1025781741=' +
-                                    currentUrl()
+                                    encodeURIComponent($route.fullPath)
                             "
                         >
                             Nahlásit
@@ -418,10 +418,6 @@ export default {
                     return rec.number;
                 }
             }
-        },
-
-        currentUrl() {
-            return encodeURIComponent(this.$route.fullPath);
         }
     },
 
