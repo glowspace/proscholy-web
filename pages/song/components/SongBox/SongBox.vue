@@ -507,6 +507,10 @@ export default {
         }
     },
 
+    destroyed() {
+        this.setScroll(this.autoscrollNum, false);
+    },
+
     computed: {
         hasExternalsOrFiles: {
             get() {

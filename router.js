@@ -20,6 +20,14 @@ export function createRouter() {
             { path: '/autor/:id', component: Author },
 
             { path: '/muj-ucet', component: Login }
-        ]
+        ],
+        scrollBehavior (to, from, savedPosition) {
+            if (savedPosition) {
+                return savedPosition
+            } else {
+                return { x: 0, y: 0 }
+            }
+        }
+
     });
 }
