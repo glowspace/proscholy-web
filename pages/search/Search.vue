@@ -108,7 +108,6 @@
                                     "
                                     v-bind:init="init"
                                     v-on:query-loaded="
-                                        autoInit();
                                         updateHistoryState();
                                     "
                                 ></SongsList>
@@ -239,8 +238,6 @@ export default {
                 path: '/',
                 query: GETparameters
             });
-
-            console.log('replaced url');
         },
 
         applyStateChange(event) {
@@ -251,14 +248,16 @@ export default {
                 return;
             }
 
+            if (this.init) {
+                this.init = false;
+            }
+
             this.search_string =
                 GETparameters.vyhledavani || this.search_string;
 
             // a helper function
             const getObjFormat = function(str) {
                 if (isEmpty(str)) return {};
-
-                console.log(str);
 
                 return str
                     .split(',')
@@ -285,12 +284,6 @@ export default {
             }
         },
 
-        autoInit() {
-            if (this.init && this.search_string !== '') {
-                this.init = false;
-            }
-        },
-
         currentUrl() {
             // return encodeURIComponent(window.location.href);
             return this.$route.fullPath;
@@ -299,12 +292,11 @@ export default {
 
     mounted() {
         this.search_string = this.strPrefill ? this.strPrefill : '';
-        if (process.client) window.onpopstate = this.applyStateChange;
-
-        if (this.$route.path == '/search') {
-            // this.applyStateChange();
-            this.init = false;
+        if (process.client) {
+            window.onpopstate = this.applyStateChange;
+            document.getElementsByClassName('navbar-brand')[0].onclick = () => {this.resetState(); this.init = true;};
         }
+        // this.applyStateChange();
     },
 
     components: {
@@ -328,6 +320,18 @@ export default {
                     Object.keys(this.selected_languages).length >
                 0
             );
+        }
+    },
+
+    watch: {
+        init(val) {
+            if (!val) {
+                document.getElementsByTagName('body')[0].style.overflowY =
+                    'scroll';
+            } else {
+                document.getElementsByTagName('body')[0].style.overflowY =
+                    'auto';
+            }
         }
     }
 };

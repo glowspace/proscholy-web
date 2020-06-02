@@ -85,24 +85,6 @@
 import gql from 'graphql-tag';
 import Vue from 'vue'
 
-const fetch_items = gql`
-    query {
-        tags {
-            id
-            name
-            type
-            child_tags {
-                id
-                name
-            }
-            parent_tag {
-                id
-            }
-            description
-        }
-    }
-`;
-
 const FETCH_TAGS_GENERIC = gql`
     query {
         tags_generic: tags_enum(type: GENERIC) {
@@ -240,6 +222,10 @@ export default {
         },
 
         getSelectedTagsDcnf() {
+            if (!this.tags_liturgy_part) {
+                return {};
+            }
+
             const filterMapTags = tags =>
                 tags.filter(tag => this.isSelectedTag(tag)).map(tag => tag.id);
 
@@ -253,11 +239,9 @@ export default {
     },
 
     watch: {
-        $apollo: {
-            loading(val, prev) {
-                if (val && !prev) {
-                    this.$emit('tags-loaded', null);
-                }
+        tags_generic(val, prev) {
+            if (val && !prev) {
+                this.$emit('tags-loaded', null);
             }
         },
 
