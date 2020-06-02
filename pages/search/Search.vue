@@ -157,7 +157,6 @@
 </template>
 
 <script>
-import AuthorsList from './components/AuthorsList';
 import SongsList from './components/SongsList';
 import Filters from './components/Filters';
 import AppLinks from './components/AppLinks';
@@ -311,7 +310,6 @@ export default {
     components: {
         Logo,
         AppLinks,
-        AuthorsList,
         SongsList,
         Filters
     },
