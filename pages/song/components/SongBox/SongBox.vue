@@ -96,9 +96,7 @@
                                             <th class="border-top-0"></th>
                                             <th class="border-top-0">Název</th>
                                             <th class="border-top-0">Typ</th>
-                                            <th class="border-top-0">
-                                                Autor (překladu)
-                                            </th>
+                                            <th class="border-top-0">Autor (překladu)</th>
                                         </tr>
                                         <translation-line
                                             v-for="(translation,
@@ -376,11 +374,8 @@
                 </div>
                 <div class="card-footer p-1 song-links">
                     <!-- todo: asset img -->
-                    <div class="px-3 py-2 d-inline-block">
-                        Zpěvník ProScholy.cz
-                        <img src="/img/logo_v2.png" width="20px" />
-                        {{ new Date().getFullYear() }}
-                    </div>
+                    <div class="px-3 py-2 d-inline-block">Zpěvník ProScholy.cz <img
+                    src="/img/logo_v2.png" width="20px" /> {{ new Date().getFullYear() }}</div>
                     <a
                         class="btn btn-secondary float-right"
                         target="_blank"
@@ -392,9 +387,7 @@
                                   encodeURI(song_lyric.name)
                                 : ''
                         ]"
-                    >
-                        Nahlásit
-                    </a>
+                    >Nahlásit</a>
                 </div>
             </div>
         </div>
@@ -404,38 +397,26 @@
                 v-on:click="topMode = 1"
                 v-if="renderScores"
             >
-                <div class="card-header media-opener py-2 rounded">
-                    <i class="fas fa-file-alt"></i>
-                    Zobrazit notové zápisy
-                </div>
+                <div class="card-header media-opener py-2 rounded"><i class="fas fa-file-alt"></i> Zobrazit notové zápisy</div>
             </div>
             <div
                 class="card card-green mb-3 d-none d-lg-flex"
                 v-on:click="bottomMode = 2"
                 v-if="renderMedia"
             >
-                <div class="card-header media-opener py-2">
-                    <i class="fas fa-headphones"></i>
-                    Dostupné nahrávky<span class="d-none d-xl-inline"> a videa</span>
-                </div>
+                <div class="card-header media-opener py-2"><i class="fas fa-headphones"></i> Dostupné nahrávky<span class="d-none d-xl-inline"> a videa</span></div>
                 <div class="media-opener" v-if="mediaTypes[0]"><i class="fab fa-spotify text-success"></i> Spotify</div>
                 <div class="media-opener" v-if="mediaTypes[1]"><i class="fab fa-soundcloud" style="color: orangered;"></i> SoundCloud</div>
                 <div class="media-opener" v-if="mediaTypes[3]"><i class="fas fa-music"></i> MP3</div>
                 <div class="media-opener" v-if="mediaTypes[2]"><i class="fab fa-youtube text-danger"></i> YouTube</div>
             </div>
             <div class="card mb-3 d-none d-lg-flex" v-on:click="bottomMode = 1">
-                <div
-                    class="card-header media-opener py-2 rounded bg-secondary text-white"
-                >
-                    <i class="fas fa-sliders-h"></i>
-                    Nastavit zobrazení
-                </div>
+                <div class="card-header media-opener py-2 rounded bg-secondary text-white"><i class="fas fa-sliders-h"></i> Nastavit zobrazení</div>
                 <div
                     class="media-opener"
                     v-if="chordSharedStore.nChordModes != 1"
                 >
-                    <i class="fas fa-angle-right"></i> Transpozice:
-                    <span class="float-right">{{
+                    <i class="fas fa-angle-right"></i> Transpozice: <span class="float-right">{{
                         chordSharedStore.transposition
                     }}</span>
                 </div>
@@ -443,8 +424,7 @@
                     class="media-opener"
                     v-if="chordSharedStore.nChordModes != 1"
                 >
-                    <i class="fas fa-angle-right"></i> Posuvky:
-                    <span class="float-right">{{
+                    <i class="fas fa-angle-right"></i> Posuvky: <span class="float-right">{{
                         chordSharedStore.useFlatScale ? '♭' : '#'
                     }}</span>
                 </div>
@@ -452,14 +432,12 @@
                     class="media-opener"
                     v-if="chordSharedStore.nChordModes != 1"
                 >
-                    <i class="fas fa-angle-right"></i> Akordy:
-                    <span class="float-right">{{
+                    <i class="fas fa-angle-right"></i> Akordy: <span class="float-right">{{
                         chordSharedStore.chordMode ? '+' : '–'
                     }}</span>
                 </div>
                 <div class="media-opener">
-                    <i class="fas fa-angle-right"></i> Velikost písma:
-                    <span class="float-right">{{
+                    <i class="fas fa-angle-right"></i> Velikost písma: <span class="float-right">{{
                         (chordSharedStore.fontSizePercent - 100) / 10
                     }}</span>
                 </div>

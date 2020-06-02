@@ -6,7 +6,7 @@
             ></a>
             <span v-for="(author, index) in authors" v-bind:key="author.id"
                 ><span v-if="index">,</span>
-                <a :href="author.public_route">{{ author.name }}</a>
+                <nuxt-link :to="author.public_route">{{ author.name }}</nuxt-link>
             </span>
             <a
                 v-if="downloadUrl"

@@ -54,10 +54,10 @@
                                 :key="authorIndex"
                             >
                                 <span v-if="authorIndex">,</span>
-                                <a
-                                    :href="author.public_route"
+                                <nuxt-link
+                                    :to="author.public_route"
                                     class="text-secondary"
-                                    >{{ author.name }}</a
+                                    >{{ author.name }}</nuxt-link
                                 >
                             </span>
                         </td>

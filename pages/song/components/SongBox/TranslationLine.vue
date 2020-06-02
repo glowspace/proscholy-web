@@ -6,16 +6,14 @@
                 'text-right text-uppercase small align-middle pr-0'
             ]"
             :title="translation.lang_string"
-        >
-            {{ translation.lang }}
-        </td>
+        >{{ translation.lang }}</td>
         <td class="align-middle">
-            <a
-                :href="translation.public_route"
+            <nuxt-link
+                :to="translation.public_route"
                 :class="{
                     'font-weight-bolder': translation.name == original_name
                 }"
-                >{{ translation.name }}</a
+                >{{ translation.name }}</nuxt-link
             >
         </td>
         <td class="align-middle">
@@ -27,9 +25,9 @@
                 v-for="(author, authorIndex) in translation.authors"
                 :key="authorIndex"
                 ><span v-if="authorIndex">,</span>
-                <a :href="author.public_route" class="text-secondary">{{
+                <nuxt-link :to="author.public_route" class="text-secondary">{{
                     author.name
-                }}</a>
+                }}</nuxt-link>
             </span>
         </td>
     </tr>

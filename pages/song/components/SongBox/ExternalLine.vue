@@ -25,9 +25,9 @@
         <td :class="[{ 'border-top-0': !index }, 'p-2 pl-md-5 align-middle']">
             <span v-for="(author, authorIndex) in authors"
                 ><span v-if="authorIndex">,</span>
-                <a :href="author.public_route" class="text-secondary">{{
+                <nuxt-link :to="author.public_route" class="text-secondary">{{
                     author.name
-                }}</a>
+                }}</nuxt-link>
             </span>
         </td>
     </tr>

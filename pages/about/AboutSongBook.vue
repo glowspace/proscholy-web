@@ -35,7 +35,7 @@
         <p>
             Chcete se podílet na tvorbě zpěvníku? Máte tipy na nové funkce nebo
             nový repertoár?<br />
-            Můžete nám napsat na email
+            Můžete nám napsat na e-mail
             <a href="mailto:redakce@proscholy.cz">redakce@proscholy.cz</a> nebo
             se na nás obrátit telefonicky na
             <a href="tel:+420734791909">734 791 909</a>.
