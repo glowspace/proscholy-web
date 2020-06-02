@@ -1,6 +1,6 @@
 <template>
     <song-loading v-if="$apollo.loading"></song-loading>
-    <song-detail v-else :song="song_lyric"></song-detail>
+    <song-detail v-else-if="song_lyric" :song="song_lyric"></song-detail>
 </template>
 
 <script>
@@ -91,8 +91,6 @@ export default {
         };
     },
 
-    mounted() {},
-
     apollo: {
         song_lyric: {
             query: FETCH_SONG_LYRIC,
@@ -104,6 +102,10 @@ export default {
         }
     },
 
-    methods: {}
+    mounted() {
+        if(!this.$apollo.loading && this.song_lyric === null) {
+            this.$nuxt.error({ statusCode: 404 });
+        }
+    }
 };
 </script>

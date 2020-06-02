@@ -1,5 +1,5 @@
 <template>
-    <div class="container" v-if="!$apollo.loading">
+    <div class="container" v-if="!$apollo.loading && author">
         <h2 style="margin-bottom: 0">{{ author.name }}</h2>
 
         <span style="color:dimgrey" v-if="author.type == 0">autor</span>
@@ -117,5 +117,11 @@ export default {
             }
         }
     },
+
+    mounted() {
+        if(!this.$apollo.loading && this.author === null) {
+            this.$nuxt.error({ statusCode: 404 });
+        }
+    }
 };
 </script>
