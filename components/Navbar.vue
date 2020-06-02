@@ -9,30 +9,16 @@
                         width="60"
                         alt="logo"
                     />Zpěvník pro scholy</nuxt-link>
-                <div class="d-flex flex-grow-1">
-                    <ul class="navbar-nav flex-nowrap">
-                        <li class="nav-item">
-                            <nuxt-link
-                                to="/"
-                                class="btn btn-secondary"
-                            ><i class="fas fa-search"></i> Vyhledávání</nuxt-link>
-                        </li>&nbsp;<li class="nav-item">
-                            <nuxt-link
-                                to="/o-zpevniku"
-                                class="btn btn-secondary"
-                            ><i class="fas fa-info"></i> O zpěvníku</nuxt-link>
-                        </li>&nbsp;<dark-mode-button v-cloak> Tmavý mód</dark-mode-button>
-                    </ul>
-                </div>
-                <div class="d-flex flex-grow-1">
-                    <ul class="navbar-nav ml-auto flex-nowrap">
-                        <li class="nav-item">
-                            <nuxt-link
-                                to="/muj-ucet"
-                                class="btn btn-secondary nav-item"
-                            ><i class="fas fa-user"></i> Přihlásit se</nuxt-link>
-                        </li>
-                    </ul>
+                <div class="d-inline-flex">
+                    <nuxt-link
+                        to="/"
+                        class="btn btn-secondary"
+                    ><i class="fas fa-search"></i> Vyhledávání</nuxt-link>
+                    <nuxt-link
+                        to="/o-zpevniku"
+                        class="btn btn-secondary"
+                    ><i class="fas fa-info"></i> O&nbsp;zpěvníku</nuxt-link>
+                    <dark-mode-button v-cloak> Tmavý&nbsp;mód</dark-mode-button>
                 </div>
             </div>
         </nav>
