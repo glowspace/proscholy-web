@@ -59,7 +59,7 @@
                         >
                             <a
                                 class="btn btn-outline-light display-all-songs font-weight-bold"
-                                ><i class="fas fa-chevron-down pr-1"></i>ZOBRAZIT VŠECHNY PÍSNĚ</a
+                                ><i class="fas fa-chevron-down pr-1"></i> ZOBRAZIT VŠECHNY PÍSNĚ</a
                             >
                         </div>
                         <div
@@ -253,7 +253,7 @@ export default {
             }
 
             this.search_string =
-                GETparameters.vyhledavani.replace(/_/g, ' ') || this.search_string;
+                GETparameters.vyhledavani ? GETparameters.vyhledavani.replace(/_/g, ' ') : this.search_string;
 
             // a helper function
             const getObjFormat = function(str) {
