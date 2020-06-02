@@ -216,7 +216,7 @@ export default {
 
             let GETparameters = {};
             if (this.search_string) {
-                GETparameters.vyhledavani = this.search_string;
+                GETparameters.vyhledavani = this.search_string.replace(/\s/g, '_');
             }
             if (Object.keys(this.selected_tags).length) {
                 GETparameters.stitky = Object.keys(this.selected_tags).join(
@@ -253,7 +253,7 @@ export default {
             }
 
             this.search_string =
-                GETparameters.vyhledavani || this.search_string;
+                GETparameters.vyhledavani.replace(/_/g, ' ') || this.search_string;
 
             // a helper function
             const getObjFormat = function(str) {
