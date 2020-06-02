@@ -48,7 +48,7 @@ export default {
     /*
      ** Customize the progress-bar color
      */
-    loading: { color: '#fff' },
+    loading: { color: '#aaa' },
     /*
      ** Global CSS
      */
@@ -108,7 +108,7 @@ export default {
                             path.join(__dirname, './layouts/**/*.vue'),
                             path.join(__dirname, './components/**/*.vue')
                         ]),
-                        whitelist: ['html', 'body']
+                        whitelist: ['html', 'body', 'nuxt-progress']
                     })
                 )
             }
