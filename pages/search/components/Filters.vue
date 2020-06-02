@@ -222,18 +222,14 @@ export default {
         },
 
         getSelectedTagsDcnf() {
-            if (!this.tags_liturgy_part) {
-                return {};
-            }
-
             const filterMapTags = tags =>
                 tags.filter(tag => this.isSelectedTag(tag)).map(tag => tag.id);
 
             return {
-                liturgy_part: filterMapTags(this.tags_liturgy_part),
-                liturgy_period: filterMapTags(this.tags_liturgy_period),
-                generic: filterMapTags(this.tags_generic),
-                saints: filterMapTags(this.tags_saints)
+                liturgy_part: this.tags_liturgy_part ? filterMapTags(this.tags_liturgy_part) : [],
+                liturgy_period: this.tags_liturgy_period ? filterMapTags(this.tags_liturgy_period) : [],
+                generic: this.tags_generic ? filterMapTags(this.tags_generic) : [],
+                saints: this.tags_saints ? filterMapTags(this.tags_saints) : []
             };
         }
     },

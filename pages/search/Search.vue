@@ -295,6 +295,7 @@ export default {
         if (process.client) {
             window.onpopstate = this.applyStateChange;
             document.getElementsByClassName('navbar-brand')[0].onclick = () => {this.resetState(); this.init = true;};
+            document.getElementsByClassName('search-home')[0].focus();
         }
         // this.applyStateChange();
     },
@@ -331,6 +332,7 @@ export default {
             } else {
                 document.getElementsByTagName('body')[0].style.overflowY =
                     'auto';
+                document.getElementsByClassName('search-home')[0].focus();
             }
         }
     }
