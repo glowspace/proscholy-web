@@ -13,7 +13,6 @@ export function createRouter() {
         mode: 'history',
         routes: [
             { path: '/', component: Search },
-            // {path: '/search', component: Search},
 
             { path: '/o-zpevniku', component: AboutSongBook },
             { path: '/pisen/:id/:slug', component: Song },
