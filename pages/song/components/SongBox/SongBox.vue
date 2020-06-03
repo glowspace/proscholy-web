@@ -3,45 +3,53 @@
         <div class="col-lg-9">
             <div class="card card-lyrics" id="cardLyrics">
                 <div class="card-header p-1 song-links">
-                    <a
-                        v-if="renderScores"
-                        class="btn btn-secondary"
-                        :class="{ chosen: topMode == 1 }"
-                        @click="topMode = topMode == 1 ? 0 : 1"
-                    >
-                        <i class="fas fa-file-alt"></i>
-                        <span class="d-none d-sm-inline">Noty</span>
-                    </a>
-                    <a
-                        v-if="renderTranslations"
-                        class="btn btn-secondary"
-                        :class="{ chosen: topMode == 2 }"
-                        @click="topMode = topMode == 2 ? 0 : 2"
-                    >
-                        <i class="fas fa-language"></i>
-                        <span class="d-none d-sm-inline">Překlady</span>
-                    </a>
-                    <!-- <a class="btn btn-secondary">
-                      <i class="fas fa-file-export"></i>
-                      <span class="d-none d-sm-inline">Export</span>
-                    </a>
-                    <a class="btn btn-secondary">
-                      <i class="far fa-star"></i>
-                      <span class="d-none d-sm-inline">Hvězdička</span>
-                    </a> -->
-                    <a
-                        class="btn float-right"
-                        title="Nahlásit"
-                        target="_blank"
-                        :href="[
-                            song_lyric
-                                ? 'https://docs.google.com/forms/d/e/1FAIpQLSdTaOCzzlfZmyoCB0I_S2kSPiSZVGwDhDovyxkWB7w2LfH0IA/viewform?entry.2038741493=' +
-                                  encodeURI(song_lyric.name)
-                                : ''
-                        ]"
-                    >
-                        <i class="fas fa-exclamation-triangle p-0"></i>
-                    </a>
+                    <div class="d-inline-block">
+                        <a
+                            v-if="renderScores"
+                            class="btn btn-secondary"
+                            :class="{ chosen: topMode == 1 }"
+                            @click="topMode = topMode == 1 ? 0 : 1"
+                        >
+                            <i class="fas fa-file-alt"></i>
+                            <span class="d-none d-sm-inline">Noty</span>
+                        </a>
+                        <a
+                            v-if="renderTranslations"
+                            class="btn btn-secondary"
+                            :class="{ chosen: topMode == 2 }"
+                            @click="topMode = topMode == 2 ? 0 : 2"
+                        >
+                            <i class="fas fa-language"></i>
+                            <span class="d-none d-sm-inline">Překlady</span>
+                        </a>
+                    </div>
+                    <div class="float-right">
+                        <!-- <a class="btn btn-secondary">
+                            <i class="fas fa-plus"></i>
+                            <span class="d-none d-sm-inline">Seznamy</span>
+                        </a>
+                        <a class="btn btn-secondary">
+                            <i class="fas fa-file-export"></i>
+                            <span class="d-none d-sm-inline">Export</span>
+                        </a>
+                        <a class="btn btn-secondary">
+                            <i class="fas fa-share-alt"></i>
+                            <span class="d-none d-sm-inline">Sdílet</span>
+                        </a> -->
+                        <a
+                            class="btn"
+                            title="Nahlásit"
+                            target="_blank"
+                            :href="[
+                                song_lyric
+                                    ? 'https://docs.google.com/forms/d/e/1FAIpQLSdTaOCzzlfZmyoCB0I_S2kSPiSZVGwDhDovyxkWB7w2LfH0IA/viewform?entry.2038741493=' +
+                                    encodeURI(song_lyric.name)
+                                    : ''
+                            ]"
+                        >
+                            <i class="fas fa-exclamation-triangle p-0"></i>
+                        </a>
+                    </div>
 
                     <!-- scores -->
                     <div v-show="topMode === 1">
