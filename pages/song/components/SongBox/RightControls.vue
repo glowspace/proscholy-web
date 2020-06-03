@@ -1,5 +1,15 @@
 <template>
     <div class="d-flex flex-column mr-n3 position-relative">
+        <!-- <a
+            class="btn btn-secondary m-0"
+            :title="[
+                !starred
+                    ? 'Označit píseň hvězdičkou'
+                    : 'Zrušit hvězdičku'
+            ]"
+            @click="toggleStar"
+            ><i class="fa-star" :class="[starred ? 'fas' : 'far']"></i
+        ></a> -->
         <a
             class="btn btn-secondary m-0"
             :title="[
@@ -13,7 +23,13 @@
                 :class="[fullscreen ? 'fa-compress' : 'fa-expand']"
             ></i
         ></a>
-        <!-- <a
+        <!-- <nuxt-link
+            class="btn btn-secondary m-0"
+            title="Aktivovat režim promítání"
+            :to="'/promitat' + song.public_route"
+            ><i class="fas fa-desktop"></i
+        ></nuxt-link>
+        <a
             class="btn btn-secondary m-0"
             :title="[
                 !columns
@@ -41,16 +57,6 @@
                 ? 'zhasínání&nbsp;displeje není&nbsp;blokováno'
                 : 'zhasínání&nbsp;displeje je&nbsp;blokováno'
         }}</a>
-        <!-- <a
-            class="btn btn-secondary m-0"
-            :title="[
-                !starred
-                    ? 'Označit píseň hvězdičkou'
-                    : 'Zrušit hvězdičku'
-            ]"
-            @click="toggleStar"
-            ><i class="fa-star" :class="[starred ? 'fas' : 'far']"></i
-        ></a> -->
     </div>
 </template>
 
