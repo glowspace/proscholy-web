@@ -169,10 +169,6 @@ import { isEmpty } from 'lodash';
  * Toggles 2 views (SearchHome and SearchResults).
  */
 export default {
-    props: {
-        'str-prefill': String
-    },
-
     head() {
         return {
             // title: this.$t('web.' + this.pageCode + '.page_title') + this.titleTemplate,
@@ -274,22 +270,21 @@ export default {
         },
 
         resetState(update_url) {
-            this.search_string = '';
             this.selected_tags = {};
             this.selected_languages = {};
             this.selected_songbooks = {};
 
             if (update_url) {
+                this.search_string = ''; // this prevents search box from being cleared after filters' load
                 this.updateHistoryState();
             }
         }
     },
 
     mounted() {
-        this.search_string = this.strPrefill ? this.strPrefill : '';
         if (process.client) {
             window.onpopstate = this.applyStateChange;
-            document.getElementsByClassName('navbar-brand')[0].onclick = () => {this.resetState(); this.init = true;};
+            document.getElementsByClassName('navbar-brand')[0].onclick = () => {this.resetState(true); this.init = true;};
             document.getElementsByClassName('search-home')[0].focus();
         }
         // this.applyStateChange();

@@ -43,9 +43,9 @@
         </div>
 
         <!-- todo: implement missing api features -->
-        <author-songs-list text="Autorské písně" v-if="author.song_lyrics.length" :songs="author.song_lyrics" />
-        <author-songs-list text="Překlady" v-if="author.song_lyrics.length" :songs="author.song_lyrics" />
-        <author-songs-list text="Interpretace písní" v-if="author.song_lyrics.length" :songs="author.song_lyrics" />
+        <author-songs-list text="Autorské písně" v-if="author.songs_originals.length" :songs="author.songs_originals" />
+        <author-songs-list text="Překlady" v-if="author.songs_translations.length" :songs="author.songs_translations" />
+        <author-songs-list text="Interpretace písní" v-if="author.songs_interpreted.length" :songs="author.songs_interpreted" />
 
         <div class="p-1 mb-3 mt-n2">
             <div class="px-3 py-2 d-inline-block">Zpěvník ProScholy.cz <img
@@ -76,6 +76,21 @@ const FETCH_AUTHOR = gql`
                 name
                 public_route
             }
+            songs_originals { ...slFields }
+            songs_translations { ...slFields }
+            songs_interpreted { ...slFields }
+        }
+    }
+
+    fragment slFields on SongLyric {
+        type
+        name
+        public_route
+        authors {
+            name
+            public_route
+        }
+        song {
             song_lyrics {
                 type
                 name
@@ -83,17 +98,6 @@ const FETCH_AUTHOR = gql`
                 authors {
                     name
                     public_route
-                }
-                song {
-                    song_lyrics {
-                        type
-                        name
-                        public_route
-                        authors {
-                            name
-                            public_route
-                        }
-                    }
                 }
             }
         }
