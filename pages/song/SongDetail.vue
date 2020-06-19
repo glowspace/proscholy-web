@@ -12,23 +12,23 @@
             </div>
             <tags :song="song"></tags>
         </div>
-        <song-view
+        <song-box
             :song_lyric="song"
-        ></song-view>
+        ></song-box>
         <!-- admin-toolbox :song="song" v-if="false"></admin-toolbox -->
     </div>
 </template>
 
 <script>
 import SongAuthorLabel from './components/SongAuthorLabel';
-import SongView from './components/SongBox/SongBox';
+import SongBox from './components/SongBox/SongBox';
 import Tags from './components/Tags';
 
 export default {
     name: 'SongDetail',
 
     components: {
-        SongView,
+        SongBox,
         SongAuthorLabel,
         Tags
     },

@@ -490,7 +490,7 @@ export default {
     },
 
     data() {
-        // use this only in SongView and Chord component
+        // use this only in SongBox and Chord component
         // use v-model to bind data from every other component
         return {
             controlsDisplay: true,

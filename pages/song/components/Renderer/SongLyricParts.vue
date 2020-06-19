@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <sl-parts-loading v-if="$apollo.loading" />
+    <div v-else-if="song_lyric_parts">
         <div
             :class="getSongPartClass(part)"
             v-for="(part, key) in song_lyric_parts"
@@ -34,6 +35,7 @@
 import gql from 'graphql-tag';
 import Chord from './Chord';
 import SongPartTag from './SongPartTag';
+import SlPartsLoading from '../../SlPartsLoading';
 
 const FETCH_SONG_LYRIC_PARTS = gql`
     query($id: ID!) {
@@ -66,7 +68,8 @@ export default {
 
     components: {
         Chord,
-        SongPartTag
+        SongPartTag,
+        SlPartsLoading
     },
 
     apollo: {
