@@ -35,7 +35,7 @@
 import gql from 'graphql-tag';
 import Chord from './Chord';
 import SongPartTag from './SongPartTag';
-import SlPartsLoading from '../../SlPartsLoading';
+import SlPartsLoading from '../SlPartsLoading';
 
 const FETCH_SONG_LYRIC_PARTS = gql`
     query($id: ID!) {

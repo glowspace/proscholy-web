@@ -1,5 +1,11 @@
 <template>
-    <div class="container" v-if="!$apollo.loading && author">
+    <div class="container" v-if="$apollo.loading">
+        <v-skeleton-loader type="heading" class="mt-4" />
+        <v-skeleton-loader type="text" class="mt-3" max-width="100" />
+        <br>
+        <author-songs-list-loading />
+    </div>
+    <div class="container" v-else-if="author">
         <h2 style="margin-bottom: 0">{{ author.name }}</h2>
 
         <span style="color:dimgrey" v-if="author.type == 0">autor</span>
@@ -13,7 +19,7 @@
         <div class="card" v-if="author.description">
             <div class="card-header p-1">
                 <div class="px-3 py-2 d-inline-block">
-                    <span>O&nbsp;</span>
+                    <span>O</span>
                     <span v-if="author.type == 0">autorovi</span>
                     <span v-else-if="author.type == 1">hudebním uskupení</span>
                     <span v-else-if="author.type == 2">schole</span>
@@ -59,6 +65,7 @@
 
 <script>
 import AuthorSongsList from './AuthorSongsList';
+import AuthorSongsListLoading from './AuthorSongsListLoading';
 import gql from 'graphql-tag';
 
 const FETCH_AUTHOR = gql`
@@ -108,7 +115,8 @@ export default {
     name: 'Author',
 
     components: {
-        AuthorSongsList
+        AuthorSongsList,
+        AuthorSongsListLoading
     },
 
     apollo: {

@@ -14,7 +14,7 @@
                     <div class="card-header p-1 song-links">
                         <v-skeleton-loader type="button" width="50" class="d-inline-block float-right" />
                     </div>
-                    <div class="card-body py-2 pl-3" style="min-height:100vh">
+                    <div class="card-body py-2 pl-3">
                         <sl-parts-loading />
                     </div>
                     <div class="controls fixed-bottom position-sticky p-1 card-footer">
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import SlPartsLoading from './SlPartsLoading';
+import SlPartsLoading from './components/SlPartsLoading';
 
 export default {
     name: 'SongLoading',

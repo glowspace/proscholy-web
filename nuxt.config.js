@@ -79,7 +79,7 @@ export default {
         ['@nuxtjs/google-analytics', { id: 'UA-94042414-8' }],
         '@nuxtjs/router',
         '@nuxtjs/dotenv',
-        '@nuxtjs/vuetify'
+        ['@nuxtjs/vuetify', { treeShake: true }]
     ],
     /*
      ** Nuxt.js modules
