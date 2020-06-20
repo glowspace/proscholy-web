@@ -460,7 +460,7 @@ import { clone } from 'lodash';
 
 import FontSizer from './FontSizer';
 import ChordMode from './ChordMode';
-import ChordSharpFlat from '../ChordSharpFlat';
+import ChordSharpFlat from './ChordSharpFlat';
 import RightControls from './RightControls';
 import Transposition from './Transposition';
 import TranslationLine from './TranslationLine.vue';
