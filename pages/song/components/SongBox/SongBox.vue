@@ -193,6 +193,7 @@
                                 <!-- here goes the song lyrics -->
                                 <song-lyric-parts
                                     :song-id="song_lyric.id"
+                                    :font-size-percent="chordSharedStore.fontSizePercent"
                                 ></song-lyric-parts>
                             </span>
                             <span v-else :style="{ fontSize: chordSharedStore.fontSizePercent + '%' }">Text písně připravujeme.</span>

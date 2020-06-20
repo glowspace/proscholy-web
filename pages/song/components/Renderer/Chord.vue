@@ -1,7 +1,6 @@
 <template>
     <span
         class="chord"
-        v-bind:style="{ fontSize: chordSharedStore.fontSizePercent + '%' }"
     >
         <!-- the if condition syntax is weird but necessary here -->
         <span class="chord-sign" v-if="displayChordSign">

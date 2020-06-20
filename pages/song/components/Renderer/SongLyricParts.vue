@@ -4,14 +4,15 @@
         <div
             :class="getSongPartClass(part)"
             v-for="(part, key) in song_lyric_parts"
-            v-bind:key="key"
+            :key="key"
+            :style="{ fontSize: fontSizePercent + '%' }"
         >
             <div
                 class="song-line"
                 v-for="(line, key2) in part.songLines"
                 v-bind:key="key2"
             >
-                <song-part-tag v-if="!key2">{{ part.type + (part.type ? (part.isVerse ? '.' : ':') : '') }}&nbsp;</song-part-tag
+                <span v-if="!key2" class="song-part-tag">{{ part.type + (part.type ? (part.isVerse ? '.' : ':') : '') }}&nbsp;</span
                 ><template v-for="(chord, key3) in line.chords">
                     <chord
                         v-bind:key="key3"
@@ -34,7 +35,6 @@
 <script>
 import gql from 'graphql-tag';
 import Chord from './Chord';
-import SongPartTag from './SongPartTag';
 import SlPartsLoading from '../SlPartsLoading';
 
 const FETCH_SONG_LYRIC_PARTS = gql`
@@ -64,11 +64,10 @@ const FETCH_SONG_LYRIC_PARTS = gql`
 `;
 
 export default {
-    props: ['songId'],
+    props: ['songId', 'fontSizePercent'],
 
     components: {
         Chord,
-        SongPartTag,
         SlPartsLoading
     },
 
