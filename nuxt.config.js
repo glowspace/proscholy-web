@@ -21,11 +21,11 @@ export default {
                 name: 'viewport',
                 content: 'width=device-width, initial-scale=1'
             },
-            {
-                hid: 'description',
-                name: 'description',
-                content: process.env.npm_package_description || ''
-            }
+
+            {property: 'og:type', content: 'website'},
+            // {property: 'og:image', content: 'https://zpevnik.proscholy.cz/banner.png'},
+            // {property: 'twitter:card', content: 'summary_large_image'},
+            // {property: 'twitter:image', content: 'https://zpevnik.proscholy.cz/banner.png'}
         ],
         link: [
             {
@@ -93,7 +93,7 @@ export default {
        '@nuxtjs/apollo',
        '@nuxtjs/axios',
        '@nuxtjs/proxy',
-       ['@nuxtjs/vuetify', { treeShake: true }]
+       ['@nuxtjs/vuetify', { treeShake: true, theme: { disable: true } }]
     ],
     apollo: {
         clientConfigs: {

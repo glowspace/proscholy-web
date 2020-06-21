@@ -121,13 +121,13 @@ export default {
 
     head() {
         return {
-            title: (this.author ? this.author.name : 'Autor') + this.titleSeparator + this.titleWebsite,
+            title: this.getTitle(),
             meta: [
-            //     {name: 'description', content: this.$t('web.' + this.pageCode + '.description')},
-            //     {property: 'og:title', content: this.$t('web.' + this.pageCode + '.page_title') + this.titleTemplate},
-            //     {property: 'og:description', content: this.$t('web.' + this.pageCode + '.description')},
-            //     {property: 'twitter:title', content: this.$t('web.' + this.pageCode + '.page_title') + this.titleTemplate},
-            //     {property: 'twitter:description', content: this.$t('web.' + this.pageCode + '.description')}
+                {property: 'og:title', content: this.getTitle()},
+                {property: 'twitter:title', content: this.getTitle()},
+                {name: 'description', content: this.getDescription()},
+                {property: 'og:description', content: this.getDescription()},
+                {property: 'twitter:description', content: this.getDescription()}
             ]
         }
     },
@@ -137,6 +137,16 @@ export default {
             titleWebsite: process.env.titleWebsite,
             titleSeparator: process.env.titleSeparator
         };
+    },
+
+    methods: {
+        getTitle() {
+            return (this.author ? this.author.name : 'Autor') + this.titleSeparator + this.titleWebsite;
+        },
+
+        getDescription() {
+            return '';
+        }
     },
 
     apollo: {

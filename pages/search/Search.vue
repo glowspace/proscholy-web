@@ -170,13 +170,13 @@ import { isEmpty } from 'lodash';
 export default {
     head() {
         return {
-            title: this.titleWebsite + this.titleSeparator + 'chytrý křesťanský zpěvník',
+            title: this.getTitle(),
             meta: [
-            //     {name: 'description', content: this.$t('web.' + this.pageCode + '.description')},
-            //     {property: 'og:title', content: this.$t('web.' + this.pageCode + '.page_title') + this.titleTemplate},
-            //     {property: 'og:description', content: this.$t('web.' + this.pageCode + '.description')},
-            //     {property: 'twitter:title', content: this.$t('web.' + this.pageCode + '.page_title') + this.titleTemplate},
-            //     {property: 'twitter:description', content: this.$t('web.' + this.pageCode + '.description')}
+                {property: 'og:title', content: this.getTitle()},
+                {property: 'twitter:title', content: this.getTitle()},
+                {name: 'description', content: this.getDescription()},
+                {property: 'og:description', content: this.getDescription()},
+                {property: 'twitter:description', content: this.getDescription()}
             ],
             bodyAttrs: {
                 class: ['home']
@@ -206,6 +206,14 @@ export default {
     },
 
     methods: {
+        getTitle() {
+            return this.titleWebsite + this.titleSeparator + 'chytrý křesťanský zpěvník';
+        },
+
+        getDescription() {
+            return '';
+        },
+
         updateSelectedTagsDcnf(event) {
             this.selected_tags_dcnf = event;
         },
