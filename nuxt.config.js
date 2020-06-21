@@ -6,6 +6,7 @@ import path from 'path'
 export default {
     mode: 'universal',
     env: {
+        baseUrl: 'https://zpevnik.proscholy.cz',
         titleWebsite: 'ProScholy.cz',
         titleSeparator: ' – '
     },
