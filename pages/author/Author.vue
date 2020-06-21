@@ -119,6 +119,26 @@ export default {
         AuthorSongsListLoading
     },
 
+    head() {
+        return {
+            title: (this.author ? this.author.name : 'Autor') + this.titleSeparator + this.titleWebsite,
+            meta: [
+            //     {name: 'description', content: this.$t('web.' + this.pageCode + '.description')},
+            //     {property: 'og:title', content: this.$t('web.' + this.pageCode + '.page_title') + this.titleTemplate},
+            //     {property: 'og:description', content: this.$t('web.' + this.pageCode + '.description')},
+            //     {property: 'twitter:title', content: this.$t('web.' + this.pageCode + '.page_title') + this.titleTemplate},
+            //     {property: 'twitter:description', content: this.$t('web.' + this.pageCode + '.description')}
+            ]
+        }
+    },
+
+    data() {
+        return {
+            titleWebsite: process.env.titleWebsite,
+            titleSeparator: process.env.titleSeparator
+        };
+    },
+
     apollo: {
         author: {
             query: FETCH_AUTHOR,

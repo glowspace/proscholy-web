@@ -85,9 +85,23 @@ export default {
     name: 'Song',
     components: { SongLoading, SongDetail },
 
-    data: () => {
+    head() {
         return {
-            song_lyric: {}
+            title: (this.song_lyric ? this.song_lyric.name : 'Píseň ' + this.$route.params.id) + this.titleSeparator + this.titleWebsite,
+            meta: [
+            //     {name: 'description', content: this.$t('web.' + this.pageCode + '.description')},
+            //     {property: 'og:title', content: this.$t('web.' + this.pageCode + '.page_title') + this.titleTemplate},
+            //     {property: 'og:description', content: this.$t('web.' + this.pageCode + '.description')},
+            //     {property: 'twitter:title', content: this.$t('web.' + this.pageCode + '.page_title') + this.titleTemplate},
+            //     {property: 'twitter:description', content: this.$t('web.' + this.pageCode + '.description')}
+            ]
+        }
+    },
+
+    data() {
+        return {
+            titleWebsite: process.env.titleWebsite,
+            titleSeparator: process.env.titleSeparator
         };
     },
 

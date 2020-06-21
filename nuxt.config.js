@@ -5,11 +5,15 @@ import path from 'path'
 
 export default {
     mode: 'universal',
+    env: {
+        titleWebsite: 'ProScholy.cz',
+        titleSeparator: ' – '
+    },
     /*
      ** Headers of the page
      */
     head: {
-        title: process.env.npm_package_name || '',
+        title: 'ProScholy.cz',
         meta: [
             { charset: 'utf-8' },
             {
