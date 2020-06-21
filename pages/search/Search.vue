@@ -15,6 +15,7 @@
                     >
                         <div class="search-wrapper shadow">
                             <input
+                                type="search"
                                 class="search-home"
                                 placeholder="Zadejte název písně, část textu nebo jméno autora"
                                 v-model="search_string"
@@ -107,9 +108,7 @@
                                         selected_languages
                                     "
                                     v-bind:init="init"
-                                    v-on:query-loaded="
-                                        updateHistoryState();
-                                    "
+                                    v-on:query-loaded="queryLoaded"
                                 ></SongsList>
                             </div>
                         </div>
@@ -208,8 +207,6 @@ export default {
         },
 
         updateHistoryState() {
-            if (this.init) return;
-
             let GETparameters = {};
             if (this.search_string) {
                 GETparameters.vyhledavani = this.search_string.replace(/\s/g, '_');
@@ -276,6 +273,15 @@ export default {
 
             if (update_url) {
                 this.search_string = ''; // this prevents search box from being cleared after filters' load
+                this.updateHistoryState();
+            }
+        },
+
+        queryLoaded() {
+            if (this.search_string && this.init) {
+                this.updateHistoryState();
+                this.init = false;
+            } else if (!this.init) {
                 this.updateHistoryState();
             }
         }
