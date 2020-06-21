@@ -230,7 +230,7 @@ export default {
             this.$router.replace({
                 path: '/',
                 query: GETparameters
-            });
+            }).catch(err => {});
         },
 
         applyStateChange(event) {
