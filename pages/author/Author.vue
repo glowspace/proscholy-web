@@ -6,7 +6,7 @@
         <author-songs-list-loading />
     </div>
     <div class="container" v-else-if="author">
-        <h2 style="margin-bottom: 0">{{ author.name }}</h2>
+        <h1 class="mb-0">{{ author.name }}</h1>
 
         <span style="color:dimgrey" v-if="author.type == 0">autor</span>
         <span style="color:dimgrey" v-else-if="author.type == 1">hudební uskupení</span>
