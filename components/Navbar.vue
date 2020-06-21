@@ -8,7 +8,9 @@
                         style="padding-right:10px"
                         width="60"
                         alt="logo"
-                    />Zpěvník pro scholy</nuxt-link>
+                    /><h1 v-if="$nuxt.$route.path == '/'" class="home-h1">Zpěvník pro scholy</h1>
+                    <span v-else>Zpěvník pro scholy</span>
+                    </nuxt-link>
                 <div class="d-inline-flex">
                     <nuxt-link
                         to="/"
