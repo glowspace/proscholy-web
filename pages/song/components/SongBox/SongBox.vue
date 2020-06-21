@@ -101,10 +101,10 @@
                                 <table class="table m-0 w-auto">
                                     <tbody>
                                         <tr>
-                                            <th class="border-top-0"></th>
-                                            <th class="border-top-0">Název</th>
-                                            <th class="border-top-0">Typ</th>
-                                            <th class="border-top-0">Autor (překladu)</th>
+                                            <th></th>
+                                            <th>Název</th>
+                                            <th>Typ</th>
+                                            <th>Autor (překladu)</th>
                                         </tr>
                                         <translation-line
                                             v-for="(translation,

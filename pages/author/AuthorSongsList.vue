@@ -5,10 +5,10 @@
             <table class="table m-0">
                 <tbody>
                     <tr v-for="(sl, key) in songs" :key="key">
-                        <td :class="[{ 'border-top-0': !key }, 'p-1 align-middle']">
+                        <td class="p-1 align-middle">
                             <nuxt-link class="px-3 py-2 w-100 d-inline-block" :to="sl.public_route">{{ sl.name }}</nuxt-link>
                         </td>
-                        <td :class="[{ 'border-top-0': !key }, 'author-secondary-links px-1 py-2 align-middle']">
+                        <td class="author-secondary-links px-1 py-2 align-middle">
                             <song-author-label :song="sl"></song-author-label>
                         </td>
                     </tr>

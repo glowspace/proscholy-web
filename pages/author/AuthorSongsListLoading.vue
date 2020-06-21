@@ -6,10 +6,10 @@
                 <tbody>
                     <template v-for="(x, key2) in [0, 1, 2]">
                         <tr v-for="(w, key) in [400, 200, 300, 350, 250, 350, 400, 250, 200, 450]" :key="key + '.' + key2">
-                            <td :class="[{ 'border-top-0': !(key + key2) }, 'px-3 pb-2 pt-3 align-middle']">
+                            <td class="px-3 pb-2 pt-3 align-middle">
                                 <v-skeleton-loader type="text" :width="w/1.5" />
                             </td>
-                            <td :class="[{ 'border-top-0': !(key + key2) }, 'px-1 pb-2 pt-3 align-middle']">
+                            <td class="px-1 pb-2 pt-3 align-middle">
                                 <v-skeleton-loader type="text" :width="w" />
                             </td>
                         </tr>

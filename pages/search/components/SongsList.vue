@@ -4,18 +4,40 @@
     <div class="songs-list">
         <table class="table m-0">
             <tbody>
+                <tr v-if="!results_loaded">
+                    <td>
+                        <div class="d-flex justify-content-end align-items-center">
+                            <span>&nbsp;</span>
+                            <span
+                                class="spinner-border spinner-border-sm"
+                                role="status"
+                                aria-hidden="true"
+                            ></span>
+                        </div>
+                    </td>
+                    <td>Načítám...</td>
+                    <td class="p-1" colspan="5">
+                        <a
+                            class="btn btn-secondary float-right m-0"
+                            target="_blank"
+                            :href="
+                                'https://docs.google.com/forms/d/e/1FAIpQLScmdiN_8S_e8oEY_jfEN4yJnLq8idxUR5AJpFmtrrnvd1NWRw/viewform?usp=pp_url&entry.1025781741=' +
+                                    encodeURIComponent($route.fullPath)
+                            "
+                        >
+                            Nahlásit
+                        </a>
+                    </td>
+                </tr>
                 <template
-                    v-if="song_lyrics && song_lyrics.length && results_loaded"
+                    v-if="song_lyrics && song_lyrics.length"
                 >
                     <tr
                         v-for="(song_lyric, index) in song_lyrics"
                         v-bind:key="song_lyric.id"
                     >
                         <td
-                            :class="[
-                                { 'border-top-0': !index },
-                                'p-1 align-middle text-right w-min'
-                            ]"
+                            class="p-1 align-middle text-right w-min"
                         >
                             <nuxt-link
                                 class="p-2 pl-3 w-100 d-flex justify-content-between text-secondary"
@@ -30,10 +52,7 @@
                             </nuxt-link>
                         </td>
                         <td
-                            :class="[
-                                { 'border-top-0': !index },
-                                'p-1 align-middle'
-                            ]"
+                            class="p-1 align-middle"
                         >
                             <nuxt-link
                                 class="p-2 w-100 d-inline-block"
@@ -42,10 +61,7 @@
                             </nuxt-link>
                         </td>
                         <td
-                            :class="[
-                                { 'border-top-0': !index },
-                                'p-1 align-middle'
-                            ]"
+                            class="p-1 align-middle"
                             :colspan="song_lyric.lang != 'cs' ? 1 : 2"
                         >
                             <span
@@ -63,7 +79,6 @@
                         </td>
                         <td
                             class="no-left-padding text-right text-uppercase small align-middle pr-3"
-                            :class="{ 'border-top-0': !index }"
                             v-if="song_lyric.lang != 'cs'"
                         >
                             <span
@@ -80,7 +95,6 @@
                         <td
                             style="width:10px"
                             class="no-left-padding align-middle d-none d-sm-table-cell"
-                            :class="{ 'border-top-0': !index }"
                         >
                             <i
                                 v-if="song_lyric.has_chords"
@@ -97,7 +111,6 @@
                         <td
                             style="width:10px"
                             class="no-left-padding align-middle d-none d-sm-table-cell"
-                            :class="{ 'border-top-0': !index }"
                         >
                             <i
                                 v-if="song_lyric.scoreFiles.length > 0"
@@ -112,7 +125,6 @@
                         <td
                             style="width:10px"
                             class="no-left-padding pr-4 align-middle d-none d-sm-table-cell"
-                            :class="{ 'border-top-0': !index }"
                         >
                             <i
                                 v-if="
@@ -135,21 +147,8 @@
                         :enabled="enable_more"
                     /></td></tr>
                 </template>
-                <tr v-else>
-                    <td v-if="!results_loaded" class="border-top-0 p-1">
-                        <span class="px-3 py-2 d-inline-block">Načítám...</span>
-                        <a
-                            class="btn btn-secondary float-right m-0"
-                            target="_blank"
-                            :href="
-                                'https://docs.google.com/forms/d/e/1FAIpQLScmdiN_8S_e8oEY_jfEN4yJnLq8idxUR5AJpFmtrrnvd1NWRw/viewform?usp=pp_url&entry.1025781741=' +
-                                    encodeURIComponent($route.fullPath)
-                            "
-                        >
-                            Nahlásit
-                        </a>
-                    </td>
-                    <td v-else class="border-top-0 p-1">
+                <tr v-else-if="results_loaded">
+                    <td class="p-1">
                         <span class="px-3 py-2 d-inline-block"
                             >Žádná píseň odpovídající zadaným kritériím nebyla
                             nalezena.</span
@@ -167,11 +166,11 @@
         </table>
         <div class="text-center">
             <div
-                class="btn btn-primary"
+                class="btn btn-primary d-inline-flex align-items-center"
                 v-if="enable_more && results_loaded"
             >
                 <span
-                    class="spinner-border spinner-border-sm"
+                    class="spinner-border spinner-border-sm mr-3"
                     role="status"
                     aria-hidden="true"
                 ></span>

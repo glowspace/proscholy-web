@@ -319,6 +319,12 @@ Home page specific elements
 Other elements
  */
 
+.table tr:first-child {
+    td, th {
+        border-top: none;
+    }
+}
+
 .card-blue {
     border-radius: 3px;
 
