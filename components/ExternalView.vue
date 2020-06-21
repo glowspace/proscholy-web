@@ -44,9 +44,8 @@
         </div>
 
         <!-- audio soubor -->
-        <audio controls :src="iframeSrc" v-else-if="type == 7" class="w-100">
-            Váš prohlížeč bohužel nepodporuje přehrávání nahraných souborů.
-        </audio>
+        <audio controls :src="iframeSrc" v-else-if="type == 7" class="w-100"
+        >Váš prohlížeč bohužel nepodporuje přehrávání nahraných souborů.</audio>
 
         <iframe
             v-else
