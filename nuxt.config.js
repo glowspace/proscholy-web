@@ -78,17 +78,17 @@ export default {
     buildModules: [
         ['@nuxtjs/google-analytics', { id: 'UA-94042414-8' }],
         '@nuxtjs/router',
-        '@nuxtjs/dotenv',
-        ['@nuxtjs/vuetify', { treeShake: true }]
+        '@nuxtjs/dotenv'
     ],
     /*
-     ** Nuxt.js modules
-     */
-    modules: [
-        // '@nuxtjs/pwa',
-        '@nuxtjs/apollo',
-        '@nuxtjs/axios',
-        '@nuxtjs/proxy'
+    ** Nuxt.js modules
+    */
+   modules: [
+       // '@nuxtjs/pwa',
+       '@nuxtjs/apollo',
+       '@nuxtjs/axios',
+       '@nuxtjs/proxy',
+       ['@nuxtjs/vuetify', { treeShake: true }]
     ],
     apollo: {
         clientConfigs: {
