@@ -93,4 +93,8 @@ body[data-dark] {
     .tag:hover {
         color: white;
     }
+
+    .v-skeleton-loader {
+        filter: invert(1);
+    }
 }
