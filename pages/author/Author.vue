@@ -8,11 +8,11 @@
     <div class="container" v-else-if="author">
         <h1 class="mb-0">{{ author.name }}</h1>
 
-        <span style="color:dimgrey" v-if="author.type == 0">autor</span>
-        <span style="color:dimgrey" v-else-if="author.type == 1">hudební uskupení</span>
-        <span style="color:dimgrey" v-else-if="author.type == 2">schola</span>
-        <span style="color:dimgrey" v-else-if="author.type == 3">kapela</span>
-        <span style="color:dimgrey" v-else-if="author.type == 4">sbor</span>
+        <span class="text-secondary" v-if="author.type == 0">autor</span>
+        <span class="text-secondary" v-else-if="author.type == 1">hudební uskupení</span>
+        <span class="text-secondary" v-else-if="author.type == 2">schola</span>
+        <span class="text-secondary" v-else-if="author.type == 3">kapela</span>
+        <span class="text-secondary" v-else-if="author.type == 4">sbor</span>
 
         <br><br>
 

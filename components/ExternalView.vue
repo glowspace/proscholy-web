@@ -1,5 +1,5 @@
 <template>
-    <div class="card card-green" style="margin-bottom: 1em;">
+    <div class="card card-green mb-3">
         <div class="card-header py-2" v-if="![4, 8, 9].includes(this.type)">
             <a :href="mediaLink" target="_blank" title="Otevřít v novém okně"
                 ><i :class="typeClass"></i

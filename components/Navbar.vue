@@ -5,7 +5,7 @@
                 <nuxt-link to="/" class="navbar-brand">
                     <img
                         src="/img/logo_v2.png"
-                        style="padding: 0 10px 0 0;"
+                        style="padding-right:10px"
                         width="60"
                         alt="logo"
                     />Zpěvník pro scholy</nuxt-link>

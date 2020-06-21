@@ -78,7 +78,7 @@
                             >
                         </td>
                         <td
-                            style="width: 10px;"
+                            style="width:10px"
                             class="no-left-padding align-middle d-none d-sm-table-cell"
                             :class="{ 'border-top-0': !index }"
                         >
@@ -95,7 +95,7 @@
                             <i v-else class="fas fa-align-left text-very-muted"></i>
                         </td>
                         <td
-                            style="width: 10px;"
+                            style="width:10px"
                             class="no-left-padding align-middle d-none d-sm-table-cell"
                             :class="{ 'border-top-0': !index }"
                         >
@@ -110,7 +110,7 @@
                             ></i>
                         </td>
                         <td
-                            style="width: 10px;"
+                            style="width:10px"
                             class="no-left-padding pr-4 align-middle d-none d-sm-table-cell"
                             :class="{ 'border-top-0': !index }"
                         >
