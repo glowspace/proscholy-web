@@ -56,8 +56,8 @@ const FETCH_SONG_LYRIC = gql`
                         name
                         public_route
                     }
-                    # lang
-                    # lang_string
+                    lang
+                    lang_string
                 }
             }
             capo
