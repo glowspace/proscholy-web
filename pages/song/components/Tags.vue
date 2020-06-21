@@ -2,9 +2,9 @@
     <div class="song-tags p-0 mt-3">
         <div class="d-inline-flex flex-row flex-wrap align-items-start mr-3"
             v-if="song.tags_saints.concat(song.tags_generic).concat(song.tags_liturgy_period).concat(song.tags_liturgy_part).length">
-            <nuxt-link class="tag tag-blue" v-for="(tag, key) in song.tags_liturgy_part" :key="key"
+            <nuxt-link class="tag tag-blue" v-for="(tag, key) in song.tags_liturgy_part" :key="'1.' + key"
                :to="'/?stitky=' + tag.id">{{ tag.name }}</nuxt-link>
-            <nuxt-link class="tag tag-green" v-for="(tag, key2) in song.tags_saints.concat(song.tags_generic).concat(song.tags_liturgy_period)" :key="key2"
+            <nuxt-link class="tag tag-green" v-for="(tag, key2) in song.tags_saints.concat(song.tags_generic).concat(song.tags_liturgy_period)" :key="'2.' + key2"
                :to="'/?stitky=' + tag.id">{{ tag.name }}</nuxt-link>
         </div>
 
@@ -17,7 +17,7 @@
 
         <div class="d-inline-flex flex-row flex-wrap align-items-start"
             v-if="song.songbook_records.length">
-            <nuxt-link class="tag tag-yellow songbook-tag" v-for="(sb, key3) in song.songbook_records" :key="key3"
+            <nuxt-link class="tag tag-yellow songbook-tag" v-for="(sb, key3) in song.songbook_records" :key="'3.' + key3"
                 :to="'/?zpevniky=' + sb.songbook.id">
                 <span class="songbook-name">{{ sb.songbook.name }}</span><span class="songbook-number">{{ sb.number }}</span>
             </nuxt-link>
