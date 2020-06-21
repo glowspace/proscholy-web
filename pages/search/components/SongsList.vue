@@ -5,7 +5,7 @@
         <table class="table m-0">
             <tbody>
                 <tr v-if="!results_loaded">
-                    <td>
+                    <td style="width:4rem">
                         <div class="d-flex justify-content-end align-items-center">
                             <span>&nbsp;</span>
                             <span
@@ -148,7 +148,7 @@
                     /></td></tr>
                 </template>
                 <tr v-else-if="results_loaded">
-                    <td class="p-1">
+                    <td class="p-1" colspan="7">
                         <span class="px-3 py-2 d-inline-block"
                             >Žádná píseň odpovídající zadaným kritériím nebyla
                             nalezena.</span
