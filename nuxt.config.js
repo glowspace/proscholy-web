@@ -84,6 +84,7 @@ export default {
         ['@nuxtjs/google-analytics', { id: 'UA-94042414-8' }],
         '@nuxtjs/router',
         '@nuxtjs/dotenv'
+        ['@nuxtjs/vuetify', { treeShake: true, theme: { disable: true } }]
     ],
     /*
     ** Nuxt.js modules
@@ -93,7 +94,6 @@ export default {
        '@nuxtjs/apollo',
        '@nuxtjs/axios',
        '@nuxtjs/proxy',
-       ['@nuxtjs/vuetify', { treeShake: true, theme: { disable: true } }]
     ],
     apollo: {
         clientConfigs: {
