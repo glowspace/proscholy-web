@@ -151,235 +151,236 @@
                         </div>
                     </div>
                 </div>
+                <div>
+                    <div class="card-body py-2 pl-3 overflow-hidden">
+                        <div
+                            class="d-flex align-items-start justify-content-between"
+                        >
+                            <div
+                                id="song-lyrics"
+                                :class="{
+                                    'p-1': true,
+                                    'song-lyrics-extended':
+                                        chordSharedStore.chordMode == 2
+                                }"
+                            >
+                                <span v-if="song_lyric.has_lyrics">
+                                    <a
+                                        class="btn btn-secondary bg-transparent p-0 mb-3"
+                                        v-if="
+                                            chordSharedStore.nChordModes != 1 &&
+                                                chordSharedStore.chordMode == 0
+                                        "
+                                        @click="chordSharedStore.chordMode = 2"
+                                        >Zobrazit akordy</a
+                                    >
+                                    <a
+                                        class="btn btn-secondary bg-transparent p-0 mb-3"
+                                        v-if="chordSharedStore.chordMode != 0"
+                                        @click="chordSharedStore.chordMode = 0"
+                                        >Skrýt akordy</a
+                                    >
+                                    <div
+                                        v-if="
+                                            !$apollo.loading &&
+                                                song_lyric.capo > 0 &&
+                                                chordSharedStore.chordMode != 0
+                                        "
+                                        class="mb-2"
+                                    >
+                                        <i>capo: {{ song_lyric.capo }}</i>
+                                    </div>
+                                    <!-- here goes the song lyrics -->
+                                    <song-lyric-parts
+                                        :song-id="song_lyric.id"
+                                        :font-size-percent="chordSharedStore.fontSizePercent"
+                                    ></song-lyric-parts>
+                                </span>
+                                <span v-else :style="{ fontSize: chordSharedStore.fontSizePercent + '%' }">Text písně připravujeme.</span>
+                            </div>
+                            <right-controls></right-controls>
+                        </div>
+                    </div>
 
-                <div class="card-body py-2 pl-3 overflow-hidden">
                     <div
-                        class="d-flex align-items-start justify-content-between"
+                        class="controls fixed-bottom position-sticky p-1"
+                        v-bind:class="{ 'card-footer': controlsDisplay }"
                     >
-                        <div
-                            id="song-lyrics"
-                            :class="{
-                                'p-1': true,
-                                'song-lyrics-extended':
-                                    chordSharedStore.chordMode == 2
-                            }"
-                        >
-                            <span v-if="song_lyric.has_lyrics">
+                        <div v-show="bottomMode == 1 && controlsDisplay">
+                            <div class="overflow-auto toolbox">
                                 <a
-                                    class="btn btn-secondary bg-transparent p-0 mb-3"
-                                    v-if="
-                                        chordSharedStore.nChordModes != 1 &&
+                                    class="btn btn-secondary float-right"
+                                    v-on:click="bottomMode = 0"
+                                >
+                                    <i class="fas fa-times pr-0"></i>
+                                </a>
+                                <div
+                                    class="toolbox-item"
+                                    v-if="chordSharedStore.nChordModes != 1"
+                                    :class="{
+                                        'hidden-toolbox-item':
                                             chordSharedStore.chordMode == 0
-                                    "
-                                    @click="chordSharedStore.chordMode = 2"
-                                    >Zobrazit akordy</a
+                                    }"
                                 >
+                                    <transposition
+                                        v-model="chordSharedStore.transposition"
+                                    ></transposition>
+                                </div>
+
+                                <div
+                                    class="toolbox-item"
+                                    v-if="chordSharedStore.nChordModes != 1"
+                                    :class="{
+                                        'hidden-toolbox-item':
+                                            chordSharedStore.chordMode == 0
+                                    }"
+                                >
+                                    <chord-sharp-flat
+                                        v-model="chordSharedStore.useFlatScale"
+                                    ></chord-sharp-flat>
+                                </div>
+
+                                <div
+                                    class="toolbox-item"
+                                    v-if="chordSharedStore.nChordModes != 1"
+                                >
+                                    <chord-mode
+                                        v-model="chordSharedStore.chordMode"
+                                        :n-chord-modes="
+                                            chordSharedStore.nChordModes
+                                        "
+                                    ></chord-mode>
+                                </div>
+
+                                <div class="toolbox-item">
+                                    <font-sizer
+                                        v-model="chordSharedStore.fontSizePercent"
+                                    ></font-sizer>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- media -->
+                        <div v-show="bottomMode == 2 && controlsDisplay">
+                            <div class="overflow-auto media-card toolbox">
                                 <a
-                                    class="btn btn-secondary bg-transparent p-0 mb-3"
-                                    v-if="chordSharedStore.chordMode != 0"
-                                    @click="chordSharedStore.chordMode = 0"
-                                    >Skrýt akordy</a
+                                    class="btn btn-secondary float-right fixed-top position-sticky cross"
+                                    v-on:click="bottomMode = 0"
                                 >
+                                    <i class="fas fa-times pr-0"></i>
+                                </a>
                                 <div
-                                    v-if="
-                                        !$apollo.loading &&
-                                            song_lyric.capo > 0 &&
-                                            chordSharedStore.chordMode != 0
-                                    "
-                                    class="mb-2"
+                                    class="row ml-0 pt-2"
+                                    v-if="hasExternalsOrFiles && !$apollo.loading"
                                 >
-                                    <i>capo: {{ song_lyric.capo }}</i>
+                                    <div
+                                        class="col-md-6"
+                                        v-for="external in mediaExternals"
+                                        v-bind:key="external.id"
+                                    >
+                                        <external-view
+                                            :url="external.url"
+                                            :media-id="external.media_id"
+                                            :type="external.type"
+                                            :authors="external.authors"
+                                        ></external-view>
+                                    </div>
+                                    <div
+                                        class="col-md-6"
+                                        v-for="file in mediaFiles"
+                                        v-bind:key="file.id"
+                                    >
+                                        <external-view
+                                            :url="file.url"
+                                            :download-url="file.download_url"
+                                            :media-id="file.media_id"
+                                            :type="fileTypeConvert(file.type)"
+                                            :authors="file.authors"
+                                        ></external-view>
+                                    </div>
                                 </div>
-                                <!-- here goes the song lyrics -->
-                                <song-lyric-parts
-                                    :song-id="song_lyric.id"
-                                    :font-size-percent="chordSharedStore.fontSizePercent"
-                                ></song-lyric-parts>
-                            </span>
-                            <span v-else :style="{ fontSize: chordSharedStore.fontSizePercent + '%' }">Text písně připravujeme.</span>
+                                <div v-else>
+                                    <span v-if="$apollo.loading">
+                                        <i>Načítám...</i>
+                                    </span>
+                                    <span v-else>
+                                        <i>Žádná nahrávka nebyla nalezena.</i>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
-                        <right-controls></right-controls>
-                    </div>
-                </div>
-
-                <div
-                    class="controls fixed-bottom position-sticky p-1"
-                    v-bind:class="{ 'card-footer': controlsDisplay }"
-                >
-                    <div v-show="bottomMode == 1 && controlsDisplay">
-                        <div class="overflow-auto toolbox">
+                        <!-- control buttons -->
+                        <span v-show="controlsDisplay">
                             <a
-                                class="btn btn-secondary float-right"
-                                v-on:click="bottomMode = 0"
+                                class="btn btn-secondary"
+                                v-bind:class="{ chosen: bottomMode === 1 }"
+                                v-on:click="bottomMode = bottomMode === 1 ? 0 : 1"
                             >
-                                <i class="fas fa-times pr-0"></i>
+                                <i class="fas fa-sliders-h"></i>
+                                <span class="d-none d-sm-inline">Nástroje</span>
+                            </a>
+                            <a
+                                class="btn btn-secondary"
+                                v-if="renderMedia"
+                                v-bind:class="{ chosen: bottomMode == 2 }"
+                                v-on:click="bottomMode = bottomMode == 2 ? 0 : 2"
+                            >
+                                <i class="fas fa-headphones"></i>
+                                <span class="d-none d-sm-inline">Nahrávky</span>
                             </a>
                             <div
-                                class="toolbox-item"
-                                v-if="chordSharedStore.nChordModes != 1"
-                                :class="{
-                                    'hidden-toolbox-item':
-                                        chordSharedStore.chordMode == 0
-                                }"
+                                class="d-inline-block btn-group m-0"
+                                role="group"
+                                v-bind:class="{ chosen: autoscroll }"
                             >
-                                <transposition
-                                    v-model="chordSharedStore.transposition"
-                                ></transposition>
-                            </div>
-
-                            <div
-                                class="toolbox-item"
-                                v-if="chordSharedStore.nChordModes != 1"
-                                :class="{
-                                    'hidden-toolbox-item':
-                                        chordSharedStore.chordMode == 0
-                                }"
-                            >
-                                <chord-sharp-flat
-                                    v-model="chordSharedStore.useFlatScale"
-                                ></chord-sharp-flat>
-                            </div>
-
-                            <div
-                                class="toolbox-item"
-                                v-if="chordSharedStore.nChordModes != 1"
-                            >
-                                <chord-mode
-                                    v-model="chordSharedStore.chordMode"
-                                    :n-chord-modes="
-                                        chordSharedStore.nChordModes
-                                    "
-                                ></chord-mode>
-                            </div>
-
-                            <div class="toolbox-item">
-                                <font-sizer
-                                    v-model="chordSharedStore.fontSizePercent"
-                                ></font-sizer>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- media -->
-                    <div v-show="bottomMode == 2 && controlsDisplay">
-                        <div class="overflow-auto media-card toolbox">
-                            <a
-                                class="btn btn-secondary float-right fixed-top position-sticky cross"
-                                v-on:click="bottomMode = 0"
-                            >
-                                <i class="fas fa-times pr-0"></i>
-                            </a>
-                            <div
-                                class="row ml-0 pt-2"
-                                v-if="hasExternalsOrFiles && !$apollo.loading"
-                            >
-                                <div
-                                    class="col-md-6"
-                                    v-for="external in mediaExternals"
-                                    v-bind:key="external.id"
+                                <a
+                                    class="btn btn-secondary"
+                                    v-on:click="autoscroll = !autoscroll"
                                 >
-                                    <external-view
-                                        :url="external.url"
-                                        :media-id="external.media_id"
-                                        :type="external.type"
-                                        :authors="external.authors"
-                                    ></external-view>
-                                </div>
-                                <div
-                                    class="col-md-6"
-                                    v-for="file in mediaFiles"
-                                    v-bind:key="file.id"
+                                    <i
+                                        class="fas"
+                                        v-bind:class="[
+                                            autoscroll
+                                                ? 'pr-0 fa-stop-circle'
+                                                : 'fa-arrow-circle-down'
+                                        ]"
+                                    ></i>
+                                    <span
+                                        class="d-none d-sm-inline"
+                                        v-if="!autoscroll"
+                                        >Rolovat</span
+                                    > </a
+                                ><a
+                                    class="btn btn-secondary"
+                                    v-if="autoscroll"
+                                    @click="autoscrollNum--"
+                                    :class="{ disabled: autoscrollNum == 1 }"
+                                    >-</a
+                                ><a
+                                    class="btn btn-secondary"
+                                    v-if="autoscroll"
+                                    @click="autoscrollNum++"
+                                    :class="{ disabled: autoscrollNum == 20 }"
+                                    >+</a
                                 >
-                                    <external-view
-                                        :url="file.url"
-                                        :download-url="file.download_url"
-                                        :media-id="file.media_id"
-                                        :type="fileTypeConvert(file.type)"
-                                        :authors="file.authors"
-                                    ></external-view>
-                                </div>
                             </div>
-                            <div v-else>
-                                <span v-if="$apollo.loading">
-                                    <i>Načítám...</i>
-                                </span>
-                                <span v-else>
-                                    <i>Žádná nahrávka nebyla nalezena.</i>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- control buttons -->
-                    <span v-show="controlsDisplay">
+                        </span>
                         <a
-                            class="btn btn-secondary"
-                            v-bind:class="{ chosen: bottomMode === 1 }"
-                            v-on:click="bottomMode = bottomMode === 1 ? 0 : 1"
-                        >
-                            <i class="fas fa-sliders-h"></i>
-                            <span class="d-none d-sm-inline">Nástroje</span>
-                        </a>
-                        <a
-                            class="btn btn-secondary"
-                            v-if="renderMedia"
-                            v-bind:class="{ chosen: bottomMode == 2 }"
-                            v-on:click="bottomMode = bottomMode == 2 ? 0 : 2"
-                        >
-                            <i class="fas fa-headphones"></i>
-                            <span class="d-none d-sm-inline">Nahrávky</span>
-                        </a>
-                        <div
-                            class="d-inline-block btn-group m-0"
-                            role="group"
-                            v-bind:class="{ chosen: autoscroll }"
-                        >
-                            <a
-                                class="btn btn-secondary"
-                                v-on:click="autoscroll = !autoscroll"
-                            >
-                                <i
-                                    class="fas"
-                                    v-bind:class="[
-                                        autoscroll
-                                            ? 'pr-0 fa-stop-circle'
-                                            : 'fa-arrow-circle-down'
-                                    ]"
-                                ></i>
-                                <span
-                                    class="d-none d-sm-inline"
-                                    v-if="!autoscroll"
-                                    >Rolovat</span
-                                > </a
-                            ><a
-                                class="btn btn-secondary"
-                                v-if="autoscroll"
-                                @click="autoscrollNum--"
-                                :class="{ disabled: autoscrollNum == 1 }"
-                                >-</a
-                            ><a
-                                class="btn btn-secondary"
-                                v-if="autoscroll"
-                                @click="autoscrollNum++"
-                                :class="{ disabled: autoscrollNum == 20 }"
-                                >+</a
-                            >
-                        </div>
-                    </span>
-                    <a
-                        class="btn btn-secondary float-right"
-                        :title="[
-                            controlsDisplay ? 'Skrýt lišty' : 'Zobrazit lišty'
-                        ]"
-                        v-on:click="controlsToggle"
-                    >
-                        <i
-                            class="fas pr-0"
-                            v-bind:class="[
-                                controlsDisplay
-                                    ? 'fa-chevron-right'
-                                    : 'fa-chevron-left'
+                            class="btn btn-secondary float-right"
+                            :title="[
+                                controlsDisplay ? 'Skrýt lišty' : 'Zobrazit lišty'
                             ]"
-                        ></i>
-                    </a>
+                            v-on:click="controlsToggle"
+                        >
+                            <i
+                                class="fas pr-0"
+                                v-bind:class="[
+                                    controlsDisplay
+                                        ? 'fa-chevron-right'
+                                        : 'fa-chevron-left'
+                                ]"
+                            ></i>
+                        </a>
+                    </div>
                 </div>
                 <div class="card-footer p-1 song-links">
                     <div class="px-3 py-2 d-inline-block">Zpěvník ProScholy.cz <img
