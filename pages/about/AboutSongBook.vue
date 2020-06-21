@@ -82,8 +82,8 @@
             <h4>Redakce</h4>
 
             <div class="d-block d-sm-flex flex-wrap">
-                <user-card name="Jana Stuchlíková" info="vedoucí redakce" />
-                <user-card name="Ondřej Múčka" info="Musica Sacra" />
+                <user-card name="Jana Stuchlíková" info="vedoucí redakce" multiple="true" />
+                <user-card name="Ondřej Múčka" info="Musica Sacra" multiple="true" />
                 <user-card name="Václav Šablatura" info="odborný konzultant" />
                 <user-card name="Barbora Kuchaříková" info="" />
                 <user-card name="Jakub Soukal" info="" />
@@ -95,7 +95,7 @@
                 <user-card name="Terezie Kološová" info="" />
                 <user-card name="Terezie Tichá" info="" />
                 <user-card name="Zuzana Bayerová" info="" />
-                <user-card name="Zuzana Haikerová" info="" />
+                <user-card name="Zuzana Haikerová" info="" multiple="true" />
             </div>
         </div>
 
@@ -106,10 +106,12 @@
                 <user-card
                     name="Miroslav Šerý"
                     info="vedoucí vývojář, vývoj webu"
+                    multiple="true"
                 />
                 <user-card
                     name="Michael Dojčár"
                     info="celková koordinace projektu, IT"
+                    multiple="true"
                 />
                 <user-card name="Vít Kološ" info="vývoj webu, návrh rozhraní" />
                 <user-card
@@ -131,10 +133,11 @@
             <h4>Public relations</h4>
 
             <div class="d-block d-sm-flex flex-wrap">
-                <user-card name="Zuzana Haikerová" info="vedoucí propagace" />
+                <user-card name="Zuzana Haikerová" info="vedoucí propagace" multiple="true" />
                 <user-card
                     name="P. Ondřej Talaš"
                     info="koordinace, duchovní podpora, PR"
+                    multiple="true"
                 />
                 <user-card name="Emma Kasanová" info="" />
                 <user-card name="Patra Kalousková" info="" />
