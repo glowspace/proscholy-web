@@ -193,7 +193,7 @@ export default {
         },
 
         getDescription() {
-            return '';
+            return 'Jak vzniká největší český křesťanský online zpěvník a kdo ho tvoří? Tady to zjistíte.';
         }
     }
 };

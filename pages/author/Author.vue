@@ -145,7 +145,7 @@ export default {
         },
 
         getDescription() {
-            return '';
+            return 'Písně i tohoto autora najdete ve Zpěvníku pro scholy.';
         }
     },
 

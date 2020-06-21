@@ -111,7 +111,7 @@ export default {
         },
 
         getDescription() {
-            return '';
+            return 'I tuto píseň máme ve Zpěvníku pro scholy.';
         }
     },
 

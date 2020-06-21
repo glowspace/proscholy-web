@@ -211,7 +211,7 @@ export default {
         },
 
         getDescription() {
-            return '';
+            return 'Zpěvník ProScholy.cz je největší česká platforma sdružující křesťanské písně.';
         },
 
         updateSelectedTagsDcnf(event) {
