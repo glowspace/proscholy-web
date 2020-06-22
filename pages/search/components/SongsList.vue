@@ -57,8 +57,7 @@
                             <nuxt-link
                                 class="p-2 w-100 d-inline-block"
                                 :to="song_lyric.public_route"
-                                >{{ song_lyric.name }}
-                            </nuxt-link>
+                            >{{ song_lyric.name }}</nuxt-link>
                         </td>
                         <td
                             class="p-1 align-middle"
@@ -173,10 +172,8 @@
                     class="spinner-border spinner-border-sm mr-3"
                     role="status"
                     aria-hidden="true"
-                ></span>
-                Načítám další výsledky (celkem
-                {{ song_lyrics_paginated.paginatorInfo.total }})
-            </div>
+                ></span>Načítám další výsledky (celkem {{ song_lyrics_paginated.paginatorInfo.total }})</div
+            >
         </div>
     </div>
     </client-only>
