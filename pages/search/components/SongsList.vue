@@ -142,7 +142,7 @@
                             ></i>
                         </td>
                     </tr>
-                    <tr><td class="p-0 border-top-0"><scroll-trigger
+                    <tr v-if="results_loaded"><td class="p-0 border-top-0"><scroll-trigger
                         @triggerIntersected="loadMore"
                         :enabled="enable_more"
                     /></td></tr>
