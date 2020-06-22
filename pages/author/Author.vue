@@ -92,18 +92,24 @@ const FETCH_AUTHOR = gql`
         type
         name
         public_route
-        authors {
-            name
-            public_route
+        authors_pivot {
+            author {
+                name
+                public_route
+            }
+            authorship_type
         }
         song {
             song_lyrics {
                 type
                 name
                 public_route
-                authors {
-                    name
-                    public_route
+                authors_pivot {
+                    author {
+                        name
+                        public_route
+                    }
+                    authorship_type
                 }
             }
         }

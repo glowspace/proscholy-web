@@ -16,10 +16,13 @@ const FETCH_SONG_LYRIC = gql`
             id
             name
             type
-            authors {
-                id
-                name
-                public_route
+            authors_pivot {
+                author {
+                    id
+                    name
+                    public_route
+                }
+                authorship_type
             }
             externals(orderBy: { field: "type", order: ASC }) {
                 id
@@ -51,10 +54,13 @@ const FETCH_SONG_LYRIC = gql`
                     name
                     public_route
                     type
-                    authors {
-                        id
-                        name
-                        public_route
+                    authors_pivot {
+                        author {
+                            id
+                            name
+                            public_route
+                        }
+                        authorship_type
                     }
                     lang
                     lang_string

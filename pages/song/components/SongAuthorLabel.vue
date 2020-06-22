@@ -4,32 +4,38 @@
             <span v-if="original">
                 <span>Originál: </span>
                 <nuxt-link :to="original.public_route">{{ original.name }}</nuxt-link><br>
-                <span v-if="!original.authors.length">Autor neznámý,</span>
+                <span v-if="original.authors_pivot.length == 0">Autor neznámý,</span>
                 <span v-else>
-                    <span v-if="original.authors.length == 1">Autor:</span>
+                    <span v-if="original.authors_pivot.length == 1">Autor:</span>
                     <span v-else>Autoři:</span>
-                    <span v-for="(author, key) in original.authors" v-bind:key="key">
-                        <nuxt-link :to="author.public_route">{{ author.name }}</nuxt-link><span>, </span>
+                    <span v-for="(ap, key) in original.authors_pivot" v-bind:key="key">
+                        <nuxt-link :to="ap.author.public_route"
+                        :title="{'GENERIC':'','LYRICS':'text','MUSIC':'hudba'}[ap.authorship_type]"
+                        >{{ ap.author.name }}</nuxt-link><span>, </span>
                     </span>
                 </span>
             </span>
 
-            <span v-if="!song.authors.length">{{original?'a':'A'}}utor překladu neznámý</span>
+            <span v-if="song.authors_pivot.length == 0">{{original?'a':'A'}}utor překladu neznámý</span>
             <span v-else>
-                <span v-if="song.authors.length == 1">{{original?'a':'A'}}utor překladu:</span>
+                <span v-if="song.authors_pivot.length == 1">{{original?'a':'A'}}utor překladu:</span>
                 <span v-else>{{original?'a':'A'}}utoři překladu:</span>
-                <span v-for="(author, key2) in song.authors" v-bind:key="key2">
-                    <span v-if="key2">,</span> <nuxt-link :to="author.public_route">{{ author.name }}</nuxt-link>
+                <span v-for="(ap, key2) in song.authors_pivot" v-bind:key="key2">
+                    <span v-if="key2">,</span> <nuxt-link :to="ap.author.public_route"
+                    :title="{'GENERIC':'','LYRICS':'text','MUSIC':'hudba'}['LYRICS']"
+                    >{{ ap.author.name }}</nuxt-link>
                 </span>
             </span>
         </span>
         <span v-else>
-            <span v-if="!song.authors.length">Autor neznámý</span>
+            <span v-if="song.authors_pivot.length == 0">Autor neznámý</span>
             <span v-else>
-                <span v-if="song.authors.length == 1">Autor:</span>
+                <span v-if="song.authors_pivot.length == 1">Autor:</span>
                 <span v-else>Autoři:</span>
-                <span v-for="(author, key3) in song.authors" v-bind:key="key3">
-                    <span v-if="key3">,</span> <nuxt-link :to="author.public_route">{{ author.name }}</nuxt-link>
+                <span v-for="(ap, key3) in song.authors_pivot" v-bind:key="key3">
+                    <span v-if="key3">,</span> <nuxt-link :to="ap.author.public_route"
+                    :title="{'GENERIC':'','LYRICS':'text','MUSIC':'hudba'}[ap.authorship_type]"
+                    >{{ ap.author.name }}</nuxt-link>
                 </span>
             </span>
         </span>

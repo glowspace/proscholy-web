@@ -64,15 +64,16 @@
                             :colspan="song_lyric.lang != 'cs' ? 1 : 2"
                         >
                             <span
-                                v-for="(author,
-                                authorIndex) in song_lyric.authors"
+                                v-for="(ap,
+                                authorIndex) in song_lyric.authors_pivot"
                                 :key="authorIndex"
                             >
                                 <span v-if="authorIndex">,</span>
                                 <nuxt-link
-                                    :to="author.public_route"
+                                    :to="ap.author.public_route"
+                                    :title="song_lyric.type ? {'GENERIC':'','LYRICS':'text','MUSIC':'hudba'}['LYRICS'] : {'GENERIC':'','LYRICS':'text','MUSIC':'hudba'}[ap.authorship_type]"
                                     class="text-secondary"
-                                    >{{ author.name }}</nuxt-link
+                                    >{{ ap.author.name }}</nuxt-link
                                 >
                             </span>
                         </td>
@@ -215,10 +216,12 @@ const fetch_items = gql`
                 audioFiles: files(type: 4) {
                     id
                 }
-                authors {
-                    id
-                    name
-                    public_route
+                authors_pivot {
+                    author {
+                        name
+                        public_route
+                    }
+                    authorship_type
                 }
                 tags {
                     id

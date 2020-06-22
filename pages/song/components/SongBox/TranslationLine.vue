@@ -22,11 +22,13 @@
         </td>
         <td class="align-middle">
             <span
-                v-for="(author, authorIndex) in translation.authors"
+                v-for="(ap, authorIndex) in translation.authors_pivot"
                 :key="authorIndex"
                 ><span v-if="authorIndex">,</span>
-                <nuxt-link :to="author.public_route" class="text-secondary">{{
-                    author.name
+                <nuxt-link :to="ap.author.public_route" class="text-secondary"
+                :title="translation.type ? {'GENERIC':'','LYRICS':'text','MUSIC':'hudba'}['LYRICS'] : {'GENERIC':'','LYRICS':'text','MUSIC':'hudba'}[ap.authorship_type]"
+                >{{
+                    ap.author.name
                 }}</nuxt-link>
             </span>
         </td>
