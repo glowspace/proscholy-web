@@ -1,5 +1,16 @@
 <template>
-    <div class="song-tags card pt-1">
+    <div class="song-tags card pt-1" v-if="$apollo.loading || !tags_generic">
+        <template v-for="(x, key2) in [1.3, 1.2, 1.4, 1.1, 1.2, 1.3]">
+            <v-skeleton-loader type="heading" class="my-3" />
+            <div
+                class="tag d-inline-block"
+                v-for="(w, key) in [400, 200, 300, 350, 250, 350, 400, 250, 200, 450]"
+                :key="key + '.' + key2"
+                :style="'width:' + (w/3)*x + 'px'"
+            >&nbsp;</div>
+        </template>
+    </div>
+    <div class="song-tags card pt-1" v-else>
         <!-- todo: make component -->
         <h4>Liturgie – mše svatá</h4>
         <a
@@ -85,41 +96,24 @@
 import gql from 'graphql-tag';
 import Vue from 'vue'
 
-const FETCH_TAGS_GENERIC = gql`
+const FETCH_TAGS_AND_SONGBOOKS = gql`
     query {
         tags_generic: tags_enum(type: GENERIC) {
             id
             name
         }
-    }
-`;
-const FETCH_TAGS_LITURGY_PART = gql`
-    query {
         tags_liturgy_part: tags_enum(type: LITURGY_PART) {
             id
             name
         }
-    }
-`;
-const FETCH_TAGS_LITURGY_PERIOD = gql`
-    query {
         tags_liturgy_period: tags_enum(type: LITURGY_PERIOD) {
             id
             name
         }
-    }
-`;
-const FETCH_TAGS_SAINTS = gql`
-    query {
         tags_saints: tags_enum(type: SAINTS) {
             id
             name
         }
-    }
-`;
-
-const fetch_songbooks = gql`
-    query {
         songbooks(is_private: false) {
             id
             name
@@ -156,19 +150,19 @@ export default {
 
     apollo: {
         tags_generic: {
-            query: FETCH_TAGS_GENERIC
+            query: FETCH_TAGS_AND_SONGBOOKS
         },
         tags_liturgy_part: {
-            query: FETCH_TAGS_LITURGY_PART
+            query: FETCH_TAGS_AND_SONGBOOKS
         },
         tags_liturgy_period: {
-            query: FETCH_TAGS_LITURGY_PERIOD
+            query: FETCH_TAGS_AND_SONGBOOKS
         },
         tags_saints: {
-            query: FETCH_TAGS_SAINTS
+            query: FETCH_TAGS_AND_SONGBOOKS
         },
         songbooks: {
-            query: fetch_songbooks
+            query: FETCH_TAGS_AND_SONGBOOKS
         }
     },
 
