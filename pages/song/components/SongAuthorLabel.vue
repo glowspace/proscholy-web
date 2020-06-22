@@ -44,17 +44,9 @@ export default {
 
     computed: {
         original: function() {
-            for (let index = 0; index < this.song.song.song_lyrics.length; index++) {
-                const element = this.song.song.song_lyrics[index];
-                if(!element.type) {
-                    return {
-                        name: element.name,
-                        public_route: element.public_route,
-                        authors: element.authors
-                    };
-                }
-            }
-            return false;
+            return this.song.song.song_lyrics.find(sl => {
+                return sl.type === 0
+            });
         }
     }
 };
