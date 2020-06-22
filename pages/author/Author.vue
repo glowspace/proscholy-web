@@ -48,7 +48,6 @@
             </div>
         </div>
 
-        <!-- todo: implement missing api features -->
         <author-songs-list text="Autorské písně" v-if="author.songs_originals.length" :songs="author.songs_originals" />
         <author-songs-list text="Překlady" v-if="author.songs_translations.length" :songs="author.songs_translations" />
         <author-songs-list text="Interpretace písní" v-if="author.songs_interpreted.length" :songs="author.songs_interpreted" />
