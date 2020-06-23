@@ -18,29 +18,24 @@ export default {
         title: 'ProScholy.cz',
         meta: [
             { charset: 'utf-8' },
-            {
-                name: 'viewport',
-                content: 'width=device-width, initial-scale=1'
-            },
+            { name: 'viewport', content: 'width=device-width, initial-scale=1' },
 
-            {property: 'og:type', content: 'website'},
-            // {property: 'og:image', content: 'https://zpevnik.proscholy.cz/banner.png'},
-            // {property: 'twitter:card', content: 'summary_large_image'},
-            // {property: 'twitter:image', content: 'https://zpevnik.proscholy.cz/banner.png'}
+            { name: 'msapplication-TileColor', content: '#da532c' },
+            { name: 'theme-color', content: '#292929' },
+
+            { property: 'og:type', content: 'website' },
+            // { property: 'og:image', content: 'https://zpevnik.proscholy.cz/banner.png' },
+            // { property: 'twitter:card', content: 'summary_large_image' },
+            // { property: 'twitter:image', content: 'https://zpevnik.proscholy.cz/banner.png' }
         ],
         link: [
-            {
-                rel: 'icon',
-                type: 'image/png',
-                sizes: '32x32',
-                href: '/favicon/favicon-32x32.png'
-            },
-            {
-                rel: 'icon',
-                type: 'image/png',
-                sizes: '16x16',
-                href: '/favicon/favicon-16x16.png'
-            },
+            { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+            { rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon/apple-touch-icon.png' },
+            { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon/favicon-32x32.png' },
+            { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon/favicon-16x16.png' },
+            { rel: 'manifest', href: '/favicon/site.webmanifest' },
+            { rel: 'mask-icon', href: '/favicon/safari-pinned-tab.svg', color: '#5bbad5' },
+
             {
                 rel: 'stylesheet',
                 type: 'text/css',
