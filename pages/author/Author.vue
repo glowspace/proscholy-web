@@ -150,7 +150,16 @@ export default {
         },
 
         getDescription() {
-            return 'Písně i tohoto autora najdete ve Zpěvníku pro scholy.';
+            if (this.author && this.author.description) {
+                return this.author.description;
+            }
+
+            let str = 'Písně i ';
+            let type = (this.author && this.author.type) ? this.author.type : 0;
+            let arr = ['tohoto autora', 'tohoto hudebního uskupení', 'této scholy', 'této kapely', 'tohoto sboru'];
+            str += arr[type];
+            str += ' najdete ve Zpěvníku pro scholy.';
+            return str;
         }
     },
 

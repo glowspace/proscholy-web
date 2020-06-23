@@ -16,6 +16,7 @@ const FETCH_SONG_LYRIC = gql`
             id
             name
             type
+            lyrics_no_chords
             authors_pivot {
                 author {
                     id
@@ -117,6 +118,15 @@ export default {
         },
 
         getDescription() {
+            if (this.song_lyric) {
+                let lyrics = this.song_lyric.lyrics_no_chords;
+                lyrics = lyrics.replace(/\n{2,}/g, ' // ');
+                lyrics = lyrics.replace(/([.:,;!?])\s*\n/g, '$1 ');
+                lyrics = lyrics.replace(/\n/g, ' / ');
+                lyrics = lyrics.replace(/\s+/g, ' ');
+                lyrics = lyrics.substring(0, 300);
+                return lyrics;
+            }
             return 'I tuto píseň máme ve Zpěvníku pro scholy.';
         }
     },
