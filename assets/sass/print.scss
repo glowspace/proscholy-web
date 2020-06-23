@@ -12,7 +12,7 @@
     .container,
     .col-lg-9,
     .card-body,
-    .p-1.overflow-hidden,
+    .p-1,
     .card-footer,
     .px-3.py-2.d-inline-block {
         padding: 0 !important;
@@ -27,10 +27,15 @@
         margin: 0 !important;
     }
 
+    .ml-3 {
+        margin-left: 0 !important;
+    }
+
     .card-lyrics .card-header,
     .position-sticky,
     .btn,
-    .col-lg-3 {
+    .col-lg-3,
+    .song-number {
         display: none;
     }
 
@@ -40,16 +45,6 @@
     .container {
         background-color: #fff !important;
         min-width: initial !important;
-    }
-
-    .card.card-lyrics,
-    .col-lg-9,
-    #preloadPlaceholder {
-        display: block !important;
-    }
-
-    .row {
-        display: none;
     }
 
     .flex-md-row {
