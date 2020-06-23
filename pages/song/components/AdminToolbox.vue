@@ -1,16 +1,15 @@
 <template>
-    <div class="admin-controls d-none d-sm-block">
+    <div class="admin-controls" v-if="false">
         <a class="btn btn-secondary"
-           href="{{route('admin.dashboard')}}">
+           :href="adminUrl">
             <i class="fas fa-columns"></i>
         </a>
         <a class="btn btn-secondary"
            href="#">Nástěnka</a>
         <br>
 
-        <!-- @if (App\SongLyric::restricted()->where('id', $song_l->id)->count() > 0) -->
         <a class="btn btn-secondary"
-           href="{{route('admin.song.edit', ['song_lyric' => $song_l->id])}}">
+           :href="adminUrl + '/song/' + song.id + '/edit'">
             <i class="fas fa-edit"></i>
         </a>
         <a class="btn btn-secondary"
@@ -18,7 +17,7 @@
         <br>
 
         <a class="btn btn-secondary"
-           href="{{route('admin.external.create_for_song', ['song_lyric' => $song_l->id])}}">
+           :href="adminUrl + '/external/new-for-song/' + song.id">
             <i class="fas fa-link"></i>
         </a>
         <a class="btn btn-secondary"
@@ -26,7 +25,7 @@
         <br>
 
         <a class="btn btn-secondary"
-           href="{{route('admin.file.create_for_song', ['song_lyric' => $song_l->id])}}">
+           :href="adminUrl + '/file/new-for-song/' + song.id">
             <i class="fas fa-file"></i>
         </a>
         <a class="btn btn-secondary"
@@ -35,12 +34,18 @@
 </template>
 
 <script>
-    /**
-     * TODO: show only when admin authenticated
-     */
-    export default {
-        name: "AdminToolbox",
+/**
+ * TODO: show only when admin authenticated
+ */
+export default {
+    name: 'AdminToolbox',
 
-        props: ['song'],
+    props: ['song'],
+
+    data() {
+        return {
+            adminUrl: process.env.adminUrl
+        }
     }
+}
 </script>

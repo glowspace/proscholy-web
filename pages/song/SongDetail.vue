@@ -15,7 +15,7 @@
         <song-box
             :song_lyric="song"
         ></song-box>
-        <!-- admin-toolbox :song="song" v-if="false"></admin-toolbox -->
+        <admin-toolbox :song="song"></admin-toolbox>
     </div>
 </template>
 
@@ -23,6 +23,7 @@
 import SongAuthorLabel from './components/SongAuthorLabel';
 import SongBox from './components/SongBox/SongBox';
 import Tags from './components/Tags';
+import AdminToolbox from './components/AdminToolbox';
 
 export default {
     name: 'SongDetail',
@@ -30,7 +31,8 @@ export default {
     components: {
         SongBox,
         SongAuthorLabel,
-        Tags
+        Tags,
+        AdminToolbox
     },
 
     props: ['song']

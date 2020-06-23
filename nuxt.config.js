@@ -8,7 +8,8 @@ export default {
     env: {
         baseUrl: 'https://zpevnik.proscholy.cz',
         titleWebsite: 'ProScholy.cz',
-        titleSeparator: ' – '
+        titleSeparator: ' – ',
+        adminUrl: 'https://zpevnik.proscholy.cz/admin'
     },
     /*
      ** Headers of the page
