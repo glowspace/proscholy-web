@@ -203,7 +203,7 @@
                     </div>
 
                     <div
-                        class="controls fixed-bottom position-sticky p-1"
+                        class="controls fixed-bottom position-sticky p-1 clearfix"
                         v-bind:class="{ 'card-footer': controlsDisplay }"
                     >
                         <div v-show="bottomMode == 1 && controlsDisplay">
