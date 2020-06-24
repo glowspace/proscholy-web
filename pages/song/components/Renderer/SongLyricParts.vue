@@ -24,7 +24,7 @@
                         :isOptional="chord.isOptional"
                         :isSubstitute="chord.isSubstitute"
                         :hasNextSibling="hasNextSibling(chord)"
-                    >{{ chord.text }}</chord
+                    >{{ chord.text.replace(/^ /, '&nbsp;') }}</chord
                     ><template v-if="!chord.isDivided && line.chords[key3 + 1]"><span class="chord">&nbsp;</span></template>
                 </template>
             </div>
