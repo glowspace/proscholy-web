@@ -368,49 +368,6 @@ body[data-dark] .nosleep-caption {
     display: none;
 }
 
-.admin-controls {
-    position: fixed;
-    top: 30vh;
-    left: 0.3125rem;
-    z-index: 20;
-
-    a:nth-of-type(odd) {
-        i {
-            width: 16px;
-        }
-
-        & + a {
-            padding-left: 5px;
-            padding-right: 10px;
-            display: none;
-            background: rgba(248, 250, 252, 0.8);
-            border-radius: 10px;
-
-            .dark & {
-                background: rgba(0, 0, 0, 0.8);
-            }
-        }
-
-        &:hover + a {
-            display: inline-block;
-        }
-    }
-
-    @include media-breakpoint-down(xs) {
-        position: static;
-
-        br {
-            display: none;
-        }
-
-        a:nth-of-type(odd) {
-            &:hover + a {
-                display: none;
-            }
-        }
-    }
-}
-
 .v-skeleton-loader__chip {
     max-width: 100%;
 }

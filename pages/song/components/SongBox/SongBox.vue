@@ -49,6 +49,14 @@
                         >
                             <i class="fas fa-exclamation-triangle p-0"></i>
                         </a>
+                        <a
+                            class="btn"
+                            title="Upravit píseň"
+                            target="_blank"
+                            :href="[song_lyric ? adminUrl + '/song/' + song_lyric.id + '/edit' : '']"
+                        >
+                            <i class="fas fa-pen p-0"></i>
+                        </a>
                     </div>
 
                     <!-- scores -->
@@ -385,18 +393,23 @@
                 <div class="card-footer p-1 song-links">
                     <div class="px-3 py-2 d-inline-block">Zpěvník ProScholy.cz <img
                     src="/img/logo_v2.png" width="20px" /> {{ new Date().getFullYear() }}</div>
-                    <a
-                        class="btn btn-secondary float-right"
-                        target="_blank"
-                        :href="[
-                            song_lyric
-                                ? 'https://docs.google.com/forms/d/e/1FAIpQLSdTaOCzzlfZmyoCB0I_S2kSPiSZVGwDhDovyxkWB7w2LfH0IA/viewform?entry.1714245491=' +
-                                  song_lyric.id +
-                                  '&entry.2038741493=' +
-                                  encodeURI(song_lyric.name)
-                                : ''
-                        ]"
-                    >Nahlásit</a>
+                    <div class="float-right">
+                        <a
+                            class="btn btn-secondary"
+                            target="_blank"
+                            :href="[
+                                song_lyric
+                                    ? 'https://docs.google.com/forms/d/e/1FAIpQLSdTaOCzzlfZmyoCB0I_S2kSPiSZVGwDhDovyxkWB7w2LfH0IA/viewform?entry.2038741493=' +
+                                    encodeURI(song_lyric.name)
+                                    : ''
+                            ]"
+                        >Nahlásit</a>
+                        <a
+                            class="btn btn-secondary"
+                            target="_blank"
+                            :href="[song_lyric ? adminUrl + '/song/' + song_lyric.id + '/edit' : '']"
+                        >Upravit</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -504,7 +517,8 @@ export default {
             fullscreen: false,
             selectedScoreIndex: 0,
 
-            chordSharedStore: store
+            chordSharedStore: store,
+            adminUrl: process.env.adminUrl
         };
     },
 
