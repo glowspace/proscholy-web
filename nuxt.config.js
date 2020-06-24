@@ -89,7 +89,8 @@ export default {
        // '@nuxtjs/pwa',
        '@nuxtjs/apollo',
        '@nuxtjs/axios',
-       '@nuxtjs/proxy'
+       '@nuxtjs/proxy',
+       '@nuxtjs/sentry'
     ],
     apollo: {
         clientConfigs: {
@@ -105,6 +106,9 @@ export default {
                 '^/api': '/'
             }
         }
+    },
+    sentry: {
+        dsn: 'https://4e5c6342c1d448cf9dfa78895528c0a3@sentry.softici.cz/7'
     },
     /*
      ** Build configuration
