@@ -130,7 +130,9 @@ export default {
                             path.join(__dirname, './layouts/**/*.vue'),
                             path.join(__dirname, './components/**/*.vue')
                         ]),
-                        whitelist: ['html', 'body', 'nuxt-progress']
+                        whitelist: ['html', 'body', 'nuxt-progress'],
+                        whitelistPatterns: [/^v-((?!application).)*$/],
+                        whitelistPatternsChildren: [/^theme--*/]
                     })
                 )
             }
