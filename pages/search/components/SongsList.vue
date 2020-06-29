@@ -355,38 +355,44 @@ export default {
     },
 
     methods: {
-        loadMore() {
+        async loadMore() {
             this.page++;
+            console.log('switched to page: ' + this.page);
 
-            this.$apollo.queries.song_lyrics_paginated.fetchMore({
-                variables: {
-                    page: this.page,
-                    per_page: this.per_page
-                },
-                updateQuery: (previousResult, { fetchMoreResult }) => {
-                    // console.log('fetched more');
+            try {
+                await this.$apollo.queries.song_lyrics_paginated.fetchMore({
+                    variables: {
+                        page: this.page,
+                        per_page: this.per_page
+                    },
+                    updateQuery: (previousResult, { fetchMoreResult }) => {
+                        // console.log('fetched more');
+    
+                        const newSongLyrics =
+                            fetchMoreResult.song_lyrics_paginated.data;
+                        const paginatorInfo =
+                            fetchMoreResult.song_lyrics_paginated.paginatorInfo;
+    
+                        this.enable_more = paginatorInfo.hasMorePages;
+    
+                        return {
+                            song_lyrics_paginated: {
+                                __typename:
+                                    previousResult.song_lyrics_paginated.__typename,
+                                // Merging the songLyrics lists
+                                data: [
+                                    ...previousResult.song_lyrics_paginated.data,
+                                    ...newSongLyrics
+                                ],
+                                paginatorInfo
+                            }
+                        };
+                    }
+                });
+            } catch (e) {
+                return e;
+            }
 
-                    const newSongLyrics =
-                        fetchMoreResult.song_lyrics_paginated.data;
-                    const paginatorInfo =
-                        fetchMoreResult.song_lyrics_paginated.paginatorInfo;
-
-                    this.enable_more = paginatorInfo.hasMorePages;
-
-                    return {
-                        song_lyrics_paginated: {
-                            __typename:
-                                previousResult.song_lyrics_paginated.__typename,
-                            // Merging the songLyrics lists
-                            data: [
-                                ...previousResult.song_lyrics_paginated.data,
-                                ...newSongLyrics
-                            ],
-                            paginatorInfo
-                        }
-                    };
-                }
-            });
         },
 
         getSongNumber(song_lyric, getfirstPart) {
