@@ -357,7 +357,6 @@ export default {
     methods: {
         async loadMore() {
             this.page++;
-            console.log('switched to page: ' + this.page);
 
             try {
                 await this.$apollo.queries.song_lyrics_paginated.fetchMore({
@@ -366,8 +365,6 @@ export default {
                         per_page: this.per_page
                     },
                     updateQuery: (previousResult, { fetchMoreResult }) => {
-                        // console.log('fetched more');
-    
                         const newSongLyrics =
                             fetchMoreResult.song_lyrics_paginated.data;
                         const paginatorInfo =
