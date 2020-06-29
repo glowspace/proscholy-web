@@ -218,6 +218,7 @@ const fetch_items = gql`
                 }
                 authors_pivot {
                     author {
+                        id
                         name
                         public_route
                     }
@@ -363,6 +364,8 @@ export default {
                     per_page: this.per_page
                 },
                 updateQuery: (previousResult, { fetchMoreResult }) => {
+                    // console.log('fetched more');
+
                     const newSongLyrics =
                         fetchMoreResult.song_lyrics_paginated.data;
                     const paginatorInfo =
