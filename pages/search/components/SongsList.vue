@@ -284,6 +284,7 @@ export default {
                 bool: {
                     // see must vs filter elastic documentation https://www.elastic.co/guide/en/elasticsearch/reference/current/query-filter-context.html
                     must: [],
+                    should: [],
                     filter: [{ term: { is_arrangement: { value: false } } }]
                 }
             };
@@ -292,6 +293,18 @@ export default {
             let sort = [];
 
             if (this.searchString) {
+                query.bool.should.push({
+                    multi_match: {
+                        query: this.searchString,
+                        type: 'phrase',
+
+                        fields: [
+                            'name^10',
+                            'lyrics^5'
+                        ]
+                    }
+                });
+
                 query.bool.must.push({
                     // see multi_match elastic documentation https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html
                     multi_match: {
