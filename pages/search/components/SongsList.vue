@@ -292,10 +292,17 @@ export default {
             // beware that not all attribute types can be used for sorting, this is why 'name_keyword' (used here later) has been added to index
             let sort = [];
 
-            if (this.searchString) {
-                query.bool.should.push({
+            // handle search strings surrounded by "" as exact match queries
+            const cleanSearchString = this.searchString.replace(/"/g, '');
+            const isExactMatch = this.searchString == `"${cleanSearchString}"`;
+
+            if (cleanSearchString) {
+                // if exact match query -> multi_match needs to end in `must` section,
+                // otherwise it is to be in `should` in order only to improve the rating
+                let queryObject = isExactMatch ? query.bool.must : query.bool.should;
+                queryObject.push({
                     multi_match: {
-                        query: this.searchString,
+                        query: cleanSearchString,
                         type: 'phrase',
 
                         fields: [
@@ -308,7 +315,7 @@ export default {
                 query.bool.must.push({
                     // see multi_match elastic documentation https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html
                     multi_match: {
-                        query: this.searchString,
+                        query: cleanSearchString,
 
                         fields: [
                             'name^2',
@@ -319,6 +326,7 @@ export default {
                         ]
                     }
                 });
+
             } else {
                 // no search keyword provided, so use the alphabetical sorting
                 sort.push('name_keyword');
@@ -349,6 +357,8 @@ export default {
                     }
                 });
             }
+
+            console.log(query);
 
             // encode to a JSON string to pass as an argument
 
