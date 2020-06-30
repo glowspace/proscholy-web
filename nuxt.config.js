@@ -9,7 +9,7 @@ export default {
         baseUrl: 'https://zpevnik.proscholy.cz',
         titleWebsite: 'ProScholy.cz',
         titleSeparator: ' – ',
-        adminUrl: 'https://zpevnik.proscholy.cz/admin'
+        adminUrl: process.env.ADMIN_URL || ''
     },
     /*
      ** Headers of the page
@@ -96,7 +96,7 @@ export default {
         clientConfigs: {
             default: {
                 httpEndpoint: process.env.APP_URL,
-                // when running in docker, the server-side endpoint differs from the client-side one 
+                // when running in docker, the server-side endpoint differs from the client-side one
                 // --> httpEndpoint is accessed from the inside of the Docker image, so the url is http://(docker-img-name):(inside-port)
                 // --> browserHttpEndpoint is accessed from the browser, so the url is http://localhost:(outside-port)
                 browserHttpEndpoint: process.env.APP_URL_BROWSER || process.env.APP_URL,
