@@ -358,8 +358,6 @@ export default {
                 });
             }
 
-            console.log(query);
-
             // encode to a JSON string to pass as an argument
 
             const query_str = JSON.stringify({
