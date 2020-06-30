@@ -282,16 +282,18 @@ export default {
 
             let query = {
                 bool: {
+                    // see must vs filter elastic documentation https://www.elastic.co/guide/en/elasticsearch/reference/current/query-filter-context.html
                     must: [],
                     filter: [{ term: { is_arrangement: { value: false } } }]
                 }
             };
 
-            // beware that not all attribute types can be used for sorting, this is why 'name_keyword' has been added to index
+            // beware that not all attribute types can be used for sorting, this is why 'name_keyword' (used here later) has been added to index
             let sort = [];
 
             if (this.searchString) {
                 query.bool.must.push({
+                    // see multi_match elastic documentation https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html
                     multi_match: {
                         query: this.searchString,
 
