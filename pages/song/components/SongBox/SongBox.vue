@@ -660,6 +660,8 @@ export default {
                 this.topMode = 2;
             }
         }
+
+        this.chordSharedStore.transposition = 0;
     }
 };
 </script>
