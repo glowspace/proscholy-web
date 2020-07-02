@@ -39,26 +39,8 @@ import SlPartsLoading from '../SlPartsLoading';
 
 const FETCH_SONG_LYRIC_PARTS = gql`
     query($id: ID!) {
-        song_lyric_parts(id: $id) {
-            type
-            isHidden
-            isHiddenText
-            isEmpty
-            isVerse
-            isRefrain
-            isInline
-            songLines {
-                chords {
-                    base
-                    variant
-                    extension
-                    bass
-                    isSubstitute
-                    isOptional
-                    isDivided
-                    text
-                }
-            }
+        song_lyric_parts_json(id: $id) {
+            json
         }
     }
 `;
@@ -66,18 +48,27 @@ const FETCH_SONG_LYRIC_PARTS = gql`
 export default {
     props: ['songId', 'fontSizePercent'],
 
+    data() {
+        return {
+            song_lyric_parts: []
+        };
+    },
+
     components: {
         Chord,
         SlPartsLoading
     },
 
     apollo: {
-        song_lyric_parts: {
+        song_lyric_parts_json: {
             query: FETCH_SONG_LYRIC_PARTS,
             variables() {
                 return {
                     id: this.songId
                 };
+            },
+            result() {
+                this.song_lyric_parts = JSON.parse(this.song_lyric_parts_json.json);
             }
         }
     },
