@@ -15,6 +15,7 @@ const FETCH_SONG_LYRIC = gql`
             has_lyrics
             id
             name
+            public_route
             type
             lyrics_no_chords
             authors_pivot {
@@ -143,8 +144,12 @@ export default {
     },
 
     mounted() {
-        if(!this.$apollo.loading && this.song_lyric === null) {
-            this.$nuxt.error({ statusCode: 404 });
+        if (!this.$apollo.loading) {
+            if (this.song_lyric === null) {
+                this.$nuxt.error({ statusCode: 404 });
+            } else if (window.location.pathname != this.song_lyric.public_route) {
+                window.history.replaceState(null, '', this.song_lyric.public_route);
+            }
         }
     }
 };

@@ -16,7 +16,7 @@ export function createRouter() {
             { name: 'index', path: '/', component: Search },
 
             { path: '/o-zpevniku', component: AboutSongBook },
-            { path: '/pisen/:id/:slug', component: Song },
+            { path: '/pisen/:id*', component: Song },
             { path: '/autor/:id', component: Author },
 
             { path: '/muj-ucet', component: Login },
