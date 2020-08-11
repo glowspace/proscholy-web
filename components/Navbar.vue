@@ -15,10 +15,12 @@
                     <nuxt-link
                         to="/"
                         class="btn btn-secondary"
+                        exact-active-class="active"
                     ><i class="fas fa-search"></i> Vyhledávání</nuxt-link>
                     <nuxt-link
                         to="/o-zpevniku"
                         class="btn btn-secondary"
+                        exact-active-class="active"
                     ><i class="fas fa-info"></i> O&nbsp;zpěvníku</nuxt-link>
                     <dark-mode-button v-cloak> Tmavý&nbsp;mód</dark-mode-button>
                 </div>
