@@ -14,13 +14,12 @@
                 <div class="d-inline-flex">
                     <nuxt-link
                         to="/"
-                        class="btn btn-secondary"
-                        exact-active-class="active"
+                        :class="[{ active: isHome }, 'btn btn-secondary']"
                     ><i class="fas fa-search"></i> Vyhledávání</nuxt-link>
                     <nuxt-link
                         to="/o-zpevniku"
                         class="btn btn-secondary"
-                        exact-active-class="active"
+                        active-class="active"
                     ><i class="fas fa-info"></i> O&nbsp;zpěvníku</nuxt-link>
                     <dark-mode-button v-cloak> Tmavý&nbsp;mód</dark-mode-button>
                 </div>
@@ -57,6 +56,12 @@ import DarkModeButton from '~/components/DarkModeButton';
 export default {
     name: 'Navbar',
 
-    components: { DarkModeButton }
+    components: { DarkModeButton },
+
+    computed: {
+        isHome() {
+            return this.$nuxt.$route.name == 'index';
+        }
+    }
 };
 </script>

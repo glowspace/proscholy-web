@@ -19,14 +19,14 @@
                                 class="search-home"
                                 placeholder="Zadejte název písně, část textu nebo jméno autora"
                                 v-model="search_string"
-                                v-on:keyup.enter="init = false"
+                                v-on:keyup.enter="inputEnter()"
                                 autofocus
                             />
                             <button
                                 type="button"
                                 class="search-submit"
                                 v-if="init"
-                                @click="init = false"
+                                @click="inputEnter()"
                             >
                                 <i class="fa fa-search d-none d-sm-inline"></i>
                             </button>
@@ -34,6 +34,7 @@
                                 type="button"
                                 class="search-submit d-none d-lg-inline"
                                 v-if="!init"
+                                @click="inputEnter()"
                             >
                                 <i class="fa fa-search"></i>
                             </button>
@@ -201,7 +202,10 @@ export default {
 
             // Title
             titleWebsite: process.env.titleWebsite,
-            titleSeparator: process.env.titleSeparator
+            titleSeparator: process.env.titleSeparator,
+
+            // Admin url
+            adminUrl: process.env.adminUrl
         };
     },
 
@@ -295,6 +299,14 @@ export default {
                 this.init = false;
             } else if (!this.init) {
                 this.updateHistoryState();
+            }
+        },
+
+        inputEnter() {
+            this.init = false;
+            console.log('a');
+            if (this.search_string == 'admin') {
+                window.location.href = this.adminUrl;
             }
         }
     },
