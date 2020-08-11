@@ -51,6 +51,11 @@
                                 <i class="fa fa-filter"></i>
                             </button>
                         </div>
+                        <InitFilters
+                            v-if="init && false"
+                            :selected-tags.sync="selected_tags"
+                            @input="updateHistoryState; init = false;"
+                        ></InitFilters>
                         <div
                             v-if="init"
                             @click="
@@ -158,6 +163,7 @@
 <script>
 import SongsList from './components/SongsList';
 import Filters from './components/Filters';
+import InitFilters from './components/InitFilters';
 import AppLinks from './components/AppLinks';
 import Logo from './components/Logo';
 
@@ -324,7 +330,8 @@ export default {
         Logo,
         AppLinks,
         SongsList,
-        Filters
+        Filters,
+        InitFilters
     },
 
     computed: {
