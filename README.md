@@ -1,4 +1,6 @@
-# zpevnik-proscholy-spa
+# Zpěvník pro scholy SPA
+
+[![Gitpod ready](https://img.shields.io/badge/Gitpod-ready-blue?logo=gitpod)](https://gitpod.io/#https://github.com/proscholy/zpevnik-proscholy-spa)
 
 >  User frontend of zpevnik.proscholy.cz written in Nuxt.js
 
