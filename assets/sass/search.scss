@@ -106,6 +106,31 @@ body[data-dark] .btn.display-all-songs {
     }
 }
 
+.song-tags--init-filters {
+    overflow: hidden;
+    height: 3.8em;
+
+    a.tag {
+        border: none !important;
+        margin-bottom: 2em;
+        opacity: .7;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    a.tag--filter-icon {
+        background-color: transparent !important;
+    }
+
+    &:hover {
+        .tag--filter-icon {
+            opacity: 1;
+        }
+    }
+}
+
 /**
 View: Search results
  */

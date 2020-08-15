@@ -1,16 +1,20 @@
 <template>
-    <div class="song-tags card pt-1" v-if="$apollo.loading || !tags">
-    </div>
-    <div class="song-tags card pt-1" v-else>
+    <div class="song-tags song-tags--init-filters">
         <a
-            v-bind:class="[
-                'tag'
-            ]"
-            v-for="tag in randomTags"
-            :key="'tag-' + tag.id"
-            @click="selectTag(tag)"
-            >{{ tag.name }}</a
-        >
+            class="tag tag--filter-icon px-1"
+            @click="$emit('input', null);"
+        ><i class="fa fa-filter text-white"></i></a>
+        <client-only>
+            <span>
+                <a
+                    class="tag border-0"
+                    v-for="tag in randomTags"
+                    :key="'tag-' + tag.id"
+                    @click="selectTag(tag)"
+                    >{{ tag.name }}</a
+                >
+            </span>
+        </client-only>
     </div>
 </template>
 
@@ -44,7 +48,11 @@ export default {
 
     computed: {
         randomTags() {
-            return [];
+            if (process.client && this.tags) {
+                return this.shuffleArray(this.tags).slice(0, 10);
+            } else {
+                return [];
+            }
         }
     },
 
@@ -55,6 +63,14 @@ export default {
             // notify the parent that sth has changed
             this.$emit('update:selected-tags', this.selected_tags);
             this.$emit('input', null);
+        },
+
+        shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
         }
     }
 };

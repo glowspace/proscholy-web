@@ -52,7 +52,7 @@
                             </button>
                         </div>
                         <InitFilters
-                            v-if="init && false"
+                            v-if="init"
                             :selected-tags.sync="selected_tags"
                             @input="updateHistoryState; init = false;"
                         ></InitFilters>
@@ -62,7 +62,7 @@
                                 resetState(true);
                                 init = false;
                             "
-                            class="text-center pt-4 text-white"
+                            class="text-center pt-2 text-white"
                         >
                             <a
                                 class="btn btn-outline-light display-all-songs font-weight-bold"
