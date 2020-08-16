@@ -1,6 +1,7 @@
 <template>
     <div class="song-tags song-tags--init-filters">
         <a
+            v-show="randomTags.length"
             class="tag tag--filter-icon px-1"
             @click="$emit('input', null);"
         ><i class="fa fa-filter text-white"></i></a>
