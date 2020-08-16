@@ -25,8 +25,8 @@
                     </div>
                     <div class="float-right">
                         <!-- <a class="btn btn-secondary">
-                            <i class="fas fa-plus"></i>
-                            <span class="d-none d-sm-inline">Seznamy</span>
+                            <i class="fas fa-folder-plus"></i>
+                            <span class="d-none d-sm-inline">Do seznamu</span>
                         </a>
                         <a class="btn btn-secondary">
                             <i class="fas fa-file-export"></i>
@@ -48,14 +48,6 @@
                             ]"
                         >
                             <i class="fas fa-exclamation-triangle p-0"></i>
-                        </a>
-                        <a
-                            class="btn"
-                            title="Upravit píseň"
-                            target="_blank"
-                            :href="[song_lyric ? adminUrl + '/song/' + song_lyric.id + '/edit' : '']"
-                        >
-                            <i class="fas fa-pen p-0"></i>
                         </a>
                     </div>
 
@@ -162,7 +154,7 @@
                 <div>
                     <div class="card-body py-2 pl-3 overflow-hidden">
                         <div
-                            class="d-flex align-items-start justify-content-between"
+                            class="d-flex align-items-start justify-content-between flex-column-reverse flex-sm-row"
                         >
                             <div
                                 id="song-lyrics"
@@ -206,7 +198,7 @@
                                 </span>
                                 <span v-else :style="{ fontSize: chordSharedStore.fontSizePercent + '%' }">Text písně připravujeme.</span>
                             </div>
-                            <right-controls></right-controls>
+                            <right-controls :song_lyric="song_lyric"></right-controls>
                         </div>
                     </div>
 

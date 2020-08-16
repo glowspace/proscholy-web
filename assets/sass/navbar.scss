@@ -17,6 +17,12 @@
 .navbar.absolute-top a i,
 .card-header i {
     padding-right: 5px;
+
+    @include media-breakpoint-down(xs) {
+        .card-lyrics & {
+            padding-right: 0;
+        }
+    }
 }
 
 

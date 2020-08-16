@@ -1,5 +1,13 @@
 <template>
-    <div class="d-flex flex-column mr-n3 position-relative">
+    <div class="align-self-end align-self-sm-start d-sm-flex flex-column pb-sm-0 mr-n3 position-relative">
+        <a
+            class="btn m-0"
+            title="Upravit píseň"
+            target="_blank"
+            :href="[song_lyric ? adminUrl + '/song/' + song_lyric.id + '/edit' : '']"
+        >
+            <i class="fas fa-pen p-0"></i>
+        </a>
         <!-- <a
             class="btn btn-secondary m-0"
             :title="[
@@ -26,7 +34,7 @@
         <!-- <nuxt-link
             class="btn btn-secondary m-0"
             title="Aktivovat režim promítání"
-            :to="'/promitat' + song.public_route"
+            :to="'/promitat' + song_lyric.public_route"
             ><i class="fas fa-desktop"></i
         ></nuxt-link>
         <a
@@ -64,12 +72,14 @@
 import NoSleep from 'nosleep.js';
 
 export default {
+    props: ['song_lyric'],
+
     data() {
         return {
             fullscreen: false,
             nosleep: false,
-
-            noSleeper: process.client ? new NoSleep() : null
+            noSleeper: process.client ? new NoSleep() : null,
+            adminUrl: process.env.adminUrl
         };
     },
 
