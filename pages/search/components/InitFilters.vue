@@ -28,6 +28,7 @@ const FETCH_TAGS = gql`
         tags: tags_enum {
             id
             name
+            type
         }
     }
 `;
@@ -48,9 +49,14 @@ export default {
     },
 
     computed: {
+        usefulTags() {
+            // do not include regenschori tag types
+            return this.tags.filter(tag => [0,1,2,3].includes(tag.type));
+        },
+
         randomTags() {
             if (process.client && this.tags) {
-                return this.shuffleArray(this.tags).slice(0, 10);
+                return this.shuffleArray(this.usefulTags).slice(0, 10);
             } else {
                 return [];
             }
