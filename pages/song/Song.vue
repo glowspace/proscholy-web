@@ -9,6 +9,14 @@ import SongLoading from './SongLoading';
 
 import gql, { disableFragmentWarnings } from 'graphql-tag';
 
+const VISIT_SONG = gql`
+    mutation($song_lyric_id: Int!, $is_mobile: Boolean, $visit_type: VisitType!) {
+        visit_song(song_lyric_id: $song_lyric_id, source: PROSCHOLY, is_mobile: $is_mobile, visit_type: $visit_type) {
+            confirmed
+        }
+    }
+`;
+
 const FETCH_SONG_LYRIC = gql`
     query($id: ID!) {
         song_lyric(id: $id) {
@@ -88,6 +96,7 @@ const FETCH_SONG_LYRIC = gql`
 `;
 
 import { clone } from 'lodash';
+import Bowser from 'bowser';
 
 export default {
     name: 'Song',
@@ -129,6 +138,21 @@ export default {
                 return lyrics;
             }
             return 'I tuto píseň máme ve Zpěvníku pro scholy.';
+        },
+
+        notifySongVisit(visit_type) {
+            this.$apollo.mutate({
+                mutation: VISIT_SONG,
+                variables: {
+                    // todo: detect desktop/mobile on server side
+                    is_mobile: process.client ? this.isMobileBrowser() : null,
+                    song_lyric_id: this.$route.params.id,
+                    visit_type: visit_type
+                }});
+        },
+
+        isMobileBrowser() {
+            return Bowser.getParser(window.navigator.userAgent).getPlatformType() === 'mobile';
         }
     },
 
@@ -151,6 +175,14 @@ export default {
                 window.history.replaceState(null, '', this.song_lyric.public_route);
             }
         }
+
+        setTimeout(() => {
+            this.notifySongVisit("GENERIC");
+        }, 2000);
+
+        // setTimeout(() => {
+        //     this.notifySongVisit("LONG");
+        // }, 20000);
     }
 };
 </script>
