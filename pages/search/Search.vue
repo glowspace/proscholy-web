@@ -186,7 +186,7 @@ export default {
                 {property: 'twitter:description', content: this.getDescription()}
             ],
             bodyAttrs: {
-                class: ['home']
+                class: ['home', (this.init ? '' : 'home-scroll')]
             }
         }
     },
@@ -353,11 +353,7 @@ export default {
 
     watch: {
         init(val) {
-            if (!val) {
-                document.getElementsByTagName('body')[0].classList.remove('home-scroll');
-                setTimeout(() => {document.getElementsByTagName('body')[0].classList.add('home-scroll');}, 200);
-            } else {
-                document.getElementsByTagName('body')[0].classList.remove('home-scroll');
+            if (val) {
                 document.getElementsByClassName('search-home')[0].focus();
             }
         }
