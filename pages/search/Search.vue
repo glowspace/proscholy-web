@@ -5,7 +5,10 @@
                 <logo />
 
                 <div
-                    class="row fixed-top position-sticky mt-n4 justify-content-center zindex-lower"
+                    :class="[
+                            { 'fixed-top position-sticky': !init },
+                            'row mt-n4 justify-content-center zindex-lower'
+                    ]"
                 >
                     <div
                         :class="[
@@ -97,8 +100,15 @@
                     </div>
                     <div class="col-lg-4 search-balance"></div>
                 </div>
+                <div class="row justify-content-center text-center pt-4" v-show="init">
+                    <div :class="[{ 'col-lg-6': init }, 'col-lg-8 search-column']">
+                        <News><div class="news-opener" @click="init = false;"></div></News>
+                    </div>
+                    <div class="col-lg-4 search-balance"></div>
+                </div>
                 <div class="row" v-show="!init">
                     <div class="col-lg-8">
+                        <News v-show="!filters_active && !search_string" />
                         <div class="card">
                             <div class="card-body p-0">
                                 <SongsList
@@ -166,6 +176,7 @@ import Filters from './components/Filters';
 import InitFilters from './components/InitFilters';
 import AppLinks from './components/AppLinks';
 import Logo from './components/Logo';
+import News from './components/News';
 
 import { isEmpty } from 'lodash';
 
@@ -331,7 +342,8 @@ export default {
         AppLinks,
         SongsList,
         Filters,
-        InitFilters
+        InitFilters,
+        News
     },
 
     computed: {

@@ -142,3 +142,39 @@ View: Search results
 .result-table {
     width: auto;
 }
+
+div.card.news {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 1rem;
+
+    .news-item {
+        padding: 0.25rem 0.5rem;
+        display: inline-block;
+
+        i {
+            padding-right: 0.5rem;
+        }
+    }
+
+    .justify-content-center & {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
+        max-width: 100%;
+
+        .news-item {
+            display: inline;
+        }
+
+        .news-opener {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 3rem;
+            cursor: pointer;
+        }
+    }
+}
