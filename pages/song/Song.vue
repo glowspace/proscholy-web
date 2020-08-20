@@ -139,6 +139,7 @@ export default {
         },
 
         notifySongVisit(visit_type) {
+            // todo: change mutation to visit_song_number when we switch to getting songs by numbers
             this.$apollo.mutate({
                 mutation: VISIT_SONG,
                 variables: {
@@ -174,13 +175,15 @@ export default {
             }
         }
 
+        // todo: notify when SSR (this works only on client)
+
         setTimeout(() => {
             this.notifySongVisit("GENERIC");
         }, 2000);
 
-        // setTimeout(() => {
-        //     this.notifySongVisit("LONG");
-        // }, 20000);
+        setTimeout(() => {
+            this.notifySongVisit("LONG");
+        }, 20000);
     }
 };
 </script>
