@@ -71,7 +71,11 @@ body[data-dark] {
     }
 
     .chosen .btn,
-    .btn.chosen,
+    .btn.chosen {
+        background-color: rgba(255, 255, 255, 0.133);
+    }
+
+
     .dark-mode-button {
         background-color: rgba(0, 0, 0, 0.3);
     }
