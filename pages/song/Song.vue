@@ -28,9 +28,7 @@ const FETCH_SONG_LYRIC = gql`
             lyrics_no_chords
             authors_pivot {
                 author {
-                    id
-                    name
-                    public_route
+                    ...authorFields
                 }
                 authorship_type
             }
@@ -41,9 +39,7 @@ const FETCH_SONG_LYRIC = gql`
                 type
                 media_id
                 authors {
-                    id
-                    name
-                    public_route
+                    ...authorFields
                 }
             }
             files {
@@ -53,9 +49,7 @@ const FETCH_SONG_LYRIC = gql`
                 download_url
                 type
                 authors {
-                    id
-                    name
-                    public_route
+                    ...authorFields
                 }
             }
             song {
@@ -66,9 +60,7 @@ const FETCH_SONG_LYRIC = gql`
                     type
                     authors_pivot {
                         author {
-                            id
-                            name
-                            public_route
+                            ...authorFields
                         }
                         authorship_type
                     }
@@ -92,6 +84,12 @@ const FETCH_SONG_LYRIC = gql`
             tags_liturgy_period {id name}
             tags_saints         {id name}
         }
+    }
+
+    fragment authorFields on Author {
+        id
+        name
+        public_route
     }
 `;
 
