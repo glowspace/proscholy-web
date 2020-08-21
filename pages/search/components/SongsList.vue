@@ -328,8 +328,16 @@ export default {
                 });
 
             } else {
-                // no search keyword provided, so use the alphabetical sorting
-                sort.push('name_keyword');
+                // old: no search keyword provided, so use the alphabetical sorting
+                // sort.push('name_keyword');
+
+                // new: no search keyword provided, so use the random sorting
+                query.bool.must.push({
+                    function_score: {
+                        query: { match_all: { boost: 1 } },
+                        random_score: { seed: this.$parent.seed, field: '_id' }
+                    }
+                });
             }
 
             for (let category_tags of Object.values(this.selectedTagsDcnf)) {
@@ -392,9 +400,9 @@ export default {
                             fetchMoreResult.song_lyrics_paginated.data;
                         const paginatorInfo =
                             fetchMoreResult.song_lyrics_paginated.paginatorInfo;
-    
+
                         this.enable_more = paginatorInfo.hasMorePages;
-    
+
                         return {
                             song_lyrics_paginated: {
                                 __typename:
@@ -459,7 +467,7 @@ export default {
                 this.results_loaded = true;
 
                 // when the graphql result is cached, then currentPage is higher than 1 at component mounting
-                // this needs to get mirrored in the local page property 
+                // this needs to get mirrored in the local page property
                 this.page = result.data.song_lyrics_paginated.paginatorInfo.currentPage;
             }
         }

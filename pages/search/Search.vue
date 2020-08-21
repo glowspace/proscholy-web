@@ -222,7 +222,20 @@ export default {
             titleSeparator: process.env.titleSeparator,
 
             // Admin url
-            adminUrl: process.env.adminUrl
+            adminUrl: process.env.adminUrl,
+
+            // Random order seed
+            seed: 0
+        };
+    },
+
+    asyncData() {
+        function randomInteger(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        return {
+            seed: randomInteger(1, 100000)
         };
     },
 
