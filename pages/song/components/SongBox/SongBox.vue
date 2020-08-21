@@ -471,7 +471,7 @@ import RightControls from './RightControls';
 import Transposition from './Transposition';
 import TranslationLine from './TranslationLine.vue';
 import SongLyricParts from '../Renderer/SongLyricParts.vue';
-import ExternalView from '../../../../components/ExternalView.vue';
+import ExternalView from '~/components/ExternalView.vue';
 import ExternalLine from './ExternalLine.vue';
 
 /**
