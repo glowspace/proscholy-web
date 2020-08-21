@@ -355,13 +355,13 @@
                                     v-if="autoscroll"
                                     @click="autoscrollNum--"
                                     :class="{ disabled: autoscrollNum == 1 }"
-                                    >-</a
+                                    >&minus;</a
                                 ><a
                                     class="btn btn-secondary"
                                     v-if="autoscroll"
                                     @click="autoscrollNum++"
                                     :class="{ disabled: autoscrollNum == 20 }"
-                                    >+</a
+                                    >&plus;</a
                                 >
                             </div>
                         </span>
@@ -657,6 +657,19 @@ export default {
             } else {
                 this.scrollable = true;
             }
+        },
+
+        keyUp: function(e) {
+            if (e.key == '+') {
+                if (this.autoscroll && this.autoscrollNum < 20) {
+                        this.autoscrollNum++;
+                }
+                this.autoscroll = true;
+            } else if (e.key == 'Escape') {
+                this.autoscroll = false;
+            } else if (e.key == '-' && this.autoscrollNum > 1) {
+                this.autoscrollNum--;
+            }
         }
     },
 
@@ -674,6 +687,7 @@ export default {
         } else {
             window.addEventListener('resize', this.isScrollable);
             this.isScrollable(true);
+            window.addEventListener('keyup', this.keyUp);
         }
 
 
