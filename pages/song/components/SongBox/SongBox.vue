@@ -636,7 +636,11 @@ export default {
             if (num > 0 && num < 21 && condition) {
                 this.scrolldelay = setInterval(function() {
                     window.scrollBy(0, 1);
-                }, (21 - num) * 10);
+                    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
+                        // we're at the bottom of the page
+                        this.autoscroll = false;
+                    }
+                }.bind(this), (21 - num) * 10);
             }
         }
     },
