@@ -322,7 +322,7 @@ export default {
                             'lyrics',
                             'authors',
                             '_id^50',
-                            'songbook_records.sonbgook_number'
+                            'songbook_records.songbook_number'
                         ]
                     }
                 });
