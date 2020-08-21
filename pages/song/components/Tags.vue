@@ -19,7 +19,7 @@
 
         <div class="d-inline-flex flex-row flex-wrap align-items-start"
             v-if="song.songbook_records.length">
-            <nuxt-link class="tag tag-yellow songbook-tag" v-for="sb in song.songbook_records" :key="'sb' + sb.id"
+            <nuxt-link class="tag tag-yellow songbook-tag" v-for="(sb, key) in song.songbook_records" :key="'sb' + key"
                 :to="'/?zpevniky=' + sb.songbook.id">
                 <span class="songbook-name">{{ sb.songbook.name }}</span><span class="songbook-number">{{ sb.number }}</span>
             </nuxt-link>

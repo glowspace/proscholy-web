@@ -331,6 +331,7 @@
                                 class="d-inline-block btn-group m-0"
                                 role="group"
                                 v-bind:class="{ chosen: autoscroll }"
+                                v-if="scrollable"
                             >
                                 <a
                                     class="btn btn-secondary"
@@ -508,6 +509,7 @@ export default {
             scrolldelay: null,
             fullscreen: false,
             selectedScoreIndex: 0,
+            scrollable: true,
 
             chordSharedStore: store,
             adminUrl: process.env.adminUrl
@@ -642,6 +644,19 @@ export default {
                     }
                 }.bind(this), (21 - num) * 10);
             }
+        },
+
+        isScrollable: function(initial) {
+            if (document.body.scrollHeight == document.body.clientHeight) {
+                // the page isn't scrollable
+                this.scrollable = false;
+
+                if (initial === true) {
+                    this.bottomMode = 1;
+                }
+            } else {
+                this.scrollable = true;
+            }
         }
     },
 
@@ -655,7 +670,12 @@ export default {
             } else if (this.renderTranslations) {
                 this.topMode = 2;
             }
+            this.scrollable = false;
+        } else {
+            window.addEventListener('resize', this.isScrollable);
+            this.isScrollable(true);
         }
+
 
         this.chordSharedStore.transposition = 0;
     }
