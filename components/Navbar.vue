@@ -2,7 +2,7 @@
     <div>
         <nav class="navbar navbar-expand-lg navbar-dark absolute-top">
             <div class="container">
-                <nuxt-link to="/" class="navbar-brand">
+                <nuxt-link to="/" class="navbar-brand" id="navbar-brand">
                     <img
                         src="/img/logo_v2.png"
                         style="padding-right:10px"
@@ -10,7 +10,7 @@
                         alt="logo"
                     /><h1 v-if="$nuxt.$route.path == '/'" class="home-h1">Zpěvník pro scholy</h1>
                     <span v-else>Zpěvník pro scholy</span>
-                    </nuxt-link>
+                </nuxt-link>
                 <div class="d-inline-flex">
                     <nuxt-link
                         to="/"
@@ -32,15 +32,15 @@
 
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
             <div class="container">
-                <nuxt-link to="/" class="btn">
+                <nuxt-link to="/" class="btn" id="navbar-brand-small">
                     <img src="/img/logo_v2.png" height="24" alt="logo"
                 /></nuxt-link>
 
-                <nuxt-link to="/" class="btn btn-secondary"
+                <nuxt-link to="/" class="btn btn-secondary" :class="[{ active: isHome }, 'btn btn-secondary']"
                     ><i class="fas fa-search"></i
                 ></nuxt-link>
 
-                <nuxt-link to="/o-zpevniku" class="btn btn-secondary"
+                <nuxt-link to="/o-zpevniku" class="btn btn-secondary" active-class="active"
                     ><i class="fas fa-info"></i
                 ></nuxt-link>
 

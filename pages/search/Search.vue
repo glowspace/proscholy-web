@@ -20,6 +20,7 @@
                             <input
                                 type="search"
                                 class="search-home"
+                                id="search-home"
                                 placeholder="Zadejte název písně, část textu nebo jméno autora"
                                 v-model="search_string"
                                 v-on:keyup.enter="inputEnter()"
@@ -61,10 +62,7 @@
                         ></InitFilters>
                         <div
                             v-if="init"
-                            @click="
-                                resetState(true);
-                                init = false;
-                            "
+                            @click="init = false;"
                             class="text-center pt-2 text-white"
                         >
                             <a
@@ -217,12 +215,13 @@ export default {
             adminUrl: process.env.adminUrl,
 
             // Random order seed
-            seed: 0
+            seed: 0,
+            seedLocked: false
         };
     },
 
     asyncData() {
-        function randomInteger(min, max) {
+        const randomInteger = function randomInt(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
 
@@ -267,6 +266,9 @@ export default {
             if (this.show_authors) {
                 GETparameters.autori = 'ano';
             }
+            if (this.seedLocked) {
+                GETparameters.nahoda = this.seed;
+            }
 
             this.$router.replace({
                 path: '/',
@@ -307,15 +309,22 @@ export default {
             this.selected_songbooks = getObjFormat(GETparameters.zpevniky);
 
             this.show_authors = !!GETparameters.autori;
+
+            if (GETparameters.nahoda) {
+                this.seed = GETparameters.nahoda;
+                this.seedLocked = true;
+            }
         },
 
-        resetState(update_url) {
+        resetState(manual) {
             this.selected_tags = {};
             this.selected_languages = {};
             this.selected_songbooks = {};
 
-            if (update_url) {
+            if (manual) {
+                this.init = true;
                 this.search_string = ''; // this prevents search box from being cleared after filters' load
+                this.refreshSeed();
                 this.updateHistoryState();
             }
         },
@@ -334,14 +343,24 @@ export default {
             if (this.search_string == 'admin') {
                 window.location.href = this.adminUrl;
             }
+        },
+
+        refreshSeed() {
+            const randomInteger = function randomInt(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+
+            this.seedLocked = false;
+            this.seed = randomInteger(1, 100000);
         }
     },
 
     mounted() {
         if (process.client) {
             window.onpopstate = this.applyStateChange;
-            document.getElementsByClassName('navbar-brand')[0].onclick = () => {this.resetState(true); this.init = true;};
-            document.getElementsByClassName('search-home')[0].focus();
+            document.getElementById('navbar-brand').onclick = () => {this.resetState(true);};
+            document.getElementById('navbar-brand-small').onclick = () => {this.resetState(true);};
+            document.getElementById('search-home').focus();
         }
         // this.applyStateChange();
     },
@@ -376,12 +395,12 @@ export default {
     watch: {
         init(val) {
             if (val) {
-                document.getElementsByClassName('search-home')[0].focus();
+                document.getElementById('search-home').focus();
             }
         },
 
         show_authors(val) {
-            this.resetState();
+            this.resetState(false);
         }
     }
 };
