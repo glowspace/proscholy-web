@@ -86,6 +86,7 @@ body[data-dark] .btn.display-all-songs {
 
 .filter-panel {
     max-height: calc(100vh - 47px - 3rem);
+    width: calc(100% - 1.5rem);
     overflow: auto;
 }
 

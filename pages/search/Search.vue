@@ -264,6 +264,9 @@ export default {
                     this.selected_songbooks
                 ).join(',');
             }
+            if (this.show_authors) {
+                GETparameters.autori = 'ano';
+            }
 
             this.$router.replace({
                 path: '/',
@@ -302,6 +305,8 @@ export default {
             this.selected_tags = getObjFormat(GETparameters.stitky);
             this.selected_languages = getObjFormat(GETparameters.jayzky);
             this.selected_songbooks = getObjFormat(GETparameters.zpevniky);
+
+            this.show_authors = !!GETparameters.autori;
         },
 
         resetState(update_url) {
@@ -373,6 +378,10 @@ export default {
             if (val) {
                 document.getElementsByClassName('search-home')[0].focus();
             }
+        },
+
+        show_authors(val) {
+            this.resetState();
         }
     }
 };

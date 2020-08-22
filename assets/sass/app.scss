@@ -416,6 +416,10 @@ Other elements
     }
 }
 
+.card-body {
+    padding: 0.90rem 1.25rem;
+}
+
 .error {
     color: white;
     text-align: center;
@@ -493,6 +497,10 @@ Other elements
             flex: 0 0 calc(100% / 3 - 20px);
             margin-left: 10px;
             margin-right: 10px;
+
+            .card-body {
+                padding: 1.25rem;
+            }
 
             @include media-breakpoint-between(sm, md) {
                 flex: 0 0 calc(100% / 2 - 20px);
