@@ -4,7 +4,7 @@ import glob from 'glob-all'
 import path from 'path'
 
 export default {
-    mode: 'universal',
+    mode: process.env.NUXT_MODE || 'universal',
     env: {
         baseUrl: 'https://zpevnik.proscholy.cz',
         titleWebsite: 'ProScholy.cz',
