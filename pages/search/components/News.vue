@@ -1,26 +1,49 @@
 <template>
     <div class="card news" v-if="news && news.length">
         <span class="news-item"><b>Aktuálně:</b></span>
-        <template v-for="(item, key) in news">
-            <nuxt-link v-if="item.nuxt && item.link" :to="item.link" class="news-item"><i v-if="item.icon" :class="item.icon"></i>{{ item.text }}</nuxt-link>
-            <a v-else-if="item.link" :href="item.link" class="news-item"><i v-if="item.icon" :class="item.icon"></i>{{ item.text }}</a>
-            <span v-else="item.link" class="news-item"><i v-if="item.icon" :class="item.icon"></i>{{ item.text }}</span>
-        </template>
+        <UniversalLink v-for="(item, key) in news" :key="key" :type="item.type" :link="item.link">
+            <i v-if="item.fa_icon_class" :class="item.fa_icon_class"></i> {{ item.text }}
+        </UniversalLink>
         <slot></slot>
     </div>
 </template>
 
 <script>
+
+import UniversalLink from '~/components/UniversalLink';
+import gql from 'graphql-tag';
+
+// const FETCH_NEWS = gql`
+//     query {
+//         news {
+//             text
+//             fa_icon_class
+//             link
+//             type
+//         } 
+//     }
+// `;
+
 export default {
     name: 'News',
 
+    components: { UniversalLink },
+
     data() {
         return {
-            news: [
-                // {text: 'nová zpěvníková šifra', icon: 'fas fa-key', link: '/o-zpevniku', nuxt: true}
-                // waiting for graphql endpoint
-            ]
+            news: [{
+                text: 'dummy text',
+                fa_icon_class: 'fa fa-key',
+                link: '/o-zpevniku',
+                type: 'NUXTLINK'
+            }]
         };
-    }
+    },
+
+    // apollo: {
+    //     news: {
+    //         query: FETCH_NEWS
+    //     }
+    // }
 };
 </script>
