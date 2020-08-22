@@ -107,6 +107,17 @@ body[data-dark] .btn.display-all-songs {
     }
 }
 
+div.filters {
+    .btn-group {
+        border-radius: 0.125rem;
+        border: 1px solid #dee2e6;
+
+        a:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
 .song-tags--init-filters {
     overflow: hidden;
     height: 3.8em;

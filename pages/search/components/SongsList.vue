@@ -256,6 +256,8 @@ export default {
         'selected-songbooks',
         'selected-tags',
         'selected-languages',
+        'sort',
+        'descending',
         'seed'
     ],
 
@@ -329,16 +331,18 @@ export default {
                 });
 
             } else {
-                // old: no search keyword provided, so use the alphabetical sorting
-                // sort.push('name_keyword');
-
-                // new: no search keyword provided, so use the random sorting
-                query.bool.must.push({
-                    function_score: {
-                        query: { match_all: { boost: 1 } },
-                        random_score: { seed: this.seed, field: '_id' }
-                    }
-                });
+                if (this.sort == 1) {
+                    // no search keyword provided, so use the alphabetical sorting
+                    sort.push({name_keyword: {order: this.descending ? 'desc' : 'asc'}});
+                } else {
+                    // no search keyword provided, so use the random sorting
+                    query.bool.must.push({
+                        function_score: {
+                            query: { match_all: { boost: 1 } },
+                            random_score: { seed: this.seed, field: '_id' }
+                        }
+                    });
+                }
             }
 
             for (let category_tags of Object.values(this.selectedTagsDcnf)) {

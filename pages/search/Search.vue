@@ -86,6 +86,11 @@
                                 :selected-tags.sync="selected_tags"
                                 :selected-languages.sync="selected_languages"
                                 :show-authors.sync="show_authors"
+                                :sort.sync="sort"
+                                :descending.sync="descending"
+                                :seed-locked.sync="seedLocked"
+                                :search-string="search_string"
+                                v-on:refresh-seed="refreshSeed"
                                 v-on:update:selected-tags-dcnf="updateSelectedTagsDcnf($event)"
                                 v-on:input="updateHistoryState"
                             ></Filters>
@@ -111,6 +116,8 @@
                                     :selected-tags="selected_tags"
                                     :selected-songbooks="selected_songbooks"
                                     :selected-languages="selected_languages"
+                                    :sort="sort"
+                                    :descending="descending"
                                     :seed="seed"
                                     v-on:query-loaded="queryLoaded"
                                 ></SongsList>
@@ -132,6 +139,11 @@
                                 :selected-tags.sync="selected_tags"
                                 :selected-languages.sync="selected_languages"
                                 :show-authors.sync="show_authors"
+                                :sort.sync="sort"
+                                :descending.sync="descending"
+                                :seed-locked.sync="seedLocked"
+                                :search-string="search_string"
+                                v-on:refresh-seed="refreshSeed"
                                 v-on:update:selected-tags-dcnf="updateSelectedTagsDcnf($event)"
                                 v-on:input="updateHistoryState"
                                 v-on:tags-loaded="applyStateChange"
@@ -216,7 +228,11 @@ export default {
 
             // Random order seed
             seed: 0,
-            seedLocked: false
+            seedLocked: false,
+
+            // Sort
+            sort: 0,
+            descending: false
         };
     },
 
@@ -269,6 +285,12 @@ export default {
             if (this.seedLocked) {
                 GETparameters.nahoda = this.seed;
             }
+            if (this.sort) {
+                GETparameters.razeni = this.sort;
+            }
+            if (this.descending) {
+                GETparameters.sestupne = 'ano';
+            }
 
             this.$router.replace({
                 path: '/',
@@ -309,10 +331,15 @@ export default {
             this.selected_songbooks = getObjFormat(GETparameters.zpevniky);
 
             this.show_authors = !!GETparameters.autori;
+            this.descending = !!GETparameters.sestupne;
 
             if (GETparameters.nahoda) {
                 this.seed = GETparameters.nahoda;
                 this.seedLocked = true;
+            }
+
+            if (GETparameters.razeni) {
+                this.sort = GETparameters.razeni;
             }
         },
 
@@ -320,11 +347,12 @@ export default {
             this.selected_tags = {};
             this.selected_languages = {};
             this.selected_songbooks = {};
+            this.sort = 0;
+            this.descending = false;
 
             if (manual) {
                 this.init = true;
                 this.search_string = ''; // this prevents search box from being cleared after filters' load
-                this.refreshSeed();
                 this.updateHistoryState();
             }
         },
