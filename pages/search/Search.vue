@@ -353,6 +353,7 @@ export default {
             if (manual) {
                 this.init = true;
                 this.search_string = ''; // this prevents search box from being cleared after filters' load
+                this.refreshSeed();
                 this.updateHistoryState();
             }
         },
