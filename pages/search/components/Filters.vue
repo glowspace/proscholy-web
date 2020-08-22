@@ -28,16 +28,24 @@
         <div v-if="!authors" :class="[searchString ? 'disabled' : '', 'btn-group m-0 my-2 bg-light btn-group--icons']" role="group">
             <a
                 class="btn btn-secondary"
+                title="řadit náhodně"
                 @click="localSort = 0; localDescending = false;"
                 :class="{ chosen: !localSort }"
                 ><i class="fas fa-random"></i>&nbsp; náhodně &nbsp;<i
-                :class="[localSeedLocked ? 'fa-unlock' : 'fa-lock', localSort ? 'text-secondary' : '', 'fas']"
-                @click="localSeedLocked = !localSeedLocked"></i>&nbsp;&nbsp;<i
+                v-if="!localSeedLocked"
+                :class="[localSort ? 'text-secondary' : '', 'fas fa-lock']"
+                @click="localSeedLocked = true"
+                title="uložit aktuální řazení do URL"></i><i
+                v-else
+                class="fas fa-copy"
+                @click="copyUrl()"
+                title="zkopírovat URL s aktuálním řazením"></i>&nbsp;&nbsp;<i
                 :class="[localSort ? 'text-secondary' : '', 'fas fa-sync']"
-                @click="refreshSeed()"></i></a
+                @click="refreshSeed()" title="zamíchat"></i></a
             >
             <a
                 class="btn btn-secondary"
+                :title="'řadit podle abecedy ' + (localSort == 1 ? (localDescending ? 'vzestupně' : 'sestupně') : 'vzestupně')"
                 @click="if (localSort == 1) {localDescending = !localDescending;} else {localSort = 1; localDescending = false; localSeedLocked = false;}"
                 :class="{ chosen: localSort == 1 }"
                 ><i :class="[ (localSort == 1) ? (localDescending ? 'fa-sort-alpha-up' : 'fa-sort-alpha-down-alt') : 'fa-sort-alpha-up', 'fas' ]"></i
@@ -268,6 +276,39 @@ export default {
 
         refreshSeed() {
             this.$emit('refresh-seed', null);
+        },
+
+        // https://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript
+        fallbackCopyTextToClipboard(text) {
+            var textArea = document.createElement("textarea");
+            textArea.value = text;
+
+            // Avoid scrolling to bottom
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.position = "fixed";
+
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                var successful = document.execCommand('copy');
+                var msg = successful ? 'successful' : 'unsuccessful';
+                console.log('Fallback: Copying text command was ' + msg);
+            } catch (err) {
+                console.error('Fallback: Oops, unable to copy', err);
+            }
+
+            document.body.removeChild(textArea);
+        },
+        copyUrl() {
+            let text = window.location.href;
+            if (!navigator.clipboard) {
+                fallbackCopyTextToClipboard(text);
+                return;
+            }
+            navigator.clipboard.writeText(text).then(function() {}, function(err) {});
         }
     },
 
