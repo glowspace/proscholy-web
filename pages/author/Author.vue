@@ -32,7 +32,7 @@
 
         <div class="card" v-if="author.members.length">
             <div class="card-body">
-                <span>Členové:</span>
+                <span>Související autoři:</span>
                 <span v-for="(members, key) in author.members" :key="key">
                     <span v-if="key">,</span> <nuxt-link :to="members.public_route">{{ members.name }}</nuxt-link>
                 </span>
