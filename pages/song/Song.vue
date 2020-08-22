@@ -22,6 +22,7 @@ const FETCH_SONG_LYRIC = gql`
         song_lyric(id: $id) {
             has_lyrics
             id
+            song_number
             name
             public_route
             type

@@ -194,6 +194,7 @@ const fetch_items = gql`
         ) {
             data {
                 id
+                song_number
                 name
                 public_route
                 lang
@@ -424,26 +425,23 @@ export default {
         },
 
         getSongNumber(song_lyric, getfirstPart) {
-            if (this.preferred_songbook_id === null) {
-                if (getfirstPart) {
-                    return '';
-                } else {
-                    return song_lyric.id;
-                }
-            } else {
+            if (this.preferred_songbook_id !== null) {
                 let rec = song_lyric.songbook_records.filter(
                     record => record.songbook.id === this.preferred_songbook_id
                 )[0];
-                if (!rec)
-                    // when mocking the search data, the record is not always available
-                    return;
-
-                if (getfirstPart) {
-                    return rec.songbook.shortcut + ' ';
-                } else {
-                    return rec.number;
+                if (rec) {
+                    if (getfirstPart) {
+                        return rec.songbook.shortcut + ' ';
+                    } else {
+                        return rec.number;
+                    }
                 }
             }
+
+            if (!getfirstPart) {
+                return song_lyric.song_number;
+            }
+            return '';
         }
     },
 
