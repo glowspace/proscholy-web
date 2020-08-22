@@ -11,84 +11,100 @@
         </template>
     </div>
     <div class="song-tags card pt-1" v-else>
+        <div class="btn-group m-0 my-2 bg-light" role="group">
+            <a
+                class="btn btn-secondary"
+                v-bind:class="{ chosen: !authors }"
+                v-on:click="authors = false"
+                >písně</a
+            >
+            <a
+                class="btn btn-secondary mb-0"
+                v-bind:class="{ chosen: authors }"
+                v-on:click="authors = true"
+                >autoři</a
+            >
+        </div>
         <!-- todo: make component -->
-        <h4>Liturgie – mše svatá</h4>
-        <a
-            v-bind:class="[
-                'tag',
-                'tag-blue',
-                isSelectedTag(tag) ? 'tag-selected' : ''
-            ]"
-            v-for="tag in tags_liturgy_part"
-            v-bind:key="'tag-' + tag.id"
-            v-on:click="selectTag(tag)"
-            >{{ tag.name }}</a
-        >
+        <div v-if="!authors">
+            <h4>Liturgie – mše svatá</h4>
+            <a
+                v-bind:class="[
+                    'tag',
+                    'tag-blue',
+                    isSelectedTag(tag) ? 'tag-selected' : ''
+                ]"
+                v-for="tag in tags_liturgy_part"
+                v-bind:key="'tag-' + tag.id"
+                v-on:click="selectTag(tag)"
+                >{{ tag.name }}</a
+            >
 
-        <h4>Liturgický rok</h4>
-        <a
-            v-bind:class="[
-                'tag',
-                'tag-blue',
-                isSelectedTag(tag) ? 'tag-selected' : ''
-            ]"
-            v-for="tag in tags_liturgy_period"
-            v-bind:key="'tag-' + tag.id"
-            v-on:click="selectTag(tag)"
-            >{{ tag.name }}</a
-        >
+            <h4>Liturgický rok</h4>
+            <a
+                v-bind:class="[
+                    'tag',
+                    'tag-blue',
+                    isSelectedTag(tag) ? 'tag-selected' : ''
+                ]"
+                v-for="tag in tags_liturgy_period"
+                v-bind:key="'tag-' + tag.id"
+                v-on:click="selectTag(tag)"
+                >{{ tag.name }}</a
+            >
 
-        <h4>Příležitosti</h4>
-        <a
-            v-bind:class="[
-                'tag',
-                'tag-green',
-                isSelectedTag(tag) ? 'tag-selected' : ''
-            ]"
-            v-for="tag in tags_generic"
-            v-bind:key="'tag-' + tag.id"
-            v-on:click="selectTag(tag)"
-            >{{ tag.name }}</a
-        >
+            <h4>Příležitosti</h4>
+            <a
+                v-bind:class="[
+                    'tag',
+                    'tag-green',
+                    isSelectedTag(tag) ? 'tag-selected' : ''
+                ]"
+                v-for="tag in tags_generic"
+                v-bind:key="'tag-' + tag.id"
+                v-on:click="selectTag(tag)"
+                >{{ tag.name }}</a
+            >
 
-        <h4>Ke svatým</h4>
-        <a
-            v-bind:class="[
-                'tag',
-                'tag-green',
-                isSelectedTag(tag) ? 'tag-selected' : ''
-            ]"
-            v-for="tag in tags_saints"
-            v-bind:key="'tag-' + tag.id"
-            v-on:click="selectTag(tag)"
-            >{{ tag.name }}</a
-        >
+            <h4>Ke svatým</h4>
+            <a
+                v-bind:class="[
+                    'tag',
+                    'tag-green',
+                    isSelectedTag(tag) ? 'tag-selected' : ''
+                ]"
+                v-for="tag in tags_saints"
+                v-bind:key="'tag-' + tag.id"
+                v-on:click="selectTag(tag)"
+                >{{ tag.name }}</a
+            >
 
-        <h4>Zpěvníky</h4>
-        <a
-            v-bind:class="[
-                'tag',
-                'tag-yellow',
-                isSelectedSongbook(songbook) ? 'tag-selected' : ''
-            ]"
-            v-for="songbook in songbooks"
-            v-bind:key="'songbook-' + songbook.id"
-            v-on:click="selectSongbook(songbook)"
-            >{{ songbook.name }}</a
-        >
+            <h4>Zpěvníky</h4>
+            <a
+                v-bind:class="[
+                    'tag',
+                    'tag-yellow',
+                    isSelectedSongbook(songbook) ? 'tag-selected' : ''
+                ]"
+                v-for="songbook in songbooks"
+                v-bind:key="'songbook-' + songbook.id"
+                v-on:click="selectSongbook(songbook)"
+                >{{ songbook.name }}</a
+            >
 
-        <h4>Jazyky</h4>
-        <a
-            v-bind:class="[
-                'tag',
-                'tag-red',
-                isSelectedLanguage(lang_code) ? 'tag-selected' : ''
-            ]"
-            v-for="(lang_name, lang_code) in all_languages"
-            v-bind:key="'lang-' + lang_code"
-            v-on:click="selectLanguage(lang_code)"
-            >{{ lang_name }}</a
-        >
+            <h4>Jazyky</h4>
+            <a
+                v-bind:class="[
+                    'tag',
+                    'tag-red',
+                    isSelectedLanguage(lang_code) ? 'tag-selected' : ''
+                ]"
+                v-for="(lang_name, lang_code) in all_languages"
+                v-bind:key="'lang-' + lang_code"
+                v-on:click="selectLanguage(lang_code)"
+                >{{ lang_name }}</a
+            >
+        </div>
     </div>
 </template>
 
@@ -123,7 +139,7 @@ const FETCH_TAGS_AND_SONGBOOKS = gql`
 `;
 
 export default {
-    props: ['selected-tags', 'selected-songbooks', 'selected-languages'],
+    props: ['selected-tags', 'selected-songbooks', 'selected-languages', 'show-authors'],
 
     data() {
         return {
@@ -144,7 +160,8 @@ export default {
                 he: 'hebrejština',
                 cu: 'staroslověnština',
                 mixed: 'vícejazyčná píseň'
-            }
+            },
+            authors: this.showAuthors
         };
     },
 
@@ -250,6 +267,10 @@ export default {
 
         selectedLanguages(val, prev) {
             this.selected_languages = val;
+        },
+
+        authors(val, prev) {
+            this.$emit('update:show-authors', val);
         }
     }
 };

@@ -255,7 +255,7 @@ export default {
         'selected-songbooks',
         'selected-tags',
         'selected-languages',
-        'init'
+        'seed'
     ],
 
     components: { ScrollTrigger },
@@ -335,7 +335,7 @@ export default {
                 query.bool.must.push({
                     function_score: {
                         query: { match_all: { boost: 1 } },
-                        random_score: { seed: this.$parent.seed, field: '_id' }
+                        random_score: { seed: this.seed, field: '_id' }
                     }
                 });
             }

@@ -84,16 +84,11 @@
                             </a>
                             <!-- filters shown only for mobile -->
                             <Filters
-                                v-bind:selected-songbooks.sync="
-                                    selected_songbooks
-                                "
-                                v-bind:selected-tags.sync="selected_tags"
-                                v-bind:selected-languages.sync="
-                                    selected_languages
-                                "
-                                v-on:update:selected-tags-dcnf="
-                                    updateSelectedTagsDcnf($event)
-                                "
+                                :selected-songbooks.sync="selected_songbooks"
+                                :selected-tags.sync="selected_tags"
+                                :selected-languages.sync="selected_languages"
+                                :show-authors.sync="show_authors"
+                                v-on:update:selected-tags-dcnf="updateSelectedTagsDcnf($event)"
                                 v-on:input="updateHistoryState"
                             ></Filters>
                         </div>
@@ -112,20 +107,20 @@
                         <div class="card">
                             <div class="card-body p-0">
                                 <SongsList
-                                    v-bind:search-string="search_string"
-                                    v-bind:selected-tags-dcnf="
-                                        selected_tags_dcnf
-                                    "
-                                    v-bind:selected-tags="selected_tags"
-                                    v-bind:selected-songbooks="
-                                        selected_songbooks
-                                    "
-                                    v-bind:selected-languages="
-                                        selected_languages
-                                    "
-                                    v-bind:init="init"
+                                    v-if="!show_authors"
+                                    :search-string="search_string"
+                                    :selected-tags-dcnf="selected_tags_dcnf"
+                                    :selected-tags="selected_tags"
+                                    :selected-songbooks="selected_songbooks"
+                                    :selected-languages="selected_languages"
+                                    :seed="seed"
                                     v-on:query-loaded="queryLoaded"
                                 ></SongsList>
+                                <AuthorsList
+                                    v-else
+                                    :search-string="search_string"
+                                    v-on:query-loaded="queryLoaded"
+                                ></AuthorsList>
                             </div>
                         </div>
                     </div>
@@ -135,16 +130,11 @@
                         <div class="fixed-top position-sticky">
                             <!-- filters shown only for desktop -->
                             <Filters
-                                v-bind:selected-songbooks.sync="
-                                    selected_songbooks
-                                "
-                                v-bind:selected-tags.sync="selected_tags"
-                                v-bind:selected-languages.sync="
-                                    selected_languages
-                                "
-                                v-on:update:selected-tags-dcnf="
-                                    updateSelectedTagsDcnf($event)
-                                "
+                                :selected-songbooks.sync="selected_songbooks"
+                                :selected-tags.sync="selected_tags"
+                                :selected-languages.sync="selected_languages"
+                                :show-authors.sync="show_authors"
+                                v-on:update:selected-tags-dcnf="updateSelectedTagsDcnf($event)"
                                 v-on:input="updateHistoryState"
                                 v-on:tags-loaded="applyStateChange"
                             ></Filters>
@@ -172,6 +162,7 @@
 
 <script>
 import SongsList from './components/SongsList';
+import AuthorsList from './components/AuthorsList';
 import Filters from './components/Filters';
 import InitFilters from './components/InitFilters';
 import AppLinks from './components/AppLinks';
@@ -216,6 +207,7 @@ export default {
             // View state
             init: true,
             displayFilter: false,
+            show_authors: false,
 
             // Title
             titleWebsite: process.env.titleWebsite,
@@ -334,7 +326,6 @@ export default {
 
         inputEnter() {
             this.init = false;
-            console.log('a');
             if (this.search_string == 'admin') {
                 window.location.href = this.adminUrl;
             }
@@ -354,6 +345,7 @@ export default {
         Logo,
         AppLinks,
         SongsList,
+        AuthorsList,
         Filters,
         InitFilters,
         News
