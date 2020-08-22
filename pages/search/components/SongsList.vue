@@ -339,7 +339,7 @@ export default {
                     query.bool.must.push({
                         function_score: {
                             query: { match_all: { boost: 1 } },
-                            random_score: { seed: this.seed, field: '_id' }
+                            random_score: { seed: parseInt(this.seed), field: '_id' }
                         }
                     });
                 }
