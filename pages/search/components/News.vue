@@ -1,8 +1,8 @@
 <template>
     <div class="card news" v-if="news && news.length">
         <span class="news-item"><b>Aktuálně:</b></span>
-        <UniversalLink v-for="(item, key) in news" :key="key" :type="item.type" :link="item.link">
-            <i v-if="item.fa_icon_class" :class="item.fa_icon_class"></i> {{ item.text }}
+        <UniversalLink v-for="(item, key) in news" :key="key" :type="item.type" :link="item.link" classes="news-item">
+            <i v-if="item.fa_icon_class" :class="item.fa_icon_class"></i>{{ item.text }}
         </UniversalLink>
         <slot></slot>
     </div>
@@ -20,7 +20,7 @@ import gql from 'graphql-tag';
 //             fa_icon_class
 //             link
 //             type
-//         } 
+//         }
 //     }
 // `;
 
@@ -31,12 +31,14 @@ export default {
 
     data() {
         return {
-            news: [{
-                text: 'dummy text',
-                fa_icon_class: 'fa fa-key',
-                link: '/o-zpevniku',
-                type: 'NUXTLINK'
-            }]
+            news: [
+                // {
+                //     text: 'Zpěvníková šifra',
+                //     fa_icon_class: 'fa fa-key',
+                //     link: 'https://zpevnik.proscholy.cz/preview/501/a-mezidobi-11.pdf',
+                //     type: 'PDF'
+                // }
+            ]
         };
     },
 

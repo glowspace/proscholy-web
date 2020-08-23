@@ -10,16 +10,12 @@
                             'row mt-n4 justify-content-center zindex-lower'
                     ]"
                 >
-                    <div
-                        :class="[
-                            { 'col-lg-6': init },
-                            'col-lg-8 px-1 pt-5 pb-3 search-column'
-                        ]"
-                    >
+                    <div class="col-lg-8 px-1 pt-5 pb-3 search-column">
                         <div class="search-wrapper shadow">
                             <input
                                 type="search"
                                 class="search-home"
+                                id="search-home"
                                 placeholder="Zadejte název písně, část textu nebo jméno autora"
                                 v-model="search_string"
                                 v-on:keyup.enter="inputEnter()"
@@ -61,10 +57,7 @@
                         ></InitFilters>
                         <div
                             v-if="init"
-                            @click="
-                                resetState(true);
-                                init = false;
-                            "
+                            @click="init = false;"
                             class="text-center pt-2 text-white"
                         >
                             <a
@@ -88,6 +81,11 @@
                                 :selected-tags.sync="selected_tags"
                                 :selected-languages.sync="selected_languages"
                                 :show-authors.sync="show_authors"
+                                :sort.sync="sort"
+                                :descending.sync="descending"
+                                :seed-locked.sync="seedLocked"
+                                :search-string="search_string"
+                                v-on:refresh-seed="refreshSeed"
                                 v-on:update:selected-tags-dcnf="updateSelectedTagsDcnf($event)"
                                 v-on:input="updateHistoryState"
                             ></Filters>
@@ -96,7 +94,7 @@
                     <div class="col-lg-4 search-balance"></div>
                 </div>
                 <div class="row justify-content-center text-center pt-4" v-show="init">
-                    <div :class="[{ 'col-lg-6': init }, 'col-lg-8 search-column']">
+                    <div class="col-lg-8 search-column">
                         <News><div class="news-opener" @click="init = false;"></div></News>
                     </div>
                     <div class="col-lg-4 search-balance"></div>
@@ -113,6 +111,8 @@
                                     :selected-tags="selected_tags"
                                     :selected-songbooks="selected_songbooks"
                                     :selected-languages="selected_languages"
+                                    :sort="sort"
+                                    :descending="descending"
                                     :seed="seed"
                                     v-on:query-loaded="queryLoaded"
                                 ></SongsList>
@@ -134,6 +134,11 @@
                                 :selected-tags.sync="selected_tags"
                                 :selected-languages.sync="selected_languages"
                                 :show-authors.sync="show_authors"
+                                :sort.sync="sort"
+                                :descending.sync="descending"
+                                :seed-locked.sync="seedLocked"
+                                :search-string="search_string"
+                                v-on:refresh-seed="refreshSeed"
                                 v-on:update:selected-tags-dcnf="updateSelectedTagsDcnf($event)"
                                 v-on:input="updateHistoryState"
                                 v-on:tags-loaded="applyStateChange"
@@ -217,12 +222,17 @@ export default {
             adminUrl: process.env.adminUrl,
 
             // Random order seed
-            seed: 0
+            seed: 0,
+            seedLocked: false,
+
+            // Sort
+            sort: 0,
+            descending: false
         };
     },
 
     asyncData() {
-        function randomInteger(min, max) {
+        const randomInteger = function randomInt(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
 
@@ -264,6 +274,18 @@ export default {
                     this.selected_songbooks
                 ).join(',');
             }
+            if (this.show_authors) {
+                GETparameters.autori = 'ano';
+            }
+            if (this.seedLocked) {
+                GETparameters.nahoda = this.seed;
+            }
+            if (this.sort) {
+                GETparameters.razeni = this.sort;
+            }
+            if (this.descending) {
+                GETparameters.sestupne = 'ano';
+            }
 
             this.$router.replace({
                 path: '/',
@@ -302,15 +324,31 @@ export default {
             this.selected_tags = getObjFormat(GETparameters.stitky);
             this.selected_languages = getObjFormat(GETparameters.jayzky);
             this.selected_songbooks = getObjFormat(GETparameters.zpevniky);
+
+            this.show_authors = !!GETparameters.autori;
+            this.descending = !!GETparameters.sestupne;
+
+            if (GETparameters.nahoda) {
+                this.seed = GETparameters.nahoda;
+                this.seedLocked = true;
+            }
+
+            if (GETparameters.razeni) {
+                this.sort = GETparameters.razeni;
+            }
         },
 
-        resetState(update_url) {
+        resetState(manual) {
             this.selected_tags = {};
             this.selected_languages = {};
             this.selected_songbooks = {};
+            this.sort = 0;
+            this.descending = false;
 
-            if (update_url) {
+            if (manual) {
+                this.init = true;
                 this.search_string = ''; // this prevents search box from being cleared after filters' load
+                this.refreshSeed();
                 this.updateHistoryState();
             }
         },
@@ -329,14 +367,24 @@ export default {
             if (this.search_string == 'admin') {
                 window.location.href = this.adminUrl;
             }
+        },
+
+        refreshSeed() {
+            const randomInteger = function randomInt(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+
+            this.seedLocked = false;
+            this.seed = randomInteger(1, 100000);
         }
     },
 
     mounted() {
         if (process.client) {
             window.onpopstate = this.applyStateChange;
-            document.getElementsByClassName('navbar-brand')[0].onclick = () => {this.resetState(true); this.init = true;};
-            document.getElementsByClassName('search-home')[0].focus();
+            document.getElementById('navbar-brand').onclick = () => {this.resetState(true);};
+            document.getElementById('navbar-brand-small').onclick = () => {this.resetState(true);};
+            document.getElementById('search-home').focus();
         }
         // this.applyStateChange();
     },
@@ -371,8 +419,12 @@ export default {
     watch: {
         init(val) {
             if (val) {
-                document.getElementsByClassName('search-home')[0].focus();
+                document.getElementById('search-home').focus();
             }
+        },
+
+        show_authors(val) {
+            this.resetState(false);
         }
     }
 };

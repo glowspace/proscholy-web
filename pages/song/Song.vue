@@ -22,6 +22,7 @@ const FETCH_SONG_LYRIC = gql`
         song_lyric(id: $id) {
             has_lyrics
             id
+            song_number
             name
             public_route
             type
@@ -122,7 +123,7 @@ export default {
 
     methods: {
         getTitle() {
-            return (this.song_lyric ? this.song_lyric.name : 'Píseň ' + this.$route.params.id) + this.titleSeparator + this.titleWebsite;
+            return (this.song_lyric ? this.song_lyric.name : 'Píseň') + this.titleSeparator + this.titleWebsite;
         },
 
         getDescription() {

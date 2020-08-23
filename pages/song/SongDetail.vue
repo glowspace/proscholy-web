@@ -4,7 +4,7 @@
             <div>
                 <h1 class="song-title">{{ song.name }}</h1>
                 <div class="d-flex align-items-center mt-1">
-                    <h4 class="song-number m-0">{{ song.id }}</h4>
+                    <h4 class="song-number m-0">{{ song.song_number }}</h4>
                     <p class="song-author ml-3 mb-0">
                         <song-author-label :song="song"></song-author-label>
                     </p>

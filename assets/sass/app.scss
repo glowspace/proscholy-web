@@ -214,7 +214,6 @@ Home page specific elements
         opacity: 0;
         height: 0;
         margin-top: 0;
-        margin-bottom: 0;
     }
 
     .search-balance {
@@ -224,22 +223,18 @@ Home page specific elements
 
 .logo-wrapper {
     text-align: center;
-    margin-top: 130px;
+    margin-top: 10vh;
     transition: 0.5s;
     height: 160px;
     margin-right: -15px;
     margin-left: -15px;
 
     @include media-breakpoint-down(sm) {
-        margin-top: 110px;
-        margin-bottom: -50px;
-        height: 90px;
+        height: 60px;
     }
 
     @include media-breakpoint-down(xs) {
-        margin-top: 90px;
-        margin-bottom: -70px;
-        height: 70x;
+        height: 40px;
     }
 
     .logo {
@@ -416,6 +411,10 @@ Other elements
     }
 }
 
+.card-body {
+    padding: 0.90rem 1.25rem;
+}
+
 .error {
     color: white;
     text-align: center;
@@ -493,6 +492,10 @@ Other elements
             flex: 0 0 calc(100% / 3 - 20px);
             margin-left: 10px;
             margin-right: 10px;
+
+            .card-body {
+                padding: 1.25rem;
+            }
 
             @include media-breakpoint-between(sm, md) {
                 flex: 0 0 calc(100% / 2 - 20px);

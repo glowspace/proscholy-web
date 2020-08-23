@@ -4,7 +4,7 @@
 
         <div class="row">
             <div class="card col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
-                <div class="card-body">
+                <div class="card-body py-4">
                     <h5 class="card-title">Zpětná vazba</h5>
                     <p class="card-text">
                         Pokud se vám podaří najít si 54 sekund k&nbsp;vyplnění

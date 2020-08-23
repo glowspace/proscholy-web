@@ -5,18 +5,8 @@
         <table class="table m-0">
             <tbody>
                 <tr v-if="!results_loaded">
-                    <td style="width:4rem">
-                        <div class="d-flex justify-content-end align-items-center">
-                            <span>&nbsp;</span>
-                            <span
-                                class="spinner-border spinner-border-sm"
-                                role="status"
-                                aria-hidden="true"
-                            ></span>
-                        </div>
-                    </td>
-                    <td>Načítám...</td>
-                    <td class="p-1" colspan="5">
+                    <td class="p-1"><span class="p-2 pl-3 d-inline-block">Načítám...</span></td>
+                    <td class="p-1">
                         <a
                             class="btn btn-secondary float-right m-0"
                             target="_blank"
@@ -38,17 +28,19 @@
                     >
                         <td
                             class="p-1 align-middle"
-                            colspan="7"
                         >
                             <nuxt-link
-                                class="p-2 w-100 d-inline-block"
+                                class="p-2 pl-3 w-100 d-inline-block"
                                 :to="author.public_route"
                             >{{ author.name }}</nuxt-link>
                         </td>
+                        <td
+                            class="p-1 align-middle"
+                        >{{ author.type_string }}</td>
                     </tr>
                 </template>
                 <tr v-else-if="results_loaded">
-                    <td class="p-1" colspan="7">
+                    <td class="p-1" colspan="2">
                         <span class="px-3 py-2 d-inline-block"
                             >Žádný autor odpovídající zadaným kritériím nebyl
                             nalezen.</span
@@ -71,6 +63,7 @@ query ($search_string: String) {
         id
         name
         public_route
+        type_string
     }
 }`;
 
@@ -100,6 +93,12 @@ export default {
                 this.$emit('query-loaded', null);
                 this.results_loaded = true;
             }
+        }
+    },
+
+    watch: {
+        searchString(val) {
+            this.results_loaded = false;
         }
     }
 };

@@ -86,6 +86,7 @@ body[data-dark] .btn.display-all-songs {
 
 .filter-panel {
     max-height: calc(100vh - 47px - 3rem);
+    width: calc(100% - 1.5rem);
     overflow: auto;
 }
 
@@ -102,6 +103,17 @@ body[data-dark] .btn.display-all-songs {
 
         a:last-child {
             margin-bottom: 1em; // firefox fix
+        }
+    }
+}
+
+div.filters {
+    .btn-group {
+        border-radius: 0.125rem;
+        border: 1px solid #dee2e6;
+
+        a:last-child {
+            margin-bottom: 0;
         }
     }
 }
