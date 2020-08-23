@@ -80,10 +80,9 @@
                                 :selected-songbooks.sync="selected_songbooks"
                                 :selected-tags.sync="selected_tags"
                                 :selected-languages.sync="selected_languages"
-                                :show-authors.sync="show_authors"
+                                :show-authors.sync="showAuthors"
                                 :sort.sync="sort"
                                 :descending.sync="descending"
-                                :seed-locked.sync="seedLocked"
                                 :search-string="search_string"
                                 v-on:refresh-seed="refreshSeed"
                                 v-on:update:selected-tags-dcnf="updateSelectedTagsDcnf($event)"
@@ -105,7 +104,7 @@
                         <div class="card">
                             <div class="card-body p-0">
                                 <SongsList
-                                    v-if="!show_authors"
+                                    v-if="!showAuthors"
                                     :search-string="search_string"
                                     :selected-tags-dcnf="selected_tags_dcnf"
                                     :selected-tags="selected_tags"
@@ -133,10 +132,9 @@
                                 :selected-songbooks.sync="selected_songbooks"
                                 :selected-tags.sync="selected_tags"
                                 :selected-languages.sync="selected_languages"
-                                :show-authors.sync="show_authors"
+                                :show-authors.sync="showAuthors"
                                 :sort.sync="sort"
                                 :descending.sync="descending"
-                                :seed-locked.sync="seedLocked"
                                 :search-string="search_string"
                                 v-on:refresh-seed="refreshSeed"
                                 v-on:update:selected-tags-dcnf="updateSelectedTagsDcnf($event)"
@@ -212,7 +210,7 @@ export default {
             // View state
             init: true,
             displayFilter: false,
-            show_authors: false,
+            showAuthors: false,
 
             // Title
             titleWebsite: process.env.titleWebsite,
@@ -274,17 +272,24 @@ export default {
                     this.selected_songbooks
                 ).join(',');
             }
-            if (this.show_authors) {
+            if (this.showAuthors) {
                 GETparameters.autori = 'ano';
-            }
-            if (this.seedLocked) {
-                GETparameters.nahoda = this.seed;
             }
             if (this.sort) {
                 GETparameters.razeni = this.sort;
             }
             if (this.descending) {
                 GETparameters.sestupne = 'ano';
+            }
+
+            if (!(this.search_string || this.sort || this.showAuthors || this.init)) {
+                this.seedLocked = true;
+            } else {
+                this.seedLocked = false;
+            }
+
+            if (this.seedLocked) {
+                GETparameters.nahoda = this.seed;
             }
 
             this.$router.replace({
@@ -325,7 +330,7 @@ export default {
             this.selected_languages = getObjFormat(GETparameters.jayzky);
             this.selected_songbooks = getObjFormat(GETparameters.zpevniky);
 
-            this.show_authors = !!GETparameters.autori;
+            this.showAuthors = !!GETparameters.autori;
             this.descending = !!GETparameters.sestupne;
 
             if (GETparameters.nahoda) {
@@ -347,6 +352,7 @@ export default {
 
             if (manual) {
                 this.init = true;
+                document.getElementById('search-home').focus();
                 this.search_string = ''; // this prevents search box from being cleared after filters' load
                 this.refreshSeed();
                 this.updateHistoryState();
@@ -420,10 +426,16 @@ export default {
         init(val) {
             if (val) {
                 document.getElementById('search-home').focus();
+                this.seedLocked = false;
+            } else {
+                if (!this.search_string) {
+                    this.seedLocked = true;
+                    this.updateHistoryState();
+                }
             }
         },
 
-        show_authors(val) {
+        showAuthors(val) {
             this.resetState(false);
         }
     }

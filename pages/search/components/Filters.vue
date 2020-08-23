@@ -16,13 +16,13 @@
                 class="btn btn-secondary"
                 :class="{ chosen: !localShowAuthors }"
                 @click="localShowAuthors = false"
-                >písně</a
+                ><i class="fas fa-music"></i>&nbsp; písně</a
             >
             <a
                 class="btn btn-secondary"
                 :class="{ chosen: localShowAuthors }"
                 @click="localShowAuthors = true"
-                >autoři</a
+                ><i class="fas fa-user"></i>&nbsp; autoři</a
             >
         </div><br>
         <div v-if="!localShowAuthors" :class="[searchString ? 'disabled' : '', 'btn-group m-0 my-2 bg-light btn-group--icons']" role="group">
@@ -32,21 +32,13 @@
                 @click="localSort = 0; localDescending = false;"
                 :class="{ chosen: !localSort }"
                 ><i class="fas fa-random"></i>&nbsp; náhodně &nbsp;<i
-                v-if="!localSeedLocked"
-                :class="[localSort ? 'text-secondary' : '', 'fas fa-lock']"
-                @click="localSeedLocked = true"
-                title="uložit aktuální řazení do URL"></i><i
-                v-else
-                class="fas fa-copy"
-                @click="copyUrl()"
-                title="zkopírovat URL s aktuálním řazením"></i>&nbsp;&nbsp;<i
                 :class="[localSort ? 'text-secondary' : '', 'fas fa-sync']"
                 @click="refreshSeed()" title="zamíchat"></i></a
             >
             <a
                 class="btn btn-secondary"
                 :title="'řadit podle abecedy ' + (localSort == 1 ? (localDescending ? 'vzestupně' : 'sestupně') : 'vzestupně')"
-                @click="if (localSort == 1) {localDescending = !localDescending;} else {localSort = 1; localDescending = false; localSeedLocked = false;}"
+                @click="if (localSort == 1) {localDescending = !localDescending;} else {localSort = 1; localDescending = false;}"
                 :class="{ chosen: localSort == 1 }"
                 ><i :class="[ (localSort == 1) ? (localDescending ? 'fa-sort-alpha-up' : 'fa-sort-alpha-down-alt') : 'fa-sort-alpha-up', 'fas' ]"></i
                 >&nbsp;&nbsp;{{ (localSort == 1) ? (localDescending ? 'A–Z' : 'Z–A') : 'A–Z' }}</a
@@ -166,7 +158,7 @@ const FETCH_TAGS_AND_SONGBOOKS = gql`
 `;
 
 export default {
-    props: ['selected-tags', 'selected-songbooks', 'selected-languages', 'show-authors', 'sort', 'descending', 'search-string', 'seed-locked'],
+    props: ['selected-tags', 'selected-songbooks', 'selected-languages', 'show-authors', 'sort', 'descending', 'search-string'],
 
     data() {
         return {
@@ -236,16 +228,6 @@ export default {
             },
             set(val) {
                 this.$emit('update:descending', val);
-                this.$emit('input', null);
-            }
-        },
-
-        localSeedLocked: {
-            get() {
-                return this.seedLocked;
-            },
-            set(val) {
-                this.$emit('update:seed-locked', val);
                 this.$emit('input', null);
             }
         }
