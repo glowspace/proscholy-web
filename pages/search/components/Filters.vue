@@ -14,18 +14,18 @@
         <div class="btn-group m-0 my-2 bg-light" role="group">
             <a
                 class="btn btn-secondary"
-                :class="{ chosen: !authors }"
-                @click="authors = false"
+                :class="{ chosen: !localShowAuthors }"
+                @click="localShowAuthors = false"
                 >písně</a
             >
             <a
                 class="btn btn-secondary"
-                :class="{ chosen: authors }"
-                @click="authors = true"
+                :class="{ chosen: localShowAuthors }"
+                @click="localShowAuthors = true"
                 >autoři</a
             >
         </div><br>
-        <div v-if="!authors" :class="[searchString ? 'disabled' : '', 'btn-group m-0 my-2 bg-light btn-group--icons']" role="group">
+        <div v-if="!localShowAuthors" :class="[searchString ? 'disabled' : '', 'btn-group m-0 my-2 bg-light btn-group--icons']" role="group">
             <a
                 class="btn btn-secondary"
                 title="řadit náhodně"
@@ -53,7 +53,7 @@
             >
         </div>
         <!-- todo: make component -->
-        <div v-if="!authors">
+        <div v-if="!localShowAuthors">
             <h4>Liturgie – mše svatá</h4>
             <a
                 v-bind:class="[
@@ -187,11 +187,7 @@ export default {
                 he: 'hebrejština',
                 cu: 'staroslověnština',
                 mixed: 'vícejazyčná píseň'
-            },
-            authors: this.showAuthors,
-            localSort: this.sort,
-            localDescending: this.descending,
-            localSeedLocked: this.seedLocked
+            }
         };
     },
 
@@ -210,6 +206,48 @@ export default {
         },
         songbooks: {
             query: FETCH_TAGS_AND_SONGBOOKS
+        }
+    },
+
+    computed: {
+        localShowAuthors: {
+            get() {
+                return this.showAuthors;
+            },
+            set(val) {
+                this.$emit('update:show-authors', val);
+                this.$emit('input', null);
+            }
+        },
+
+        localSort: {
+            get() {
+                return this.sort;
+            },
+            set(val) {
+                this.$emit('update:sort', val);
+                this.$emit('input', null);
+            }
+        },
+
+        localDescending: {
+            get() {
+                return this.descending;
+            },
+            set(val) {
+                this.$emit('update:descending', val);
+                this.$emit('input', null);
+            }
+        },
+
+        localSeedLocked: {
+            get() {
+                return this.seedLocked;
+            },
+            set(val) {
+                this.$emit('update:seed-locked', val);
+                this.$emit('input', null);
+            }
         }
     },
 
@@ -334,42 +372,6 @@ export default {
 
         selectedLanguages(val, prev) {
             this.selected_languages = val;
-        },
-
-        showAuthors(val, prev) {
-            this.authors = val;
-        },
-
-        sort(val, prev) {
-            this.localSort = val;
-        },
-
-        descending(val, prev) {
-            this.localDescending = val;
-        },
-
-        seedLocked(val, prev) {
-            this.localSeedLocked = val;
-        },
-
-        authors(val, prev) {
-            this.$emit('update:show-authors', val);
-            this.$emit('input', null);
-        },
-
-        localSort(val, prev) {
-            this.$emit('update:sort', val);
-            this.$emit('input', null);
-        },
-
-        localDescending(val, prev) {
-            this.$emit('update:descending', val);
-            this.$emit('input', null);
-        },
-
-        localSeedLocked(val, prev) {
-            this.$emit('update:seed-locked', val);
-            this.$emit('input', null);
         }
     }
 };
