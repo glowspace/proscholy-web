@@ -113,7 +113,7 @@ export default {
         }
     },
     sentry: {
-        dsn: 'https://4e5c6342c1d448cf9dfa78895528c0a3@sentry.softici.cz/7'
+        dsn: process.env.SENTRY_DSN
     },
     /*
      ** Build configuration
