@@ -10,12 +10,7 @@
                             'row mt-n4 justify-content-center zindex-lower'
                     ]"
                 >
-                    <div
-                        :class="[
-                            { 'col-lg-6': init },
-                            'col-lg-8 px-1 pt-5 pb-3 search-column'
-                        ]"
-                    >
+                    <div class="col-lg-8 px-1 pt-5 pb-3 search-column">
                         <div class="search-wrapper shadow">
                             <input
                                 type="search"
@@ -99,7 +94,7 @@
                     <div class="col-lg-4 search-balance"></div>
                 </div>
                 <div class="row justify-content-center text-center pt-4" v-show="init">
-                    <div :class="[{ 'col-lg-6': init }, 'col-lg-8 search-column']">
+                    <div class="col-lg-8 search-column">
                         <News><div class="news-opener" @click="init = false;"></div></News>
                     </div>
                     <div class="col-lg-4 search-balance"></div>
