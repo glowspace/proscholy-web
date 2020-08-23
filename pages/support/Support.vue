@@ -13,9 +13,10 @@
                     </p>
                     <p>
                         Mnohá z nich najdete v dokumentu našich biskupů
-                        <a
-                            href="http://www.liturgie.cz/shared/clanky/411/V%C3%BDb%C4%9Br%20hudby%20k%20bohoslu%C5%BEb%C3%A1m.pdf" target="_blank"
-                        >Výběr hudby k bohoslužbám – Směrnice ČBK pro používání liturgické hudby při bohoslužbách, zvláště ve vztahu k&nbsp;mládeži</a>.
+                        <UniversalLink
+                            type="PDF"
+                            link="http://www.liturgie.cz/shared/clanky/411/V%C3%BDb%C4%9Br%20hudby%20k%20bohoslu%C5%BEb%C3%A1m.pdf"
+                        ><i class="far fa-file-pdf pr-1"></i>Výběr hudby k bohoslužbám – Směrnice ČBK pro používání liturgické hudby při bohoslužbách, zvláště ve vztahu k&nbsp;mládeži</UniversalLink>.
                     </p>
                     <p>
                         Štítek znamená, že takto označenou píseň je možné pro danou část mše svaté použít,
@@ -38,8 +39,14 @@
 </template>
 
 <script>
+import UniversalLink from '~/components/UniversalLink';
+
 export default {
     name: 'Support',
+
+    components: {
+        UniversalLink
+    },
 
     head() {
         return {
