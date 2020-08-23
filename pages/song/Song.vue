@@ -140,7 +140,6 @@ export default {
         },
 
         notifySongVisit(visit_type) {
-            // todo: change mutation to visit_song_number when we switch to getting songs by numbers
             this.$apollo.mutate({
                 mutation: VISIT_SONG,
                 variables: {
