@@ -5,6 +5,7 @@ import Search from '~/pages/search/Search';
 import AboutSongBook from '~/pages/about/AboutSongBook';
 import Song from '~/pages/song/Song';
 import Author from '~/pages/author/Author';
+import Support from '~/pages/support/Support';
 import Login from '~/pages/account/Login';
 
 Vue.use(Router);
@@ -19,6 +20,8 @@ export function createRouter() {
             { path: '/pisen/:id/*', component: Song },
             { path: '/autor/:id', component: Author },
 
+            { path: '/napoveda', component: Support },
+
             { path: '/muj-ucet', component: Login },
 
             { path: '/vanoce', redirect: { name: 'index', query: { stitky: '22' } } },
@@ -27,7 +30,9 @@ export function createRouter() {
             { path: '/postni-doba', redirect: { name: 'index', query: { stitky: '25' } } }
         ],
         scrollBehavior (to, from, savedPosition) {
-            if (savedPosition) {
+            if (to.hash) {
+                return { selector: to.hash }
+            } else if (savedPosition) {
                 return savedPosition
             } else {
                 return { x: 0, y: 0 }
