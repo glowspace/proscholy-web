@@ -2,9 +2,15 @@
     <!-- todo: refactor so that it does not need client-only wrapper -->
     <client-only>
     <div class="authors-list">
+        <v-progress-linear
+            indeterminate
+            color="bg-main-blue"
+            :height="4"
+            :class="[results_loaded ? '' : 'custom-progress-bar--visible', 'custom-progress-bar']"
+        ></v-progress-linear>
         <table class="table m-0">
             <tbody>
-                <tr v-if="!results_loaded">
+                <tr v-if="!results_loaded && !(authors && authors.length)">
                     <td class="p-1"><span class="p-2 pl-3 d-inline-block">Načítám...</span></td>
                     <td class="p-1">
                         <a
@@ -20,7 +26,7 @@
                     </td>
                 </tr>
                 <template
-                    v-if="authors && authors.length"
+                    v-else-if="authors && authors.length"
                 >
                     <tr
                         v-for="(author, index) in authors"

@@ -476,6 +476,20 @@ Other elements
     width: 1%;
 }
 
+.bg-main-blue {
+    background-color: $main-blue !important;
+}
+
+.custom-progress-bar {
+    opacity: 0;
+    transition: 0.2s;
+    margin-bottom: -4px;
+}
+
+.custom-progress-bar--visible {
+    opacity: 1;
+}
+
 .our-team {
     h4 {
         transition: padding 0.2s;

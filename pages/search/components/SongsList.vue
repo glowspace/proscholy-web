@@ -2,9 +2,15 @@
     <!-- todo: refactor so that it does not need client-only wrapper -->
     <client-only>
     <div class="songs-list">
+        <v-progress-linear
+            indeterminate
+            color="bg-main-blue"
+            :height="4"
+            :class="[results_loaded ? '' : 'custom-progress-bar--visible', 'custom-progress-bar']"
+        ></v-progress-linear>
         <table class="table m-0">
             <tbody>
-                <tr v-if="!results_loaded">
+                <tr v-if="!results_loaded && !(song_lyrics && song_lyrics.length)">
                     <td style="width:4rem">
                         <div class="d-flex justify-content-end align-items-center">
                             <span>&nbsp;</span>
@@ -30,7 +36,7 @@
                     </td>
                 </tr>
                 <template
-                    v-if="song_lyrics && song_lyrics.length"
+                    v-else-if="song_lyrics && song_lyrics.length"
                 >
                     <tr
                         v-for="(song_lyric, index) in song_lyrics"
