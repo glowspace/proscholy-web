@@ -35,7 +35,13 @@
                                 v-if="!init"
                                 @click="inputEnter()"
                             >
-                                <i class="fa fa-search"></i>
+                                <i class="fa fa-search" v-if="!songLoading"></i>
+                                <span
+                                    v-else
+                                    class="spinner-border spinner-border-sm align-middle"
+                                    role="status"
+                                    aria-hidden="true"
+                                ></span>
                             </button>
                             <button
                                 type="button"
@@ -47,7 +53,13 @@
                                 }"
                                 @click="displayFilter = !displayFilter"
                             >
-                                <i class="fa fa-filter"></i>
+                                <i class="fa fa-filter" v-if="!songLoading"></i>
+                                <span
+                                    v-else
+                                    class="spinner-border spinner-border-sm align-middle"
+                                    role="status"
+                                    aria-hidden="true"
+                                ></span>
                             </button>
                         </div>
                         <InitFilters
@@ -173,6 +185,15 @@ import Logo from './components/Logo';
 import News from './components/News';
 
 import { isEmpty } from 'lodash';
+import gql from 'graphql-tag';
+
+const FETCH_SONG_ROUTE = gql`
+    query($song_number: Int!) {
+        song_lyric_number(song_number: $song_number) {
+            public_route
+        }
+    }
+`;
 
 /**
  * Root search component.
@@ -225,7 +246,10 @@ export default {
 
             // Sort
             sort: 0,
-            descending: false
+            descending: false,
+
+            // Song route loading
+            songLoading: false
         };
     },
 
@@ -376,8 +400,27 @@ export default {
 
         inputEnter() {
             this.init = false;
-            if (this.search_string == 'admin') {
-                window.location.href = this.adminUrl;
+            if (this.search_string) {
+                if (this.search_string == 'admin') {
+                    window.location.href = this.adminUrl;
+                } else if (!isNaN(parseInt(this.search_string, 10))) {
+                    this.songLoading = true;
+                    this.$apollo.query({
+                        query: FETCH_SONG_ROUTE,
+                        variables: {
+                            song_number: this.search_string
+                        }
+                    }).then((response) => {
+                        if (response.data.song_lyric_number) {
+                            this.$router.push({
+                                path: response.data.song_lyric_number.public_route
+                            }).catch(err => {});
+                        }
+                        this.songLoading = false;
+                    }).catch((err) => {
+                        this.songLoading = false;
+                    });
+                }
             }
         },
 

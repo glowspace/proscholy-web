@@ -294,7 +294,10 @@ export default {
                     // see must vs filter elastic documentation https://www.elastic.co/guide/en/elasticsearch/reference/current/query-filter-context.html
                     must: [],
                     should: [],
-                    filter: [{ term: { is_arrangement: { value: false } } }]
+                    filter: [
+                        { term: { is_arrangement: { value: false } } },
+                        { term: { only_regenschori: { value: false } } }
+                    ]
                 }
             };
 
@@ -330,7 +333,7 @@ export default {
                             'name^2',
                             'lyrics',
                             'authors',
-                            '_id^50',
+                            'song_number^50',
                             'songbook_records.songbook_number'
                         ]
                     }

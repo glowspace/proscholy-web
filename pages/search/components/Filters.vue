@@ -315,10 +315,7 @@ export default {
             try {
                 var successful = document.execCommand('copy');
                 var msg = successful ? 'successful' : 'unsuccessful';
-                console.log('Fallback: Copying text command was ' + msg);
-            } catch (err) {
-                console.error('Fallback: Oops, unable to copy', err);
-            }
+            } catch (err) {}
 
             document.body.removeChild(textArea);
         },
