@@ -123,20 +123,19 @@ export default {
          ** You can extend webpack config here
          */
         extend(config, { isDev, isClient }) {
-            if (!isDev) {
-                config.plugins.push(
-                    new PurgecssPlugin({
-                        paths: glob.sync([
-                            path.join(__dirname, './pages/**/*.vue'),
-                            path.join(__dirname, './layouts/**/*.vue'),
-                            path.join(__dirname, './components/**/*.vue')
-                        ]),
-                        whitelist: ['html', 'body', 'nuxt-progress'],
-                        whitelistPatterns: [/^v-((?!application).)*$/],
-                        whitelistPatternsChildren: [/^theme--*/]
-                    })
-                )
-            }
+            config.plugins.push(
+                new PurgecssPlugin({
+                    paths: glob.sync([
+                        path.join(__dirname, './pages/**/*.vue'),
+                        path.join(__dirname, './layouts/**/*.vue'),
+                        path.join(__dirname, './components/**/*.vue')
+                    ]),
+                    whitelist: ['html', 'body', 'nuxt-progress'],
+                    whitelistPatterns: [/^v-((?!application).)*$/, /^nuxt/],
+                    whitelistPatternsChildren: [/^theme--*/, /^v-((?!application).)*$/, /^nuxt/]
+                })
+            );
+
             if (isClient) {
                 config.optimization.splitChunks.maxSize = 500000;
             }

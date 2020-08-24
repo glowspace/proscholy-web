@@ -63,7 +63,7 @@ body[data-dark] {
     }
 
     .chord-sign {
-        color: #4dc0b5;
+        color: $teal;
     }
 
     .chord-bass {
@@ -83,7 +83,7 @@ body[data-dark] {
     a,
     .btn.btn-primary,
     .btn-primary.custom-file-control::before {
-        color: #4dc0b5;
+        color: $teal;
 
         &:hover {
             color: #328e85;
@@ -100,5 +100,9 @@ body[data-dark] {
 
     .v-skeleton-loader {
         filter: invert(1);
+    }
+
+    .bg-main-blue {
+        background-color: $teal !important;
     }
 }
