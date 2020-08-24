@@ -29,11 +29,9 @@
             <a
                 class="btn btn-secondary"
                 title="řadit náhodně"
-                @click="localSort = 0; localDescending = false;"
+                @click="refreshSeed(); localSort = 0; localDescending = false;"
                 :class="{ chosen: !localSort }"
-                ><i class="fas fa-random"></i>&nbsp; náhodně &nbsp;<i
-                :class="[localSort ? 'text-secondary' : '', 'fas fa-sync']"
-                @click="refreshSeed()" title="zamíchat"></i></a
+                ><i class="fas fa-random"></i>&nbsp; náhodně</a
             >
             <a
                 class="btn btn-secondary"
@@ -42,6 +40,14 @@
                 :class="{ chosen: localSort == 1 }"
                 ><i :class="[ (localSort == 1) ? (localDescending ? 'fa-sort-alpha-up' : 'fa-sort-alpha-down-alt') : 'fa-sort-alpha-up', 'fas' ]"></i
                 >&nbsp;&nbsp;{{ (localSort == 1) ? (localDescending ? 'A–Z' : 'Z–A') : 'A–Z' }}</a
+            >
+            <a
+                class="btn btn-secondary"
+                :title="'řadit podle čísla ' + (localSort == 2 ? (localDescending ? 'vzestupně' : 'sestupně') : 'vzestupně')"
+                @click="if (localSort == 2) {localDescending = !localDescending;} else {localSort = 2; localDescending = false;}"
+                :class="{ chosen: localSort == 2 }"
+                ><i :class="[ (localSort == 2) ? (localDescending ? 'fa-sort-numeric-up' : 'fa-sort-numeric-down-alt') : 'fa-sort-numeric-up', 'fas' ]"></i
+                >&nbsp;&nbsp;{{ (localSort == 2) ? (localDescending ? '1–9' : '9–1') : '1–9' }}</a
             >
         </div>
         <!-- todo: make component -->

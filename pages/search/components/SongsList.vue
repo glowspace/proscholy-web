@@ -340,11 +340,12 @@ export default {
                 });
 
             } else {
+                // no search keyword provided
                 if (this.sort == 1) {
-                    // no search keyword provided, so use the alphabetical sorting
                     sort.push({name_keyword: {order: this.descending ? 'desc' : 'asc'}});
+                } else if (this.sort == 2) {
+                    sort.push({song_number: {order: this.descending ? 'desc' : 'asc'}});
                 } else {
-                    // no search keyword provided, so use the random sorting
                     query.bool.must.push({
                         function_score: {
                             query: { match_all: { boost: 1 } },

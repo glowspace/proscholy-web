@@ -112,8 +112,13 @@ div.filters {
         border-radius: 0.125rem;
         border: 1px solid #dee2e6;
 
+        a {
+            border-right: 1px solid #dee2e6;
+        }
+
         a:last-child {
             margin-bottom: 0;
+            border-right: none;
         }
     }
 }
