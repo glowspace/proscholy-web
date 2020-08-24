@@ -300,6 +300,8 @@ export default {
 
         applyStateChange(event) {
             let GETparameters = this.$route.query;
+            const validParameters = ['vyhledavani', 'stitky', 'jazyky', 'zpevniky', 'autori', 'razeni', 'sestupne', 'nahoda'];
+            Object.keys(GETparameters).forEach((parameter) => validParameters.includes(parameter) || delete GETparameters[parameter]);
 
             if (isEmpty(GETparameters)) {
                 this.resetState(false);
@@ -327,7 +329,7 @@ export default {
             };
 
             this.selected_tags = getObjFormat(GETparameters.stitky);
-            this.selected_languages = getObjFormat(GETparameters.jayzky);
+            this.selected_languages = getObjFormat(GETparameters.jazyky);
             this.selected_songbooks = getObjFormat(GETparameters.zpevniky);
 
             this.showAuthors = !!GETparameters.autori;
@@ -341,6 +343,8 @@ export default {
             if (GETparameters.razeni) {
                 this.sort = GETparameters.razeni;
             }
+
+            this.updateHistoryState();
         },
 
         resetState(manual) {
