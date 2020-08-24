@@ -140,14 +140,17 @@ export default {
         },
 
         notifySongVisit(visit_type) {
-            this.$apollo.mutate({
-                mutation: VISIT_SONG,
-                variables: {
-                    // todo: detect desktop/mobile on server side
-                    is_mobile: process.client ? this.isMobileBrowser() : null,
-                    song_lyric_id: this.$route.params.id,
-                    visit_type: visit_type
-                }});
+            if (this.$route.params.id) {
+                this.$apollo.mutate({
+                    mutation: VISIT_SONG,
+                    variables: {
+                        // todo: detect desktop/mobile on server side
+                        is_mobile: process.client ? this.isMobileBrowser() : null,
+                        song_lyric_id: this.$route.params.id,
+                        visit_type: visit_type
+                    }
+                });
+            }
         },
 
         isMobileBrowser() {
