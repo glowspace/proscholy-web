@@ -2,7 +2,7 @@
     <div class="card news" v-if="news_items && news_items.length">
         <span class="news-item"><b>Aktuálně:</b></span>
         <UniversalLink v-for="(item, key) in news_items" :key="key" :type="item.link_type" :link="item.link" classes="news-item">
-            <i v-if="item.fa_icon" :class="`fa fa-${item.fa_icon}`"></i>{{ item.text }}
+            <i v-if="item.fa_icon" :class="item.fa_icon"></i>{{ item.text }}
         </UniversalLink>
         <slot></slot>
     </div>
