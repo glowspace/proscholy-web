@@ -356,7 +356,9 @@ export default {
 
             if (manual) {
                 this.init = true;
-                document.getElementById('search-home').focus();
+                if (document.getElementById('search-home')) {
+                    document.getElementById('search-home').focus();
+                }
                 this.search_string = ''; // this prevents search box from being cleared after filters' load
                 this.refreshSeed();
                 this.updateHistoryState();
@@ -392,9 +394,15 @@ export default {
     mounted() {
         if (process.client) {
             window.onpopstate = this.applyStateChange;
-            document.getElementById('navbar-brand').onclick = () => {this.resetState(true);};
-            document.getElementById('navbar-brand-small').onclick = () => {this.resetState(true);};
-            document.getElementById('search-home').focus();
+            if (document.getElementById('navbar-brand')) {
+                document.getElementById('navbar-brand').onclick = () => {this.resetState(true);};
+            }
+            if (document.getElementById('navbar-brand-small')) {
+                document.getElementById('navbar-brand-small').onclick = () => {this.resetState(true);};
+            }
+            if (document.getElementById('search-home')) {
+                document.getElementById('search-home').focus();
+            }
         }
         // this.applyStateChange();
     },
@@ -429,7 +437,9 @@ export default {
     watch: {
         init(val) {
             if (val) {
-                document.getElementById('search-home').focus();
+                if (document.getElementById('search-home')) {
+                    document.getElementById('search-home').focus();
+                }
                 this.seedLocked = false;
             } else {
                 if (!this.search_string) {
