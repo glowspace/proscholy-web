@@ -361,16 +361,20 @@ export default {
     // GraphQL client
     apollo: {
         tags_generic: {
-            query: fetchFiltersQuery
+            query: fetchFiltersQuery,
+            prefetch: false
         },
         tags_liturgy_part: {
-            query: fetchFiltersQuery
+            query: fetchFiltersQuery,
+            prefetch: false
         },
         tags_liturgy_period: {
-            query: fetchFiltersQuery
+            query: fetchFiltersQuery,
+            prefetch: false
         },
         tags_saints: {
-            query: fetchFiltersQuery
+            query: fetchFiltersQuery,
+            prefetch: false
         },
         song_lyrics_paginated: {
             query: FETCH_ITEMS,
