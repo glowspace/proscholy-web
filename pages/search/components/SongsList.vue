@@ -189,7 +189,8 @@
 <script>
 import gql from 'graphql-tag';
 import ScrollTrigger from './ScrollTrigger';
-import buildSearchParams from './buildSearchParams';
+import buildElasticSearchParams from './buildElasticSearchParams';
+import mergeFetchMoreResult from './mergeFetchMoreResult';
 
 // Query
 const fetch_items = gql`
@@ -282,7 +283,7 @@ export default {
 
     computed: {
         searchParams() {
-            return buildSearchParams({
+            return buildElasticSearchParams({
                 searchString: this.searchString,
                 filterTagsDcnf: this.selectedTagsDcnf,
                 filterLanguages: this.selectedLanguages,
@@ -318,25 +319,10 @@ export default {
                         per_page: this.per_page
                     },
                     updateQuery: (previousResult, { fetchMoreResult }) => {
-                        const newSongLyrics =
-                            fetchMoreResult.song_lyrics_paginated.data;
-                        const paginatorInfo =
-                            fetchMoreResult.song_lyrics_paginated.paginatorInfo;
+                        const { hasMorePages, mergedResult } = mergeFetchMoreResult(previousResult, fetchMoreResult);
+                        this.enable_more = hasMorePages;
 
-                        this.enable_more = paginatorInfo.hasMorePages;
-
-                        return {
-                            song_lyrics_paginated: {
-                                __typename:
-                                    previousResult.song_lyrics_paginated.__typename,
-                                // Merging the songLyrics lists
-                                data: [
-                                    ...previousResult.song_lyrics_paginated.data,
-                                    ...newSongLyrics
-                                ],
-                                paginatorInfo
-                            }
-                        };
+                        return mergedResult;
                     }
                 });
             } catch (e) {
