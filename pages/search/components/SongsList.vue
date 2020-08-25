@@ -191,27 +191,7 @@ import gql from 'graphql-tag';
 import ScrollTrigger from './ScrollTrigger';
 import buildElasticSearchParams, { getSelectedTagsDcnf } from './buildElasticSearchParams';
 import mergeFetchMoreResult from './mergeFetchMoreResult';
-
-const FETCH_TAGS = gql`
-query {
-        tags_generic: tags_enum(type: GENERIC) {
-            id
-            name
-        }
-        tags_liturgy_part: tags_enum(type: LITURGY_PART) {
-            id
-            name
-        }
-        tags_liturgy_period: tags_enum(type: LITURGY_PERIOD) {
-            id
-            name
-        }
-        tags_saints: tags_enum(type: SAINTS) {
-            id
-            name
-        }
-}
-`;
+import fetchFiltersQuery from './fetchFiltersQuery.graphql';
 
 // Query
 const FETCH_ITEMS = gql`
@@ -381,16 +361,16 @@ export default {
     // GraphQL client
     apollo: {
         tags_generic: {
-            query: FETCH_TAGS
+            query: fetchFiltersQuery
         },
         tags_liturgy_part: {
-            query: FETCH_TAGS
+            query: fetchFiltersQuery
         },
         tags_liturgy_period: {
-            query: FETCH_TAGS
+            query: fetchFiltersQuery
         },
         tags_saints: {
-            query: FETCH_TAGS
+            query: fetchFiltersQuery
         },
         song_lyrics_paginated: {
             query: FETCH_ITEMS,

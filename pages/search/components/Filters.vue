@@ -138,37 +138,7 @@
 <script>
 import gql from 'graphql-tag';
 import Vue from 'vue'
-
-const FETCH_TAGS = gql`
-    query {
-        tags_generic: tags_enum(type: GENERIC) {
-            id
-            name
-        }
-        tags_liturgy_part: tags_enum(type: LITURGY_PART) {
-            id
-            name
-        }
-        tags_liturgy_period: tags_enum(type: LITURGY_PERIOD) {
-            id
-            name
-        }
-        tags_saints: tags_enum(type: SAINTS) {
-            id
-            name
-        }
-    }
-`;
-
-const FETCH_SONGBOOKS = gql`
-    query {
-        songbooks(is_private: false) {
-            id
-            name
-            shortcut
-        }
-    }
-`
+import fetchFiltersQuery from './fetchFiltersQuery.graphql';
 
 export default {
     props: ['selected-tags', 'selected-songbooks', 'selected-languages', 'show-authors', 'sort', 'descending', 'search-string'],
@@ -198,19 +168,19 @@ export default {
 
     apollo: {
         tags_generic: {
-            query: FETCH_TAGS
+            query: fetchFiltersQuery
         },
         tags_liturgy_part: {
-            query: FETCH_TAGS
+            query: fetchFiltersQuery
         },
         tags_liturgy_period: {
-            query: FETCH_TAGS
+            query: fetchFiltersQuery
         },
         tags_saints: {
-            query: FETCH_TAGS
+            query: fetchFiltersQuery
         },
         songbooks: {
-            query: FETCH_SONGBOOKS
+            query: fetchFiltersQuery
         }
     },
 
