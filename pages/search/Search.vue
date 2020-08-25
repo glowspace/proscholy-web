@@ -198,7 +198,7 @@ const FETCH_SONG_ROUTE = gql`
  * Toggles 2 views (SearchHome and SearchResults).
  */
 export default {
-    extends: { SearchHistoryManager },
+    extends: SearchHistoryManager,
 
     head() {
         return {

@@ -9,8 +9,10 @@ export default {
         updateHistoryState() {
             this.$router.replace({
                 path: '/',
-                query: HistoryState.toGETParameters(this.historyStateObjects)
-            }).catch(err => {});
+                query: HistoryState.toGETParameters(this.historyStateObject)
+            }).catch(err => {
+                console.log(err);
+            });
         },
 
         applyStateChange(event) {
