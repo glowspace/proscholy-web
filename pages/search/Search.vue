@@ -180,10 +180,8 @@ import InitFilters from './components/InitFilters';
 import AppLinks from './components/AppLinks';
 import Logo from './components/Logo';
 import News from './components/News';
+import SearchHistoryManager from './components/SearchHistoryManager';
 
-import HistoryState from './components/historyState.js';
-
-import { isEmpty } from 'lodash';
 import gql from 'graphql-tag';
 
 const FETCH_SONG_ROUTE = gql`
@@ -200,6 +198,8 @@ const FETCH_SONG_ROUTE = gql`
  * Toggles 2 views (SearchHome and SearchResults).
  */
 export default {
+    extends: { SearchHistoryManager },
+
     head() {
         return {
             title: this.getTitle(),
@@ -268,55 +268,7 @@ export default {
             return 'Zpěvník ProScholy.cz je největší česká platforma sdružující křesťanské písně.';
         },
 
-        updateHistoryState() {
-            if (!(this.search_string || this.sort || this.showAuthors || this.init)) {
-                this.seedLocked = true;
-            } else {
-                this.seedLocked = false;
-            }
-
-            this.$router.replace({
-                path: '/',
-                query: HistoryState.toGETParameters({
-                    search_string: this.search_string,
-                    tags: this.selected_tags,
-                    languages: this.selected_languages,
-                    songbooks: this.selected_songbooks,
-                    show_authors: this.showAuthors,
-                    seed: this.seedLocked ? this.seed : null,
-                    is_descending: this.search_string ? null : this.descending,
-                    sort: this.search_string ? null : this.sort
-                })
-            }).catch(err => {});
-        },
-
-        applyStateChange(event) {
-            let GETparameters = this.$route.query;
-
-            HistoryState.deleteInvalidGETParameters(GETparameters);
-            if (isEmpty(GETparameters)) {
-                this.resetState(false);
-                return;
-            }
-
-            let obj = HistoryState.fromGETParameters(GETparameters);
-            this.search_string = obj.search_string;
-            this.selected_tags = obj.tags;
-            this.selected_languages = obj.languages;
-            this.selected_songbooks = obj.songbooks;
-            this.showAuthors = obj.show_authors;
-            this.descending = obj.is_descending;
-            this.seed = obj.seed;
-            this.sort = obj.sort;
-
-            if (this.seed) {
-                this.seedLocked = true;
-            }
-            
-            this.updateHistoryState();
-        },
-
-        resetState(manual) {
+        resetState(manual = false) {
             this.selected_tags = {};
             this.selected_languages = {};
             this.selected_songbooks = {};
@@ -419,6 +371,40 @@ export default {
                     Object.keys(this.selected_languages).length >
                 0
             );
+        },
+
+
+        // getter / setter for the SearchHistoryManager extending component
+        historyStateObject: {
+            get() {
+                this.seedLocked = !(this.search_string || this.sort || this.showAuthors || this.init);
+
+                return {
+                    search_string: this.search_string,
+                    tags: this.selected_tags,
+                    languages: this.selected_languages,
+                    songbooks: this.selected_songbooks,
+                    show_authors: this.showAuthors,
+                    seed: this.seedLocked ? this.seed : null,
+                    is_descending: this.search_string ? null : this.descending,
+                    sort: this.search_string ? null : this.sort
+                };
+            },
+
+            set(obj) {
+                this.search_string = obj.search_string;
+                this.selected_tags = obj.tags;
+                this.selected_languages = obj.languages;
+                this.selected_songbooks = obj.songbooks;
+                this.showAuthors = obj.show_authors;
+                this.descending = obj.is_descending;
+                this.seed = obj.seed;
+                this.sort = obj.sort;
+
+                if (this.seed) {
+                    this.seedLocked = true;
+                }
+            }
         }
     },
 
@@ -438,7 +424,7 @@ export default {
         },
 
         showAuthors(val) {
-            this.resetState(false);
+            this.resetState();
         }
     }
 };
