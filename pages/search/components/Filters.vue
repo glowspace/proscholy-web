@@ -168,19 +168,24 @@ export default {
 
     apollo: {
         tags_generic: {
-            query: fetchFiltersQuery
+            query: fetchFiltersQuery,
+            prefetch: false
         },
         tags_liturgy_part: {
-            query: fetchFiltersQuery
+            query: fetchFiltersQuery,
+            prefetch: false
         },
         tags_liturgy_period: {
-            query: fetchFiltersQuery
+            query: fetchFiltersQuery,
+            prefetch: false
         },
         tags_saints: {
-            query: fetchFiltersQuery
+            query: fetchFiltersQuery,
+            prefetch: false
         },
         songbooks: {
-            query: fetchFiltersQuery
+            query: fetchFiltersQuery,
+            prefetch: false
         }
     },
 
