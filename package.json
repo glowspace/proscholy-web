@@ -44,7 +44,9 @@
         "sass-loader": "^8.0.2"
     },
     "bit": {
-        "env": {},
+        "env": {
+            "compiler": "bit.envs/compilers/vue@0.1.10"
+        },
         "componentsDefaultDirectory": "components/{name}",
         "packageManager": "yarn"
     }
