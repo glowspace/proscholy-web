@@ -1,4 +1,4 @@
-/// INTERNAL FUNCTIONS USED FOR BUILDING ELASTIC QUERY 
+/// INTERNAL FUNCTIONS USED FOR BUILDING ELASTIC QUERY
 
 function baseQueryObject() {
     return {
@@ -28,8 +28,7 @@ function applyFulltext(query, search_string, options = {
         'songbook_records.songbook_number',
         'songbook_records.songbook_full_number^50'
     ]
-})
-{
+}) {
     // if exact match query -> multi_match needs to end in `must` section,
     // otherwise it is to be in `should` in order only to improve the rating
     let queryObject = options.must_match ? query.bool.must : query.bool.should;
@@ -65,7 +64,7 @@ function applyFilterTags(query, filterTagsDcnf) {
 function applyFilterLanguages(query, filterLanguages) {
     if (Object.keys(filterLanguages).length === 0)
         return;
-        
+
     query.bool.filter.push({
         terms: { lang: Object.keys(filterLanguages) }
     });
@@ -101,8 +100,7 @@ function applySongNumberSorting(sort, is_descending) {
     sort.push({song_number_integer: {order: is_descending ? 'desc' : 'asc'}});
 }
 
-function applySongbookNumberSorting(sort, is_descending, query, songbook_id)
-{
+function applySongbookNumberSorting(sort, is_descending, query, songbook_id) {
     query.bool.must.push({
         function_score: {
             query: { match_all: { boost: 1 } },
@@ -119,23 +117,24 @@ function applySongbookNumberSorting(sort, is_descending, query, songbook_id)
     sort.push({_score: {order: is_descending ? 'desc' : 'asc'}});
 }
 
-// EXPORTED FUNCTION USED TO TRANSFORM TAGS' ARRAYS TO DISJUNCTIVE CANONICAL NORMAL FORM 
+// EXPORTED FUNCTION USED TO TRANSFORM TAGS' ARRAYS TO DISJUNCTIVE CANONICAL NORMAL FORM
 // [ (1 or 2 or 3) and (4 or 5) and ... ]
 
-function getSelectedTagsDcnf(tags_groups = {
-    liturgy_part: [],
-    liturgy_period: [],
-    generic: [],
-    saints: [],
-    history_period: [],
-    instrumentation: [],
-    genre: [],
-    musical_form: [],
-}, 
+function getSelectedTagsDcnf(
+    tags_groups = {
+        liturgy_part: [],
+        liturgy_period: [],
+        generic: [],
+        saints: [],
+        history_period: [],
+        instrumentation: [],
+        genre: [],
+        musical_form: [],
+    },
     selected_tags = {}
 ) {
     return Object.values(tags_groups).map(
-        group => group ? 
+        group => group ?
             group.map(tag => tag.id).filter(tag_id => selected_tags[tag_id])
             : []
     );

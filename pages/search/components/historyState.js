@@ -1,7 +1,7 @@
 import { isEmpty } from 'lodash';
 
 const GET_PARAMETERS = {
-    search_string: 'vyhledavani', 
+    search_string: 'vyhledavani',
     tags: 'stitky',
     languages: 'jazyky',
     songbooks: 'zpevniky',
@@ -11,8 +11,7 @@ const GET_PARAMETERS = {
     seed: 'nahoda'
 };
 
-function validParameters()
-{
+function validParameters() {
     return Object.values(GET_PARAMETERS);
 }
 
@@ -43,13 +42,11 @@ function toGETParameters(
     };
 }
 
-function deleteInvalidGETParameters(params)
-{
+function deleteInvalidGETParameters(params) {
     Object.keys(params).forEach((p) => validParameters().includes(p) || delete params[p]);
 }
 
-function fromGETParameters(params)
-{
+function fromGETParameters(params) {
     const keysToObj = function(str) {
         if (isEmpty(str)) return {};
 
