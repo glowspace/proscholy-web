@@ -344,28 +344,24 @@ export default {
                 if (this.sort == 1) {
                     sort.push({name_keyword: {order: this.descending ? 'desc' : 'asc'}});
                 } else if (this.sort == 2) {
-                    if (Object.keys(this.selectedSongbooks).length == 1) {
+                    if (this.preferred_songbook_id !== null) {
                         // sort by songbook number
                         query.bool.must.push({
                             function_score: {
-                                query: { match_all: { boost: 1}},
-                                script_score: {
-                                    script: {
-                                        source: `
-                                            for (int i = 0; i < params._source.songbook_records.length; i++)
-                                            {
-                                                if (params._source.songbook_records[i].songbook_id == ${this.preferred_songbook_id}) {
-                                                    return params._source.songbook_records[i].songbook_number_integer;
-                                                }
-                                            }
-                                            return 0;
-                                        `
+                                query: { match_all: { boost: 1 } },
+                                script_score: { script: { source: `
+                                    for (int i = 0; i < params._source.songbook_records.length; i++) {
+                                        if (params._source.songbook_records[i].songbook_id == ${this.preferred_songbook_id}) {
+                                            return params._source.songbook_records[i].songbook_number_integer;
+                                        }
                                     }
-                                }
+                                    return 0;
+                                ` } }
                             }
                         });
+                        sort.push({_score: {order: this.descending ? 'desc' : 'asc'}});
                     } else {
-                        sort.push({song_number: {order: this.descending ? 'desc' : 'asc'}});
+                        sort.push({song_number_integer: {order: this.descending ? 'desc' : 'asc'}});
                     }
                 } else {
                     query.bool.must.push({

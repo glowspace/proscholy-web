@@ -111,9 +111,16 @@ div.filters {
     .btn-group {
         border-radius: 0.125rem;
         border: 1px solid #dee2e6;
+        max-width: 100%;
 
         a {
             border-right: 1px solid #dee2e6;
+            overflow: hidden;
+            white-space: nowrap;
+
+            i {
+                margin-right: 0.5rem;
+            }
         }
 
         a:last-child {
