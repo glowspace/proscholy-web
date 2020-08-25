@@ -396,7 +396,8 @@ export default {
                 // when the graphql result is cached, then currentPage is higher than 1 at component mounting
                 // this needs to get mirrored in the local page property
                 this.page = result.data.song_lyrics_paginated.paginatorInfo.currentPage;
-            }
+            },
+            prefetch: false
         },
     },
 
