@@ -138,6 +138,7 @@
 <script>
 import gql from 'graphql-tag';
 import Vue from 'vue'
+import getSelectedTagsDcnf from './getSelectedTagsDcnf';
 
 const FETCH_TAGS_AND_SONGBOOKS = gql`
     query {
@@ -290,17 +291,17 @@ export default {
             return this.selected_languages[language];
         },
 
-        getSelectedTagsDcnf() {
-            const filterMapTags = tags =>
-                tags.filter(tag => this.isSelectedTag(tag)).map(tag => tag.id);
+        // getSelectedTagsDcnf() {
+        //     const filterMapTags = tags =>
+        //         tags.filter(tag => this.isSelectedTag(tag)).map(tag => tag.id);
 
-            return {
-                liturgy_part: this.tags_liturgy_part ? filterMapTags(this.tags_liturgy_part) : [],
-                liturgy_period: this.tags_liturgy_period ? filterMapTags(this.tags_liturgy_period) : [],
-                generic: this.tags_generic ? filterMapTags(this.tags_generic) : [],
-                saints: this.tags_saints ? filterMapTags(this.tags_saints) : []
-            };
-        },
+        //     return {
+        //         liturgy_part: this.tags_liturgy_part ? filterMapTags(this.tags_liturgy_part) : [],
+        //         liturgy_period: this.tags_liturgy_period ? filterMapTags(this.tags_liturgy_period) : [],
+        //         generic: this.tags_generic ? filterMapTags(this.tags_generic) : [],
+        //         saints: this.tags_saints ? filterMapTags(this.tags_saints) : []
+        //     };
+        // },
 
         refreshSeed() {
             this.$emit('refresh-seed', null);
@@ -348,9 +349,15 @@ export default {
         selectedTags(val, prev) {
             this.selected_tags = val;
 
-            // ok this needs to be here because otherwise the applyStateChange method on Search.vue
-            // doesn't work properly when updating only the selectedTags property
-            this.$emit('update:selected-tags-dcnf', this.getSelectedTagsDcnf());
+            this.$emit('update:selected-tags-dcnf', getSelectedTagsDcnf(
+                {
+                    liturgy_part: this.tags_liturgy_part,
+                    liturgy_period: this.tags_liturgy_period,
+                    generic: this.tags_generic,
+                    saints: this.tags_saints
+                },
+                this.selected_tags
+            ));
         },
 
         selectedSongbooks(val, prev) {
