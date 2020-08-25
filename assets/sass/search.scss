@@ -133,6 +133,8 @@ div.filters {
 .song-tags--init-filters {
     overflow: hidden;
     height: 3.8em;
+    opacity: 0;
+    transition: opacity .5s;
 
     a.tag {
         border: none !important;
@@ -153,6 +155,10 @@ div.filters {
             opacity: 1;
         }
     }
+}
+
+.song-tags--init-filters--visible {
+    opacity: 1;
 }
 
 /**
