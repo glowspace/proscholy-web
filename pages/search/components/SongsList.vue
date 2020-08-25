@@ -189,6 +189,7 @@
 <script>
 import gql from 'graphql-tag';
 import ScrollTrigger from './ScrollTrigger';
+import buildSearchParams from './buildSearchParams';
 
 // Query
 const fetch_items = gql`
@@ -281,135 +282,22 @@ export default {
 
     computed: {
         searchParams() {
-            // encode the elasticsearch attributes into an object and send as JSON text
-            // for docs see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html
-
-            // all the searchable fields are defined in App\SongLyrics: toSearchableArray() and $mapping attr
-
-            // also, the Kibana tool can be used for debugging the elasticsearch requests
-            // see docker-compose.yml
-
-            let query = {
-                bool: {
-                    // see must vs filter elastic documentation https://www.elastic.co/guide/en/elasticsearch/reference/current/query-filter-context.html
-                    must: [],
-                    should: [],
-                    filter: [
-                        { term: { is_arrangement: { value: false } } },
-                        { term: { only_regenschori: { value: false } } }
-                    ]
+            return buildSearchParams({
+                searchString: this.searchString,
+                filterTagsDcnf: this.selectedTagsDcnf,
+                filterLanguages: this.selectedLanguages,
+                filterSongbooks: this.selectedSongbooks,
+                sortType: [
+                    "RANDOM", 
+                    "NAME", 
+                    this.preferred_songbook_id === null ? "NUMBER" : "SONGBOOK_NUMBER"
+                ][this.sort],
+                sortConfig: {
+                    seed: this.seed,
+                    songbook_id: this.preferred_songbook_id,
+                    is_descending: this.descending
                 }
-            };
-
-            // beware that not all attribute types can be used for sorting, this is why 'name_keyword' (used here later) has been added to index
-            let sort = [];
-
-            // handle search strings surrounded by "" as exact match queries
-            const cleanSearchString = this.searchString.replace(/"/g, '');
-            const isExactMatch = this.searchString == `"${cleanSearchString}"`;
-
-            if (cleanSearchString) {
-                // if exact match query -> multi_match needs to end in `must` section,
-                // otherwise it is to be in `should` in order only to improve the rating
-                let queryObject = isExactMatch ? query.bool.must : query.bool.should;
-                queryObject.push({
-                    multi_match: {
-                        query: cleanSearchString,
-                        type: 'phrase',
-
-                        fields: [
-                            'name^10',
-                            'lyrics^5'
-                        ]
-                    }
-                });
-
-                query.bool.must.push({
-                    // see multi_match elastic documentation https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html
-                    multi_match: {
-                        query: cleanSearchString,
-
-                        fields: [
-                            'name^2',
-                            'lyrics',
-                            'authors',
-                            'song_number^50',
-                            'songbook_records.songbook_number',
-                            'songbook_records.songbook_full_number^50'
-                        ]
-                    }
-                });
-
-            } else {
-                // no search keyword provided
-                if (this.sort == 1) {
-                    sort.push({name_keyword: {order: this.descending ? 'desc' : 'asc'}});
-                } else if (this.sort == 2) {
-                    if (this.preferred_songbook_id !== null) {
-                        // sort by songbook number
-                        query.bool.must.push({
-                            function_score: {
-                                query: { match_all: { boost: 1 } },
-                                script_score: { script: { source: `
-                                    for (int i = 0; i < params._source.songbook_records.length; i++) {
-                                        if (params._source.songbook_records[i].songbook_id == ${this.preferred_songbook_id}) {
-                                            return params._source.songbook_records[i].songbook_number_integer;
-                                        }
-                                    }
-                                    return 0;
-                                ` } }
-                            }
-                        });
-                        sort.push({_score: {order: this.descending ? 'desc' : 'asc'}});
-                    } else {
-                        sort.push({song_number_integer: {order: this.descending ? 'desc' : 'asc'}});
-                    }
-                } else {
-                    query.bool.must.push({
-                        function_score: {
-                            query: { match_all: { boost: 1 } },
-                            random_score: { seed: parseInt(this.seed), field: '_id' }
-                        }
-                    });
-                }
-            }
-
-            for (let category_tags of Object.values(this.selectedTagsDcnf)) {
-                let tag_ids = Object.values(category_tags).map(v =>
-                    parseInt(v)
-                );
-
-                if (tag_ids.length) {
-                    query.bool.filter.push({ terms: { tag_ids: tag_ids } });
-                }
-            }
-
-            if (Object.keys(this.selectedLanguages).length) {
-                query.bool.filter.push({
-                    terms: { lang: Object.keys(this.selectedLanguages) }
-                });
-            }
-
-            if (Object.keys(this.selectedSongbooks).length) {
-                query.bool.filter.push({
-                    terms: {
-                        'songbook_records.songbook_id': Object.keys(
-                            this.selectedSongbooks
-                        )
-                    }
-                });
-            }
-
-            // encode to a JSON string to pass as an argument
-
-            const query_str = JSON.stringify({
-                sort: sort,
-                query: query
             });
-
-            // // const query_base64 = Buffer.from(query_str).toString("base64");
-
-            return query_str;
         },
 
         song_lyrics() {
