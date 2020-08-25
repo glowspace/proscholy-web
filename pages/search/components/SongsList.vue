@@ -334,7 +334,8 @@ export default {
                             'lyrics',
                             'authors',
                             'song_number^50',
-                            'songbook_records.songbook_number'
+                            'songbook_records.songbook_number',
+                            'songbook_records.songbook_full_number^50'
                         ]
                     }
                 });

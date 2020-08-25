@@ -299,10 +299,10 @@ export default {
             if (this.showAuthors) {
                 GETparameters.autori = 'ano';
             }
-            if (this.sort) {
+            if (this.sort && !this.search_string) {
                 GETparameters.razeni = this.sort;
             }
-            if (this.descending) {
+            if (this.descending && !this.search_string) {
                 GETparameters.sestupne = 'ano';
             }
 
