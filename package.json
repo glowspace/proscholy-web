@@ -42,5 +42,10 @@
         "node-sass": "^4.13.1",
         "prettier": "^1.19.1",
         "sass-loader": "^8.0.2"
+    },
+    "bit": {
+        "env": {},
+        "componentsDefaultDirectory": "components/{name}",
+        "packageManager": "yarn"
     }
 }
