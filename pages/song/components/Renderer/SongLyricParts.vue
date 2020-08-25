@@ -8,9 +8,9 @@
             :style="{ fontSize: fontSizePercent + '%' }"
         >
             <div
-                class="song-line"
                 v-for="(line, key2) in part.songLines"
-                v-bind:key="key2"
+                :key="key2"
+                :class="[{'song-line--newline': line.chords.length == 1 && line.chords[0].base + line.chords[0].text == ''}, 'song-line']"
             >
                 <span v-if="!key2" class="song-part-tag">{{ part.type + (part.type ? (part.isVerse ? '.' : ':') : '') }}&nbsp;</span
                 ><template v-for="(chord, key3) in line.chords">
