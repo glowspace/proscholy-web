@@ -22,16 +22,7 @@
 <script>
 import gql from 'graphql-tag';
 import Vue from 'vue'
-
-const FETCH_TAGS = gql`
-    query {
-        tags: tags_enum {
-            id
-            name
-            type
-        }
-    }
-`;
+import fetchFiltersQuery from './fetchFiltersQuery.graphql';
 
 export default {
     props: ['selected-tags'],
@@ -43,19 +34,33 @@ export default {
     },
 
     apollo: {
-        tags: {
-            query: FETCH_TAGS
+        tags_generic: {
+            query: fetchFiltersQuery
+        },
+        tags_liturgy_part: {
+            query: fetchFiltersQuery
+        },
+        tags_liturgy_period: {
+            query: fetchFiltersQuery
+        },
+        tags_saints: {
+            query: fetchFiltersQuery
         }
     },
 
     computed: {
         usefulTags() {
             // do not include regenschori tag types
-            return this.tags.filter(tag => [0,1,2,3].includes(tag.type));
+            return [
+                ...this.tags_generic,
+                ...this.tags_liturgy_part,
+                ...this.tags_liturgy_part,
+                ...this.tags_saints
+            ];
         },
 
         randomTags() {
-            if (process.client && this.tags) {
+            if (process.client && this.$apollo.loading === false) {
                 return this.shuffleArray(this.usefulTags).slice(0, 10);
             } else {
                 return [];
