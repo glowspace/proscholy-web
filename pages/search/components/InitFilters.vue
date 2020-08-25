@@ -58,7 +58,7 @@ export default {
             return [
                 ...this.tags_generic,
                 ...this.tags_liturgy_part,
-                ...this.tags_liturgy_part,
+                ...this.tags_liturgy_period,
                 ...this.tags_saints
             ];
         },
