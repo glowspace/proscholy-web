@@ -2,7 +2,7 @@
     "name": "zpevnik-proscholy-spa",
     "version": "1.0.0",
     "description": " User frontend of zpevnik.proscholy.cz written in Nuxt.js",
-    "author": "Vít Kološ",
+    "author": "Team ProScholy.cz",
     "private": true,
     "scripts": {
         "dev": "nuxt",
