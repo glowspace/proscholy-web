@@ -1,3 +1,5 @@
+/// INTERNAL FUNCTIONS USED FOR BUILDING ELASTIC QUERY 
+
 function baseQueryObject() {
     return {
         bool: {
@@ -116,6 +118,9 @@ function applySongbookNumberSorting(sort, is_descending, query, songbook_id)
     });
     sort.push({_score: {order: is_descending ? 'desc' : 'asc'}});
 }
+
+// EXPORTED FUNCTION USED TO TRANSFORM TAGS' ARRAYS TO DISJUNCTIVE CANONICAL NORMAL FORM 
+// [ (1 or 2 or 3) and (4 or 5) and ... ]
 
 function getSelectedTagsDcnf(tags_groups = {
     liturgy_part: [],
