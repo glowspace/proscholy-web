@@ -69,7 +69,7 @@ function fromGETParameters(params)
         songbooks: keysToObj(params.zpevniky),
         show_authors: !!params.autori,
         is_descending: !!params.sestupne,
-        seed: !!params.nahoda,
+        seed: params.nahoda,
         sort: params.razeni ?? 0
     }
 }
