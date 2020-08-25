@@ -35,7 +35,14 @@ import BigPicture from 'bigpicture';
 import Bowser from 'bowser';
 
 export default {
-    props: ['type', 'link', 'classes'],
+    props: {
+        type: {
+            type: String,
+            default: 'NORMAL'
+        },
+        link: String,
+        classes: String,
+    },
 
     data() {
         return {
