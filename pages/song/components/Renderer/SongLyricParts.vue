@@ -69,6 +69,7 @@ export default {
             },
             result() {
                 this.song_lyric_parts = JSON.parse(this.song_lyric_parts_json.json);
+                this.$nextTick(() => { this.$emit('loaded', null); });
             }
         }
     },
