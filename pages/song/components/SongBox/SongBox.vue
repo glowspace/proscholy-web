@@ -194,6 +194,7 @@
                                     <song-lyric-parts
                                         :song-id="song_lyric.id"
                                         :font-size-percent="chordSharedStore.fontSizePercent"
+                                        @loaded="isScrollable(true);"
                                     ></song-lyric-parts>
                                 </span>
                                 <span v-else :style="{ fontSize: chordSharedStore.fontSizePercent + '%' }">Text písně připravujeme.</span>
@@ -635,7 +636,7 @@ export default {
 
         setScroll: function(num, condition) {
             clearInterval(this.scrolldelay);
-            if (num > 0 && num < 21 && condition) {
+            if (process.client && num > 0 && num < 21 && condition) {
                 this.scrolldelay = setInterval(function() {
                     window.scrollBy(0, 1);
                     if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
@@ -647,7 +648,7 @@ export default {
         },
 
         isScrollable: function(initial) {
-            if (document.body.scrollHeight == document.body.clientHeight) {
+            if (process.client && document.body.scrollHeight == document.body.clientHeight) {
                 // the page isn't scrollable
                 this.scrollable = false;
 
@@ -689,7 +690,6 @@ export default {
             this.isScrollable(true);
             window.addEventListener('keyup', this.keyUp);
         }
-
 
         this.chordSharedStore.transposition = 0;
     }
