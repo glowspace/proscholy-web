@@ -181,6 +181,8 @@ import AppLinks from './components/AppLinks';
 import Logo from './components/Logo';
 import News from './components/News';
 
+import HistoryState from './components/historyState.js';
+
 import { isEmpty } from 'lodash';
 import gql from 'graphql-tag';
 
@@ -267,97 +269,50 @@ export default {
         },
 
         updateHistoryState() {
-            let GETparameters = {};
-            if (this.search_string) {
-                GETparameters.vyhledavani = this.search_string.replace(/\s/g, '_');
-            }
-            if (Object.keys(this.selected_tags).length) {
-                GETparameters.stitky = Object.keys(this.selected_tags).join(
-                    ','
-                );
-            }
-            if (Object.keys(this.selected_languages).length) {
-                GETparameters.jazyky = Object.keys(
-                    this.selected_languages
-                ).join(',');
-            }
-            if (Object.keys(this.selected_songbooks).length) {
-                GETparameters.zpevniky = Object.keys(
-                    this.selected_songbooks
-                ).join(',');
-            }
-            if (this.showAuthors) {
-                GETparameters.autori = 'ano';
-            }
-            if (this.sort && !this.search_string) {
-                GETparameters.razeni = this.sort;
-            }
-            if (this.descending && !this.search_string) {
-                GETparameters.sestupne = 'ano';
-            }
-
             if (!(this.search_string || this.sort || this.showAuthors || this.init)) {
                 this.seedLocked = true;
             } else {
                 this.seedLocked = false;
             }
 
-            if (this.seedLocked) {
-                GETparameters.nahoda = this.seed;
-            }
-
             this.$router.replace({
                 path: '/',
-                query: GETparameters
+                query: HistoryState.toGETParameters({
+                    search_string: this.search_string,
+                    tags: this.selected_tags,
+                    languages: this.selected_languages,
+                    songbooks: this.selected_songbooks,
+                    show_authors: this.showAuthors,
+                    seed: this.seedLocked ? this.seed : null,
+                    is_descending: this.search_string ? null : this.descending,
+                    sort: this.search_string ? null : this.sort
+                })
             }).catch(err => {});
         },
 
         applyStateChange(event) {
             let GETparameters = this.$route.query;
-            const validParameters = ['vyhledavani', 'stitky', 'jazyky', 'zpevniky', 'autori', 'razeni', 'sestupne', 'nahoda'];
-            Object.keys(GETparameters).forEach((parameter) => validParameters.includes(parameter) || delete GETparameters[parameter]);
 
+            HistoryState.deleteInvalidGETParameters(GETparameters);
             if (isEmpty(GETparameters)) {
                 this.resetState(false);
                 return;
             }
 
-            if (this.init) {
-                this.init = false;
-            }
+            let obj = HistoryState.fromGETParameters(GETparameters);
+            this.search_string = obj.search_string;
+            this.selected_tags = obj.tags;
+            this.selected_languages = obj.languages;
+            this.selected_songbooks = obj.songbooks;
+            this.showAuthors = obj.show_authors;
+            this.descending = obj.is_descending;
+            this.seed = obj.seed;
+            this.sort = obj.sort;
 
-            this.search_string =
-                GETparameters.vyhledavani ? GETparameters.vyhledavani.replace(/_/g, ' ') : this.search_string;
-
-            // a helper function
-            const getObjFormat = function(str) {
-                if (isEmpty(str)) return {};
-
-                return str
-                    .split(',')
-                    .filter(str => str.length)
-                    .reduce((obj, key, _) => {
-                        obj[key] = true;
-                        return obj;
-                    }, {});
-            };
-
-            this.selected_tags = getObjFormat(GETparameters.stitky);
-            this.selected_languages = getObjFormat(GETparameters.jazyky);
-            this.selected_songbooks = getObjFormat(GETparameters.zpevniky);
-
-            this.showAuthors = !!GETparameters.autori;
-            this.descending = !!GETparameters.sestupne;
-
-            if (GETparameters.nahoda) {
-                this.seed = GETparameters.nahoda;
+            if (this.seed) {
                 this.seedLocked = true;
             }
-
-            if (GETparameters.razeni) {
-                this.sort = GETparameters.razeni;
-            }
-
+            
             this.updateHistoryState();
         },
 
