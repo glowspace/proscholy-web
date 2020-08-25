@@ -189,11 +189,32 @@
 <script>
 import gql from 'graphql-tag';
 import ScrollTrigger from './ScrollTrigger';
-import buildElasticSearchParams from './buildElasticSearchParams';
+import buildElasticSearchParams, { getSelectedTagsDcnf } from './buildElasticSearchParams';
 import mergeFetchMoreResult from './mergeFetchMoreResult';
 
+const FETCH_TAGS = gql`
+query {
+        tags_generic: tags_enum(type: GENERIC) {
+            id
+            name
+        }
+        tags_liturgy_part: tags_enum(type: LITURGY_PART) {
+            id
+            name
+        }
+        tags_liturgy_period: tags_enum(type: LITURGY_PERIOD) {
+            id
+            name
+        }
+        tags_saints: tags_enum(type: SAINTS) {
+            id
+            name
+        }
+}
+`;
+
 // Query
-const fetch_items = gql`
+const FETCH_ITEMS = gql`
     query($search_params: String, $page: Int, $per_page: Int) {
         song_lyrics_paginated: search_song_lyrics(
             search_params: $search_params
@@ -260,7 +281,6 @@ const fetch_items = gql`
 export default {
     props: [
         'search-string',
-        'selected-tags-dcnf',
         'selected-songbooks',
         'selected-tags',
         'selected-languages',
@@ -285,7 +305,13 @@ export default {
         searchParams() {
             return buildElasticSearchParams({
                 searchString: this.searchString,
-                filterTagsDcnf: this.selectedTagsDcnf,
+                filterTagsDcnf: getSelectedTagsDcnf({
+                        generic: this.tags_generic,
+                        liturgy_part: this.tags_liturgy_part,
+                        liturgy_period: this.tags_liturgy_period,
+                        saints: this.tags_saints
+                    }, 
+                    this.selectedTags),
                 filterLanguages: this.selectedLanguages,
                 filterSongbooks: this.selectedSongbooks,
                 sortType: [
@@ -354,8 +380,20 @@ export default {
 
     // GraphQL client
     apollo: {
+        tags_generic: {
+            query: FETCH_TAGS
+        },
+        tags_liturgy_part: {
+            query: FETCH_TAGS
+        },
+        tags_liturgy_period: {
+            query: FETCH_TAGS
+        },
+        tags_saints: {
+            query: FETCH_TAGS
+        },
         song_lyrics_paginated: {
-            query: fetch_items,
+            query: FETCH_ITEMS,
             variables() {
                 return {
                     search_params: this.searchParams,
@@ -375,7 +413,7 @@ export default {
                 // this needs to get mirrored in the local page property
                 this.page = result.data.song_lyrics_paginated.paginatorInfo.currentPage;
             }
-        }
+        },
     },
 
     watch: {

@@ -97,7 +97,6 @@
                                 :descending.sync="descending"
                                 :search-string="search_string"
                                 v-on:refresh-seed="refreshSeed"
-                                v-on:update:selected-tags-dcnf="updateSelectedTagsDcnf($event)"
                                 v-on:input="updateHistoryState"
                             ></Filters>
                         </div>
@@ -118,7 +117,6 @@
                                 <SongsList
                                     v-if="!showAuthors"
                                     :search-string="search_string"
-                                    :selected-tags-dcnf="selected_tags_dcnf"
                                     :selected-tags="selected_tags"
                                     :selected-songbooks="selected_songbooks"
                                     :selected-languages="selected_languages"
@@ -149,7 +147,6 @@
                                 :descending.sync="descending"
                                 :search-string="search_string"
                                 v-on:refresh-seed="refreshSeed"
-                                v-on:update:selected-tags-dcnf="updateSelectedTagsDcnf($event)"
                                 v-on:input="updateHistoryState"
                                 v-on:tags-loaded="applyStateChange"
                             ></Filters>
@@ -225,9 +222,6 @@ export default {
             selected_languages: {},
             selected_tags: {},
 
-            // dcnf - disjunctive canonical normal form :)
-            selected_tags_dcnf: {},
-
             // View state
             init: true,
             displayFilter: false,
@@ -270,10 +264,6 @@ export default {
 
         getDescription() {
             return 'Zpěvník ProScholy.cz je největší česká platforma sdružující křesťanské písně.';
-        },
-
-        updateSelectedTagsDcnf(event) {
-            this.selected_tags_dcnf = event;
         },
 
         updateHistoryState() {

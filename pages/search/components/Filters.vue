@@ -138,9 +138,8 @@
 <script>
 import gql from 'graphql-tag';
 import Vue from 'vue'
-import getSelectedTagsDcnf from './getSelectedTagsDcnf';
 
-const FETCH_TAGS_AND_SONGBOOKS = gql`
+const FETCH_TAGS = gql`
     query {
         tags_generic: tags_enum(type: GENERIC) {
             id
@@ -158,13 +157,18 @@ const FETCH_TAGS_AND_SONGBOOKS = gql`
             id
             name
         }
+    }
+`;
+
+const FETCH_SONGBOOKS = gql`
+    query {
         songbooks(is_private: false) {
             id
             name
             shortcut
         }
     }
-`;
+`
 
 export default {
     props: ['selected-tags', 'selected-songbooks', 'selected-languages', 'show-authors', 'sort', 'descending', 'search-string'],
@@ -194,19 +198,19 @@ export default {
 
     apollo: {
         tags_generic: {
-            query: FETCH_TAGS_AND_SONGBOOKS
+            query: FETCH_TAGS
         },
         tags_liturgy_part: {
-            query: FETCH_TAGS_AND_SONGBOOKS
+            query: FETCH_TAGS
         },
         tags_liturgy_period: {
-            query: FETCH_TAGS_AND_SONGBOOKS
+            query: FETCH_TAGS
         },
         tags_saints: {
-            query: FETCH_TAGS_AND_SONGBOOKS
+            query: FETCH_TAGS
         },
         songbooks: {
-            query: FETCH_TAGS_AND_SONGBOOKS
+            query: FETCH_SONGBOOKS
         }
     },
 
@@ -291,18 +295,6 @@ export default {
             return this.selected_languages[language];
         },
 
-        // getSelectedTagsDcnf() {
-        //     const filterMapTags = tags =>
-        //         tags.filter(tag => this.isSelectedTag(tag)).map(tag => tag.id);
-
-        //     return {
-        //         liturgy_part: this.tags_liturgy_part ? filterMapTags(this.tags_liturgy_part) : [],
-        //         liturgy_period: this.tags_liturgy_period ? filterMapTags(this.tags_liturgy_period) : [],
-        //         generic: this.tags_generic ? filterMapTags(this.tags_generic) : [],
-        //         saints: this.tags_saints ? filterMapTags(this.tags_saints) : []
-        //     };
-        // },
-
         refreshSeed() {
             this.$emit('refresh-seed', null);
         },
@@ -348,16 +340,6 @@ export default {
         // watch props for changes
         selectedTags(val, prev) {
             this.selected_tags = val;
-
-            this.$emit('update:selected-tags-dcnf', getSelectedTagsDcnf(
-                {
-                    liturgy_part: this.tags_liturgy_part,
-                    liturgy_period: this.tags_liturgy_period,
-                    generic: this.tags_generic,
-                    saints: this.tags_saints
-                },
-                this.selected_tags
-            ));
         },
 
         selectedSongbooks(val, prev) {
