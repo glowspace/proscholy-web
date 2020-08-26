@@ -13,5 +13,17 @@
         "origin": "AUTHORED",
         "exported": true
     },
+    "search-history-manager": {
+        "files": [
+            {
+                "relativePath": "components/SearchHistoryManager.vue",
+                "test": false,
+                "name": "SearchHistoryManager.vue"
+            }
+        ],
+        "mainFile": "components/SearchHistoryManager.vue",
+        "origin": "AUTHORED",
+        "exported": false
+    },
     "version": "14.8.8"
 }
