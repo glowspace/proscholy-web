@@ -43,7 +43,8 @@ function toGETParameters(
 }
 
 function deleteInvalidGETParameters(params) {
-    Object.keys(params).forEach((p) => validParameters().includes(p) || delete params[p]);
+    // checks if the parameter is valid and its value is not undefined, otherwise it deletes the property
+    Object.keys(params).forEach(p => (validParameters().includes(p) && params[p] !== undefined) || delete params[p]);
 }
 
 function fromGETParameters(params) {
