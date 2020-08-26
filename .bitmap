@@ -49,6 +49,42 @@
         "origin": "AUTHORED",
         "exported": true
     },
+    "proscholy.utilities/dark-mode-button@0.0.1": {
+        "files": [
+            {
+                "relativePath": "components/DarkModeButton.vue",
+                "test": false,
+                "name": "DarkModeButton.vue"
+            }
+        ],
+        "mainFile": "components/DarkModeButton.vue",
+        "origin": "AUTHORED",
+        "exported": true
+    },
+    "proscholy.utilities/external-line@0.0.1": {
+        "files": [
+            {
+                "relativePath": "components/ExternalLine.vue",
+                "test": false,
+                "name": "ExternalLine.vue"
+            }
+        ],
+        "mainFile": "components/ExternalLine.vue",
+        "origin": "AUTHORED",
+        "exported": true
+    },
+    "proscholy.utilities/external-view@0.0.1": {
+        "files": [
+            {
+                "relativePath": "components/ExternalView.vue",
+                "test": false,
+                "name": "ExternalView.vue"
+            }
+        ],
+        "mainFile": "components/ExternalView.vue",
+        "origin": "AUTHORED",
+        "exported": true
+    },
     "proscholy.utilities/universal-link@0.0.4": {
         "files": [
             {
