@@ -7,10 +7,8 @@
 </template>
 
 <script>
-import Chord from './Chord';
 
 export default {
-    props: ['line'],
-    components: { Chord }
+    props: ['line']
 }
 </script>
