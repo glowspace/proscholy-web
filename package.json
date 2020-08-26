@@ -52,6 +52,7 @@
     },
     "peerDependencies": {
         "nuxt": "^2.12.0",
-        "@nuxtjs/router": "^1.5.0"
+        "@nuxtjs/router": "^1.5.0",
+        "lodash": "^4.17.19"
     }
 }
