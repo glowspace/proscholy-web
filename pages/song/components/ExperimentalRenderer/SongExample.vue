@@ -2,9 +2,9 @@
     <div class="song">
         <song-lyric-part :part="part" v-for="(part, key) in json" :key="key">
             <template v-slot:song-line="line_data">
-                <song-line :line="line_data">
+                <song-line :line="line_data" :part="part" :class="{'song-line--newline': isSongLineNewline(line_data)}">
                     <template v-slot:chord="chord_data">
-                        <chord-sign :chord="chord_data" v-if="showChordSigns"></chord-sign>
+                        <chord-sign :chord-data="chord_data" v-if="showChordSigns"></chord-sign>
                         <span :class="['chord-text', !chord_data.chord.isDivided ? 'chord-text-spaced' : '']">{{ chord_data.chord.text }}</span>
                         <span class="chord-line" v-if="chord_data.chord.isDivided"></span>
                     </template>
@@ -34,6 +34,10 @@ export default {
         // return data for transposed chord
         transposed: function(chord) {
             return chord;
+        },
+
+        isSongLineNewline({songLine}) {
+            return songLine.chords.length == 1 && songLine.chords[0].base + songLine.chords[0].text;
         }
     },
 
