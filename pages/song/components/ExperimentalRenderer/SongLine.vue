@@ -1,8 +1,8 @@
 <template>
     <div class="song-line">
-        <span v-for="(chord, key) in line.songLine.chords" :key="key">
+        <template v-for="chord in line.songLine.chords">
             <slot name="chord" :chord="chord"></slot>
-        </span>
+        </template>
     </div>
 </template>
 
