@@ -191,7 +191,7 @@
 
 <script>
 import gql from 'graphql-tag';
-import ScrollTrigger from './ScrollTrigger';
+import ScrollTrigger from '~/components/Search/ScrollTrigger';
 import buildElasticSearchParams, { getSelectedTagsDcnf } from '~/components/Search/buildElasticSearchParams';
 import mergeFetchMoreResult from '~/components/Search/mergeFetchMoreResult';
 import fetchFiltersQuery from './fetchFiltersQuery.graphql';
