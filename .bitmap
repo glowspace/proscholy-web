@@ -4,9 +4,9 @@
     "proscholy.search/build-elastic-search-params@0.0.2": {
         "files": [
             {
+                "name": "buildElasticSearchParams.js",
                 "relativePath": "components/Search/buildElasticSearchParams.js",
-                "test": false,
-                "name": "buildElasticSearchParams.js"
+                "test": false
             }
         ],
         "mainFile": "components/Search/buildElasticSearchParams.js",
@@ -16,9 +16,9 @@
     "proscholy.search/merge-fetch-more-result@0.0.2": {
         "files": [
             {
+                "name": "mergeFetchMoreResult.js",
                 "relativePath": "components/Search/mergeFetchMoreResult.js",
-                "test": false,
-                "name": "mergeFetchMoreResult.js"
+                "test": false
             }
         ],
         "mainFile": "components/Search/mergeFetchMoreResult.js",
@@ -28,12 +28,17 @@
     "proscholy.search/search-history-manager@0.0.2": {
         "files": [
             {
+                "name": "SearchHistoryManager.vue",
                 "relativePath": "components/Search/SearchHistoryManager.vue",
-                "test": false,
-                "name": "SearchHistoryManager.vue"
+                "test": false
+            },
+            {
+                "name": "SearchHistoryManager.vue",
+                "relativePath": "components/SearchHistoryManager.vue",
+                "test": false
             }
         ],
-        "mainFile": "components/Search/SearchHistoryManager.vue",
+        "mainFile": "components/SearchHistoryManager.vue",
         "origin": "AUTHORED",
         "exported": true
     },
