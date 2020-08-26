@@ -179,7 +179,7 @@ import InitFilters from './components/InitFilters';
 import AppLinks from './components/AppLinks';
 import Logo from './components/Logo';
 import News from './components/News';
-import SearchHistoryManager from '~/components/SearchHistoryManager';
+import SearchHistoryManager from '~/components/Search/SearchHistoryManager';
 
 import gql from 'graphql-tag';
 
@@ -192,7 +192,7 @@ const FETCH_SONG_ROUTE = gql`
 `;
 
 /**
- * Root search component.
+ * Root search component. 
  *
  * Toggles 2 views (SearchHome and SearchResults).
  */
