@@ -37,12 +37,12 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "proscholy.utilities/universal-link@0.0.2": {
+    "proscholy.utilities/universal-link@0.0.4": {
         "files": [
             {
+                "name": "UniversalLink.vue",
                 "relativePath": "components/UniversalLink.vue",
-                "test": false,
-                "name": "UniversalLink.vue"
+                "test": false
             }
         ],
         "mainFile": "components/UniversalLink.vue",
