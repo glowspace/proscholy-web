@@ -1,9 +1,9 @@
 <template>
     <div class="song-lyric-lines">
-        <div v-for="(line, key) in part.songLines" :key="key">
+        <template v-for="line in part.songLines">
             <slot name="song-line" :song-line="line">
             </slot>
-        </div>
+        </template>
     </div>
 </template>
 
