@@ -37,15 +37,27 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "proscholy.search/search-history-manager@0.0.2": {
+    "proscholy.search/scroll-trigger@0.0.1": {
+        "files": [
+            {
+                "relativePath": "components/Search/ScrollTrigger.vue",
+                "test": false,
+                "name": "ScrollTrigger.vue"
+            }
+        ],
+        "mainFile": "components/Search/ScrollTrigger.vue",
+        "origin": "AUTHORED",
+        "exported": true
+    },
+    "proscholy.search/search-history-manager@0.0.3": {
         "files": [
             {
                 "name": "SearchHistoryManager.vue",
-                "relativePath": "components/SearchHistoryManager.vue",
+                "relativePath": "components/Search/SearchHistoryManager.vue",
                 "test": false
             }
         ],
-        "mainFile": "components/SearchHistoryManager.vue",
+        "mainFile": "components/Search/SearchHistoryManager.vue",
         "origin": "AUTHORED",
         "exported": true
     },
