@@ -1,6 +1,7 @@
 <template>
     <div class="song-line">
-        <template v-for="chord in line.songLine.chords">
+        <template v-for="(chord, key) in line.songLine.chords">
+            <span class="song-part-tag" v-if="key === 0" :key="key">{{ part.type + (part.type ? (part.isVerse ? '.' : ':') : '') }}&nbsp;</span>
             <slot name="chord" :chord="chord"></slot>
         </template>
     </div>
@@ -9,6 +10,6 @@
 <script>
 
 export default {
-    props: ['line']
+    props: ['line', 'part']
 }
 </script>
