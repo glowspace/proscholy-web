@@ -31,7 +31,7 @@ const SHARP_SCALE = [
 ];
 
 function transposeNote(note, semitones, options = {
-    useFlatScale: false,
+    sharpness: 0,
     forceB: false,
     useAmericanNotation: false
 }) {
@@ -39,7 +39,7 @@ function transposeNote(note, semitones, options = {
         return note;
     }
 
-    let scale = options.useFlatScale ? FLAT_SCALE : SHARP_SCALE;
+    let scale = options.sharpness == -1 ? FLAT_SCALE : SHARP_SCALE;
     let note_i = FLAT_SCALE.indexOf(note);
     if (note_i === -1) {
         note_i = SHARP_SCALE.indexOf(note);
