@@ -8,10 +8,7 @@
 </template>
 
 <script>
-import SongLine from './SongLine';
-
 export default {
-    props: ['part'],
-    components: { SongLine }
+    props: ['part']
 }
 </script>
