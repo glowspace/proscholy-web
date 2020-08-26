@@ -8,13 +8,18 @@
                 ><span v-if="index">,</span>
                 <nuxt-link :to="author.public_route">{{ author.name }}</nuxt-link>
             </span>
-            <a
-                v-if="downloadUrl"
-                :href="downloadUrl"
-                title="Stáhnout"
-                class="float-right"
-                ><i class="fas fa-download"></i
-            ></a>
+            <span class="float-right">
+                <a
+                    v-if="downloadUrl"
+                    :href="downloadUrl"
+                    title="Stáhnout"
+                    class="mr-2"
+                ><i class="fas fa-download"></i></a>
+                <a
+                    :href="mediaLink" target="_blank"
+                    title="Otevřít v novém okně"
+                ><i class="fas fa-external-link-alt"></i></a>
+            </span>
         </div>
         <iframe
             v-if="type == 1"
