@@ -29,11 +29,6 @@
         "files": [
             {
                 "name": "SearchHistoryManager.vue",
-                "relativePath": "components/Search/SearchHistoryManager.vue",
-                "test": false
-            },
-            {
-                "name": "SearchHistoryManager.vue",
                 "relativePath": "components/SearchHistoryManager.vue",
                 "test": false
             }

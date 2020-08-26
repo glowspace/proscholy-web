@@ -179,7 +179,7 @@ import InitFilters from './components/InitFilters';
 import AppLinks from './components/AppLinks';
 import Logo from './components/Logo';
 import News from './components/News';
-import SearchHistoryManager from '~/components/Search/SearchHistoryManager';
+import SearchHistoryManager from '~/components/SearchHistoryManager';
 
 import gql from 'graphql-tag';
 
