@@ -314,10 +314,6 @@ div.filters {
     }
 }
 
-.song-tags--init-filters--visible {
-    opacity: 1;
-}
-
 /**
 View: Search results
  */
@@ -371,8 +367,4 @@ div.card.news {
     opacity: 0;
     transition: 0.2s;
     margin-bottom: -4px;
-}
-
-.custom-progress-bar--visible {
-    opacity: 1;
 }
