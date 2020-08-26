@@ -27,21 +27,31 @@ export default {
     },
 
     mounted() {
-        this.observer = new IntersectionObserver(entries => {
-            this.handleIntersect(entries[0]);
-        }, this.opts);
+        if (this.caniuseObserver()) {
+            this.observer = new IntersectionObserver(entries => {
+                this.handleIntersect(entries[0]);
+            }, this.opts);
 
-        this.observer.observe(this.$refs.trigger);
+            this.observer.observe(this.$refs.trigger);
+        } else {
+            this.$emit('noObserver');
+        }
     },
 
     destroyed() {
-        this.observer.disconnect();
+        if (this.caniuseObserver()) {
+            this.observer.disconnect();
+        }
     },
 
     methods: {
         handleIntersect(entry) {
             if (this.enabled && entry.isIntersecting)
                 this.$emit('triggerIntersected');
+        },
+
+        caniuseObserver() {
+            return !(!('IntersectionObserver' in window) || !('IntersectionObserverEntry' in window) || !('intersectionRatio' in window.IntersectionObserverEntry.prototype));
         }
     }
 };
