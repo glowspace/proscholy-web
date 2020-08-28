@@ -80,7 +80,7 @@ export default {
                     if (this.browser.satisfies(this.supportPdfIframesCondition)) {
                         BigPicture({el: e.target, iframeSrc: link});
                     } else {
-                        BigPicture({el: e.target, iframeSrc: 'https://docs.google.com/viewer?embedded=true&url=' + link});
+                        BigPicture({el: e.target, iframeSrc: 'https://docs.google.com/viewer?embedded=true&pid=explorer&efh=false&a=v&chrome=false&url=' + link});
                     }
                     break;
 
