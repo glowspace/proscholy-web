@@ -9,7 +9,7 @@
             </nuxt-link>
             <a
                 v-else-if="['IMAGE', 'YOUTUBE', 'VIDEO', 'IFRAME', 'PDF'].includes(type)"
-                :href="link" target="_blank" @click.prevent="openBP($event, link, type)" :class="classes"
+                :href="mediaLink" target="_blank" @click="openBP($event, link, type)" :class="classes"
             >
                 <slot></slot>
             </a>
@@ -61,6 +61,16 @@ export default {
         };
     },
 
+    computed: {
+        mediaLink() {
+            if (this.type == 'PDF' && this.browser && !this.browser.satisfies(this.supportPdfIframesCondition)) {
+                return 'https://docs.google.com/viewerng/viewer?url=' + this.link;
+            }
+
+            return this.link;
+        }
+    },
+
     methods: {
         openBP(e, link, type) {
             switch (type) {
@@ -78,9 +88,8 @@ export default {
 
                 case 'PDF':
                     if (this.browser.satisfies(this.supportPdfIframesCondition)) {
+                        e.preventDefault();
                         BigPicture({el: e.target, iframeSrc: link});
-                    } else {
-                        BigPicture({el: e.target, iframeSrc: 'https://docs.google.com/viewer?embedded=true&pid=explorer&efh=false&a=v&chrome=false&url=' + link});
                     }
                     break;
 
