@@ -61,6 +61,18 @@
         "origin": "AUTHORED",
         "exported": true
     },
+    "proscholy.search/tag-category@0.0.1": {
+        "files": [
+            {
+                "relativePath": "components/Search/TagCategory.vue",
+                "test": false,
+                "name": "TagCategory.vue"
+            }
+        ],
+        "mainFile": "components/Search/TagCategory.vue",
+        "origin": "AUTHORED",
+        "exported": true
+    },
     "proscholy.utilities/dark-mode-button@0.0.1": {
         "files": [
             {
