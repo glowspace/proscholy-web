@@ -14,11 +14,11 @@
                 <div class="d-inline-flex">
                     <nuxt-link
                         to="/"
-                        :class="[{ active: isHome }, 'btn btn-secondary']"
+                        :class="[{ active: isHome }, 'btn btn-secondary mr-1']"
                     ><i class="fas fa-search"></i> Vyhledávání</nuxt-link>
                     <nuxt-link
                         to="/o-zpevniku"
-                        class="btn btn-secondary"
+                        class="btn btn-secondary mr-1"
                         active-class="active"
                     ><i class="fas fa-info"></i> O&nbsp;zpěvníku</nuxt-link>
                     <dark-mode-button v-cloak> Tmavý&nbsp;mód</dark-mode-button>
