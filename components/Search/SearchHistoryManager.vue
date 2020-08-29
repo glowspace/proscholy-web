@@ -21,18 +21,22 @@ export default {
             }
         },
 
-        applyStateChange(event) {
+        applyStateChange(event, basic) {
             let GETparameters = this.$route.query;
             deleteInvalidGETParameters(GETparameters);
 
-            if (isEmpty(GETparameters)) {
-                this.resetState();
-                return;
-            }
+            if (basic) {
+                this.historyStateObject = fromGETParameters(GETparameters);
+            } else {
+                if (isEmpty(GETparameters)) {
+                    this.resetState();
+                    return;
+                }
 
-            this.init = false;
-            this.historyStateObject = fromGETParameters(GETparameters);
-            this.updateHistoryState();
+                this.init = false;
+                this.historyStateObject = fromGETParameters(GETparameters);
+                this.updateHistoryState();
+            }
         }
     }
 }
