@@ -3,13 +3,22 @@ import { isEmpty } from 'lodash';
 
 export default {
     methods: {
-        updateHistoryState() {
-            this.$router.replace({
-                path: '/',
-                query: toGETParameters(this.historyStateObject)
-            }).catch(err => {
-                // empty catch prevents errors when navigating to the current route
-            });
+        updateHistoryState(push) {
+            if (push) {
+                this.$router.push({
+                    path: '/',
+                    query: toGETParameters(this.historyStateObject)
+                }).catch(err => {
+                    // empty catch prevents errors when navigating to the current route
+                });
+            } else {
+                this.$router.replace({
+                    path: '/',
+                    query: toGETParameters(this.historyStateObject)
+                }).catch(err => {
+                    // empty catch prevents errors when navigating to the current route
+                });
+            }
         },
 
         applyStateChange(event) {

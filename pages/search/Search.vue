@@ -65,7 +65,7 @@
                         <InitFilters
                             v-if="init"
                             :selected-tags.sync="selected_tags"
-                            @input="updateHistoryState; init = false;"
+                            @input="updateHistoryState(true); init = false;"
                         ></InitFilters>
                         <div
                             v-if="init"
@@ -97,7 +97,7 @@
                                 :descending.sync="descending"
                                 :search-string="search_string"
                                 v-on:refresh-seed="refreshSeed"
-                                v-on:input="updateHistoryState"
+                                v-on:input="updateHistoryState(true)"
                             ></Filters>
                         </div>
                     </div>
@@ -147,7 +147,7 @@
                                 :descending.sync="descending"
                                 :search-string="search_string"
                                 v-on:refresh-seed="refreshSeed"
-                                v-on:input="updateHistoryState"
+                                v-on:input="updateHistoryState(true)"
                             ></Filters>
                         </div>
                     </div>
@@ -283,7 +283,7 @@ export default {
                 }
                 this.search_string = ''; // this prevents search box from being cleared after filters' load
                 this.refreshSeed();
-                this.updateHistoryState();
+                this.updateHistoryState(true);
             }
         },
 
@@ -399,7 +399,7 @@ export default {
                 this.selected_songbooks = obj.songbooks;
                 this.showAuthors = obj.show_authors;
                 this.descending = obj.is_descending;
-                this.seed = obj.seed;
+                if (obj.seed) {this.seed = obj.seed;}
                 this.sort = obj.sort;
 
                 if (this.seed) {
