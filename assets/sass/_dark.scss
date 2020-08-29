@@ -24,8 +24,8 @@ body[data-dark] {
         color: #ccc;
     }
 
-    .tag {
-        border: #555 1px solid;
+    .tag, div.filters .btn-group, div.filters .btn-group a {
+        border-color: #555;
     }
 
     .song-tags .songbook-tag .songbook-number {
