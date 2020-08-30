@@ -12,8 +12,6 @@ export default {
                 return;
             }
 
-            console.log('updated', push);
-
             if (push) {
                 this.$router.push({
                     path: '/',
