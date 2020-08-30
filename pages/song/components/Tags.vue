@@ -18,8 +18,8 @@
         </div>
 
         <div class="d-inline-flex flex-row flex-wrap align-items-start"
-            v-if="song.songbook_records.length">
-            <nuxt-link class="tag tag-yellow songbook-tag" v-for="(sb, key) in song.songbook_records" :key="'sb' + key"
+            v-if="publicSongbookRecords.length">
+            <nuxt-link class="tag tag-yellow songbook-tag" v-for="(sb, key) in publicSongbookRecords" :key="'sb' + key"
                 :to="'/?zpevniky=' + sb.songbook.id + '&razeni=2'">
                 <span class="songbook-name">{{ sb.songbook.name }}</span><span class="songbook-number">{{ sb.number }}</span>
             </nuxt-link>
@@ -39,6 +39,14 @@
 export default {
     name: 'Tags',
 
-    props: ['song']
+    props: ['song'],
+
+    computed: {
+        // todo: refactor to use server-side filtering of songbooks
+
+        publicSongbookRecords() {
+            return this.song.songbook_records.filter(sb => !sb.songbook.is_private)
+        }
+    }
 };
 </script>

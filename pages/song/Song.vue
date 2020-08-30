@@ -76,6 +76,9 @@ const FETCH_SONG_LYRIC = gql`
                     id
                     name
                     shortcut
+                    # used to filter out private songbooks
+                    # todo: use server-side filtering
+                    is_private
                 }
             }
             liturgy_approval_status
