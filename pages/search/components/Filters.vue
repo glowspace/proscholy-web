@@ -1,7 +1,7 @@
 <template>
     <div class="song-tags card py-1" v-if="$apollo.loading || !tags_generic">
         <template v-for="(x, key2) in [1.3, 1.2, 1.4, 1.1, 1.2, 1.3]">
-            <v-skeleton-loader type="heading" class="my-3" />
+            <v-skeleton-loader type="heading" class="my-3" :key="key2" />
             <div
                 class="tag d-inline-block"
                 v-for="(w, key) in [400, 200, 300, 350, 250, 350, 400, 250, 200, 450]"
