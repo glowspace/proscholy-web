@@ -49,7 +49,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "proscholy.search/search-history-manager@1.0.0": {
+    "proscholy.search/search-history-manager@1.0.1": {
         "files": [
             {
                 "name": "SearchHistoryManager.vue",

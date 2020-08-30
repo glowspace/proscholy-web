@@ -1,9 +1,19 @@
 <script>
-import { isEmpty } from 'lodash';
+import { isEmpty, isEqual } from 'lodash';
 
 export default {
     methods: {
         updateHistoryState(push) {
+            if (push !== false) {push = true;}
+            let oldParams = JSON.parse(JSON.stringify(this.$route.query));
+            let newParams = JSON.parse(JSON.stringify(toGETParameters(this.historyStateObject)));
+
+            if (isEqual(oldParams, newParams)) {
+                return;
+            }
+
+            console.log('updated', push);
+
             if (push) {
                 this.$router.push({
                     path: '/',
@@ -23,6 +33,7 @@ export default {
 
         applyStateChange(event, basic) {
             let GETparameters = this.$route.query;
+            let originalParams = JSON.stringify(GETparameters);
             deleteInvalidGETParameters(GETparameters);
 
             if (basic) {
@@ -35,7 +46,10 @@ export default {
 
                 this.init = false;
                 this.historyStateObject = fromGETParameters(GETparameters);
-                this.updateHistoryState();
+
+                if (JSON.stringify(GETparameters) != originalParams) {
+                    this.updateHistoryState(false);
+                }
             }
         }
     }
@@ -77,9 +91,9 @@ function toGETParameters(
         jazyky: joinKeys(params.languages),
         zpevniky: joinKeys(params.songbooks),
         autori: params.show_authors == true ? 'ano' : undefined,
-        razeni: params.sort > 0 ? params.sort : undefined,
+        razeni: params.sort > 0 ? String(params.sort) : undefined,
         sestupne: params.is_descending == true ? 'ano' : undefined,
-        nahoda: params.seed ? params.seed : undefined
+        nahoda: params.seed ? String(params.seed) : undefined
     };
 }
 
