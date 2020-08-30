@@ -262,15 +262,30 @@ const FETCH_ITEMS = gql`
 `;
 
 export default {
-    props: [
-        'search-string',
-        'selected-songbooks',
-        'selected-tags',
-        'selected-languages',
-        'sort',
-        'descending',
-        'seed'
-    ],
+    props: {
+        searchString: {
+            type: String,
+            default: ""
+        },
+
+        selectedSongbooks: Object,
+        selectedTags: Object,
+        selectedLanguages: Object,
+
+        // todo: refactor `sort` to String (or a kind of enum)
+        sort: Number,
+        descending: Boolean,
+        seed: String,
+
+        showArrangements: {
+            type: Boolean,
+            default: false
+        },
+        showRegenschori: {
+            type: Boolean,
+            default: false
+        }
+    },
 
     components: { ScrollTrigger },
 
@@ -308,6 +323,10 @@ export default {
                     seed: this.seed,
                     songbook_id: this.preferred_songbook_id,
                     is_descending: this.descending
+                },
+                filterConfig: {
+                    show_regenschori: this.showRegenschori,
+                    show_arrangements: this.showArrangements
                 }
             });
         },
