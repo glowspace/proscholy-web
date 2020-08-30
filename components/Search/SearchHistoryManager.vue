@@ -3,12 +3,12 @@ import { isEmpty, isEqual } from 'lodash';
 
 export default {
     methods: {
-        updateHistoryState(push) {
+        updateHistoryState(push, force) {
             if (push !== false) {push = true;}
             let oldParams = JSON.parse(JSON.stringify(this.$route.query));
             let newParams = JSON.parse(JSON.stringify(toGETParameters(this.historyStateObject)));
 
-            if (isEqual(oldParams, newParams)) {
+            if (isEqual(oldParams, newParams) && !force) {
                 return;
             }
 
