@@ -39,7 +39,7 @@
                     v-else-if="song_lyrics && song_lyrics.length"
                 >
                     <tr
-                        v-for="(song_lyric, index) in song_lyrics"
+                        v-for="song_lyric in song_lyrics"
                         v-bind:key="song_lyric.id"
                     >
                         <td
