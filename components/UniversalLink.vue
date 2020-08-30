@@ -30,7 +30,6 @@
 // see https://github.com/proscholy/api.regenschori.cz/blob/development/graphql/news.graphql
 // respectively the enum LinkType in the graphql schema
 
-// todo import bigimage
 import BigPicture from 'bigpicture';
 import Bowser from 'bowser';
 

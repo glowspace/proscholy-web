@@ -109,7 +109,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "proscholy.utilities/universal-link@1.0.0": {
+    "proscholy.utilities/universal-link@1.0.1": {
         "files": [
             {
                 "name": "UniversalLink.vue",
