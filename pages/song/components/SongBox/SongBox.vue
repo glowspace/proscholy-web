@@ -97,7 +97,7 @@
                             >
                                 <i class="fas fa-times pr-0"></i>
                             </a>
-                            <div class="row ml-0" v-if="!$apollo.loading">
+                            <div class="row ml-0" v-if="!$apollo.loading && renderTranslations">
                                 <table class="table m-0 w-auto">
                                     <tbody>
                                         <tr>
@@ -584,7 +584,8 @@ export default {
 
         renderTranslations: {
             get() {
-                return (this.song_lyric.song.song_lyrics.length > 1);
+                // if SongLyric is an arrangement, then .song property is undefined
+                return (this.song_lyric.song && this.song_lyric.song.song_lyrics.length > 1);
             }
         },
 
