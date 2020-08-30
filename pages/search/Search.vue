@@ -273,11 +273,10 @@ export default {
             this.selected_songbooks = {};
             this.sort = 0;
             this.descending = false;
-            // this.showAuthors = false;
-
 
             if (manual) {
                 this.init = true;
+                this.showAuthors = false;
                 if (document.getElementById('search-home')) {
                     document.getElementById('search-home').focus();
                 }
