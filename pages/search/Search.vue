@@ -273,7 +273,7 @@ export default {
             this.selected_songbooks = {};
             this.sort = 0;
             this.descending = false;
-            this.showAuthors = false;
+            // this.showAuthors = false;
 
 
             if (manual) {
