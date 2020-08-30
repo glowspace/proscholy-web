@@ -1,19 +1,5 @@
 /// INTERNAL FUNCTIONS USED FOR BUILDING ELASTIC QUERY
 
-function baseQueryObject() {
-    return {
-        bool: {
-            // see must vs filter elastic documentation https://www.elastic.co/guide/en/elasticsearch/reference/current/query-filter-context.html
-            must: [],
-            should: [],
-            filter: [
-                { term: { is_arrangement: { value: false } } },
-                { term: { only_regenschori: { value: false } } }
-            ]
-        }
-    };
-}
-
 function applyFulltext(query, search_string, options = {
     must_match: false,
     phrase_fields: [
@@ -47,6 +33,16 @@ function applyFulltext(query, search_string, options = {
             fields: options.exact_match_fields
         }
     });
+}
+
+function applyDisableRegenschori(query)
+{
+    query.bool.filter.push({ term: { only_regenschori: { value: false } } });
+}
+
+function applyDisableArrangements(query)
+{
+    query.bool.filter.push({ term: { is_arrangement: { value: false } } });
 }
 
 function applyFilterTags(query, filterTagsDcnf) {
@@ -120,6 +116,8 @@ function applySongbookNumberSorting(sort, is_descending, query, songbook_id) {
 // EXPORTED FUNCTION USED TO TRANSFORM TAGS' ARRAYS TO DISJUNCTIVE CANONICAL NORMAL FORM
 // [ (1 or 2 or 3) and (4 or 5) and ... ]
 
+// groups here reflect the graphql definition as in https://github.com/proscholy/api.proscholy.cz/blob/development/graphql/tag.graphql#L32
+// however, for the purpose of elasticsearch filtering in buildElasticSearchParams.js, exact group names are *not* necessary
 function getSelectedTagsDcnf(
     tags_groups = {
         liturgy_part: [],
@@ -140,8 +138,6 @@ function getSelectedTagsDcnf(
     );
 }
 
-// groups here reflect the graphql definition as in https://github.com/proscholy/api.proscholy.cz/blob/development/graphql/tag.graphql#L32
-// however, for the purpose of elasticsearch filtering in buildElasticSearchParams.js, exact group names are *not* necessary
 export { getSelectedTagsDcnf };
 
 export default function(params = {
@@ -154,10 +150,22 @@ export default function(params = {
         seed: null,
         songbook_id: null,
         is_descending: false
+    },
+    filterConfig: {
+        show_regenschori: false,
+        show_arrangements: false
     }
 }) {
 
-    let query = baseQueryObject();
+    let query = {
+        bool: {
+            // see must/should/filter elastic documentation https://www.elastic.co/guide/en/elasticsearch/reference/current/query-filter-context.html
+            must: [],
+            should: [],
+            filter: []
+        }
+    };
+
     let sort = [];
 
     const cleanSearchString = params.searchString.replace(/"/g, '');
@@ -186,6 +194,14 @@ export default function(params = {
     applyFilterTags(query, params.filterTagsDcnf);
     applyFilterLanguages(query, params.filterLanguages);
     applyFilterSongbooks(query, params.filterSongbooks);
+
+    if (!(params.filterConfig && params.filterConfig.show_regenschori)) {
+        applyDisableRegenschori(query);
+    }
+
+    if (!(params.filterConfig && params.filterConfig.show_arrangements)) {
+        applyDisableArrangements(query);
+    }
 
     const query_str = JSON.stringify({
         sort: sort,
