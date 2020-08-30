@@ -275,7 +275,7 @@ export default {
         // todo: refactor `sort` to String (or a kind of enum)
         sort: Number,
         descending: Boolean,
-        seed: String,
+        seed: Number,
 
         showArrangements: {
             type: Boolean,
