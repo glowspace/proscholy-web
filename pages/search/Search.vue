@@ -65,7 +65,7 @@
                         <InitFilters
                             v-if="init"
                             :selected-tags.sync="selected_tags"
-                            @input="updateHistoryState(true); init = false;"
+                            @input="updateHistoryState(); init = false;"
                         ></InitFilters>
                         <div
                             v-if="init"
@@ -97,7 +97,7 @@
                                 :descending.sync="descending"
                                 :search-string="search_string"
                                 v-on:refresh-seed="refreshSeed"
-                                v-on:input="updateHistoryState(true)"
+                                v-on:input="updateHistoryState"
                             ></Filters>
                         </div>
                     </div>
@@ -120,9 +120,9 @@
                                     :selected-tags="selected_tags"
                                     :selected-songbooks="selected_songbooks"
                                     :selected-languages="selected_languages"
-                                    :sort="sort"
+                                    :sort="parseInt(sort)"
                                     :descending="descending"
-                                    :seed="seed"
+                                    :seed="parseInt(seed)"
                                     v-on:query-loaded="queryLoaded"
                                 ></SongsList>
                                 <AuthorsList
@@ -147,7 +147,7 @@
                                 :descending.sync="descending"
                                 :search-string="search_string"
                                 v-on:refresh-seed="refreshSeed"
-                                v-on:input="updateHistoryState(true)"
+                                v-on:input="updateHistoryState"
                             ></Filters>
                         </div>
                     </div>
@@ -282,7 +282,7 @@ export default {
                 }
                 this.search_string = ''; // this prevents search box from being cleared after filters' load
                 this.refreshSeed();
-                this.updateHistoryState(true);
+                this.updateHistoryState();
             }
         },
 
@@ -332,18 +332,25 @@ export default {
     },
 
     mounted() {
-        if (process.client) {
-            window.onpopstate = this.applyStateChange;
-            if (document.getElementById('navbar-brand')) {
-                document.getElementById('navbar-brand').onclick = () => {this.resetState(true);};
-            }
-            if (document.getElementById('navbar-brand-small')) {
-                document.getElementById('navbar-brand-small').onclick = () => {this.resetState(true);};
-            }
-            if (document.getElementById('search-home')) {
-                document.getElementById('search-home').focus();
-            }
-            this.applyStateChange();
+        window.onpopstate = this.applyStateChange;
+        if (document.getElementById('navbar-brand')) {
+            document.getElementById('navbar-brand').onclick = () => {this.resetState(true);};
+        }
+        if (document.getElementById('navbar-brand-small')) {
+            document.getElementById('navbar-brand-small').onclick = () => {this.resetState(true);};
+        }
+        if (document.getElementById('search-home')) {
+            document.getElementById('search-home').focus();
+        }
+        this.applyStateChange();
+    },
+
+    destroyed() {
+        if (document.getElementById('navbar-brand')) {
+            document.getElementById('navbar-brand').onclick = () => {};
+        }
+        if (document.getElementById('navbar-brand-small')) {
+            document.getElementById('navbar-brand-small').onclick = () => {};
         }
     },
 
@@ -401,8 +408,9 @@ export default {
                 if (obj.seed) {this.seed = obj.seed;}
                 this.sort = obj.sort;
 
-                if (this.seed) {
+                if (this.seed && !this.seedLocked) {
                     this.seedLocked = true;
+                    this.updateHistoryState(false);
                 }
             }
         }
@@ -416,9 +424,9 @@ export default {
                 }
                 this.seedLocked = false;
             } else {
-                if (!this.search_string) {
+                if (!this.search_string && !this.seedLocked) {
                     this.seedLocked = true;
-                    this.updateHistoryState();
+                    this.updateHistoryState(false);
                 }
             }
         },
