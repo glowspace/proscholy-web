@@ -17,7 +17,7 @@ body.home {
     }
 
     &.home-scroll {
-        overflow-y: scroll;
+        overflow-y: scroll !important;
     }
 
     & > div, & > div > div:last-child, #app {

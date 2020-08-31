@@ -39,8 +39,8 @@
 html,
 body {
     height: 100%;
-    overflow-x: visible;
-    overflow-y: initial;
+    overflow-x: visible !important;
+    overflow-y: initial !important;
 }
 
 input::placeholder {
