@@ -2,7 +2,7 @@
     <tr>
         <td
             :class="[
-                translation.lang == 'cs' ? 'invisible' : 'text-secondary',
+                translation.lang == 'cs' ? 'text-very-muted' : 'text-secondary',
                 'text-right text-uppercase small align-middle pr-0'
             ]"
             :title="translation.lang_string"
