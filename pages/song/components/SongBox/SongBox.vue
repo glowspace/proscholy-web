@@ -61,7 +61,7 @@
                                 <i class="fas fa-times pr-0"></i>
                             </a>
                             <div class="row ml-0" v-if="!$apollo.loading">
-                                <table class="table m-0 w-auto">
+                                <table class="table m-0">
                                     <tbody>
                                         <external-line
                                             v-for="(score, index) in scores"
@@ -98,7 +98,7 @@
                                 <i class="fas fa-times pr-0"></i>
                             </a>
                             <div class="row ml-0" v-if="!$apollo.loading && renderTranslations">
-                                <table class="table m-0 w-auto">
+                                <table class="table m-0">
                                     <tbody>
                                         <tr>
                                             <th></th>
@@ -471,8 +471,8 @@ import ChordMode from './ChordMode';
 import ChordSharpFlat from './ChordSharpFlat';
 import RightControls from './RightControls';
 import Transposition from './Transposition';
-import TranslationLine from './TranslationLine.vue';
 import SongLyricParts from '../Renderer/SongLyricParts.vue';
+import TranslationLine from '~/components/TranslationLine.vue';
 import ExternalView from '~/components/ExternalView.vue';
 import ExternalLine from '~/components/ExternalLine.vue';
 
