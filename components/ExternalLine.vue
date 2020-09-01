@@ -7,9 +7,9 @@
                 title="Zobrazit náhled"
                 target="_blank"
             >
-                <i :class="[typeClass, 'pl-1 pr-3']"></i
+                <span><i :class="[typeClass, 'pl-1 pr-3']"></i></span
                 ><span class="pr-3 w-100">{{ displayName }}</span
-                ><i class="far fa-eye pl-0 pr-0"></i>
+                ><span><i class="far fa-eye pl-0 pr-0"></i></span>
             </a>
         </td>
         <td class="p-0 align-middle">

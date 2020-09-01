@@ -85,7 +85,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "proscholy.utilities/external-line@1.0.0": {
+    "proscholy.utilities/external-line@1.0.1": {
         "files": [
             {
                 "relativePath": "components/ExternalLine.vue",
@@ -106,6 +106,18 @@
             }
         ],
         "mainFile": "components/ExternalView.vue",
+        "origin": "AUTHORED",
+        "exported": true
+    },
+    "proscholy.utilities/translation-line@1.0.0": {
+        "files": [
+            {
+                "relativePath": "components/TranslationLine.vue",
+                "test": false,
+                "name": "TranslationLine.vue"
+            }
+        ],
+        "mainFile": "components/TranslationLine.vue",
         "origin": "AUTHORED",
         "exported": true
     },
