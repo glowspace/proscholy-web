@@ -1,14 +1,14 @@
 <template>
     <tr>
-        <td class="p-0 align-middle">
+        <td class="p-0">
             <a
-                class="p-2 w-100 d-inline-block"
+                class="p-2 w-100 d-inline-flex align-items-center"
                 :href="viewLink"
                 title="Zobrazit náhled"
                 target="_blank"
             >
                 <i :class="[typeClass, 'pl-1 pr-3']"></i
-                ><span class="pr-3">{{ displayName }}</span
+                ><span class="pr-3 w-100">{{ displayName }}</span
                 ><i class="far fa-eye pl-0 pr-0"></i>
             </a>
         </td>
