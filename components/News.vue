@@ -14,7 +14,7 @@
 
 <script>
 
-import UniversalLink from '~/components/UniversalLink';
+import UniversalLink from './UniversalLink';
 import gql from 'graphql-tag';
 
 const FETCH_NEWS = gql`

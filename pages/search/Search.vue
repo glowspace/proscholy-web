@@ -178,7 +178,7 @@ import Filters from './components/Filters';
 import InitFilters from './components/InitFilters';
 import AppLinks from './components/AppLinks';
 import Logo from './components/Logo';
-import News from './components/News';
+import News from '~/components/News';
 import SearchHistoryManager from '~/components/Search/SearchHistoryManager';
 
 import gql from 'graphql-tag';

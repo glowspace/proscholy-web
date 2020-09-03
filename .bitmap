@@ -109,6 +109,23 @@
         "origin": "AUTHORED",
         "exported": true
     },
+    "proscholy.utilities/news@1.0.0": {
+        "files": [
+            {
+                "relativePath": "components/News.vue",
+                "test": false,
+                "name": "News.vue"
+            },
+            {
+                "relativePath": "components/UniversalLink.vue",
+                "test": false,
+                "name": "UniversalLink.vue"
+            }
+        ],
+        "mainFile": "components/News.vue",
+        "origin": "AUTHORED",
+        "exported": true
+    },
     "proscholy.utilities/translation-line@1.0.0": {
         "files": [
             {
