@@ -464,7 +464,7 @@
 
 <script>
 import { store } from '../../store.js';
-import { clone } from 'lodash';
+import { clone, throttle } from 'lodash';
 
 import FontSizer from './FontSizer';
 import ChordMode from './ChordMode';
@@ -648,7 +648,8 @@ export default {
             }
         },
 
-        isScrollable: function(initial) {
+        isScrollable: throttle(function isScrollableTh(initial) {
+            console.log('a');
             if (process.client && document.body.scrollHeight == document.body.clientHeight) {
                 // the page isn't scrollable
                 this.scrollable = false;
@@ -659,7 +660,7 @@ export default {
             } else {
                 this.scrollable = true;
             }
-        },
+        }, 100),
 
         keyUp: function(e) {
             if (e.key == '+') {

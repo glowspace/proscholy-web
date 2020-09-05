@@ -27,7 +27,7 @@
                                 v-if="init"
                                 @click="inputEnter()"
                             >
-                                <i class="fa fa-search d-none d-sm-inline"></i>
+                                <i class="fas fa-search d-none d-sm-inline"></i>
                             </button>
                             <button
                                 type="button"
@@ -35,7 +35,7 @@
                                 v-if="!init"
                                 @click="inputEnter()"
                             >
-                                <i class="fa fa-search" v-if="!songLoading"></i>
+                                <i class="fas fa-search" v-if="!songLoading"></i>
                                 <span
                                     v-else
                                     class="spinner-border spinner-border-sm align-middle"
@@ -53,7 +53,7 @@
                                 }"
                                 @click="displayFilter = !displayFilter"
                             >
-                                <i class="fa fa-filter" v-if="!songLoading"></i>
+                                <i class="fas fa-filter" v-if="!songLoading"></i>
                                 <span
                                     v-else
                                     class="spinner-border spinner-border-sm align-middle"
