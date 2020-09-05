@@ -18,7 +18,7 @@
                 <a
                     :href="mediaLink" target="_blank"
                     title="Otevřít v novém okně"
-                ><i class="fas fa-external-link-alt"></i></a>
+                ><i class="fas fa-external-link-alt pr-0"></i></a>
             </span>
         </div>
         <iframe
