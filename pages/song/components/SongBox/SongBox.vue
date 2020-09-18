@@ -649,7 +649,6 @@ export default {
         },
 
         isScrollable: throttle(function isScrollableTh(initial) {
-            console.log('a');
             if (process.client && document.body.scrollHeight == document.body.clientHeight) {
                 // the page isn't scrollable
                 this.scrollable = false;
