@@ -97,7 +97,7 @@ export default {
 
     methods: {
         transposeChordBy(chord, semitones, useFlatScale) {
-            if (semitones == 0) {
+            if (semitones == 0 && !useFlatScale) {
                 return chord;
             }
 
