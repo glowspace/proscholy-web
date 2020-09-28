@@ -97,30 +97,49 @@ export default {
 
     methods: {
         transposeChordBy(chord, semitones, useFlatScale) {
+            if (semitones == 0) {
+                return chord;
+            }
+
+            const BASIC_SCALE = [
+                'C',
+                '-',
+                'D',
+                '-',
+                'E',
+                'F',
+                '-',
+                'G',
+                '-',
+                'A',
+                '-',
+                'H'
+            ];
+
             // Chromatic scale starting from C using flats only.
             const FLAT_SCALE = [
                 'C',
                 'Db',
                 'D',
                 'Eb',
-                'E',
+                'Fb',
                 'F',
                 'Gb',
                 'G',
                 'Ab',
                 'A',
                 'B',
-                'H'
+                'Cb'
             ];
 
             // Chromatic scale starting from C using sharps only.
             const SHARP_SCALE = [
-                'C',
+                'H#',
                 'C#',
                 'D',
                 'D#',
                 'E',
-                'F',
+                'E#',
                 'F#',
                 'G',
                 'G#',
@@ -137,7 +156,7 @@ export default {
 
             let new_i = (chord_i + semitones + 12) % 12;
 
-            return scale[new_i];
+            return BASIC_SCALE[new_i] == '-' ? scale[new_i] : BASIC_SCALE[new_i];
         }
     }
 };

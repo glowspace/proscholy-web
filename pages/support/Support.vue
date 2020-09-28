@@ -82,6 +82,9 @@ export default {
             if (element) {
                 element.scrollIntoView({ behavior: 'smooth' });
             }
+            if (el.charAt(0) == '#') {
+                history.pushState(null, null, el);
+            }
         }
     },
 
