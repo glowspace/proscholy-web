@@ -52,10 +52,11 @@ export default {
             return;
         }
 
+        const isFlatNote = note => note.length > 1 && note[1] === 'b';
+
         // I'm a B-flat chord -> set flats as default
         if (
-            this.base === 'B' ||
-            (this.base.length > 1 && this.base[1] === 'b')
+            this.base === 'B' || isFlatNote(this.base) || isFlatNote(this.bass)
         ) {
             this.chordSharedStore.useFlatScale = true;
             this.chordSharedStore.useFlatScale_notified = true;
@@ -97,10 +98,6 @@ export default {
 
     methods: {
         transposeChordBy(chord, semitones, useFlatScale) {
-            if (semitones == 0 && !useFlatScale) {
-                return chord;
-            }
-
             const BASIC_SCALE = [
                 'C',
                 '-',
