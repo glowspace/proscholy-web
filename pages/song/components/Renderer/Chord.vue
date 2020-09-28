@@ -103,24 +103,24 @@ export default {
                 'Db',
                 'D',
                 'Eb',
-                'E',
+                'Fb',
                 'F',
                 'Gb',
                 'G',
                 'Ab',
                 'A',
                 'B',
-                'H'
+                'Cb'
             ];
 
             // Chromatic scale starting from C using sharps only.
             const SHARP_SCALE = [
-                'C',
+                'H#',
                 'C#',
                 'D',
                 'D#',
                 'E',
-                'F',
+                'E#',
                 'F#',
                 'G',
                 'G#',
