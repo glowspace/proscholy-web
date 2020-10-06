@@ -39,7 +39,6 @@
                         <a
                             class="btn"
                             title="Nahlásit"
-                            target="_blank"
                             :href="[
                                 song_lyric
                                     ? 'https://docs.google.com/forms/d/e/1FAIpQLSdTaOCzzlfZmyoCB0I_S2kSPiSZVGwDhDovyxkWB7w2LfH0IA/viewform?entry.2038741493=' +
@@ -390,7 +389,6 @@
                     <div class="float-right">
                         <a
                             class="btn btn-secondary"
-                            target="_blank"
                             :href="[
                                 song_lyric
                                     ? 'https://docs.google.com/forms/d/e/1FAIpQLSdTaOCzzlfZmyoCB0I_S2kSPiSZVGwDhDovyxkWB7w2LfH0IA/viewform?entry.2038741493=' +
@@ -400,7 +398,6 @@
                         >Nahlásit</a>
                         <a
                             class="btn btn-secondary"
-                            target="_blank"
                             :href="[song_lyric ? adminUrl + '/song/' + song_lyric.id + '/edit' : '']"
                         >Upravit</a>
                     </div>

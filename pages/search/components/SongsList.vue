@@ -25,7 +25,6 @@
                     <td class="p-1" colspan="5">
                         <a
                             class="btn btn-secondary float-right m-0"
-                            target="_blank"
                             :href="
                                 'https://docs.google.com/forms/d/e/1FAIpQLScmdiN_8S_e8oEY_jfEN4yJnLq8idxUR5AJpFmtrrnvd1NWRw/viewform?usp=pp_url&entry.1025781741=' +
                                     encodeURIComponent($route.fullPath)
@@ -162,7 +161,6 @@
                         >
                         <a
                             class="btn btn-secondary float-right m-0"
-                            target="_blank"
                             :href="'https://forms.gle/AYXXxkWtDHQQ13856'"
                         >
                             Přidat píseň

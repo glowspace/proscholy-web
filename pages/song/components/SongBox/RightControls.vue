@@ -3,7 +3,6 @@
         <a
             class="btn m-0"
             title="Upravit píseň"
-            target="_blank"
             :href="[song_lyric ? adminUrl + '/song/' + song_lyric.id + '/edit' : '']"
         >
             <i class="fas fa-pen p-0"></i>

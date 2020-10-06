@@ -9,24 +9,21 @@
             <div>
                 <a
                     href="http://play.google.com/store/apps/details?id=jozkar.mladez"
-                    target="_blank"
                     ><i class="fab fa-android"></i
                 ></a>
                 <span class="btn px-2 font-weight-bold">APLIKACE</span>
                 <a
                     href="http://itunes.apple.com/app/zpěvník-pro-scholy/id1475375453"
-                    target="_blank"
                     ><i class="fab fa-apple"></i
                 ></a>
             </div>
             <div>
-                <a href="https://www.facebook.com/proscholy/" target="_blank"
+                <a href="https://www.facebook.com/proscholy/"
                     ><i class="fab fa-facebook"></i
                 ></a>
                 <span class="btn px-2 font-weight-bold">SOCIÁLNÍ SÍTĚ</span>
                 <a
                     href="https://www.instagram.com/zpevnik.proscholy.cz/"
-                    target="_blank"
                     ><i class="fab fa-instagram"></i
                 ></a>
             </div>
