@@ -70,7 +70,7 @@ export default {
 
     methods: {
         getTitle() {
-            return 'Podpora' + this.titleSeparator + this.titleWebsite;
+            return 'Nápověda' + this.titleSeparator + this.titleWebsite;
         },
 
         getDescription() {
