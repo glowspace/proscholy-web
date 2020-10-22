@@ -85,7 +85,10 @@ export default {
      ** Nuxt.js dev-modules
      */
     buildModules: [
-        ['@nuxtjs/google-analytics', { id: 'G-CTBZFXNL2E' }],
+        ['@nuxtjs/google-gtag', {
+            id: 'G-CTBZFXNL2E',
+            config: { anonymize_ip: true }
+        }],
         '@nuxtjs/router',
         '@nuxtjs/dotenv',
         ['@nuxtjs/vuetify', { treeShake: true, theme: { disable: true } }]
