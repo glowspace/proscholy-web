@@ -58,7 +58,7 @@ export default {
           <br>Zkuste <u><a href="/">použít vyhledávání</a></u>.
           <br>Chybu také můžete <u><a
           href="https://docs.google.com/forms/d/e/1FAIpQLSfry7CQD0vPpuC_VB7xGR6NUF2WdPUytQwX8KipKoZcIYxbdA/viewform?usp=pp_url&entry.1025781741=–&entry.456507920=e500"
-          target="_blank" id="report-link">nahlásit</a></u>.
+          id="report-link">nahlásit</a></u>.
           <script>if (document.getElementById('report-link'))
           {document.getElementById('report-link').setAttribute('href',
           document.getElementById('report-link').getAttribute('href').replace('=–&', '=' + encodeURIComponent(window.location.href) + '&'));}</script>`,
@@ -85,7 +85,10 @@ export default {
      ** Nuxt.js dev-modules
      */
     buildModules: [
-        ['@nuxtjs/google-analytics', { id: 'G-CTBZFXNL2E' }],
+        ['@nuxtjs/google-gtag', {
+            id: 'G-CTBZFXNL2E',
+            config: { anonymize_ip: true }
+        }],
         '@nuxtjs/router',
         '@nuxtjs/dotenv',
         ['@nuxtjs/vuetify', { treeShake: true, theme: { disable: true } }]

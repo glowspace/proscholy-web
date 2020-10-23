@@ -13,7 +13,6 @@
                         v&nbsp;určitých věcech opravdu směrodatný.
                     </p>
                     <a
-                        target="_blank"
                         href="https://docs.google.com/forms/d/e/1FAIpQLSfI0143gkLBtMbWQnSa9nzpOoBNMokZrOIS5mUreSR41E_B7A/viewform?usp=pp_url&entry.791243479=ano"
                         class="btn btn-primary btn-outline stretched-link"
                         >Vyplnit formulář</a
@@ -49,7 +48,6 @@
             <a
                 class="btn btn-primary btn-outline mb-0"
                 href="https://forms.gle/AYXXxkWtDHQQ13856"
-                target="_blank"
                 >Přidat píseň</a
             >
         </p>
