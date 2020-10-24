@@ -7,11 +7,12 @@
                         <a
                             v-if="renderScores"
                             class="btn btn-secondary"
-                            :class="{ chosen: topMode == 1 }"
+                            :class="[{ chosen: topMode == 1 }, { 'font-weight-bold': song_lyric.lilypond_svg }]"
                             @click="topMode = topMode == 1 ? 0 : 1"
                         >
                             <i class="fas fa-file-alt"></i>
                             <span class="d-none d-sm-inline">Noty</span>
+                            <span v-if="song_lyric.lilypond_svg">!</span>
                         </a>
                         <a
                             v-if="renderTranslations"
@@ -79,6 +80,12 @@
                                         ></external>
                                     </tbody>
                                 </table>
+                                <div
+                                    v-if="song_lyric.lilypond_svg && topMode === 1"
+                                    v-html="song_lyric.lilypond_svg"
+                                    class="pt-3 w-100 text-center"
+                                    style="pointer-events:none"
+                                ></div>
                             </div>
                             <div class="row" v-else>
                                 <span v-if="$apollo.loading">

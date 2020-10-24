@@ -28,6 +28,7 @@ const FETCH_SONG_LYRIC = gql`
             type
             lyrics_no_chords
             bible_refs_src
+            lilypond_svg
             authors_pivot {
                 author {
                     ...authorFields
