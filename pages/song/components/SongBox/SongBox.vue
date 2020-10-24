@@ -55,7 +55,7 @@
                         <div class="overflow-auto toolbox toolbox-u">
                             <a
                                 class="btn btn-secondary float-right fixed-top position-sticky cross"
-                                v-on:click="topMode = 0"
+                                @click="topMode = 0"
                             >
                                 <i class="fas fa-times pr-0"></i>
                             </a>
@@ -96,7 +96,7 @@
                         <div class="overflow-auto toolbox toolbox-u">
                             <a
                                 class="btn btn-secondary float-right fixed-top position-sticky cross"
-                                v-on:click="topMode = 0"
+                                @click="topMode = 0"
                             >
                                 <i class="fas fa-times pr-0"></i>
                             </a>
@@ -214,7 +214,7 @@
                             <div class="overflow-auto toolbox">
                                 <a
                                     class="btn btn-secondary float-right"
-                                    v-on:click="bottomMode = 0"
+                                    @click="bottomMode = 0"
                                 >
                                     <i class="fas fa-times pr-0"></i>
                                 </a>
@@ -268,7 +268,7 @@
                             <div class="overflow-auto media-card toolbox">
                                 <a
                                     class="btn btn-secondary float-right fixed-top position-sticky cross"
-                                    v-on:click="bottomMode = 0"
+                                    @click="bottomMode = 0"
                                 >
                                     <i class="fas fa-times pr-0"></i>
                                 </a>
@@ -311,7 +311,7 @@
                             <a
                                 class="btn btn-secondary"
                                 :class="{ chosen: bottomMode === 1 }"
-                                v-on:click="bottomMode = bottomMode === 1 ? 0 : 1"
+                                @click="bottomMode = bottomMode === 1 ? 0 : 1"
                             >
                                 <i class="fas fa-sliders-h"></i>
                                 <span class="d-none d-sm-inline">Nástroje</span>
@@ -320,7 +320,7 @@
                                 class="btn btn-secondary"
                                 v-if="renderRecordings"
                                 :class="{ chosen: bottomMode == 2 }"
-                                v-on:click="bottomMode = bottomMode == 2 ? 0 : 2"
+                                @click="bottomMode = bottomMode == 2 ? 0 : 2"
                             >
                                 <i class="fas fa-headphones"></i>
                                 <span class="d-none d-sm-inline">Nahrávky</span>
@@ -333,7 +333,7 @@
                             >
                                 <a
                                     class="btn btn-secondary"
-                                    v-on:click="autoscroll = !autoscroll"
+                                    @click="autoscroll = !autoscroll"
                                 >
                                     <i
                                         class="fas"
@@ -368,7 +368,7 @@
                             :title="[
                                 controlsDisplay ? 'Skrýt lišty' : 'Zobrazit lišty'
                             ]"
-                            v-on:click="controlsToggle"
+                            @click="controlsToggle"
                         >
                             <i
                                 class="fas pr-0"
@@ -405,14 +405,14 @@
         <div class="col-lg-3">
             <div
                 class="card card-blue mb-3 d-none d-lg-flex"
-                v-on:click="topMode = 1"
+                @click="topMode = 1"
                 v-if="renderScores"
             >
                 <div class="card-header media-opener py-2 rounded"><i class="fas fa-file-alt"></i> Zobrazit notové zápisy</div>
             </div>
             <div
                 class="card card-green mb-3 d-none d-lg-flex"
-                v-on:click="bottomMode = 2"
+                @click="bottomMode = 2"
                 v-if="renderRecordings"
             >
                 <div class="card-header media-opener py-2"><i class="fas fa-headphones"></i> Dostupné nahrávky<span class="d-none d-xl-inline"> a videa</span></div>
@@ -421,7 +421,7 @@
                 <div class="media-opener" v-if="mediaTypes[3]"><i class="fas fa-music"></i> MP3</div>
                 <div class="media-opener" v-if="mediaTypes[2]"><i class="fab fa-youtube text-danger"></i> YouTube</div>
             </div>
-            <div class="card mb-3 d-none d-lg-flex" v-on:click="bottomMode = 1">
+            <div class="card mb-3 d-none d-lg-flex" @click="bottomMode = 1">
                 <div class="card-header media-opener py-2 rounded bg-secondary text-white"><i class="fas fa-sliders-h"></i> Nastavit zobrazení</div>
                 <div
                     class="media-opener"

@@ -5,13 +5,13 @@
             <a
                 class="btn btn-secondary"
                 :class="{ chosen: !useFlatScale }"
-                v-on:click="useFlatScale = false"
+                @click="useFlatScale = false"
                 >#</a
             >
             <a
                 class="btn btn-secondary"
                 :class="{ chosen: useFlatScale }"
-                v-on:click="useFlatScale = true"
+                @click="useFlatScale = true"
                 >♭</a
             >
         </div>

@@ -1,7 +1,7 @@
 <template>
     <a
         tabindex="0"
-        v-on:click="darkModeToggle"
+        @click="darkModeToggle"
         class="btn btn-secondary dark-mode-button animate-fadein"
         ><i class="fas fa-moon"></i>
         <slot></slot>

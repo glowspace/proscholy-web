@@ -8,7 +8,7 @@
             ]"
             v-for="tag in tagsInCategory"
             :key="'tag-' + tag.id"
-            v-on:click="$emit('selectTag', tag)"
+            @click="$emit('selectTag', tag)"
             >{{ tag.name }}</a
         >
     </div>
