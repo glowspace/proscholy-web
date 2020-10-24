@@ -27,6 +27,7 @@ const FETCH_SONG_LYRIC = gql`
             public_route
             type
             lyrics_no_chords
+            bible_refs_src
             authors_pivot {
                 author {
                     ...authorFields
