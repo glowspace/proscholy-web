@@ -118,7 +118,7 @@
                             class="no-left-padding align-middle d-none d-sm-table-cell"
                         >
                             <i
-                                v-if="song_lyric.scoreFiles.length > 0"
+                                v-if="song_lyric.scores.length > 0"
                                 class="fas fa-file-alt text-danger"
                                 title="K této písni jsou k dispozici noty."
                             ></i>
@@ -209,22 +209,19 @@ const FETCH_ITEMS = gql`
                 public_route
                 lang
                 lang_string
-                scoreExternals: externals(type: 4) {
+                scores: externals(content_type: SCORE) {
                     id
                 }
-                scoreFiles: files(type: 3) {
+                youtubeVideos: externals(media_type: "youtube") {
                     id
                 }
-                youtubeVideos: externals(type: 3) {
+                spotifyTracks: externals(media_type: "spotify") {
                     id
                 }
-                spotifyTracks: externals(type: 1) {
+                soundcloudTracks: externals(media_type: "soundcloud") {
                     id
                 }
-                soundcloudTracks: externals(type: 2) {
-                    id
-                }
-                audioFiles: files(type: 4) {
+                audioFiles: externals(content_type: RECORDING, is_uploaded: true) {
                     id
                 }
                 authors_pivot {
