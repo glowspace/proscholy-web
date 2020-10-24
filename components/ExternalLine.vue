@@ -12,16 +12,6 @@
                 ><span><i class="far fa-eye pl-0 pr-0"></i></span>
             </a>
         </td>
-        <td class="p-0 align-middle">
-            <a
-                v-if="downloadUrl"
-                class="p-2"
-                :href="downloadUrl"
-                title="Stáhnout"
-            >
-                <i class="fas fa-download p-0"></i>
-            </a>
-        </td>
         <td class="p-2 pl-md-5 align-middle">
             <span v-for="(author, authorIndex) in authors"
                 ><span v-if="authorIndex">,</span>
@@ -40,7 +30,6 @@ export default {
     props: {
         index: Number,
         url: String,
-        downloadUrl: String,
         songName: String,
         name: String,
         type: Number,
@@ -95,7 +84,7 @@ export default {
         },
 
         displayName() {
-            if (this.downloadUrl) {
+            if (this.public_name) {
                 return this.name;
             } else {
                 return this.songName + ' – noty č. ' + (this.index + 1);

@@ -33,22 +33,13 @@ const FETCH_SONG_LYRIC = gql`
                 }
                 authorship_type
             }
-            externals(orderBy: { field: "type", order: ASC }) {
+            externals {
                 id
                 public_name
                 url
-                type
+                content_type
+                media_type
                 media_id
-                authors {
-                    ...authorFields
-                }
-            }
-            files {
-                id
-                public_name
-                url
-                download_url
-                type
                 authors {
                     ...authorFields
                 }
