@@ -208,7 +208,7 @@
 
                     <div
                         class="controls fixed-bottom position-sticky p-1 clearfix"
-                        v-bind:class="{ 'card-footer': controlsDisplay }"
+                        :class="{ 'card-footer': controlsDisplay }"
                     >
                         <div v-show="bottomMode == 1 && controlsDisplay">
                             <div class="overflow-auto toolbox">
@@ -310,7 +310,7 @@
                         <span v-show="controlsDisplay">
                             <a
                                 class="btn btn-secondary"
-                                v-bind:class="{ chosen: bottomMode === 1 }"
+                                :class="{ chosen: bottomMode === 1 }"
                                 v-on:click="bottomMode = bottomMode === 1 ? 0 : 1"
                             >
                                 <i class="fas fa-sliders-h"></i>
@@ -319,7 +319,7 @@
                             <a
                                 class="btn btn-secondary"
                                 v-if="renderRecordings"
-                                v-bind:class="{ chosen: bottomMode == 2 }"
+                                :class="{ chosen: bottomMode == 2 }"
                                 v-on:click="bottomMode = bottomMode == 2 ? 0 : 2"
                             >
                                 <i class="fas fa-headphones"></i>
@@ -328,7 +328,7 @@
                             <div
                                 class="d-inline-block btn-group m-0"
                                 role="group"
-                                v-bind:class="{ chosen: autoscroll }"
+                                :class="{ chosen: autoscroll }"
                                 v-if="scrollable"
                             >
                                 <a
@@ -337,7 +337,7 @@
                                 >
                                     <i
                                         class="fas"
-                                        v-bind:class="[
+                                        :class="[
                                             autoscroll
                                                 ? 'pr-0 fa-stop-circle'
                                                 : 'fa-arrow-circle-down'
@@ -372,7 +372,7 @@
                         >
                             <i
                                 class="fas pr-0"
-                                v-bind:class="[
+                                :class="[
                                     controlsDisplay
                                         ? 'fa-chevron-right'
                                         : 'fa-chevron-left'

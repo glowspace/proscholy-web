@@ -10,7 +10,7 @@
         <ul class="list-group">
             <li
                 v-for="songbook in user.songbooks"
-                v-bind:key="songbook.id"
+                :key="songbook.id"
                 class="list-group-item d-flex justify-content-between align-items-center"
             >
                 {{ songbook.name }}
@@ -20,7 +20,7 @@
                 <ul>
                     <li
                         v-for="song_lyric in songbook.song_lyrics"
-                        v-bind:key="song_lyric.id"
+                        :key="song_lyric.id"
                     >
                         {{ song_lyric.name }}
                     </li>

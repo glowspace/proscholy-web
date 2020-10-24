@@ -39,7 +39,7 @@
                 >
                     <tr
                         v-for="song_lyric in song_lyrics"
-                        v-bind:key="song_lyric.id"
+                        :key="song_lyric.id"
                     >
                         <td
                             class="p-1 align-middle text-right w-min"
