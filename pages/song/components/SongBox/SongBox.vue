@@ -62,18 +62,21 @@
                             <div class="row ml-0" v-if="!$apollo.loading">
                                 <table class="table m-0">
                                     <tbody>
-                                        <external-line
-                                            v-for="(score, index) in scores"
-                                            v-bind:key="index"
+                                        <external
+                                            v-for="(external, index) in scores"
+                                            :key="index"
+                                            :line="true"
                                             :index="index"
-                                            :url="score.url"
-                                            :download-url="score.download_url"
+                                            :url="external.url"
+                                            :media-id="external.media_id"
+                                            :caption="external.caption"
+                                            :tags-instrumentation="external.tags_instrumentation"
+                                            :content-type="external.content_type"
+                                            :content-type-string="external.content_type_string"
+                                            :media-type="external.media_type"
+                                            :authors="external.authors"
                                             :song-name="song_lyric.name"
-                                            :name="score.public_name"
-                                            :content-type="score.content_type"
-                                            :media-type="score.media_type"
-                                            :authors="score.authors"
-                                        ></external-line>
+                                        ></external>
                                     </tbody>
                                 </table>
                             </div>
@@ -275,16 +278,22 @@
                                 >
                                     <div
                                         class="col-md-6"
-                                        v-for="recording in recordings"
-                                        v-bind:key="recording.id"
+                                        v-for="(external, index) in recordings"
+                                        :key="index"
                                     >
-                                        <external-view
-                                            :url="recording.url"
-                                            :media-id="recording.media_id"
-                                            :content-type="recording.content_type"
-                                            :media-type="recording.media_type"
-                                            :authors="recording.authors"
-                                        ></external-view>
+                                        <external
+                                            :line="false"
+                                            :index="index"
+                                            :url="external.url"
+                                            :media-id="external.media_id"
+                                            :caption="external.caption"
+                                            :tags-instrumentation="external.tags_instrumentation"
+                                            :content-type="external.content_type"
+                                            :content-type-string="external.content_type_string"
+                                            :media-type="external.media_type"
+                                            :authors="external.authors"
+                                            :song-name="song_lyric.name"
+                                        ></external>
                                     </div>
                                 </div>
                                 <div v-else>
@@ -459,8 +468,7 @@ import RightControls from './RightControls';
 import Transposition from './Transposition';
 import SongLyricParts from '../Renderer/SongLyricParts.vue';
 import TranslationLine from '~/components/TranslationLine.vue';
-import ExternalView from '~/components/ExternalView.vue';
-import ExternalLine from '~/components/ExternalLine.vue';
+import External from '~/components/External.vue';
 
 /**
  * This component renders white box on song detail page.
@@ -476,8 +484,7 @@ export default {
         FontSizer,
         ChordMode,
         ChordSharpFlat,
-        ExternalView,
-        ExternalLine,
+        External,
         RightControls,
         Transposition,
         TranslationLine,

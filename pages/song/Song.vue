@@ -35,11 +35,15 @@ const FETCH_SONG_LYRIC = gql`
             }
             externals {
                 id
-                public_name
                 url
-                content_type
-                media_type
                 media_id
+                caption
+                tags_instrumentation {
+                    id name
+                }
+                content_type
+                content_type_string
+                media_type
                 authors {
                     ...authorFields
                 }

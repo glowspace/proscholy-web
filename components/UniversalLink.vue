@@ -63,7 +63,8 @@ export default {
     computed: {
         mediaLink() {
             if (this.type == 'PDF' && this.browser && !this.browser.satisfies(this.supportPdfIframesCondition)) {
-                return 'https://docs.google.com/viewerng/viewer?url=' + this.link;
+                // todo pdf viewer
+                return this.link;
             }
 
             return this.link;
