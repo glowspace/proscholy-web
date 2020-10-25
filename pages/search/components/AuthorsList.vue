@@ -29,7 +29,7 @@
                 >
                     <tr
                         v-for="(author, index) in authors"
-                        v-bind:key="author.id"
+                        :key="author.id"
                     >
                         <td
                             class="p-1 align-middle"

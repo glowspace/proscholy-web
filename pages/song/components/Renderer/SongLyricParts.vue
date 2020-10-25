@@ -15,7 +15,7 @@
                 <span v-if="!key2" class="song-part-tag">{{ part.type + (part.type ? (part.isVerse ? '.' : ':') : '') }}&nbsp;</span
                 ><template v-for="(chord, key3) in line.chords">
                     <chord
-                        v-bind:key="key3"
+                        :key="key3"
                         :base="chord.base"
                         :variant="chord.variant"
                         :extension="chord.extension"

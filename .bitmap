@@ -109,7 +109,19 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "proscholy.utilities/news@1.0.0": {
+    "proscholy.utilities/external@1.0.4": {
+        "files": [
+            {
+                "relativePath": "components/External.vue",
+                "test": false,
+                "name": "External.vue"
+            }
+        ],
+        "mainFile": "components/External.vue",
+        "origin": "AUTHORED",
+        "exported": true
+    },
+    "proscholy.utilities/news@1.0.1": {
         "files": [
             {
                 "relativePath": "components/News.vue",
@@ -138,7 +150,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "proscholy.utilities/universal-link@1.0.1": {
+    "proscholy.utilities/universal-link@1.0.2": {
         "files": [
             {
                 "name": "UniversalLink.vue",

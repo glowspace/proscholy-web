@@ -7,8 +7,8 @@
                 'tag tag-' + color
             ]"
             v-for="tag in tagsInCategory"
-            v-bind:key="'tag-' + tag.id"
-            v-on:click="$emit('selectTag', tag)"
+            :key="'tag-' + tag.id"
+            @click="$emit('selectTag', tag)"
             >{{ tag.name }}</a
         >
     </div>

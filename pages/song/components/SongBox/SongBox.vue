@@ -5,13 +5,23 @@
                 <div class="card-header p-1 song-links">
                     <div class="d-inline-block">
                         <a
-                            v-if="renderScores"
+                            v-if="scores.length"
                             class="btn btn-secondary"
-                            :class="{ chosen: topMode == 1 }"
+                            :class="[{ chosen: topMode == 1 }, { 'font-weight-bold': song_lyric.lilypond_svg }]"
                             @click="topMode = topMode == 1 ? 0 : 1"
                         >
                             <i class="fas fa-file-alt"></i>
                             <span class="d-none d-sm-inline">Noty</span>
+                            <span v-if="song_lyric.lilypond_svg">!</span>
+                        </a>
+                        <a
+                            v-if="otherExternals.length"
+                            class="btn btn-secondary"
+                            :class="[{ chosen: topMode == 3 }]"
+                            @click="topMode = topMode == 3 ? 0 : 3"
+                        >
+                            <i class="fas fa-link"></i>
+                            <span class="d-none d-sm-inline">Další materiály</span>
                         </a>
                         <a
                             v-if="renderTranslations"
@@ -55,35 +65,54 @@
                         <div class="overflow-auto toolbox toolbox-u">
                             <a
                                 class="btn btn-secondary float-right fixed-top position-sticky cross"
-                                v-on:click="topMode = 0"
+                                @click="topMode = 0"
                             >
                                 <i class="fas fa-times pr-0"></i>
                             </a>
                             <div class="row ml-0" v-if="!$apollo.loading">
                                 <table class="table m-0">
                                     <tbody>
-                                        <external-line
-                                            v-for="(score, index) in scores"
-                                            v-bind:key="index"
+                                        <external
+                                            v-for="(external, index) in scores"
+                                            :key="index"
+                                            :line="true"
                                             :index="index"
-                                            :url="score.url"
-                                            :download-url="score.download_url"
+                                            :external="external"
                                             :song-name="song_lyric.name"
-                                            :name="score.public_name"
-                                            :type="score.type"
-                                            :authors="score.authors"
-                                        ></external-line>
+                                        ></external>
                                     </tbody>
                                 </table>
+                                <div
+                                    v-if="song_lyric.lilypond_svg && topMode === 1"
+                                    v-html="song_lyric.lilypond_svg"
+                                    class="pt-3 w-100 text-center"
+                                    style="pointer-events:none"
+                                ></div>
                             </div>
-                            <div class="row" v-else>
-                                <span v-if="$apollo.loading">
-                                    <i>Načítám...</i>
-                                </span>
-
-                                <span v-else>
-                                    <i>Žádné noty nebyly nalezeny.</i>
-                                </span>
+                        </div>
+                    </div>
+                    <!-- other externals -->
+                    <div v-show="topMode === 3">
+                        <div class="overflow-auto toolbox toolbox-u">
+                            <a
+                                class="btn btn-secondary float-right fixed-top position-sticky cross"
+                                @click="topMode = 0"
+                            >
+                                <i class="fas fa-times pr-0"></i>
+                            </a>
+                            <div class="row ml-0" v-if="!$apollo.loading">
+                                <table class="table m-0">
+                                    <tbody>
+                                        <external
+                                            v-for="(external, index) in otherExternals"
+                                            :key="index"
+                                            :line="true"
+                                            :index="index"
+                                            :external="external"
+                                            :song-name="song_lyric.name"
+                                        ></external>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -92,7 +121,7 @@
                         <div class="overflow-auto toolbox toolbox-u">
                             <a
                                 class="btn btn-secondary float-right fixed-top position-sticky cross"
-                                v-on:click="topMode = 0"
+                                @click="topMode = 0"
                             >
                                 <i class="fas fa-times pr-0"></i>
                             </a>
@@ -137,15 +166,6 @@
                                         </translation-line>
                                     </tbody>
                                 </table>
-                            </div>
-
-                            <div class="row" v-else>
-                                <span v-if="$apollo.loading">
-                                    <i>Načítám...</i>
-                                </span>
-                                <span v-else>
-                                    <i>Žádné překlady nebyly nalezeny.</i>
-                                </span>
                             </div>
                         </div>
                     </div>
@@ -204,13 +224,13 @@
 
                     <div
                         class="controls fixed-bottom position-sticky p-1 clearfix"
-                        v-bind:class="{ 'card-footer': controlsDisplay }"
+                        :class="{ 'card-footer': controlsDisplay }"
                     >
                         <div v-show="bottomMode == 1 && controlsDisplay">
                             <div class="overflow-auto toolbox">
                                 <a
                                     class="btn btn-secondary float-right"
-                                    v-on:click="bottomMode = 0"
+                                    @click="bottomMode = 0"
                                 >
                                     <i class="fas fa-times pr-0"></i>
                                 </a>
@@ -264,47 +284,26 @@
                             <div class="overflow-auto media-card toolbox">
                                 <a
                                     class="btn btn-secondary float-right fixed-top position-sticky cross"
-                                    v-on:click="bottomMode = 0"
+                                    @click="bottomMode = 0"
                                 >
                                     <i class="fas fa-times pr-0"></i>
                                 </a>
                                 <div
                                     class="row ml-0 pt-2"
-                                    v-if="hasExternalsOrFiles && !$apollo.loading"
+                                    v-if="hasExternals && !$apollo.loading"
                                 >
                                     <div
                                         class="col-md-6"
-                                        v-for="external in mediaExternals"
-                                        v-bind:key="external.id"
+                                        v-for="(external, index) in recordings"
+                                        :key="index"
                                     >
-                                        <external-view
-                                            :url="external.url"
-                                            :media-id="external.media_id"
-                                            :type="external.type"
-                                            :authors="external.authors"
-                                        ></external-view>
+                                        <external
+                                            :line="false"
+                                            :index="index"
+                                            :external="external"
+                                            :song-name="song_lyric.name"
+                                        ></external>
                                     </div>
-                                    <div
-                                        class="col-md-6"
-                                        v-for="file in mediaFiles"
-                                        v-bind:key="file.id"
-                                    >
-                                        <external-view
-                                            :url="file.url"
-                                            :download-url="file.download_url"
-                                            :media-id="file.media_id"
-                                            :type="fileTypeConvert(file.type)"
-                                            :authors="file.authors"
-                                        ></external-view>
-                                    </div>
-                                </div>
-                                <div v-else>
-                                    <span v-if="$apollo.loading">
-                                        <i>Načítám...</i>
-                                    </span>
-                                    <span v-else>
-                                        <i>Žádná nahrávka nebyla nalezena.</i>
-                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -312,17 +311,17 @@
                         <span v-show="controlsDisplay">
                             <a
                                 class="btn btn-secondary"
-                                v-bind:class="{ chosen: bottomMode === 1 }"
-                                v-on:click="bottomMode = bottomMode === 1 ? 0 : 1"
+                                :class="{ chosen: bottomMode === 1 }"
+                                @click="bottomMode = bottomMode === 1 ? 0 : 1"
                             >
                                 <i class="fas fa-sliders-h"></i>
                                 <span class="d-none d-sm-inline">Nástroje</span>
                             </a>
                             <a
                                 class="btn btn-secondary"
-                                v-if="renderMedia"
-                                v-bind:class="{ chosen: bottomMode == 2 }"
-                                v-on:click="bottomMode = bottomMode == 2 ? 0 : 2"
+                                v-if="recordings.length"
+                                :class="{ chosen: bottomMode == 2 }"
+                                @click="bottomMode = bottomMode == 2 ? 0 : 2"
                             >
                                 <i class="fas fa-headphones"></i>
                                 <span class="d-none d-sm-inline">Nahrávky</span>
@@ -330,16 +329,16 @@
                             <div
                                 class="d-inline-block btn-group m-0"
                                 role="group"
-                                v-bind:class="{ chosen: autoscroll }"
+                                :class="{ chosen: autoscroll }"
                                 v-if="scrollable"
                             >
                                 <a
                                     class="btn btn-secondary"
-                                    v-on:click="autoscroll = !autoscroll"
+                                    @click="autoscroll = !autoscroll"
                                 >
                                     <i
                                         class="fas"
-                                        v-bind:class="[
+                                        :class="[
                                             autoscroll
                                                 ? 'pr-0 fa-stop-circle'
                                                 : 'fa-arrow-circle-down'
@@ -370,11 +369,11 @@
                             :title="[
                                 controlsDisplay ? 'Skrýt lišty' : 'Zobrazit lišty'
                             ]"
-                            v-on:click="controlsToggle"
+                            @click="controlsToggle"
                         >
                             <i
                                 class="fas pr-0"
-                                v-bind:class="[
+                                :class="[
                                     controlsDisplay
                                         ? 'fa-chevron-right'
                                         : 'fa-chevron-left'
@@ -407,15 +406,15 @@
         <div class="col-lg-3">
             <div
                 class="card card-blue mb-3 d-none d-lg-flex"
-                v-on:click="topMode = 1"
-                v-if="renderScores"
+                @click="topMode = 1"
+                v-if="scores.length"
             >
                 <div class="card-header media-opener py-2 rounded"><i class="fas fa-file-alt"></i> Zobrazit notové zápisy</div>
             </div>
             <div
                 class="card card-green mb-3 d-none d-lg-flex"
-                v-on:click="bottomMode = 2"
-                v-if="renderMedia"
+                @click="bottomMode = 2"
+                v-if="recordings.length"
             >
                 <div class="card-header media-opener py-2"><i class="fas fa-headphones"></i> Dostupné nahrávky<span class="d-none d-xl-inline"> a videa</span></div>
                 <div class="media-opener" v-if="mediaTypes[0]"><i class="fab fa-spotify text-success"></i> Spotify</div>
@@ -423,7 +422,7 @@
                 <div class="media-opener" v-if="mediaTypes[3]"><i class="fas fa-music"></i> MP3</div>
                 <div class="media-opener" v-if="mediaTypes[2]"><i class="fab fa-youtube text-danger"></i> YouTube</div>
             </div>
-            <div class="card mb-3 d-none d-lg-flex" v-on:click="bottomMode = 1">
+            <div class="card mb-3 d-none d-lg-flex" @click="bottomMode = 1">
                 <div class="card-header media-opener py-2 rounded bg-secondary text-white"><i class="fas fa-sliders-h"></i> Nastavit zobrazení</div>
                 <div
                     class="media-opener"
@@ -470,8 +469,7 @@ import RightControls from './RightControls';
 import Transposition from './Transposition';
 import SongLyricParts from '../Renderer/SongLyricParts.vue';
 import TranslationLine from '~/components/TranslationLine.vue';
-import ExternalView from '~/components/ExternalView.vue';
-import ExternalLine from '~/components/ExternalLine.vue';
+import External from '~/components/External.vue';
 
 /**
  * This component renders white box on song detail page.
@@ -487,8 +485,7 @@ export default {
         FontSizer,
         ChordMode,
         ChordSharpFlat,
-        ExternalView,
-        ExternalLine,
+        External,
         RightControls,
         Transposition,
         TranslationLine,
@@ -528,54 +525,33 @@ export default {
     },
 
     computed: {
-        hasExternalsOrFiles: {
+        hasExternals: {
             get() {
-                return (
-                    this.song_lyric &&
-                    (this.song_lyric.externals || this.song_lyric.files) &&
-                    (this.song_lyric.externals.length ||
-                        this.song_lyric.files.length)
-                );
+                return this.song_lyric && this.song_lyric.externals && this.song_lyric.externals.length;
             }
         },
 
-        mediaExternals: {
+        recordings: {
             get() {
-                if (!this.hasExternalsOrFiles) return [];
-
                 return this.song_lyric.externals.filter(ext =>
-                    [1, 2, 3, 7].includes(ext.type)
-                );
-            }
-        },
-
-        mediaFiles: {
-            get() {
-                if (!this.hasExternalsOrFiles) return [];
-
-                return this.song_lyric.files.filter(file =>
-                    [1, 2, 3, 7].includes(this.fileTypeConvert(file.type))
+                    ext.content_type == "RECORDING"
                 );
             }
         },
 
         scores: {
             get() {
-                // File => File with unified type
-                const mapFile = file => {
-                    const copy = clone(file);
-                    copy.type = this.fileTypeConvert(copy.type);
-                    return copy;
-                };
-
-                const filteredExternals = this.song_lyric.externals.filter(
-                    ext => [4, 8, 9].includes(ext.type)
+                return this.song_lyric.externals.filter(ext =>
+                    ext.content_type == "SCORE"
                 );
-                const filteredFiles = this.song_lyric.files
-                    .map(mapFile)
-                    .filter(file => [4, 8, 9].includes(file.type));
+            }
+        },
 
-                return [...filteredExternals, ...filteredFiles];
+        otherExternals: {
+            get() {
+                return this.song_lyric.externals.filter(ext =>
+                    ext.content_type != "RECORDING" && ext.content_type != "SCORE"
+                );
             }
         },
 
@@ -586,25 +562,12 @@ export default {
             }
         },
 
-        renderMedia: {
-            get() {
-                return this.mediaExternals.length + this.mediaFiles.length > 0;
-            }
-        },
-
-        renderScores: {
-            get() {
-                return this.scores.length > 0;
-            }
-        },
-
         mediaTypes: {
             get() {
-                var arrayOfTypes = [1, 2, 3, 7];
+                var arrayOfTypes = ["spotify", "soundcloud", "youtube", "file/mp3", "file/wav", "file/aac", "file/flac"];
                 var returnArray = [];
                 for (let i = 0; i < arrayOfTypes.length; i++) {
-                    returnArray[i] = this.mediaExternals.filter(ext => ext.type == arrayOfTypes[i]).length
-                    + this.mediaFiles.filter(file => this.fileTypeConvert(file.type) == arrayOfTypes[i]).length;
+                    returnArray[i] = this.recordings.filter(ext => ext.media_type == arrayOfTypes[i]).length;
                 }
                 return returnArray;
             }
@@ -619,17 +582,6 @@ export default {
                     .querySelector('.navbar.fixed-top')
                     .classList.toggle('d-none');
             }
-        },
-
-        fileTypeConvert: function(type) {
-            const mapping = {
-                1: 8,
-                2: 9,
-                3: 4,
-                4: 7
-            };
-
-            return mapping[type] || type;
         },
 
         setScroll: function(num, condition) {
@@ -674,10 +626,10 @@ export default {
 
     mounted() {
         if (!this.song_lyric.has_lyrics) {
-            if (this.renderMedia) {
+            if (this.recordings.length) {
                 this.bottomMode = 2;
             }
-            if (this.renderScores) {
+            if (this.scores.length) {
                 this.topMode = 1;
             } else if (this.renderTranslations) {
                 this.topMode = 2;

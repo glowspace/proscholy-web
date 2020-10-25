@@ -9,7 +9,7 @@
             </nuxt-link>
             <a
                 v-else-if="['IMAGE', 'YOUTUBE', 'VIDEO', 'IFRAME', 'PDF'].includes(type)"
-                :href="mediaLink" target="_blank" @click="openBP($event, link, type)" :class="classes"
+                :href="link" target="_blank" @click.prevent="openBP($event)" :class="classes"
             >
                 <slot></slot>
             </a>
@@ -27,7 +27,7 @@
 
 // SUPPORTED MEDIA TYPES
 
-// see https://github.com/proscholy/api.regenschori.cz/blob/development/graphql/news.graphql
+// see https://github.com/proscholy/regenschori-api/blob/development/graphql/news.graphql
 // respectively the enum LinkType in the graphql schema
 
 import BigPicture from 'bigpicture';
@@ -60,40 +60,27 @@ export default {
         };
     },
 
-    computed: {
-        mediaLink() {
-            if (this.type == 'PDF' && this.browser && !this.browser.satisfies(this.supportPdfIframesCondition)) {
-                return 'https://docs.google.com/viewerng/viewer?url=' + this.link;
-            }
-
-            return this.link;
-        }
-    },
-
     methods: {
-        openBP(e, link, type) {
-            switch (type) {
+        openBP(e) {
+            switch (this.type) {
                 case 'IMAGE':
-                    BigPicture({el: e.target, imgSrc: link});
+                    BigPicture({el: e.target, imgSrc: this.link});
                     break;
 
                 case 'YOUTUBE':
-                    BigPicture({el: e.target, ytSrc: link.replace(/.*(([?&]v=)|(\/))([^?&]+).*/g, '$4')});
+                    BigPicture({el: e.target, ytSrc: this.link.replace(/.*(([?&]v=)|(\/))([^?&]+).*/g, '$4')});
                     break;
 
                 case 'VIDEO':
-                    BigPicture({el: e.target, vidSrc: link});
+                    BigPicture({el: e.target, vidSrc: this.link});
                     break;
 
                 case 'PDF':
-                    if (this.browser.satisfies(this.supportPdfIframesCondition)) {
-                        e.preventDefault();
-                        BigPicture({el: e.target, iframeSrc: link});
-                    }
+                    BigPicture({el: e.target, iframeSrc: this.link});
                     break;
 
                 default:
-                    BigPicture({el: e.target, iframeSrc: link});
+                    BigPicture({el: e.target, iframeSrc: this.link});
                     break;
             }
         }

@@ -24,6 +24,17 @@
                 <span class="songbook-name">{{ sb.songbook.name }}</span><span class="songbook-number">{{ sb.number }}</span>
             </nuxt-link>
         </div>
+
+        <div class="d-inline-flex flex-row flex-wrap align-items-start"
+            v-if="bibleRefs">
+            <a
+                class="tag tag-blue"
+                v-for="(reference, key) in bibleRefs"
+                :key="'ref' + key"
+                :href="`https://www.bibleserver.com/CEP/${reference}`"
+                target="_blank"
+            >{{ reference }}</a>
+        </div>
     </div>
 </template>
 
@@ -35,7 +46,10 @@
  * 1) related tags
  * 2) related songbooks
  * 3) liturgy approval
+ * 4) bible reference
  */
+import BibleReference from 'bible-reference/bible_reference';
+
 export default {
     name: 'Tags',
 
@@ -46,6 +60,18 @@ export default {
 
         publicSongbookRecords() {
             return this.song.songbook_records.filter(sb => !sb.songbook.is_private)
+        },
+
+        bibleRefs() {
+            if (this.song.bible_refs_src) {
+                const lines = this.song.bible_refs_src.split('\n');
+                const bib_refs = lines.map(l => BibleReference.fromEuropean(l));
+                const lines_cz = bib_refs.flatMap(r => r.toCzechStrings());
+
+                return lines_cz;
+            }
+
+            return false;
         }
     }
 };

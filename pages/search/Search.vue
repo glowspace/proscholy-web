@@ -18,7 +18,7 @@
                                 id="search-home"
                                 placeholder="Zadejte název písně, část textu nebo jméno autora"
                                 v-model="search_string"
-                                v-on:keyup.enter="inputEnter()"
+                                @keyup.enter="inputEnter()"
                                 autofocus
                             />
                             <button
@@ -83,7 +83,7 @@
                         >
                             <a
                                 class="btn btn-secondary float-right fixed-top position-sticky"
-                                v-on:click="displayFilter = false"
+                                @click="displayFilter = false"
                             >
                                 <i class="fas fa-times pr-0"></i>
                             </a>
@@ -96,8 +96,8 @@
                                 :sort.sync="sort"
                                 :descending.sync="descending"
                                 :search-string="search_string"
-                                v-on:refresh-seed="refreshSeed"
-                                v-on:input="updateHistoryState"
+                                @refresh-seed="refreshSeed"
+                                @input="updateHistoryState"
                             ></Filters>
                         </div>
                     </div>
@@ -123,12 +123,12 @@
                                     :sort="parseInt(sort)"
                                     :descending="descending"
                                     :seed="parseInt(seed)"
-                                    v-on:query-loaded="queryLoaded"
+                                    @query-loaded="queryLoaded"
                                 ></SongsList>
                                 <AuthorsList
                                     v-else
                                     :search-string="search_string"
-                                    v-on:query-loaded="queryLoaded"
+                                    @query-loaded="queryLoaded"
                                 ></AuthorsList>
                             </div>
                         </div>
@@ -146,8 +146,8 @@
                                 :sort.sync="sort"
                                 :descending.sync="descending"
                                 :search-string="search_string"
-                                v-on:refresh-seed="refreshSeed"
-                                v-on:input="updateHistoryState"
+                                @refresh-seed="refreshSeed"
+                                @input="updateHistoryState"
                             ></Filters>
                         </div>
                     </div>
