@@ -48,7 +48,7 @@
  * 3) liturgy approval
  * 4) bible reference
  */
-import BibleReference from "bible-reference/bible_reference";
+import BibleReference from 'bible-reference/bible_reference';
 
 export default {
     name: 'Tags',
