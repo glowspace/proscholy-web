@@ -5,7 +5,7 @@
                 <div class="card-header p-1 song-links">
                     <div class="d-inline-block">
                         <a
-                            v-if="renderScores"
+                            v-if="scores.length"
                             class="btn btn-secondary"
                             :class="[{ chosen: topMode == 1 }, { 'font-weight-bold': song_lyric.lilypond_svg }]"
                             @click="topMode = topMode == 1 ? 0 : 1"
@@ -13,6 +13,15 @@
                             <i class="fas fa-file-alt"></i>
                             <span class="d-none d-sm-inline">Noty</span>
                             <span v-if="song_lyric.lilypond_svg">!</span>
+                        </a>
+                        <a
+                            v-if="otherExternals.length"
+                            class="btn btn-secondary"
+                            :class="[{ chosen: topMode == 3 }]"
+                            @click="topMode = topMode == 3 ? 0 : 3"
+                        >
+                            <i class="fas fa-link"></i>
+                            <span class="d-none d-sm-inline">Další materiály</span>
                         </a>
                         <a
                             v-if="renderTranslations"
@@ -68,15 +77,7 @@
                                             :key="index"
                                             :line="true"
                                             :index="index"
-                                            :url="external.url"
-                                            :media-id="external.media_id"
-                                            :is-uploaded="external.is_uploaded"
-                                            :caption="external.caption"
-                                            :tags-instrumentation="external.tags_instrumentation"
-                                            :content-type="external.content_type"
-                                            :content-type-string="external.content_type_string"
-                                            :media-type="external.media_type"
-                                            :authors="external.authors"
+                                            :external="external"
                                             :song-name="song_lyric.name"
                                         ></external>
                                     </tbody>
@@ -88,14 +89,30 @@
                                     style="pointer-events:none"
                                 ></div>
                             </div>
-                            <div class="row" v-else>
-                                <span v-if="$apollo.loading">
-                                    <i>Načítám...</i>
-                                </span>
-
-                                <span v-else>
-                                    <i>Žádné noty nebyly nalezeny.</i>
-                                </span>
+                        </div>
+                    </div>
+                    <!-- other externals -->
+                    <div v-show="topMode === 3">
+                        <div class="overflow-auto toolbox toolbox-u">
+                            <a
+                                class="btn btn-secondary float-right fixed-top position-sticky cross"
+                                @click="topMode = 0"
+                            >
+                                <i class="fas fa-times pr-0"></i>
+                            </a>
+                            <div class="row ml-0" v-if="!$apollo.loading">
+                                <table class="table m-0">
+                                    <tbody>
+                                        <external
+                                            v-for="(external, index) in otherExternals"
+                                            :key="index"
+                                            :line="true"
+                                            :index="index"
+                                            :external="external"
+                                            :song-name="song_lyric.name"
+                                        ></external>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -149,15 +166,6 @@
                                         </translation-line>
                                     </tbody>
                                 </table>
-                            </div>
-
-                            <div class="row" v-else>
-                                <span v-if="$apollo.loading">
-                                    <i>Načítám...</i>
-                                </span>
-                                <span v-else>
-                                    <i>Žádné překlady nebyly nalezeny.</i>
-                                </span>
                             </div>
                         </div>
                     </div>
@@ -292,26 +300,10 @@
                                         <external
                                             :line="false"
                                             :index="index"
-                                            :url="external.url"
-                                            :media-id="external.media_id"
-                                            :is-uploaded="external.is_uploaded"
-                                            :caption="external.caption"
-                                            :tags-instrumentation="external.tags_instrumentation"
-                                            :content-type="external.content_type"
-                                            :content-type-string="external.content_type_string"
-                                            :media-type="external.media_type"
-                                            :authors="external.authors"
+                                            :external="external"
                                             :song-name="song_lyric.name"
                                         ></external>
                                     </div>
-                                </div>
-                                <div v-else>
-                                    <span v-if="$apollo.loading">
-                                        <i>Načítám...</i>
-                                    </span>
-                                    <span v-else>
-                                        <i>Žádná nahrávka nebyla nalezena.</i>
-                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -327,7 +319,7 @@
                             </a>
                             <a
                                 class="btn btn-secondary"
-                                v-if="renderRecordings"
+                                v-if="recordings.length"
                                 :class="{ chosen: bottomMode == 2 }"
                                 @click="bottomMode = bottomMode == 2 ? 0 : 2"
                             >
@@ -415,14 +407,14 @@
             <div
                 class="card card-blue mb-3 d-none d-lg-flex"
                 @click="topMode = 1"
-                v-if="renderScores"
+                v-if="scores.length"
             >
                 <div class="card-header media-opener py-2 rounded"><i class="fas fa-file-alt"></i> Zobrazit notové zápisy</div>
             </div>
             <div
                 class="card card-green mb-3 d-none d-lg-flex"
                 @click="bottomMode = 2"
-                v-if="renderRecordings"
+                v-if="recordings.length"
             >
                 <div class="card-header media-opener py-2"><i class="fas fa-headphones"></i> Dostupné nahrávky<span class="d-none d-xl-inline"> a videa</span></div>
                 <div class="media-opener" v-if="mediaTypes[0]"><i class="fab fa-spotify text-success"></i> Spotify</div>
@@ -555,22 +547,18 @@ export default {
             }
         },
 
+        otherExternals: {
+            get() {
+                return this.song_lyric.externals.filter(ext =>
+                    ext.content_type != "RECORDING" && ext.content_type != "SCORE"
+                );
+            }
+        },
+
         renderTranslations: {
             get() {
                 // if SongLyric is an arrangement, then .song property is undefined
                 return (this.song_lyric.song && this.song_lyric.song.song_lyrics.length > 1);
-            }
-        },
-
-        renderRecordings: {
-            get() {
-                return this.recordings.length > 0;
-            }
-        },
-
-        renderScores: {
-            get() {
-                return this.scores.length > 0;
             }
         },
 
@@ -638,10 +626,10 @@ export default {
 
     mounted() {
         if (!this.song_lyric.has_lyrics) {
-            if (this.renderRecordings) {
+            if (this.recordings.length) {
                 this.bottomMode = 2;
             }
-            if (this.renderScores) {
+            if (this.scores.length) {
                 this.topMode = 1;
             } else if (this.renderTranslations) {
                 this.topMode = 2;

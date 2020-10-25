@@ -9,7 +9,7 @@
             </nuxt-link>
             <a
                 v-else-if="['IMAGE', 'YOUTUBE', 'VIDEO', 'IFRAME', 'PDF'].includes(type)"
-                :href="mediaLink" target="_blank" @click.prevent="openBP($event)" :class="classes"
+                :href="link" target="_blank" @click.prevent="openBP($event)" :class="classes"
             >
                 <slot></slot>
             </a>
@@ -60,17 +60,6 @@ export default {
         };
     },
 
-    computed: {
-        mediaLink() {
-            if (this.type == 'PDF' && this.browser && !this.browser.satisfies(this.supportPdfIframesCondition)) {
-                // todo pdf viewer
-                return this.link;
-            }
-
-            return this.link;
-        }
-    },
-
     methods: {
         openBP(e) {
             switch (this.type) {
@@ -87,7 +76,7 @@ export default {
                     break;
 
                 case 'PDF':
-                    BigPicture({el: e.target, iframeSrc: this.mediaLink});
+                    BigPicture({el: e.target, iframeSrc: this.link});
                     break;
 
                 default:
