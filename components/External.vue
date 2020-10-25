@@ -140,7 +140,7 @@ export default {
         mediaLink() {
             if (this.external.media_type == 'spotify') {
                 return 'https://open.spotify.com/track/' + this.external.media_id;
-            } else if (this.external.media_type == 'file/pdf' && process.client && this.browser && !this.browser.satisfies(this.supportPdfIframesCondition)) {
+            } else if (this.external.media_type == 'file/pdf' && this.browser && !this.browser.satisfies(this.supportPdfIframesCondition)) {
                 return '/js/ViewerJS/#/material/' + this.external.id;
             }
 
