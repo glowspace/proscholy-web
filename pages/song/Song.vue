@@ -40,6 +40,7 @@ const FETCH_SONG_LYRIC = gql`
                 url
                 media_id
                 caption
+                is_uploaded
                 tags_instrumentation {
                     id name
                 }

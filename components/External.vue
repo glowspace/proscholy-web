@@ -12,6 +12,14 @@
                 ><span><i class="far fa-eye pl-0 pr-0"></i></span>
             </a>
         </td>
+        <td class="p-0 align-middle">
+            <a
+                v-if="downloadUrl"
+                :href="downloadUrl"
+                title="Stáhnout"
+                class="p-2"
+            ><i class="fas fa-download p-0"></i></a>
+        </td>
         <td class="p-2 pl-md-5 align-middle">
             <span v-for="(author, authorIndex) in authors" :key="author.id"
                 ><span v-if="authorIndex">,</span>
@@ -31,6 +39,12 @@
                 <nuxt-link :to="author.public_route">{{ author.name }}</nuxt-link>
             </span>
             <span class="float-right">
+                <a
+                    v-if="downloadUrl"
+                    :href="downloadUrl"
+                    title="Stáhnout"
+                    class="mr-2"
+                ><i class="fas fa-download"></i></a>
                 <a
                     :href="mediaLink" target="_blank"
                     title="Otevřít v novém okně"
@@ -79,6 +93,7 @@ export default {
         index: Number,
         url: String,
         mediaId: String,
+        isUploaded: Boolean,
         caption: String,
         tagsInstrumentation: Array,
         contentType: String,
@@ -134,6 +149,14 @@ export default {
             }
 
             return this.url;
+        },
+
+        downloadUrl() {
+            if (this.isUploaded) {
+                return this.url + '?s=1';
+            }
+
+            return false;
         },
 
         displayName() {
