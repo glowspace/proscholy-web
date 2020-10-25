@@ -27,10 +27,13 @@
 
         <div class="d-inline-flex flex-row flex-wrap align-items-start"
             v-if="bibleRefs">
-            <a class="tag tag-blue" v-for="(reference, key) in bibleRefs" :key="'ref' + key"
-                :href="`https://www.bibleserver.com/CEP/${reference}`" target="_blank">
-                {{ reference }}
-            </a>
+            <a
+                class="tag tag-blue"
+                v-for="(reference, key) in bibleRefs"
+                :key="'ref' + key"
+                :href="`https://www.bibleserver.com/CEP/${reference}`"
+                target="_blank"
+            >{{ reference }}</a>
         </div>
     </div>
 </template>
