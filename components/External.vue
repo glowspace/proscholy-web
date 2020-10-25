@@ -4,12 +4,11 @@
             <a
                 class="p-2 w-100 d-inline-flex align-items-center"
                 :href="mediaLink"
-                title="Zobrazit náhled"
                 target="_blank"
             >
                 <span><i :class="[typeClass, 'pl-1 pr-3']"></i></span
                 ><span class="pr-3 w-100">{{ displayName }}</span
-                ><span><i class="far fa-eye pl-0 pr-0"></i></span>
+                ><span><i :class="[previewClass, 'pl-0 pr-0']"></i></span>
             </a>
         </td>
         <td class="p-0 align-middle">
@@ -31,8 +30,11 @@
     </tr>
     <div v-else class="card card-green mb-3">
         <div class="card-header py-2">
-            <a :href="mediaLink" target="_blank" title="Otevřít v novém okně"
-                ><i :class="typeClass"></i
+            <a
+                :href="mediaLink"
+                target="_blank"
+                title="Otevřít v novém okně"
+            ><i :class="typeClass"></i
             ></a>
             <span v-for="(author, authorIndex) in authors" :key="author.id"
                 ><span v-if="authorIndex">,</span>
@@ -44,9 +46,10 @@
                     :href="downloadUrl"
                     title="Stáhnout"
                     class="mr-2"
-                ><i class="fas fa-download"></i></a>
-                <a
-                    :href="mediaLink" target="_blank"
+                ><i class="fas fa-download"></i></a
+                ><a
+                    :href="mediaLink"
+                    target="_blank"
                     title="Otevřít v novém okně"
                 ><i class="fas fa-external-link-alt pr-0"></i></a>
             </span>
@@ -132,7 +135,7 @@ export default {
                 );
             } else if (this.mediaType == 'youtube') {
                 return 'https://www.youtube.com/embed/' + this.mediaId;
-            } else if (this.mediaType == 'file/pdf' && this.browser && !this.browser.satisfies(this.supportPdfIframesCondition)) {
+            } else if (this.mediaType == 'file/pdf') {
                 // todo pdf viewer
                 return this.url;
             }
@@ -216,6 +219,14 @@ export default {
             }
 
             return 'fas fa-link';
+        },
+
+        previewClass() {
+            if (this.contentType == 'RECORDING') {
+                return 'far fa-play-circle';
+            }
+
+            return 'far fa-eye';
         }
     }
 };
