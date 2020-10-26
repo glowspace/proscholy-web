@@ -1,93 +1,93 @@
 <template>
-    <client-only>
-        <!-- client only because of the reactive href -->
-        <tr v-if="line">
-            <td class="p-0">
-                <a
-                    class="p-2 w-100 d-inline-flex align-items-center"
-                    :href="mediaLink"
-                    target="_blank"
-                >
-                    <span><i :class="[typeClass, 'pl-1 pr-3']"></i></span
-                    ><span class="pr-3 w-100">{{ displayName }}</span
-                    ><span><i :class="[previewClass, 'pl-0 pr-0']"></i></span>
-                </a>
-            </td>
-            <td class="p-0 align-middle">
+    <tr v-if="line">
+        <td class="p-0">
+            <a
+                class="p-2 w-100 d-inline-flex align-items-center"
+                :href="mediaLink"
+                target="_blank"
+                @click="openPreview($event)"
+            >
+                <span><i :class="[typeClass, 'pl-1 pr-3']"></i></span
+                ><span class="pr-3 w-100">{{ displayName }}</span
+                ><span><i :class="[previewClass, 'pl-0 pr-0']"></i></span>
+            </a>
+        </td>
+        <td class="p-0 align-middle">
+            <a
+                v-if="downloadUrl"
+                :href="downloadUrl"
+                title="Stáhnout"
+                class="p-2"
+            ><i class="fas fa-download p-0"></i></a>
+        </td>
+        <td class="p-2 pl-md-5 align-middle">
+            <span v-for="(author, authorIndex) in external.authors" :key="author.id"
+                ><span v-if="authorIndex">,</span>
+                <nuxt-link :to="author.public_route" class="text-secondary">{{
+                    author.name
+                }}</nuxt-link>
+            </span>
+        </td>
+    </tr>
+    <div v-else class="card card-green mb-3">
+        <div class="card-header py-2">
+            <a
+                :href="mediaLink"
+                target="_blank"
+                title="Otevřít v novém okně"
+                @click="openPreview($event)"
+            ><i :class="typeClass"></i
+            ></a>
+            <span v-for="(author, authorIndex) in external.authors" :key="author.id"
+                ><span v-if="authorIndex">,</span>
+                <nuxt-link :to="author.public_route">{{ author.name }}</nuxt-link>
+            </span>
+            <span class="float-right">
                 <a
                     v-if="downloadUrl"
                     :href="downloadUrl"
                     title="Stáhnout"
-                    class="p-2"
-                ><i class="fas fa-download p-0"></i></a>
-            </td>
-            <td class="p-2 pl-md-5 align-middle">
-                <span v-for="(author, authorIndex) in external.authors" :key="author.id"
-                    ><span v-if="authorIndex">,</span>
-                    <nuxt-link :to="author.public_route" class="text-secondary">{{
-                        author.name
-                    }}</nuxt-link>
-                </span>
-            </td>
-        </tr>
-        <div v-else class="card card-green mb-3">
-            <div class="card-header py-2">
-                <a
+                    class="mr-2"
+                ><i class="fas fa-download"></i></a
+                ><a
                     :href="mediaLink"
                     target="_blank"
                     title="Otevřít v novém okně"
-                ><i :class="typeClass"></i
-                ></a>
-                <span v-for="(author, authorIndex) in external.authors" :key="author.id"
-                    ><span v-if="authorIndex">,</span>
-                    <nuxt-link :to="author.public_route">{{ author.name }}</nuxt-link>
-                </span>
-                <span class="float-right">
-                    <a
-                        v-if="downloadUrl"
-                        :href="downloadUrl"
-                        title="Stáhnout"
-                        class="mr-2"
-                    ><i class="fas fa-download"></i></a
-                    ><a
-                        :href="mediaLink"
-                        target="_blank"
-                        title="Otevřít v novém okně"
-                    ><i class="fas fa-external-link-alt pr-0"></i></a>
-                </span>
-            </div>
-
-            <iframe
-                v-if="['spotify', 'soundcloud'].includes(external.media_type)"
-                :src="source"
-                width="100%"
-                :height="external.media_type == 'spotify' ? 80 : 120"
-                frameborder="0"
-                scrolling="no"
-                allowtransparency="true"
-                allow="encrypted-media"
-            ></iframe>
-            <div
-                v-else-if="external.media_type == 'youtube'"
-                class="embed-responsive embed-responsive-16by9"
-            >
-                <iframe :src="source" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <audio
-                v-else-if="['file/mp3', 'file/wav', 'file/aac', 'file/flac'].includes(external.media_type)"
-                :src="source"
-                controls
-                class="w-100"
-            >Váš prohlížeč bohužel nepodporuje přehrávání zvukových souborů.</audio>
-            <iframe
-                v-else
-                :src="source"
-                frameborder="0"
-                width="100%"
-                :height="300"
-            ></iframe>
+                    @click="openPreview($event)"
+                ><i class="fas fa-external-link-alt pr-0"></i></a>
+            </span>
         </div>
-    </client-only>
+
+        <iframe
+            v-if="['spotify', 'soundcloud'].includes(external.media_type)"
+            :src="source"
+            width="100%"
+            :height="external.media_type == 'spotify' ? 80 : 120"
+            frameborder="0"
+            scrolling="no"
+            allowtransparency="true"
+            allow="encrypted-media"
+        ></iframe>
+        <div
+            v-else-if="external.media_type == 'youtube'"
+            class="embed-responsive embed-responsive-16by9"
+        >
+            <iframe :src="source" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <audio
+            v-else-if="['file/mp3', 'file/wav', 'file/aac', 'file/flac'].includes(external.media_type)"
+            :src="source"
+            controls
+            class="w-100"
+        >Váš prohlížeč bohužel nepodporuje přehrávání zvukových souborů.</audio>
+        <iframe
+            v-else
+            :src="source"
+            frameborder="0"
+            width="100%"
+            :height="300"
+        ></iframe>
+    </div>
 </template>
 
 <script>
@@ -131,7 +131,7 @@ export default {
             } else if (this.external.media_type == 'youtube') {
                 return 'https://www.youtube.com/embed/' + this.external.media_id;
             } else if (this.external.media_type == 'file/pdf') {
-                return '/js/ViewerJS/#/material/' + this.external.id;
+                return '/js/ViewerJS/#/material/' + this.external.id + '.pdf';
             }
 
             return this.external.url;
@@ -140,8 +140,6 @@ export default {
         mediaLink() {
             if (this.external.media_type == 'spotify') {
                 return 'https://open.spotify.com/track/' + this.external.media_id;
-            } else if (this.external.media_type == 'file/pdf' && this.browser && !this.browser.satisfies(this.supportPdfIframesCondition)) {
-                return '/js/ViewerJS/#/material/' + this.external.id;
             }
 
             return this.external.url;
@@ -220,6 +218,15 @@ export default {
             }
 
             return 'far fa-eye';
+        }
+    },
+
+    methods: {
+        openPreview(e) {
+            if (this.external.media_type == 'file/pdf' && this.browser && !this.browser.satisfies(this.supportPdfIframesCondition)) {
+                e.preventDefault();
+                window.open('/js/ViewerJS/#/material/' + this.external.id + '.pdf', '_blank');
+            }
         }
     }
 };
