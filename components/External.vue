@@ -69,67 +69,69 @@
                     @click="showIframe = !showIframe"
                 ><i class="fas fa-plus"></i></a>
             </div>
-            <table class="w-100 external-table">
-                <tr>
-                    <td colspan="2">
-                        <span class="d-flex">
-                            <a
-                                class="w-100 d-inline-flex"
-                                :href="mediaLink"
-                                target="_blank"
-                                @click="openPreview($event)"
-                            >
-                                <span class="px-0"><i :class="typeClass"></i></span>
-                                <span class="pl-2 pr-3 w-100 font-weight-bold">{{ displayName }}</span>
-                                <span><i class="fas fa-external-link-alt"></i></span>
-                            </a>
-                            <a
-                                v-if="downloadUrl"
-                                :href="downloadUrl"
-                                title="Stáhnout"
-                                class="pl-3"
-                            ><i class="fas fa-download p-0"></i></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr v-if="external.tags_instrumentation.length">
-                    <td>Instrumentace:</td>
-                    <td>
-                        <span v-for="(tag, tagIndex) in external.tags_instrumentation" :key="tag.id">
-                            <span v-if="tagIndex">,</span>
-                            <span>{{ tag.name }}</span>
-                        </span>
-                    </td>
-                </tr>
-                <tr v-if="external.catalog_number">
-                    <td>Katalogové číslo:</td>
-                    <td>{{ external.catalog_number }}</td>
-                </tr>
-                <tr v-if="external.authors.length">
-                    <td v-if="external.authors.length == 1">Autor:</td>
-                    <td v-else>Autoři:</td>
-                    <td>
-                        <span v-for="(author, authorIndex) in external.authors" :key="author.id">
-                            <span v-if="authorIndex">,</span>
-                            <nuxt-link :to="author.public_route" class="text-secondary">{{
-                                author.name
-                            }}</nuxt-link>
-                        </span>
-                    </td>
-                </tr>
-                <tr v-if="external.editor">
-                    <td>Editor:</td>
-                    <td>{{ external.editor }}</td>
-                </tr>
-                <tr v-if="external.published_by">
-                    <td>Publikoval:</td>
-                    <td>{{ external.published_by }}</td>
-                </tr>
-                <tr v-if="external.copyright">
-                    <td>Copyright:</td>
-                    <td>{{ external.copyright }}</td>
-                </tr>
-            </table>
+            <div class="flex-grow-1">
+                <table class="w-100 external-table">
+                    <tr>
+                        <td colspan="2">
+                            <span class="d-flex">
+                                <a
+                                    class="w-100 d-inline-flex"
+                                    :href="mediaLink"
+                                    target="_blank"
+                                    @click="openPreview($event)"
+                                >
+                                    <span class="px-0"><i :class="typeClass"></i></span>
+                                    <span class="pl-2 pr-3 w-100 font-weight-bold">{{ displayName }}</span>
+                                    <span><i class="fas fa-external-link-alt"></i></span>
+                                </a>
+                                <a
+                                    v-if="downloadUrl"
+                                    :href="downloadUrl"
+                                    title="Stáhnout"
+                                    class="pl-3"
+                                ><i class="fas fa-download p-0"></i></a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr v-if="external.tags_instrumentation.length">
+                        <td>Instrum.</td>
+                        <td>
+                            <span v-for="(tag, tagIndex) in external.tags_instrumentation" :key="tag.id">
+                                <span v-if="tagIndex">,</span>
+                                <span>{{ tag.name }}</span>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr v-if="external.catalog_number">
+                        <td>Kat. č.</td>
+                        <td>{{ external.catalog_number }}</td>
+                    </tr>
+                    <tr v-if="external.authors.length">
+                        <td v-if="external.authors.length == 1">Autor</td>
+                        <td v-else>Autoři</td>
+                        <td>
+                            <span v-for="(author, authorIndex) in external.authors" :key="author.id">
+                                <span v-if="authorIndex">,</span>
+                                <nuxt-link :to="author.public_route">{{
+                                    author.name
+                                }}</nuxt-link>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr v-if="external.editor">
+                        <td>Editor</td>
+                        <td>{{ external.editor }}</td>
+                    </tr>
+                    <tr v-if="external.published_by">
+                        <td>Publikoval</td>
+                        <td>{{ external.published_by }}</td>
+                    </tr>
+                    <tr v-if="external.copyright">
+                        <td>Copyright</td>
+                        <td>{{ external.copyright }}</td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <div
             style="font-size:0"
@@ -253,7 +255,7 @@ export default {
             } else if (this.external.media_type && this.external.media_type.substring(0, 4) == 'file' && this.external.media_id) {
                 name += this.external.media_id;
             } else {
-                name += this.songName + ' – ' + this.external.content_type_string + ' č. ' + (this.index + 1);
+                name += this.songName + ' – ' + this.external.content_type_string + ' č. ' + (this.index + 1);
             }
 
             if (this.external.tags_instrumentation.length && !this.isRegenschori) {
