@@ -109,7 +109,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "proscholy.utilities/external@1.0.9": {
+    "proscholy.utilities/external@1.0.10": {
         "files": [
             {
                 "relativePath": "components/External.vue",

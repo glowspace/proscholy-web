@@ -1,6 +1,6 @@
 <template>
     <tr v-if="line">
-        <td class="p-0">
+        <td class="p-0 align-middle">
             <a
                 class="p-2 w-100 d-inline-flex align-items-center"
                 :href="mediaLink"
