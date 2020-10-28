@@ -228,7 +228,7 @@ export default {
             } else if (this.external.media_type == 'youtube') {
                 return 'https://www.youtube-nocookie.com/embed/' + this.external.media_id + (this.external.media_id.includes('?') ? '&' : '?') + 'rel=0';
             } else if (this.external.media_type == 'file/pdf') {
-                return '/js/ViewerJS/#/material/' + this.external.id + '.pdf';
+                return 'https://zpevnik.proscholy.cz/js/ViewerJS/#/material/' + this.external.id + '.pdf';
             }
 
             return this.external.url;
@@ -330,7 +330,7 @@ export default {
         openPreview(e) {
             if (this.external.media_type == 'file/pdf' && this.browser && !this.browser.satisfies(this.supportPdfIframesCondition)) {
                 e.preventDefault();
-                window.open('/js/ViewerJS/#/material/' + this.external.id + '.pdf', '_blank');
+                window.open('https://zpevnik.proscholy.cz/js/ViewerJS/#/material/' + this.external.id + '.pdf', '_blank');
             }
         }
     }
