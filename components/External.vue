@@ -163,7 +163,7 @@
             <div
                 v-else-if="['file/jpeg', 'file/png', 'file/gif'].includes(external.media_type)"
                 class="overflow-auto"
-                style="height:300px"
+                :style="'height:' + height"
             >
                 <img
                     :src="source"
@@ -174,8 +174,7 @@
                 v-else
                 :src="source"
                 frameborder="0"
-                width="100%"
-                :height="300"
+                :style="'width:100%;height:' + height"
                 allowfullscreen
             ></iframe>
         </div>
@@ -191,7 +190,11 @@ export default {
         isRegenschori: Boolean,
         index: Number,
         external: Object,
-        songName: String
+        songName: String,
+        height: {
+            type: String,
+            default: '300px'
+        }
     },
 
     data() {
