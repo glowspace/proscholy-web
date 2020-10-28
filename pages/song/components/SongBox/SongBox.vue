@@ -5,7 +5,7 @@
                 <div class="card-header p-1 song-links">
                     <div class="d-inline-block">
                         <a
-                            v-if="scores.length"
+                            v-if="scores.length || song_lyric.lilypond_svg"
                             class="btn btn-secondary"
                             :class="[{ chosen: topMode == 1 }, { 'font-weight-bold': song_lyric.lilypond_svg }]"
                             @click="topMode = topMode == 1 ? 0 : 1"
@@ -407,7 +407,7 @@
             <div
                 class="card card-blue mb-3 d-none d-lg-flex"
                 @click="topMode = 1"
-                v-if="scores.length"
+                v-if="scores.length || song_lyric.lilypond_svg"
             >
                 <div class="card-header media-opener py-2 rounded"><i class="fas fa-file-alt"></i> Zobrazit notové zápisy</div>
             </div>
@@ -629,7 +629,7 @@ export default {
             if (this.recordings.length) {
                 this.bottomMode = 2;
             }
-            if (this.scores.length) {
+            if (this.scores.length || this.song_lyric.lilypond_svg) {
                 this.topMode = 1;
             } else if (this.renderTranslations) {
                 this.topMode = 2;
