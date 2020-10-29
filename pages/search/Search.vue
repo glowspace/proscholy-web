@@ -155,6 +155,10 @@
 
                 <app-links v-if="init" />
 
+                <a href="http://www.musicasacra.cz/" target="_blank" class="footer-logo">
+                    <img src="/img/musica-sacra.svg" />
+                </a>
+
                 <a
                     class="btn btn-secondary mb-0 search-report bg-transparent"
                     title="Nahlásit"
