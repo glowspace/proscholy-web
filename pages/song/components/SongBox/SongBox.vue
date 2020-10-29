@@ -85,7 +85,7 @@
                                 <div
                                     v-if="song_lyric.lilypond_svg && topMode === 1"
                                     v-html="song_lyric.lilypond_svg"
-                                    class="pt-3 w-100 text-center"
+                                    class="pt-3 w-100 text-center lilypond-container"
                                     style="pointer-events:none"
                                 ></div>
                             </div>

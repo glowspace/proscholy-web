@@ -255,6 +255,15 @@ span.song-part-tag {
     }
 }
 
+/*! purgecss start ignore */
+.lilypond-container {
+    svg {
+        max-width: 100%;
+        height: auto;
+    }
+}
+/*! purgecss end ignore */
+
 .nosleep-caption {
     position: absolute;
     bottom: 0;
