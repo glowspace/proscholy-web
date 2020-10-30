@@ -34,21 +34,18 @@ export default {
     },
 
     apollo: {
+        $prefetch: false,
         tags_generic: {
-            query: fetchFiltersQuery,
-            prefetch: false
+            query: fetchFiltersQuery
         },
         tags_liturgy_part: {
-            query: fetchFiltersQuery,
-            prefetch: false
+            query: fetchFiltersQuery
         },
         tags_liturgy_period: {
-            query: fetchFiltersQuery,
-            prefetch: false
+            query: fetchFiltersQuery
         },
         tags_saints: {
-            query: fetchFiltersQuery,
-            prefetch: false
+            query: fetchFiltersQuery
         }
     },
 

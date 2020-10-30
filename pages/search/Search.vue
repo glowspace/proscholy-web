@@ -1,175 +1,173 @@
 <template>
-    <div class="background-home">
-        <div class="container">
-            <div :class="[init ? 'home-init' : 'home-afterinit']">
-                <logo />
+    <div class="container">
+        <div :class="[init ? 'home-init' : 'home-afterinit']">
+            <logo />
 
-                <div
-                    :class="[
-                            { 'fixed-top position-sticky': !init },
-                            'row mt-n4 justify-content-center zindex-lower'
-                    ]"
-                >
-                    <div class="col-lg-8 px-1 pt-5 pb-3 search-column">
-                        <div class="search-wrapper shadow">
-                            <input
-                                type="search"
-                                class="search-home"
-                                id="search-home"
-                                placeholder="Zadejte název písně, část textu nebo jméno autora"
-                                v-model="search_string"
-                                @keyup.enter="inputEnter()"
-                                autofocus
-                            />
-                            <button
-                                type="button"
-                                class="search-submit"
-                                v-if="init"
-                                @click="inputEnter()"
-                            >
-                                <i class="fas fa-search d-none d-sm-inline"></i>
-                            </button>
-                            <button
-                                type="button"
-                                class="search-submit d-none d-lg-inline"
-                                v-if="!init"
-                                @click="inputEnter()"
-                            >
-                                <i class="fas fa-search" v-if="!songLoading"></i>
-                                <span
-                                    v-else
-                                    class="spinner-border spinner-border-sm align-middle"
-                                    role="status"
-                                    aria-hidden="true"
-                                ></span>
-                            </button>
-                            <button
-                                type="button"
-                                class="search-submit d-lg-none"
-                                v-if="!init"
-                                :class="{
-                                    'filter-active': filters_active,
-                                    'filter-open': displayFilter
-                                }"
-                                @click="displayFilter = !displayFilter"
-                            >
-                                <i class="fas fa-filter" v-if="!songLoading"></i>
-                                <span
-                                    v-else
-                                    class="spinner-border spinner-border-sm align-middle"
-                                    role="status"
-                                    aria-hidden="true"
-                                ></span>
-                            </button>
-                        </div>
-                        <InitFilters
+            <div
+                :class="[
+                        { 'fixed-top position-sticky': !init },
+                        'row mt-n4 justify-content-center zindex-lower'
+                ]"
+            >
+                <div class="col-lg-8 px-1 pt-5 pb-3 search-column">
+                    <div class="search-wrapper shadow">
+                        <input
+                            type="search"
+                            class="search-home"
+                            id="search-home"
+                            placeholder="Zadejte název písně, část textu nebo jméno autora"
+                            v-model="search_string"
+                            @keyup.enter="inputEnter()"
+                            autofocus
+                        />
+                        <button
+                            type="button"
+                            class="search-submit"
                             v-if="init"
-                            :selected-tags.sync="selected_tags"
-                            @input="updateHistoryState(); init = false;"
-                        ></InitFilters>
-                        <div
-                            v-if="init"
-                            @click="init = false;"
-                            class="text-center pt-2 text-white"
+                            @click="inputEnter()"
                         >
-                            <a
-                                class="btn btn-outline-light display-all-songs font-weight-bold"
-                                ><i class="fas fa-chevron-down pr-1"></i> ZOBRAZIT VŠECHNY PÍSNĚ</a
-                            >
-                        </div>
-                        <div
-                            class="mx-2 d-lg-none filter-panel position-absolute"
-                            v-show="!init && displayFilter"
+                            <i class="fas fa-search d-none d-sm-inline"></i>
+                        </button>
+                        <button
+                            type="button"
+                            class="search-submit d-none d-lg-inline"
+                            v-if="!init"
+                            @click="inputEnter()"
                         >
-                            <a
-                                class="btn btn-secondary float-right fixed-top position-sticky"
-                                @click="displayFilter = false"
-                            >
-                                <i class="fas fa-times pr-0"></i>
-                            </a>
-                            <!-- filters shown only for mobile -->
-                            <Filters
-                                :selected-songbooks.sync="selected_songbooks"
-                                :selected-tags.sync="selected_tags"
-                                :selected-languages.sync="selected_languages"
-                                :show-authors.sync="showAuthors"
-                                :sort.sync="sort"
-                                :descending.sync="descending"
-                                :search-string="search_string"
-                                @refresh-seed="refreshSeed"
-                                @input="updateHistoryState"
-                            ></Filters>
-                        </div>
+                            <i class="fas fa-search" v-if="!songLoading"></i>
+                            <span
+                                v-else
+                                class="spinner-border spinner-border-sm align-middle"
+                                role="status"
+                                aria-hidden="true"
+                            ></span>
+                        </button>
+                        <button
+                            type="button"
+                            class="search-submit d-lg-none"
+                            v-if="!init"
+                            :class="{
+                                'filter-active': filters_active,
+                                'filter-open': displayFilter
+                            }"
+                            @click="displayFilter = !displayFilter"
+                        >
+                            <i class="fas fa-filter" v-if="!songLoading"></i>
+                            <span
+                                v-else
+                                class="spinner-border spinner-border-sm align-middle"
+                                role="status"
+                                aria-hidden="true"
+                            ></span>
+                        </button>
                     </div>
-                    <div class="col-lg-4 search-balance"></div>
-                </div>
-                <div class="row justify-content-center text-center pt-4" v-show="init">
-                    <div class="col-lg-8 search-column">
-                        <News><div class="news-opener" @click="init = false;"></div></News>
-                    </div>
-                    <div class="col-lg-4 search-balance"></div>
-                </div>
-                <div class="row" v-show="!init">
-                    <div class="col-lg-8">
-                        <News v-show="!filters_active && !search_string" />
-                        <div class="card">
-                            <div class="card-body p-0">
-                                <SongsList
-                                    v-if="!showAuthors"
-                                    :search-string="search_string"
-                                    :selected-tags="selected_tags"
-                                    :selected-songbooks="selected_songbooks"
-                                    :selected-languages="selected_languages"
-                                    :sort="parseInt(sort)"
-                                    :descending="descending"
-                                    :seed="parseInt(seed)"
-                                    @query-loaded="queryLoaded"
-                                ></SongsList>
-                                <AuthorsList
-                                    v-else
-                                    :search-string="search_string"
-                                    @query-loaded="queryLoaded"
-                                ></AuthorsList>
-                            </div>
-                        </div>
+                    <InitFilters
+                        v-if="init"
+                        :selected-tags.sync="selected_tags"
+                        @input="updateHistoryState(); init = false;"
+                    ></InitFilters>
+                    <div
+                        v-if="init"
+                        @click="init = false;"
+                        class="text-center pt-2 text-white"
+                    >
+                        <a
+                            class="btn btn-outline-light display-all-songs font-weight-bold"
+                            ><i class="fas fa-chevron-down pr-1"></i> ZOBRAZIT VŠECHNY PÍSNĚ</a
+                        >
                     </div>
                     <div
-                        class="col-lg-4 d-none d-lg-block desktop-filter-container"
+                        class="mx-2 d-lg-none filter-panel position-absolute"
+                        v-show="!init && displayFilter"
                     >
-                        <div class="fixed-top position-sticky">
-                            <!-- filters shown only for desktop -->
-                            <Filters
-                                :selected-songbooks.sync="selected_songbooks"
-                                :selected-tags.sync="selected_tags"
-                                :selected-languages.sync="selected_languages"
-                                :show-authors.sync="showAuthors"
-                                :sort.sync="sort"
-                                :descending.sync="descending"
+                        <a
+                            class="btn btn-secondary float-right fixed-top position-sticky"
+                            @click="displayFilter = false"
+                        >
+                            <i class="fas fa-times pr-0"></i>
+                        </a>
+                        <!-- filters shown only for mobile -->
+                        <Filters
+                            :selected-songbooks.sync="selected_songbooks"
+                            :selected-tags.sync="selected_tags"
+                            :selected-languages.sync="selected_languages"
+                            :show-authors.sync="showAuthors"
+                            :sort.sync="sort"
+                            :descending.sync="descending"
+                            :search-string="search_string"
+                            @refresh-seed="refreshSeed"
+                            @input="updateHistoryState"
+                        ></Filters>
+                    </div>
+                </div>
+                <div class="col-lg-4 search-balance"></div>
+            </div>
+            <div class="row justify-content-center text-center pt-4" v-show="init">
+                <div class="col-lg-8 search-column">
+                    <News><div class="news-opener" @click="init = false;"></div></News>
+                </div>
+                <div class="col-lg-4 search-balance"></div>
+            </div>
+            <div class="row" v-show="!init">
+                <div class="col-lg-8">
+                    <News v-show="!filters_active && !search_string" />
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <SongsList
+                                v-if="!showAuthors"
                                 :search-string="search_string"
-                                @refresh-seed="refreshSeed"
-                                @input="updateHistoryState"
-                            ></Filters>
+                                :selected-tags="selected_tags"
+                                :selected-songbooks="selected_songbooks"
+                                :selected-languages="selected_languages"
+                                :sort="parseInt(sort)"
+                                :descending="descending"
+                                :seed="parseInt(seed)"
+                                @query-loaded="queryLoaded"
+                            ></SongsList>
+                            <AuthorsList
+                                v-else
+                                :search-string="search_string"
+                                @query-loaded="queryLoaded"
+                            ></AuthorsList>
                         </div>
                     </div>
                 </div>
-
-                <app-links v-if="init" />
-
-                <a href="http://www.musicasacra.cz/" target="_blank" class="footer-logo">
-                    <img src="/img/musica-sacra.svg" />
-                </a>
-
-                <a
-                    class="btn btn-secondary mb-0 search-report bg-transparent"
-                    title="Nahlásit"
-                    :href="
-                        'https://docs.google.com/forms/d/e/1FAIpQLScmdiN_8S_e8oEY_jfEN4yJnLq8idxUR5AJpFmtrrnvd1NWRw/viewform?usp=pp_url&entry.1025781741=' +
-                            encodeURIComponent($route.fullPath)
-                    "
+                <div
+                    class="col-lg-4 d-none d-lg-block desktop-filter-container"
                 >
-                    <i class="fas fa-exclamation-triangle p-0"></i>
-                </a>
+                    <div class="fixed-top position-sticky">
+                        <!-- filters shown only for desktop -->
+                        <Filters
+                            :selected-songbooks.sync="selected_songbooks"
+                            :selected-tags.sync="selected_tags"
+                            :selected-languages.sync="selected_languages"
+                            :show-authors.sync="showAuthors"
+                            :sort.sync="sort"
+                            :descending.sync="descending"
+                            :search-string="search_string"
+                            @refresh-seed="refreshSeed"
+                            @input="updateHistoryState"
+                        ></Filters>
+                    </div>
+                </div>
             </div>
+
+            <app-links v-if="init" />
+
+            <a href="http://www.musicasacra.cz/" target="_blank" class="footer-logo">
+                <img src="/img/musica-sacra.svg" />
+            </a>
+
+            <a
+                class="btn btn-secondary mb-0 search-report bg-transparent"
+                title="Nahlásit"
+                :href="
+                    'https://docs.google.com/forms/d/e/1FAIpQLScmdiN_8S_e8oEY_jfEN4yJnLq8idxUR5AJpFmtrrnvd1NWRw/viewform?usp=pp_url&entry.1025781741=' +
+                        encodeURIComponent($route.fullPath)
+                "
+            >
+                <i class="fas fa-exclamation-triangle p-0"></i>
+            </a>
         </div>
     </div>
 </template>
