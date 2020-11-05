@@ -295,6 +295,7 @@ span.song-part-tag {
         transition: 100ms;
         margin-bottom: -0.4em;
         color: #1d6dab;
+        user-select: none;
     }
 
     &-base {
@@ -331,11 +332,18 @@ span.song-part-tag {
         position: relative;
         background: white;
         z-index: 2;
+
+        &:not(.chord-text-spaced):after {
+            /* font-weight: bold; */
+            content: "-";
+            position: absolute;
+            user-select: none;
+        }
     }
 
-    &-text-spaced {
+    // &-text-spaced {
         // margin-right: 0.5em;
-    }
+    // }
 
     &-line {
         display: block;
