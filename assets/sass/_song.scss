@@ -34,6 +34,12 @@ $indent-space: 1.5em;
     position: relative;
 }
 
+.song-line--comment {
+    color: #767676;
+    font-style: italic;
+    font-weight: 300;
+}
+
 span.song-part-tag {
     min-width: $indent-space;
     margin-left: -$indent-space;
