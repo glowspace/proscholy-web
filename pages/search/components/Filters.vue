@@ -57,6 +57,7 @@
                 ><i class="fas fa-search mr-0"></i></a
             >
         </div>
+        <a class="mt-3 tag tag-blue" :href="regenschoriUrl + '/liturgie/aktualne'">Co hrát na mši</a>
         <div v-if="!localShowAuthors">
             <tag-category
                 heading="Liturgie – mše svatá"
@@ -137,7 +138,8 @@ export default {
                 {id: 'cr', name: 'chorvatština'},
                 {id: 'cu', name: 'staroslověnština'},
                 {id: 'mixed', name: 'vícejazyčná píseň'}
-            ]
+            ],
+            regenschoriUrl: process.env.regenschoriUrl
         };
     },
 
