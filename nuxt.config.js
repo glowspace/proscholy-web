@@ -9,7 +9,8 @@ export default {
         baseUrl: 'https://zpevnik.proscholy.cz',
         titleWebsite: 'ProScholy.cz',
         titleSeparator: ' – ',
-        adminUrl: process.env.ADMIN_URL || ''
+        adminUrl: process.env.ADMIN_URL || '',
+        regenschoriUrl: process.env.REGENSCHORI_URL || 'https://www.regenschori.cz'
     },
     /*
      ** Headers of the page
