@@ -2,7 +2,7 @@
     <div class="container">
         <div class="mt-4 mb-3">
             <div>
-                <h1 class="song-title">{{ song.name }}</h1>
+                <h1 class="song-title"><song-name :song="song"/></h1>
                 <div class="d-flex align-items-center mt-1">
                     <h4 class="song-number m-0">{{ song.song_number }}</h4>
                     <p class="song-author ml-3 mb-0">
@@ -22,6 +22,7 @@
 import SongAuthorLabel from './components/SongAuthorLabel';
 import SongBox from './components/SongBox/SongBox';
 import Tags from './components/Tags';
+import SongName from '~/components/SongName';
 
 export default {
     name: 'SongDetail',
@@ -29,7 +30,8 @@ export default {
     components: {
         SongBox,
         SongAuthorLabel,
-        Tags
+        Tags,
+        SongName
     },
 
     props: ['song']

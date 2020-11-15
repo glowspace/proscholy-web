@@ -24,6 +24,8 @@ const FETCH_SONG_LYRIC = gql`
             id
             song_number
             name
+            secondary_name_1
+            secondary_name_2
             public_route
             type
             lyrics_no_chords
