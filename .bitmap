@@ -138,6 +138,18 @@
         "origin": "AUTHORED",
         "exported": true
     },
+    "proscholy.utilities/song-name@1.0.0": {
+        "files": [
+            {
+                "relativePath": "components/SongName.vue",
+                "test": false,
+                "name": "SongName.vue"
+            }
+        ],
+        "mainFile": "components/SongName.vue",
+        "origin": "AUTHORED",
+        "exported": true
+    },
     "proscholy.utilities/translation-line@1.0.0": {
         "files": [
             {
