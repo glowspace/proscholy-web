@@ -154,7 +154,7 @@
 
             <app-links v-if="init" />
 
-            <a href="http://www.musicasacra.cz/" target="_blank" class="footer-logo">
+            <a href="http://www.musicasacra.cz/" class="footer-logo">
                 <img src="/img/musica-sacra.svg" />
             </a>
 
