@@ -32,7 +32,6 @@
                 v-for="(reference, key) in bibleRefs"
                 :key="'ref' + key"
                 :href="`https://www.bibleserver.com/CEP/${reference}`"
-                target="_blank"
             >{{ reference }}</a>
         </div>
     </div>
