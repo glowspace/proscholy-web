@@ -358,8 +358,8 @@ span.song-part-tag {
         display: block;
         position: relative;
         width: calc(100% - 0.6em);
-        height: 1.1px;
-        background: #b9b9b9;
+        height: 1px;
+        border-bottom: 1px solid #b9b9b9;
         top: -0.5em;
         right: -0.5em;
     }
