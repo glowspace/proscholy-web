@@ -62,7 +62,9 @@
                             <nuxt-link
                                 class="p-2 w-100 d-inline-block"
                                 :to="song_lyric.public_route"
-                            >{{ song_lyric.name }}</nuxt-link>
+                            >
+                                <song-name :song="song_lyric" :multiline="true"/>
+                            </nuxt-link>
                         </td>
                         <td
                             class="p-1 align-middle"
@@ -188,6 +190,7 @@ import ScrollTrigger from '~/components/Search/ScrollTrigger';
 import buildElasticSearchParams, { getSelectedTagsDcnf } from '~/components/Search/buildElasticSearchParams';
 import mergeFetchMoreResult from '~/components/Search/mergeFetchMoreResult';
 import fetchFiltersQuery from './fetchFiltersQuery.graphql';
+import SongName from '~/components/SongName';
 
 // Query
 const FETCH_ITEMS = gql`
@@ -201,6 +204,8 @@ const FETCH_ITEMS = gql`
                 id
                 song_number
                 name
+                secondary_name_1
+                secondary_name_2
                 public_route
                 lang
                 lang_string
@@ -268,7 +273,7 @@ export default {
         }
     },
 
-    components: { ScrollTrigger },
+    components: { ScrollTrigger, SongName },
 
     data() {
         return {

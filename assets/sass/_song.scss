@@ -339,12 +339,15 @@ span.song-part-tag {
         background: white;
         z-index: 2;
 
-        &:not(.chord-text-spaced):after {
-            /* font-weight: bold; */
-            content: "-";
-            position: absolute;
-            user-select: none;
-        }
+        // todo: refactor to be usable
+        // was not working with ___ lines etc.. (see Abba Otce for example)
+
+        // &:not(.chord-text-spaced):after {
+        //     /* font-weight: bold; */
+        //     content: "-";
+        //     position: absolute;
+        //     user-select: none;
+        // }
     }
 
     // &-text-spaced {
@@ -355,8 +358,8 @@ span.song-part-tag {
         display: block;
         position: relative;
         width: calc(100% - 0.6em);
-        height: 1.1px;
-        background: #b9b9b9;
+        height: 1px;
+        border-bottom: 1px solid #b9b9b9;
         top: -0.5em;
         right: -0.5em;
     }
