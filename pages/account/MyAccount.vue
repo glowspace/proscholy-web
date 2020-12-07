@@ -2,9 +2,9 @@
     <div>
         <h2>Můj účet</h2>
 
-        <div v-if="me">
-            <p>Přihlášený uživatel: {{ me.name}}</p>
-            <p>Email: {{ me.email }}</p>
+        <div v-if="logged_user">
+            <p>Přihlášený uživatel: {{ logged_user.name}}</p>
+            <!-- <p>Email: {{ me.email }}</p> -->
         </div>
 
         <!-- <h2>Zpěvníky:</h2>
@@ -38,34 +38,21 @@
 <script>
 import gql from 'graphql-tag';
 
+const userQuery = gql`
+  {
+    logged_user @client {
+      id
+      name
+    }
+  }
+`;
+
 export default {
     name: 'MyAccount',
 
     apollo: {
-        me: {
-            query: gql`
-                query {
-                    me {
-                        name
-                        email
-                    }
-                }
-            `,
-            prefetch: false
-            // variables() {
-            //     return {
-            //         search_params: this.searchParams,
-            //         page: 1,
-            //         per_page: 100
-            //     };
-            // },
-
-            // debounce: 200
-            // result(result) {
-            //     this.$emit("query-loaded", null);
-            //     this.enable_more = result.data.song_lyrics_paginated.paginatorInfo.hasMorePages;
-            //     this.results_loaded = true;
-            // },
+        logged_user: {
+            query: userQuery
         }
     },
 };

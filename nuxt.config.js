@@ -106,7 +106,7 @@ export default {
     ],
     apollo: {
         clientConfigs: {
-            default: '~/plugins/apollo-config-auth.js',
+            default: '~/plugins/apollo-config.js',
         }
     },
     proxy: {
