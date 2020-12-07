@@ -2,10 +2,12 @@
     <div>
         <h2>Můj účet</h2>
 
-        <p>Přihlášený uživatel: {{ user.name }}</p>
-        <p>Email: {{ user.email }}</p>
+        <div v-if="me">
+            <p>Přihlášený uživatel: {{ me.name}}</p>
+            <p>Email: {{ me.email }}</p>
+        </div>
 
-        <h2>Zpěvníky:</h2>
+        <!-- <h2>Zpěvníky:</h2>
 
         <ul class="list-group">
             <li
@@ -26,7 +28,7 @@
                     </li>
                 </ul>
             </li>
-        </ul>
+        </ul> -->
 
         <!-- <a @click="addNewSongbook" :disabled="new_songbook_name == ''">Přidat nový zpěvník</a>
         <input type="text" v-model="new_songbook_name"/> -->
@@ -34,7 +36,37 @@
 </template>
 
 <script>
+import gql from 'graphql-tag';
+
 export default {
-    name: 'MyAccount'
+    name: 'MyAccount',
+
+    apollo: {
+        me: {
+            query: gql`
+                query {
+                    me {
+                        name
+                        email
+                    }
+                }
+            `,
+            prefetch: false
+            // variables() {
+            //     return {
+            //         search_params: this.searchParams,
+            //         page: 1,
+            //         per_page: 100
+            //     };
+            // },
+
+            // debounce: 200
+            // result(result) {
+            //     this.$emit("query-loaded", null);
+            //     this.enable_more = result.data.song_lyrics_paginated.paginatorInfo.hasMorePages;
+            //     this.results_loaded = true;
+            // },
+        }
+    },
 };
 </script>

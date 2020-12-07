@@ -7,6 +7,7 @@ import Song from '~/pages/song/Song';
 import Author from '~/pages/author/Author';
 import Support from '~/pages/support/Support';
 import Login from '~/pages/account/Login';
+import MyAccount from '~/pages/account/MyAccount';
 
 import SongExample from '~/pages/song/components/ExperimentalRenderer/SongExample';
 
@@ -29,7 +30,7 @@ export function createRouter() {
     ];
     
     if (process.env.ENABLE_EXPERIMENTAL_ROUTES) {
-        routes.push({ path: '/muj-ucet', component: Login });
+        routes.push({ path: '/muj-ucet', component: MyAccount });
         routes.push({ path: '/renderer', component: SongExample });
     }
 
