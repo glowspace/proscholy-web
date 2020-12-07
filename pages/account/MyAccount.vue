@@ -38,21 +38,31 @@
 <script>
 import gql from 'graphql-tag';
 
-const userQuery = gql`
-  {
-    logged_user @client {
-      id
-      name
-    }
-  }
-`;
+import userQuery from '~/plugins/authQuery';
+
+// const userQuery = gql`
+//   {
+//     logged_user @client {
+//       id
+//       name
+//     }
+//   }
+// `;
 
 export default {
     name: 'MyAccount',
 
     apollo: {
         logged_user: {
-            query: userQuery
+            query: userQuery,
+            prefetch: false,
+            pollInterval: 100,
+            result(res) {
+                if (res.data && res.data.logged_user) {
+                    console.log('stop polling');
+                    this.$apollo.queries.logged_user.stop()
+                }
+            }
         }
     },
 };
