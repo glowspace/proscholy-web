@@ -115,7 +115,13 @@ export default {
             pathRewrite: {
                 '^/api': '/'
             }
-        }
+        },
+        // '/auth': {
+        //     target: process.env.SANCTUM_AUTH,
+        //     pathRewrite: {
+        //         '^/auth': '/'
+        //     }
+        // }
     },
     sentry: {
         dsn: process.env.SENTRY_DSN
