@@ -2,10 +2,12 @@
     <div>
         <h2>Můj účet</h2>
 
-        <div v-if="logged_user">
-            <p>Přihlášený uživatel: {{ logged_user.name}}</p>
+        <!-- <div v-if="logged_user"> -->
+            <!-- <p>Přihlášený uživatel: {{ logged_user.name}}</p> -->
             <!-- <p>Email: {{ me.email }}</p> -->
-        </div>
+            <auth></auth>
+            <auth></auth>
+        <!-- </div> -->
 
         <!-- <h2>Zpěvníky:</h2>
 
@@ -38,32 +40,25 @@
 <script>
 import gql from 'graphql-tag';
 
-import userQuery from '~/plugins/authQuery';
+import Auth from '~/components/Auth/Auth.vue';
 
-// const userQuery = gql`
-//   {
-//     logged_user @client {
-//       id
-//       name
-//     }
-//   }
-// `;
 
 export default {
     name: 'MyAccount',
+    components: {Auth},
 
-    apollo: {
-        logged_user: {
-            query: userQuery,
-            prefetch: false,
-            pollInterval: 100,
-            result(res) {
-                if (res.data && res.data.logged_user) {
-                    console.log('stop polling');
-                    this.$apollo.queries.logged_user.stop()
-                }
-            }
-        }
-    },
+    // apollo: {
+    //     logged_user: {
+    //         query: userQuery,
+    //         prefetch: false,
+    //         pollInterval: 100,
+    //         result(res) {
+    //             if (res.data && res.data.logged_user) {
+    //                 console.log('stop polling');
+    //                 this.$apollo.queries.logged_user.stop()
+    //             }
+    //         }
+    //     }
+    // },
 };
 </script>

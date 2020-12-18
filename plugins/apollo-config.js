@@ -7,16 +7,52 @@ import axios from 'axios';
 // IntrospectionFragmentMatcher should be used, see https://github.com/nuxt-community/apollo-module/issues/120#issuecomment-482189378
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
-import logged_user from './authQuery';
-
-// todo: setup some cache?
+// todo: setup some cache storage?
 
 const typeDefs = gql`
   type LoggedUser {
     id: ID!
     name: String!
   }
+
+  type Mutation {
+    login(id: ID, name: String): LoggedUser
+    logout: Boolean
+  }
 `;
+
+import authQuery from '~/components/Auth/authQuery';
+
+const resolvers = {
+  Mutation: {
+    login: (_, { id, name }, { cache }) => {
+      const data = {
+          logged_user: {
+              __typename: 'LoggedUser',
+              id,
+              name
+          }
+      }
+
+      cache.writeData({ data });
+      return data;
+    },
+
+    logout: (_, _a, { cache }) => {
+      const data = {
+        logged_user: {
+           __typename: 'LoggedUser',
+           id: 0,
+           name: 'no user'
+        }
+      }
+      cache.writeData({ data });
+      console.log(data);
+
+      return true;
+    }
+  }
+};
 
 export default function() {
   return {
@@ -36,7 +72,7 @@ export default function() {
     }),
 
     typeDefs,
-    resolvers: {},
+    resolvers,
     cache: new InMemoryCache(),
 
     onCacheInit: async cache => {
@@ -56,17 +92,18 @@ export default function() {
         }
 
         // todo: should we do asynchronously an user auth here????
-        axios.get('/api?query={me{id,name}}').then(res => {
-          const me = res.data.data.me;
-  
-          const data = {
-            logged_user: {
-              __typename: 'LoggedUser',
-              ...me
-            }
+        const res = await axios.get('/api?query={me{id,name}}')
+        const me = res.data.data.me;
+
+        const data = {
+          logged_user: {
+            __typename: 'LoggedUser',
+            ...me
           }
-          cache.writeData({ data });
-        });
+        }
+        cache.writeData({ data });
+        console.log(data);
+
       } else {
         // SSR is totally happy with graphql requests without the XSRF-TOKEN
         // todo: find out WHY this actually works
