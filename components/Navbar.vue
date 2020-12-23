@@ -4,7 +4,7 @@
             <div class="container">
                 <nuxt-link to="/" class="navbar-brand" id="navbar-brand">
                     <img
-                        src="/img/logo_v2.png"
+                        src="/img/logo.svg"
                         style="padding-right:10px"
                         width="60"
                         alt="logo"
@@ -33,7 +33,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
             <div class="container">
                 <nuxt-link to="/" class="btn" id="navbar-brand-small">
-                    <img src="/img/logo_v2.png" height="24" alt="logo"
+                    <img src="/img/logo.svg" height="24" alt="logo"
                 /></nuxt-link>
 
                 <nuxt-link to="/" class="btn btn-secondary" :class="[{ active: isHome }, 'btn btn-secondary']"
