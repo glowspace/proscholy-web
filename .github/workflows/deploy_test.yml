@@ -1,0 +1,12 @@
+name: production_deploy
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_MESSAGE: "Proběhl testovací deploy na zpevnik.proscholy.cz! :tada:"
+          SLACK_WEBHOOK: ${{ secrets.SLACK_DEPLOYS_WEBHOOK_URL }}
