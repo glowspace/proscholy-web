@@ -12,5 +12,5 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_DEPLOYS_WEBHOOK_URL }}
           SLACK_FOOTER: ''
           MSG_MINIMAL: true
-          SLACK_TITLE: '${{ env.GITHUB_WORKFLOW }} – ${{ github.event.repository.name }}'
+          SLACK_TITLE: '${{ github.workflow }} – ${{ github.event.repository.name }}'
           SLACK_MESSAGE: 'Proběhl testovací deploy na zpevnik.proscholy.cz! :tada:'
