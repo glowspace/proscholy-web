@@ -8,5 +8,8 @@ jobs:
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@master
         env:
+          SLACK_COLOR: "#3961ad"
           SLACK_MESSAGE: "Proběhl testovací deploy na zpevnik.proscholy.cz! :tada:"
           SLACK_WEBHOOK: ${{ secrets.SLACK_DEPLOYS_WEBHOOK_URL }}
+          SLACK_FOOTER: ""
+          MSG_MINIMAL: true
