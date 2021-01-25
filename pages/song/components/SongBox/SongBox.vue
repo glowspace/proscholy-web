@@ -52,7 +52,7 @@
                             :href="[
                                 song_lyric
                                     ? 'https://docs.google.com/forms/d/e/1FAIpQLSdTaOCzzlfZmyoCB0I_S2kSPiSZVGwDhDovyxkWB7w2LfH0IA/viewform?entry.2038741493=' +
-                                    encodeURI(song_lyric.name)
+                                    getFullName(song_lyric)
                                     : ''
                             ]"
                         >
@@ -391,7 +391,7 @@
                             :href="[
                                 song_lyric
                                     ? 'https://docs.google.com/forms/d/e/1FAIpQLSdTaOCzzlfZmyoCB0I_S2kSPiSZVGwDhDovyxkWB7w2LfH0IA/viewform?entry.2038741493=' +
-                                    encodeURI(song_lyric.name)
+                                    encodeURI(getFullName(song_lyric))
                                     : ''
                             ]"
                         >Nahlásit</a>
@@ -470,6 +470,7 @@ import Transposition from './Transposition';
 import SongLyricParts from '../Renderer/SongLyricParts.vue';
 import TranslationLine from '~/components/TranslationLine.vue';
 import External from '~/components/External.vue';
+import { getFullName } from '~/components/SongName';
 
 /**
  * This component renders white box on song detail page.
@@ -621,7 +622,9 @@ export default {
             } else if (e.key == '-' && this.autoscrollNum > 1) {
                 this.autoscrollNum--;
             }
-        }
+        },
+
+        getFullName: getFullName
     },
 
     mounted() {

@@ -23,7 +23,7 @@
                 ></a>
                 <span class="btn px-2 font-weight-bold">SOCIÁLNÍ SÍTĚ</span>
                 <a
-                    href="https://www.instagram.com/zpevnik.proscholy.cz/"
+                    href="https://www.instagram.com/proscholy.cz/"
                     ><i class="fab fa-instagram"></i
                 ></a>
             </div>
