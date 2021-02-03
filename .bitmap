@@ -61,7 +61,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "proscholy.search/tag-category@1.0.0": {
+    "proscholy.search/tag-category@1.0.1": {
         "files": [
             {
                 "relativePath": "components/Search/TagCategory.vue",

@@ -6,7 +6,7 @@
                 {'tag-selected': isSelectedTag(tag)},
                 'tag tag-' + color
             ]"
-            v-for="tag in tagsInCategory"
+            v-for="tag in tagsInCategory.filter(t => t.song_lyrics_count !== 0)"
             :key="'tag-' + tag.id"
             @click="$emit('selectTag', tag)"
             >{{ tag.name }}</a
