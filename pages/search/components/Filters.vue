@@ -57,8 +57,11 @@
                 ><i class="fas fa-search mr-0"></i></a
             >
         </div>
-        <a class="mt-3 tag tag-blue" :href="regenschoriUrl + '/liturgie/aktualne'">Co hrát na mši</a>
-        <div v-if="!localShowAuthors">
+        <div class="mt-3">
+            <a class="tag tag-blue" :href="regenschoriUrl + '/liturgie/aktualne'">Co hrát na mši</a>
+            <a class="tag tag-green" :href="regenschoriUrl" @click.prevent="openRSWithCurrentQS">Zobrazit více filtrů</a>
+        </div>
+        <div v-if="!localShowAuthors" class="mb-3">
             <tag-category
                 heading="Liturgie – mše svatá"
                 color="blue"
@@ -196,6 +199,10 @@ export default {
     },
 
     methods: {
+        openRSWithCurrentQS() {
+            location.href = this.regenschoriUrl + window.location.search;
+        },
+
         selectTag(tag) {
             if (!this.isSelectedTag(tag)) {
                 Vue.set(this.selected_tags, tag.id, true);
