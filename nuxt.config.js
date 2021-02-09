@@ -36,7 +36,8 @@ export default {
             { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon/favicon-16x16.png' },
             { rel: 'manifest', href: '/favicon/site.webmanifest' },
             { rel: 'mask-icon', href: '/favicon/safari-pinned-tab.svg', color: '#5bbad5' },
-
+            { rel: 'preconnect', href: 'https://fonts.gstatic.com'},
+            { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Amiri&display=swap'},
             {
                 rel: 'stylesheet',
                 type: 'text/css',
