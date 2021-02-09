@@ -32,6 +32,14 @@
                             <i class="fas fa-language"></i>
                             <span class="d-none d-sm-inline">Překlady</span>
                         </a>
+                        <a
+                            v-if="hasArrangements"
+                            class="btn"
+                            :href="regenschoriUrl + song_lyric.public_route"
+                        >
+                            <i class="fas fa-edit"></i>
+                            <span class="d-none d-sm-inline">Aranže</span>
+                        </a>
                     </div>
                     <div class="float-right">
                         <!-- <a class="btn btn-secondary">
@@ -508,7 +516,8 @@ export default {
             scrollable: true,
 
             chordSharedStore: store,
-            adminUrl: process.env.adminUrl
+            adminUrl: process.env.adminUrl,
+            regenschoriUrl: process.env.regenschoriUrl
         };
     },
 
@@ -527,6 +536,12 @@ export default {
 
     computed: {
         hasExternals: {
+            get() {
+                return this.song_lyric && this.song_lyric.externals && this.song_lyric.externals.length;
+            }
+        },
+
+        hasArrangements: {
             get() {
                 return this.song_lyric && this.song_lyric.externals && this.song_lyric.externals.length;
             }
