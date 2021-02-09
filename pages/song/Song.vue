@@ -36,6 +36,7 @@ const FETCH_SONG_LYRIC = gql`
             lang_string
             licence_type_cc
             licence_type_cc_string_values
+            arrangements {id}
             authors_pivot {
                 author {
                     ...authorFields

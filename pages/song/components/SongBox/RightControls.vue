@@ -2,6 +2,13 @@
     <div class="align-self-end align-self-sm-start d-sm-flex flex-column pb-sm-0 mr-n3 position-relative">
         <a
             class="btn m-0"
+            title="Otevřít v Regenschorim"
+            :href="[song_lyric ? regenschoriUrl + song_lyric.public_route : '']"
+        >
+            <i class="fas fa-church p-0"></i>
+        </a>
+        <a
+            class="btn m-0"
             title="Upravit píseň"
             :href="[song_lyric ? adminUrl + '/song/' + song_lyric.id + '/edit' : '']"
         >
@@ -78,7 +85,8 @@ export default {
             fullscreen: false,
             nosleep: false,
             noSleeper: process.client ? new NoSleep() : null,
-            adminUrl: process.env.adminUrl
+            adminUrl: process.env.adminUrl,
+            regenschoriUrl: process.env.regenschoriUrl
         };
     },
 
