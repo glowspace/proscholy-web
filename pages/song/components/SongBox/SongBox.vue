@@ -57,12 +57,7 @@
                         <a
                             class="btn"
                             title="Nahlásit"
-                            :href="[
-                                song_lyric
-                                    ? 'https://docs.google.com/forms/d/e/1FAIpQLSdTaOCzzlfZmyoCB0I_S2kSPiSZVGwDhDovyxkWB7w2LfH0IA/viewform?entry.2038741493=' +
-                                    getFullName(song_lyric)
-                                    : ''
-                            ]"
+                            :href="'https://proscholy.atlassian.net/servicedesk/customer/portal/1/group/1/create/19?customfield_10056=' + encodeURIComponent(baseUrl + $route.fullPath)"
                         >
                             <i class="fas fa-exclamation-triangle p-0"></i>
                         </a>
@@ -396,12 +391,7 @@
                     <div class="float-right">
                         <a
                             class="btn btn-secondary"
-                            :href="[
-                                song_lyric
-                                    ? 'https://docs.google.com/forms/d/e/1FAIpQLSdTaOCzzlfZmyoCB0I_S2kSPiSZVGwDhDovyxkWB7w2LfH0IA/viewform?entry.2038741493=' +
-                                    encodeURI(getFullName(song_lyric))
-                                    : ''
-                            ]"
+                            :href="'https://proscholy.atlassian.net/servicedesk/customer/portal/1/group/1/create/19?customfield_10056=' + encodeURIComponent(baseUrl + $route.fullPath)"
                         >Nahlásit</a>
                         <a
                             class="btn btn-secondary"
@@ -516,6 +506,7 @@ export default {
             scrollable: true,
 
             chordSharedStore: store,
+            baseUrl: process.env.baseUrl,
             adminUrl: process.env.adminUrl,
             regenschoriUrl: process.env.regenschoriUrl
         };
