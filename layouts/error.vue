@@ -9,7 +9,7 @@
                     <i class="fas fa-search pr-1"></i> VYHLEDÁVÁNÍ
                 </nuxt-link>
             </div>
-            <div class="text-center text-white pt-5 mb-5">
+            <div class="text-center text-white mt-3 mb-5">
                 <a :href="'https://proscholy.atlassian.net/servicedesk/customer/portal/1/group/6/create/20?customfield_10056=' + encodeURIComponent(baseUrl + $route.fullPath) + '&summary=Chyba%20webu%20(' + error.statusCode + ')'"
                     class="btn btn-outline-light display-all-songs font-weight-bold">
                     <i class="fas fa-exclamation-triangle pr-1"></i> NAHLÁSIT
