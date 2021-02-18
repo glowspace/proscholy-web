@@ -128,6 +128,7 @@ function getSelectedTagsDcnf(
         instrumentation: [],
         genre: [],
         musical_form: [],
+        sacred_occasion: [],
     },
     selected_tags = {}
 ) {

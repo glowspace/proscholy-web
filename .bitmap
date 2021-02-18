@@ -13,7 +13,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "proscholy.search/build-elastic-search-params@1.0.2": {
+    "proscholy.search/build-elastic-search-params@1.0.3": {
         "files": [
             {
                 "name": "buildElasticSearchParams.js",
@@ -73,7 +73,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "proscholy.utilities/dark-mode-button@1.0.0": {
+    "proscholy.utilities/dark-mode-button@1.0.1": {
         "files": [
             {
                 "relativePath": "components/DarkModeButton.vue",
@@ -121,7 +121,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "proscholy.utilities/news@1.0.1": {
+    "proscholy.utilities/news@1.0.2": {
         "files": [
             {
                 "relativePath": "components/News.vue",
