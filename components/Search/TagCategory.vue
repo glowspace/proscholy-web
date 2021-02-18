@@ -45,6 +45,14 @@ export default {
         }
     },
 
+    watch: {
+        categoryContainsSelected(val) {
+            if (val) {
+                this.isClosed = false;
+            }
+        }
+    },
+
     methods: {
         isSelectedTag(tag) {
             return this.selectedTags[tag.id];
