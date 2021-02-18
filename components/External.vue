@@ -330,10 +330,7 @@ export default {
 
     methods: {
         openPreview(e) {
-            if (this.external.media_type == 'file/pdf' && this.browser && !this.browser.satisfies(this.supportPdfIframesCondition)) {
-                e.preventDefault();
-                window.open('https://zpevnik.proscholy.cz/js/ViewerJS/#/material/' + this.external.id + '.pdf', '_blank');
-            }
+            // can be used to override opening preview link
         }
     }
 };

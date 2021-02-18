@@ -61,7 +61,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "proscholy.search/tag-category@1.0.2": {
+    "proscholy.search/tag-category@1.0.3": {
         "files": [
             {
                 "relativePath": "components/Search/TagCategory.vue",
@@ -109,7 +109,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "proscholy.utilities/external@1.0.14": {
+    "proscholy.utilities/external@1.0.15": {
         "files": [
             {
                 "relativePath": "components/External.vue",
