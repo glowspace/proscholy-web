@@ -293,7 +293,8 @@ export default {
                         generic: this.tags_generic,
                         liturgy_part: this.tags_liturgy_part,
                         liturgy_period: this.tags_liturgy_period,
-                        saints: this.tags_saints
+                        saints: this.tags_saints,
+                        sacred_occasion: this.tags_sacred_occasion
                     },
                     this.selectedTags),
                 filterLanguages: this.selectedLanguages,
@@ -380,6 +381,9 @@ export default {
             query: fetchFiltersQuery
         },
         tags_saints: {
+            query: fetchFiltersQuery
+        },
+        tags_sacred_occasion: {
             query: fetchFiltersQuery
         },
         song_lyrics_paginated: {

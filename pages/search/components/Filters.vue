@@ -63,7 +63,7 @@
         </div>
         <div v-if="!localShowAuthors" class="mb-3">
             <tag-category
-                heading="Liturgie – mše svatá"
+                heading="Mše svatá"
                 color="blue"
                 :tags-in-category="tags_liturgy_part"
                 :selected-tags="selected_tags"
@@ -77,7 +77,14 @@
                 @selectTag="selectTag"
             ></tag-category>
             <tag-category
-                heading="Příležitosti"
+                heading="Svátosti a pobožnosti"
+                color="green"
+                :tags-in-category="tags_sacred_occasion"
+                :selected-tags="selected_tags"
+                @selectTag="selectTag"
+            ></tag-category>
+            <tag-category
+                heading="K příležitostem"
                 color="green"
                 :tags-in-category="tags_generic"
                 :selected-tags="selected_tags"
@@ -159,6 +166,9 @@ export default {
             query: fetchFiltersQuery
         },
         tags_saints: {
+            query: fetchFiltersQuery
+        },
+        tags_sacred_occasion: {
             query: fetchFiltersQuery
         },
         songbooks: {
