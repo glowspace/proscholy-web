@@ -9,10 +9,10 @@
         </div>
 
         <div class="d-inline-flex flex-row flex-wrap align-items-start mr-3"
-            v-if="song.tags_liturgy_period.concat(song.tags_saints).concat(song.tags_generic).length">
+            v-if="song.tags_liturgy_period.concat(song.tags_saints).concat(song.tags_sacred_occasion).concat(song.tags_generic).length">
             <nuxt-link class="tag tag-red" v-for="tag in song.tags_liturgy_period" :key="tag.id"
                :to="'/?stitky=' + tag.id">{{ tag.name }}</nuxt-link>
-            <nuxt-link class="tag tag-green" v-for="tag in song.tags_saints.concat(song.tags_generic)" :key="tag.id"
+            <nuxt-link class="tag tag-green" v-for="tag in song.tags_saints.concat(song.tags_sacred_occasion).concat(song.tags_generic)" :key="tag.id"
                :to="'/?stitky=' + tag.id">{{ tag.name }}</nuxt-link>
         </div>
 

@@ -57,10 +57,13 @@
                 ><i class="fas fa-search mr-0"></i></a
             >
         </div>
-        <a class="mt-3 tag tag-blue" :href="regenschoriUrl + '/liturgie/aktualne'">Co hrát na mši</a>
-        <div v-if="!localShowAuthors">
+        <div class="mt-3">
+            <a class="tag tag-blue" :href="regenschoriUrl + '/liturgie/aktualne'">Co hrát na mši</a>
+            <a class="tag tag-green" :href="regenschoriUrl" @click.prevent="openRSWithCurrentQS">Zobrazit více filtrů</a>
+        </div>
+        <div v-if="!localShowAuthors" class="mb-3">
             <tag-category
-                heading="Liturgie – mše svatá"
+                heading="Mše svatá"
                 color="blue"
                 :tags-in-category="tags_liturgy_part"
                 :selected-tags="selected_tags"
@@ -74,7 +77,14 @@
                 @selectTag="selectTag"
             ></tag-category>
             <tag-category
-                heading="Příležitosti"
+                heading="Svátosti a pobožnosti"
+                color="green"
+                :tags-in-category="tags_sacred_occasion"
+                :selected-tags="selected_tags"
+                @selectTag="selectTag"
+            ></tag-category>
+            <tag-category
+                heading="K příležitostem"
                 color="green"
                 :tags-in-category="tags_generic"
                 :selected-tags="selected_tags"
@@ -158,6 +168,9 @@ export default {
         tags_saints: {
             query: fetchFiltersQuery
         },
+        tags_sacred_occasion: {
+            query: fetchFiltersQuery
+        },
         songbooks: {
             query: fetchFiltersQuery
         }
@@ -196,6 +209,10 @@ export default {
     },
 
     methods: {
+        openRSWithCurrentQS() {
+            location.href = this.regenschoriUrl + window.location.search;
+        },
+
         selectTag(tag) {
             if (!this.isSelectedTag(tag)) {
                 Vue.set(this.selected_tags, tag.id, true);

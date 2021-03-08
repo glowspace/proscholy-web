@@ -25,10 +25,7 @@
                     <td class="p-1" colspan="5">
                         <a
                             class="btn btn-secondary float-right m-0"
-                            :href="
-                                'https://docs.google.com/forms/d/e/1FAIpQLScmdiN_8S_e8oEY_jfEN4yJnLq8idxUR5AJpFmtrrnvd1NWRw/viewform?usp=pp_url&entry.1025781741=' +
-                                    encodeURIComponent($route.fullPath)
-                            "
+                            :href="'https://proscholy.atlassian.net/servicedesk/customer/portal/1/group/6/create/20?customfield_10056=' + encodeURIComponent(baseUrl + $route.fullPath)"
                         >
                             Nahlásit
                         </a>
@@ -277,6 +274,7 @@ export default {
 
     data() {
         return {
+            baseUrl: process.env.baseUrl,
             page: 1,
             per_page: 20,
             enable_more: true,
@@ -295,7 +293,8 @@ export default {
                         generic: this.tags_generic,
                         liturgy_part: this.tags_liturgy_part,
                         liturgy_period: this.tags_liturgy_period,
-                        saints: this.tags_saints
+                        saints: this.tags_saints,
+                        sacred_occasion: this.tags_sacred_occasion
                     },
                     this.selectedTags),
                 filterLanguages: this.selectedLanguages,
@@ -382,6 +381,9 @@ export default {
             query: fetchFiltersQuery
         },
         tags_saints: {
+            query: fetchFiltersQuery
+        },
+        tags_sacred_occasion: {
             query: fetchFiltersQuery
         },
         song_lyrics_paginated: {

@@ -5,14 +5,13 @@
                 <div class="card-header p-1 song-links">
                     <div class="d-inline-block">
                         <a
-                            v-if="scores.length || song_lyric.lilypond_svg"
+                            v-if="scores.length"
                             class="btn btn-secondary"
-                            :class="[{ chosen: topMode == 1 }, { 'font-weight-bold': song_lyric.lilypond_svg }]"
+                            :class="[{ chosen: topMode == 1 }]"
                             @click="topMode = topMode == 1 ? 0 : 1"
                         >
                             <i class="fas fa-file-alt"></i>
                             <span class="d-none d-sm-inline">Noty</span>
-                            <span v-if="song_lyric.lilypond_svg">!</span>
                         </a>
                         <a
                             v-if="otherExternals.length"
@@ -32,6 +31,14 @@
                             <i class="fas fa-language"></i>
                             <span class="d-none d-sm-inline">Překlady</span>
                         </a>
+                        <a
+                            v-if="hasArrangements"
+                            class="btn"
+                            :href="regenschoriUrl + song_lyric.public_route"
+                        >
+                            <i class="fas fa-edit"></i>
+                            <span class="d-none d-sm-inline">Aranže</span>
+                        </a>
                     </div>
                     <div class="float-right">
                         <!-- <a class="btn btn-secondary">
@@ -49,12 +56,7 @@
                         <a
                             class="btn"
                             title="Nahlásit"
-                            :href="[
-                                song_lyric
-                                    ? 'https://docs.google.com/forms/d/e/1FAIpQLSdTaOCzzlfZmyoCB0I_S2kSPiSZVGwDhDovyxkWB7w2LfH0IA/viewform?entry.2038741493=' +
-                                    getFullName(song_lyric)
-                                    : ''
-                            ]"
+                            :href="'https://proscholy.atlassian.net/servicedesk/customer/portal/1/group/1/create/19?customfield_10056=' + encodeURIComponent(baseUrl + $route.fullPath)"
                         >
                             <i class="fas fa-exclamation-triangle p-0"></i>
                         </a>
@@ -82,12 +84,6 @@
                                         ></external>
                                     </tbody>
                                 </table>
-                                <div
-                                    v-if="song_lyric.lilypond_svg && topMode === 1"
-                                    v-html="song_lyric.lilypond_svg"
-                                    class="pt-3 w-100 text-center lilypond-container"
-                                    style="pointer-events:none"
-                                ></div>
                             </div>
                         </div>
                     </div>
@@ -179,13 +175,19 @@
                                 id="song-lyrics"
                                 :class="{
                                     'p-1': true,
+                                    'flex-grow-1': true,
                                     'song-lyrics-extended':
                                         chordSharedStore.chordMode == 2
                                 }"
                             >
+                                <div
+                                    v-if="song_lyric.lilypond_svg"
+                                    v-html="song_lyric.lilypond_svg"
+                                    class="ml-md-3 mb-3 lilypond-container"
+                                ></div>
                                 <span v-if="song_lyric.has_lyrics">
                                     <a
-                                        class="btn btn-secondary bg-transparent p-0 mb-3"
+                                        class="btn btn-secondary bg-transparent p-0 mb-2"
                                         v-if="
                                             chordSharedStore.nChordModes != 1 &&
                                                 chordSharedStore.chordMode == 0
@@ -194,7 +196,7 @@
                                         >Zobrazit akordy</a
                                     >
                                     <a
-                                        class="btn btn-secondary bg-transparent p-0 mb-3"
+                                        class="btn btn-secondary bg-transparent p-0 mb-2"
                                         v-if="chordSharedStore.chordMode != 0"
                                         @click="chordSharedStore.chordMode = 0"
                                         >Skrýt akordy</a
@@ -388,12 +390,7 @@
                     <div class="float-right">
                         <a
                             class="btn btn-secondary"
-                            :href="[
-                                song_lyric
-                                    ? 'https://docs.google.com/forms/d/e/1FAIpQLSdTaOCzzlfZmyoCB0I_S2kSPiSZVGwDhDovyxkWB7w2LfH0IA/viewform?entry.2038741493=' +
-                                    encodeURI(getFullName(song_lyric))
-                                    : ''
-                            ]"
+                            :href="'https://proscholy.atlassian.net/servicedesk/customer/portal/1/group/1/create/19?customfield_10056=' + encodeURIComponent(baseUrl + $route.fullPath)"
                         >Nahlásit</a>
                         <a
                             class="btn btn-secondary"
@@ -407,7 +404,7 @@
             <div
                 class="card card-blue mb-3 d-none d-lg-flex"
                 @click="topMode = 1"
-                v-if="scores.length || song_lyric.lilypond_svg"
+                v-if="scores.length"
             >
                 <div class="card-header media-opener py-2 rounded"><i class="fas fa-file-alt"></i> Zobrazit notové zápisy</div>
             </div>
@@ -508,7 +505,9 @@ export default {
             scrollable: true,
 
             chordSharedStore: store,
-            adminUrl: process.env.adminUrl
+            baseUrl: process.env.baseUrl,
+            adminUrl: process.env.adminUrl,
+            regenschoriUrl: process.env.regenschoriUrl
         };
     },
 
@@ -529,6 +528,12 @@ export default {
         hasExternals: {
             get() {
                 return this.song_lyric && this.song_lyric.externals && this.song_lyric.externals.length;
+            }
+        },
+
+        hasArrangements: {
+            get() {
+                return this.song_lyric && this.song_lyric.arrangements && this.song_lyric.arrangements.length;
             }
         },
 
@@ -632,7 +637,7 @@ export default {
             if (this.recordings.length) {
                 this.bottomMode = 2;
             }
-            if (this.scores.length || this.song_lyric.lilypond_svg) {
+            if (this.scores.length) {
                 this.topMode = 1;
             } else if (this.renderTranslations) {
                 this.topMode = 2;

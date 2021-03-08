@@ -46,6 +46,9 @@ export default {
         },
         tags_saints: {
             query: fetchFiltersQuery
+        },
+        tags_sacred_occasion: {
+            query: fetchFiltersQuery
         }
     },
 
@@ -53,10 +56,11 @@ export default {
         usefulTags() {
             // do not include regenschori tag types
             return [
-                ...this.tags_generic,
-                ...this.tags_liturgy_part,
-                ...this.tags_liturgy_period,
-                ...this.tags_saints
+                ...this.tags_generic.filter(t => t.song_lyrics_count !== 0),
+                ...this.tags_liturgy_part.filter(t => t.song_lyrics_count !== 0),
+                ...this.tags_liturgy_period.filter(t => t.song_lyrics_count !== 0),
+                ...this.tags_saints.filter(t => t.song_lyrics_count !== 0),
+                ...this.tags_sacred_occasion.filter(t => t.song_lyrics_count !== 0)
             ];
         },
 

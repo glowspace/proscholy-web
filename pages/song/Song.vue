@@ -36,6 +36,7 @@ const FETCH_SONG_LYRIC = gql`
             lang_string
             licence_type_cc
             licence_type_cc_string_values
+            arrangements {id}
             authors_pivot {
                 author {
                     ...authorFields
@@ -91,6 +92,7 @@ const FETCH_SONG_LYRIC = gql`
             tags_generic        {id name}
             tags_liturgy_period {id name}
             tags_saints         {id name}
+            tags_sacred_occasion {id name}
         }
     }
 
