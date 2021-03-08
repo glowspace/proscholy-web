@@ -175,6 +175,7 @@
                                 id="song-lyrics"
                                 :class="{
                                     'p-1': true,
+                                    'flex-grow-1': true,
                                     'song-lyrics-extended':
                                         chordSharedStore.chordMode == 2
                                 }"
