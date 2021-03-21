@@ -38,10 +38,12 @@ const FETCH_SONG_LYRIC = gql`
             licence_type_cc_string_values
             arrangements {id}
             authors_pivot {
-                author {
-                    ...authorFields
+                pivot {
+                    author {
+                        ...authorFields
+                    }
+                    authorship_type
                 }
-                authorship_type
             }
             externals {
                 id
@@ -66,10 +68,12 @@ const FETCH_SONG_LYRIC = gql`
                     public_route
                     type
                     authors_pivot {
-                        author {
-                            ...authorFields
+                        pivot {
+                            author {
+                                ...authorFields
+                            }
+                            authorship_type
                         }
-                        authorship_type
                     }
                     lang
                     lang_string
@@ -77,14 +81,16 @@ const FETCH_SONG_LYRIC = gql`
             }
             capo
             songbook_records {
-                number
-                songbook {
-                    id
-                    name
-                    shortcut
-                    # used to filter out private songbooks
-                    # todo: use server-side filtering
-                    is_private
+                pivot {
+                    number
+                    songbook {
+                        id
+                        name
+                        shortcut
+                        # used to filter out private songbooks
+                        # todo: use server-side filtering
+                        is_private
+                    }
                 }
             }
             is_approved_for_liturgy

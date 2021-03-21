@@ -25,10 +25,10 @@
                 v-for="(ap, authorIndex) in translation.authors_pivot"
                 :key="authorIndex"
                 ><span v-if="authorIndex">,</span>
-                <nuxt-link :to="ap.author.public_route" class="text-secondary"
-                :title="translation.type ? {'GENERIC':'','LYRICS':'text','MUSIC':'hudba'}['LYRICS'] : {'GENERIC':'','LYRICS':'text','MUSIC':'hudba'}[ap.authorship_type]"
+                <nuxt-link :to="ap.pivot.author.public_route" class="text-secondary"
+                :title="translation.type ? {'GENERIC':'','LYRICS':'text','MUSIC':'hudba'}['LYRICS'] : {'GENERIC':'','LYRICS':'text','MUSIC':'hudba'}[ap.pivot.authorship_type]"
                 >{{
-                    ap.author.name
+                    ap.pivot.author.name
                 }}</nuxt-link>
             </span>
         </td>
