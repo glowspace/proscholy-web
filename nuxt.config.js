@@ -81,7 +81,7 @@ export default {
      */
     plugins: [
         // ssr: false to only include it on client-side
-        { src: '~/plugins/firebase.js', ssr: false }
+        // { src: '~/plugins/firebase.js', ssr: false }
     ],
     /*
      ** Nuxt.js dev-modules
