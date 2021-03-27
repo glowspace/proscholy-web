@@ -162,7 +162,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "proscholy.utilities/translation-line@1.0.0": {
+    "proscholy.utilities/translation-line@1.0.1": {
         "files": [
             {
                 "relativePath": "components/TranslationLine.vue",

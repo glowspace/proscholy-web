@@ -101,11 +101,13 @@ const FETCH_AUTHOR = gql`
         secondary_name_2
         public_route
         authors_pivot {
-            author {
-                name
-                public_route
+            pivot {
+                author {
+                    name
+                    public_route
+                }
+                authorship_type
             }
-            authorship_type
         }
         song {
             song_lyrics {
@@ -113,11 +115,13 @@ const FETCH_AUTHOR = gql`
                 name
                 public_route
                 authors_pivot {
-                    author {
-                        name
-                        public_route
+                    pivot {
+                        author {
+                            name
+                            public_route
+                        }
+                        authorship_type
                     }
-                    authorship_type
                 }
             }
         }

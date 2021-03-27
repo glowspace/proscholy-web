@@ -81,7 +81,7 @@ export default {
      */
     plugins: [
         // ssr: false to only include it on client-side
-        { src: '~/plugins/firebase.js', ssr: false }
+        // { src: '~/plugins/firebase.js', ssr: false }
     ],
     /*
      ** Nuxt.js dev-modules
@@ -103,7 +103,8 @@ export default {
        '@nuxtjs/apollo',
        '@nuxtjs/axios',
        '@nuxtjs/proxy',
-       '@nuxtjs/sentry'
+       '@nuxtjs/sentry',
+       'nuxt-helmet'
     ],
     apollo: {
         clientConfigs: {
@@ -147,5 +148,6 @@ export default {
             }
         },
         extractCSS: true
-    }
+    },
+    rootDir: __dirname
 };
