@@ -30,6 +30,11 @@ export default {
     },
 
     mounted() {
+        // 1.4.2021
+        if (new Date().getDate() == 1 && new Date().getMonth() == 3 && new Date().getFullYear() == 2021) {
+            document.body.style = 'background-blend-mode: luminosity; background-color: #0fbe34;';
+        }
+
         // http://patorjk.com/software/taag/#p=display&f=Ivrit&t=ProScholy.cz
         console.log("%c  ____           ____       _           _                 \n |  _ \\ _ __ ___/ ___|  ___| |__   ___ | |_   _   ___ ____\n | |_) | '__/ _ \\___ \\ / __| '_ \\ / _ \\| | | | | / __|_  /\n |  __/| | | (_) |__) | (__| | | | (_) | | |_| || (__ / / \n |_|   |_|  \\___/____/ \\___|_| |_|\\___/|_|\\__, (_)___/___|\n                                          |___/           ",
         "font-family: monospace; font-weight: bold;");
