@@ -5,6 +5,7 @@ import Search from '~/pages/search/Search';
 import AboutSongBook from '~/pages/about/AboutSongBook';
 import Song from '~/pages/song/Song';
 import Author from '~/pages/author/Author';
+import Liturgy from '~/pages/liturgy/Liturgy';
 import Support from '~/pages/support/Support';
 import Login from '~/pages/account/Login';
 
@@ -19,6 +20,8 @@ export function createRouter() {
         { path: '/o-zpevniku', component: AboutSongBook },
         { path: '/pisen/:id/*', component: Song },
         { path: '/autor/:id', component: Author },
+        { path: '/liturgie/aktualne', component: Liturgy },
+        { path: '/liturgie/aktualne/:date', component: Liturgy },
 
         { path: '/napoveda', component: Support },
 
@@ -27,7 +30,7 @@ export function createRouter() {
         { path: '/advent', redirect: { name: 'index', query: { stitky: '24' } } },
         { path: '/postni-doba', redirect: { name: 'index', query: { stitky: '25' } } }
     ];
-    
+
     if (process.env.ENABLE_EXPERIMENTAL_ROUTES) {
         routes.push({ path: '/muj-ucet', component: Login });
         routes.push({ path: '/renderer', component: SongExample });
