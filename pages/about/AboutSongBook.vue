@@ -9,8 +9,7 @@
                     <p class="card-text">
                         Pokud se vám podaří najít si 54 sekund k&nbsp;vyplnění
                         našeho formuláře zpětné vazby, budeme jen rádi.<br />
-                        Názor uživatelů je pro nás velmi důležitý a
-                        v&nbsp;určitých věcech opravdu směrodatný.
+                        Váš názor je pro nás velmi důležitý.
                     </p>
                     <a
                         href="https://docs.google.com/forms/d/e/1FAIpQLSfI0143gkLBtMbWQnSa9nzpOoBNMokZrOIS5mUreSR41E_B7A/viewform?usp=pp_url&entry.791243479=ano"
@@ -83,24 +82,22 @@
                 <user-card name="Jana Stuchlíková" info="vedoucí redakce" multiple="true" />
                 <user-card name="Ondřej Múčka" info="Musica Sacra" multiple="true" />
                 <user-card name="Václav Šablatura" info="odborný konzultant" />
-                <user-card name="Zuzana Bayerová" info="" />
-                <user-card name="Zuzana Haikerová" info="" multiple="true" />
-                <user-card name="Tereza Halaštová" info="" />
+                <user-card name="Filip Kratoš" info="" />
+                <user-card name="Barbora Dojčárová" info="" />
+                <user-card name="Nikola Burešová" info="" />
                 <user-card name="Jiří Hon" info="" />
+                <user-card name="Jan Svojanovský" info="" />
                 <user-card name="Marie Ivičičová" info="" />
                 <user-card name="Ondřej Jakubec" info="" />
+                <user-card name="Tereza Halaštová" info="" />
                 <user-card name="Terezie Kološová" info="" />
-                <user-card name="Filip Kratoš" info="" />
-                <user-card name="Barbora Kuchaříková" info="" />
                 <user-card name="Matěj Kulišťák" info="" />
-                <user-card name="Martina Petrůjová" info="" />
-                <user-card name="Roman Polách" info="" />
                 <user-card name="Lada Radmacherová" info="" />
                 <user-card name="Jakub Soukal" info="" />
                 <user-card name="Monika Šinclová" info="" />
                 <user-card name="Terezie Tichá" info="" />
                 <user-card name="Barbora Viktorinová" info="" />
-                
+
             </div>
         </div>
 

@@ -401,6 +401,15 @@
             </div>
         </div>
         <div class="col-lg-3">
+            <div class="card">
+                <div class="card-header" style="background-color: rgb(240, 131, 47); color: white">Líbí se Vám náš Zpěvník?</div>
+                <div class="card-body">
+                    <div class="mb-3">Podpořte naši komunitu Glow Space na darujme.cz.</div>
+
+                    <a class="btn btn-outline-dark" href="https://www.darujme.cz/projekt/1205564">Podpořit Glow Space</a>
+                </div>
+            </div>
+
             <div
                 class="card card-blue mb-3 d-none d-lg-flex"
                 @click="topMode = 1"
