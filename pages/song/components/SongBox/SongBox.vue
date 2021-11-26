@@ -404,7 +404,7 @@
             <div class="card">
                 <div class="card-header" style="background-color: rgb(240, 131, 47); color: white">Líbí se Vám Zpěvník ProScholy?</div>
                 <div class="card-body">
-                    <div class="mb-3">Podpořte prosím náš provoz činnost malým pravidelným příspěvkem.</div>
+                    <div class="mb-3">Podpořte prosím náš provoz malým pravidelným příspěvkem.</div>
 
                     <a class="btn btn-outline-dark" href="https://www.darujme.cz/projekt/1205564">Podpořit projekt</a>
                 </div>
