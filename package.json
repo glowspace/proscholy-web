@@ -29,7 +29,7 @@
         "firebase": "^7.1.0",
         "glob-all": "^3.2.1",
         "graphql": "^14.6.0",
-        "graphql-tag": "^2.10.3",
+        "graphql-tag": "2.10.3",
         "lodash": "^4.17.19",
         "nosleep.js": "^0.9.0",
         "nuxt": "^2.12.0",
@@ -44,7 +44,7 @@
         "eslint-plugin-prettier": "^3.1.2",
         "husky": "^4.3.4",
         "jira-prepare-commit-msg": "^1.4.2",
-        "node-sass": "^4.13.1",
+        "node-sass": "^6.0.1",
         "prettier": "^1.19.1",
         "sass-loader": "^8.0.2"
     },

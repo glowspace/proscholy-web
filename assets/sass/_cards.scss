@@ -39,6 +39,16 @@
     }
 }
 
+.card-orange {
+    .card-header {
+        background-color: $main-yellow !important;
+    }
+
+    a {
+        color: $main-yellow;
+    }
+}
+
 .card-red {
     .card-header {
         background-color: $main-red !important;
