@@ -401,14 +401,7 @@
             </div>
         </div>
         <div class="col-lg-3">
-            <div class="card">
-                <div class="card-header" style="background-color: rgb(240, 131, 47); color: white">Líbí se Vám Zpěvník ProScholy?</div>
-                <div class="card-body">
-                    <div class="mb-3">Podpořte prosím náš provoz malým pravidelným příspěvkem.</div>
-
-                    <a class="btn btn-outline-dark" href="https://www.darujme.cz/projekt/1205564">Podpořit projekt</a>
-                </div>
-            </div>
+            <widget-funding></widget-funding>
 
             <div
                 class="card card-blue mb-3 d-none d-lg-flex"
@@ -428,6 +421,7 @@
                 <div class="media-opener" v-if="mediaTypes[3]"><i class="fas fa-music"></i> MP3</div>
                 <div class="media-opener" v-if="mediaTypes[2]"><i class="fab fa-youtube text-danger"></i> YouTube</div>
             </div>
+
             <div class="card mb-3 d-none d-lg-flex" @click="bottomMode = 1">
                 <div class="card-header media-opener py-2 rounded bg-secondary text-white"><i class="fas fa-sliders-h"></i> Nastavit zobrazení</div>
                 <div
@@ -477,6 +471,7 @@ import SongLyricParts from '../Renderer/SongLyricParts.vue';
 import TranslationLine from '~/components/TranslationLine.vue';
 import External from '~/components/External.vue';
 import { getFullName } from '~/components/SongName';
+import WidgetFunding from "~/components/WidgetFunding";
 
 /**
  * This component renders white box on song detail page.
@@ -496,7 +491,8 @@ export default {
         RightControls,
         Transposition,
         TranslationLine,
-        SongLyricParts
+        SongLyricParts,
+        WidgetFunding
     },
 
     data() {
