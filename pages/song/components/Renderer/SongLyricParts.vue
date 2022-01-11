@@ -10,9 +10,11 @@
             <div
                 v-for="(line, key2) in part.songLines"
                 :key="key2"
-                :class="[{'song-line--newline': line.chords.length == 1 && line.chords[0].base + line.chords[0].text == ''}, 'song-line',
+                :class="[{'song-line--newline': isLineNewLine(line)}, 'song-line',
                 {'song-line--comment': line.is_comment}]"
             >
+                <!-- references \u2009 in JavaScript (these characters are to be replaced by \n by JS) -->
+                <span>&#8201;</span>
                 <span v-if="!key2" class="song-part-tag">{{ part.type + (part.type ? (part.isVerse ? '.' : ':') : '') }}&nbsp;</span
                 ><template v-for="(chord, key3) in line.chords">
                     <chord
@@ -25,7 +27,8 @@
                         :isOptional="chord.isOptional"
                         :isSubstitute="chord.isSubstitute"
                         :hasNextSibling="hasNextSibling(chord)"
-                    >{{ chord.text.replace(/^ /, '&nbsp;') }}</chord
+                        :breakLineBefore="previousLineIsNewline(part, key2) && key3 == 0"
+                    >{{ chord.text.replace(/^ /, '&nbsp;')}}</chord
                     ><template v-if="!chord.isDivided && line.chords[key3 + 1]"><span class="chord">&nbsp;</span></template>
                 </template>
             </div>
@@ -37,6 +40,7 @@
 import gql from 'graphql-tag';
 import Chord from './Chord';
 import SlPartsLoading from '../SlPartsLoading';
+import ChordSheetJs from 'chordsheetjs';
 
 const FETCH_SONG_LYRIC_PARTS = gql`
     query($id: ID!) {
@@ -88,7 +92,39 @@ export default {
         },
         hasNextSibling(chord) {
 
+        },
+        isLineNewLine(line) {
+            return line.chords.length == 1 && line.chords[0].base + line.chords[0].text == ''
+        },
+        previousLineIsNewline(part, key) {
+            if (key == 0) {
+                return false;
+            }
+            return this.isLineNewLine(part.songLines[key - 1])
         }
+    },
+
+    mounted() {
+        document.addEventListener('copy', (event) => {
+            let text = document.getSelection();
+            text = `${text}`
+                    .trim()
+                    .replaceAll(String.fromCharCode(10), '') // replace arbitrary new-lines
+                    .replaceAll('\u2009', '\n') // create `true` new-lines
+                    .replaceAll('\n ', '\n')
+                    .replaceAll('\u200a', ']')
+                    .replaceAll('\u200b', '[')
+
+            // change the ChordPro format to plain text format
+            const parser = new ChordSheetJs.ChordProParser();
+            const song = parser.parse(text)
+            const formatter = new ChordSheetJs.TextFormatter();
+
+            text = formatter.format(song)
+
+            event.clipboardData.setData('text/plain', text);
+            event.preventDefault();
+        });
     }
 };
 </script>

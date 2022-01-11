@@ -4,15 +4,17 @@
     >
         <!-- the if condition syntax is weird but necessary here -->
         <span class="chord-sign" v-if="displayChordSign">
+            <span v-if="baseNote.length > 0">&#8203;</span>
             <span v-if="isOptional">(</span>
             <span class="chord-base">{{ baseNote }}</span>
             <span class="chord-variant">{{ variant }}</span>
             <span class="chord-extension">{{ extension }}</span>
             <span class="chord-bass" v-if="bass.length !== 0">/{{ bassNote }}</span>
             <span class="chord-right-bracket" v-if="isOptional">)</span>
+            <span v-if="baseNote.length > 0">&#8202;</span>
         </span>
         <span :class="['chord-text', !isDivided ? 'chord-text-spaced' : '']"><slot></slot></span>
-        <span class="chord-line" v-if="isDivided"></span>
+        <span class="chord-line" v-if="isDivided && displayChordSign"></span>
     </span>
 </template>
 
@@ -28,7 +30,8 @@ export default {
         'isDivided',
         'isSubstitute',
         'isOptional',
-        'hasNextSibling'
+        'hasNextSibling',
+        'breakLineBefore'
     ],
 
     data() {
