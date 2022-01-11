@@ -27,7 +27,6 @@
                         :isOptional="chord.isOptional"
                         :isSubstitute="chord.isSubstitute"
                         :hasNextSibling="hasNextSibling(chord)"
-                        :breakLineBefore="previousLineIsNewline(part, key2) && key3 == 0"
                     >{{ chord.text.replace(/^ /, '&nbsp;')}}</chord
                     ><template v-if="!chord.isDivided && line.chords[key3 + 1]"><span class="chord">&nbsp;</span></template>
                 </template>
@@ -95,12 +94,6 @@ export default {
         },
         isLineNewLine(line) {
             return line.chords.length == 1 && line.chords[0].base + line.chords[0].text == ''
-        },
-        previousLineIsNewline(part, key) {
-            if (key == 0) {
-                return false;
-            }
-            return this.isLineNewLine(part.songLines[key - 1])
         }
     },
 

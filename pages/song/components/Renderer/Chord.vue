@@ -30,8 +30,7 @@ export default {
         'isDivided',
         'isSubstitute',
         'isOptional',
-        'hasNextSibling',
-        'breakLineBefore'
+        'hasNextSibling'
     ],
 
     data() {
