@@ -100,6 +100,7 @@ export default {
     mounted() {
         document.addEventListener('copy', (event) => {
             let text = document.getSelection();
+
             text = `${text}`
                     .trim()
                     .replaceAll(String.fromCharCode(10), '') // replace arbitrary new-lines
@@ -108,12 +109,13 @@ export default {
                     .replaceAll('\u200a', ']')
                     .replaceAll('\u200b', '[')
 
+            // todo fixme: not working in production
             // change the ChordPro format to plain text format
-            const parser = new ChordSheetJs.ChordProParser();
-            const song = parser.parse(text)
-            const formatter = new ChordSheetJs.TextFormatter();
+            // const parser = new ChordSheetJs.ChordProParser();
+            // const song = parser.parse(text)
+            // const formatter = new ChordSheetJs.TextFormatter();
 
-            text = formatter.format(song)
+            // text = formatter.format(song)
 
             event.clipboardData.setData('text/plain', text);
             event.preventDefault();
