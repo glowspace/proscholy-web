@@ -952,6 +952,13 @@
     "@babel/types" "^7.4.4"
     esutils "^2.0.2"
 
+"@babel/runtime@^7.12.0":
+  version "7.16.7"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.16.7.tgz#03ff99f64106588c9c403c6ecb8c3bafbbdff1fa"
+  integrity sha512-9E9FJowqAsytyOY6LG+1KuueckRL+aQW+mKvXRXnuFGyRAyepJPmEo9vgMfXUA6O9u3IeEdv9MAkppFcaQwogQ==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/runtime@^7.14.0", "@babel/runtime@^7.15.4", "@babel/runtime@^7.5.4", "@babel/runtime@^7.8.4":
   version "7.16.3"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.16.3.tgz#b86f0db02a04187a3c17caa77de69840165d42d5"
@@ -1971,6 +1978,11 @@
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
+
+"@romcal/calendar.czech-republic@^3.0.0-alpha.0":
+  version "3.0.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/@romcal/calendar.czech-republic/-/calendar.czech-republic-3.0.0-alpha.0.tgz#fb4a96b280929b1c87b7477492e20917828661ea"
+  integrity sha512-FKfCu+KnCp9FQvPiIOluxO0lqcxFWXUMr7Dod9ktF93nA1JpVoR81rgCVmiwjUFf1Vg3xh6A4fA4ciVOLDsMqQ==
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.1"
@@ -3433,16 +3445,12 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
-bible-passage-reference-parser@^2.0.1:
+"bible-liturgy-utils@https://github.com/glowspace/bible-liturgy-utils#2.0.1":
   version "2.0.1"
-  resolved "https://registry.yarnpkg.com/bible-passage-reference-parser/-/bible-passage-reference-parser-2.0.1.tgz#1f2339645a88c4a52bea45ae36b4745be539085b"
-  integrity sha1-HyM5ZFqIxKUr6kWuNrR0W+U5CFs=
-
-"bible-reference@https://github.com/proscholy/bible-reference#1.0.6":
-  version "1.0.6"
-  resolved "https://github.com/proscholy/bible-reference#d0d9623704739b8a4d4c22c7c6a99eaf177d9bbf"
+  resolved "https://github.com/glowspace/bible-liturgy-utils#45ed4d3d10ad42f98d9ca291a19a51d7a11bbd00"
   dependencies:
-    bible-passage-reference-parser "^2.0.1"
+    "@romcal/calendar.czech-republic" "^3.0.0-alpha.0"
+    romcal "3.0.0-alpha.0"
 
 big.js@^5.2.2:
   version "5.2.2"
@@ -6008,6 +6016,11 @@ fs.realpath@^1.0.0:
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
   integrity sha1-FQStJSMVjKpA20onh8sBQRmU6k8=
 
+fs@^0.0.1-security:
+  version "0.0.1-security"
+  resolved "https://registry.yarnpkg.com/fs/-/fs-0.0.1-security.tgz#8a7bd37186b6dddf3813f23858b57ecaaf5e41d4"
+  integrity sha1-invTcYa23d84E/I4WLV+yq9eQdQ=
+
 fsevents@^1.2.7:
   version "1.2.13"
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-1.2.13.tgz#f325cb0455592428bcf11b383370ef70e3bfcc38"
@@ -6783,6 +6796,13 @@ hyperlinker@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/hyperlinker/-/hyperlinker-1.0.0.tgz#23dc9e38a206b208ee49bc2d6c8ef47027df0c0e"
   integrity sha512-Ty8UblRWFEcfSuIaajM34LdPXIhbs1ajEX/BBPv24J+enSVaEVY63xQ6lTO9VRYS5LAoghIG0IDJ+p+IPzKUQQ==
+
+i18next@^20.4.0:
+  version "20.6.1"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-20.6.1.tgz#535e5f6e5baeb685c7d25df70db63bf3cc0aa345"
+  integrity sha512-yCMYTMEJ9ihCwEQQ3phLo7I/Pwycf8uAx+sRHwwk5U9Aui/IZYgQRyMqXafQOw5QQ7DM1Z+WyEXWIqSuJHhG2A==
+  dependencies:
+    "@babel/runtime" "^7.12.0"
 
 iconv-lite@0.4.24, iconv-lite@^0.4.24:
   version "0.4.24"
@@ -10405,6 +10425,13 @@ roarr@^2.15.3:
     json-stringify-safe "^5.0.1"
     semver-compare "^1.0.0"
     sprintf-js "^1.1.2"
+
+romcal@3.0.0-alpha.0:
+  version "3.0.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/romcal/-/romcal-3.0.0-alpha.0.tgz#33644efa5cdaacbead684fe04f84692295ae5326"
+  integrity sha512-sH7c9Vm/A17JL7KtxL32RZ9Vd1TMccIYF/xFmQto+CZhAYGOv1kodGb0ztPrPz8nCQZDtXxjbZwHnCNN9sPf1Q==
+  dependencies:
+    i18next "^20.4.0"
 
 run-async@^2.4.0:
   version "2.4.1"
