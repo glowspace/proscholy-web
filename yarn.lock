@@ -3483,9 +3483,9 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
-"bible-liturgy-utils@https://github.com/glowspace/bible-liturgy-utils#2.0.1":
-  version "2.0.1"
-  resolved "https://github.com/glowspace/bible-liturgy-utils#45ed4d3d10ad42f98d9ca291a19a51d7a11bbd00"
+"bible-liturgy-utils@https://github.com/glowspace/bible-liturgy-utils#2.0.2":
+  version "2.0.2"
+  resolved "https://github.com/glowspace/bible-liturgy-utils#e844ebadf4129784059f27eebcf56f71fc24b914"
   dependencies:
     "@romcal/calendar.czech-republic" "^3.0.0-alpha.0"
     romcal "3.0.0-alpha.0"
@@ -9149,6 +9149,10 @@ postcss-color-gray@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/postcss-color-gray/-/postcss-color-gray-5.0.0.tgz#532a31eb909f8da898ceffe296fdc1f864be8547"
   integrity sha512-q6BuRnAGKM/ZRpfDascZlIZPjvwsRye7UDNalqVz3s7GDxMtqPY6+Q871liNxsonUw8oC61OG+PSaysYpl1bnw==
+  dependencies:
+    "@csstools/convert-colors" "^1.4.0"
+    postcss "^7.0.5"
+    postcss-values-parser "^2.0.0"
 
 postcss-color-hex-alpha@^5.0.3:
   version "5.0.3"
@@ -9326,6 +9330,8 @@ postcss-initial@^3.0.0:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/postcss-initial/-/postcss-initial-3.0.4.tgz#9d32069a10531fe2ecafa0b6ac750ee0bc7efc53"
   integrity sha512-3RLn6DIpMsK1l5UUy9jxQvoDeUN4gP939tDcKUHD/kM8SGSKbFAnvkpFpj3Bhtz3HGk1jWY5ZNWX6mPta5M9fg==
+  dependencies:
+    postcss "^7.0.2"
 
 postcss-lab-function@^2.0.1:
   version "2.0.1"
@@ -9629,6 +9635,9 @@ postcss-pseudo-class-any-link@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/postcss-pseudo-class-any-link/-/postcss-pseudo-class-any-link-6.0.0.tgz#2ed3eed393b3702879dec4a87032b210daeb04d1"
   integrity sha512-lgXW9sYJdLqtmw23otOzrtbDXofUdfYzNm4PIpNE322/swES3VU9XlXHeJS46zT2onFO7V1QFdD4Q9LiZj8mew==
+  dependencies:
+    postcss "^7.0.2"
+    postcss-selector-parser "^5.0.0-rc.3"
 
 postcss-reduce-initial@^4.0.3:
   version "4.0.3"
