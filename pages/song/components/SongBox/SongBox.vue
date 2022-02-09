@@ -11,7 +11,7 @@
                             @click="topMode = topMode == 1 ? 0 : 1"
                         >
                             <i class="fas fa-file-alt"></i>
-                            <span class="d-none d-sm-inline">Noty</span>
+                            <span class="d-sm-inline">Noty</span>
                         </a>
                         <a
                             v-if="otherExternals.length"
