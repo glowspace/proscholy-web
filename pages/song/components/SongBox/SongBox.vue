@@ -236,8 +236,7 @@
                                 >
                                     <i class="fas fa-times pr-0"></i>
                                 </a>
-                                <div
-                                    class="toolbox-item"
+                                <div class="toolbox-item"
                                     v-if="chordSharedStore.nChordModes != 1"
                                     :class="{
                                         'hidden-toolbox-item':

@@ -1,8 +1,9 @@
 // Body
-$body-bg: #f8fafc;
+$body-bg: white;
 
 // Typography
-$font-family-base: Nunito, Arial,sans-serif;
+$font-family-base: "Open Sans", Arial, sans-serif;
+$font-weight-base: 400;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 
@@ -17,6 +18,7 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+$grey: #dedede;
 
 $theme-colors: (
   "primary": #1d6dab,

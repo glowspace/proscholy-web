@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Nunito:200,400,600");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500&family=Roboto:wght@300;400;500&display=swap');
 
 @font-face {
     font-family: "Cocogoose";
@@ -11,7 +11,9 @@ $main-blue: #3961ad;
 $main-green: #098845;
 $main-yellow: #faa61b;
 
-@import "~bootstrap-material-design/scss/bootstrap-material-design"; // Materialize.css
+
+//@import "~bootstrap-material-design/scss/bootstrap-material-design"; // Materialize.css
+@import "~bootstrap/scss/bootstrap";
 
 @import "base";
 @import "navbar";

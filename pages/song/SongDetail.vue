@@ -1,13 +1,15 @@
 <template>
-    <div class="container">
+    <div class="song-detail">
         <div class="mt-4 mb-3">
             <div>
-                <h1 class="song-title"><song-name :song="song" /></h1>
+                <h1 class="song-title">
+                    <song-name :song="song"/>
+                </h1>
                 <div class="d-flex align-items-center mt-1">
                     <h4 class="song-number m-0">{{ song.song_number }}</h4>
                     <p class="song-author ml-3 mb-0">
-                        <song-author-label :song="song" />
-                        <song-info :song="song" />
+                        <song-author-label :song="song"/>
+                        <song-info :song="song"/>
                     </p>
                 </div>
             </div>
@@ -40,3 +42,17 @@ export default {
     props: ['song']
 };
 </script>
+
+<style lang="scss">
+.song-detail {
+    //font-family: "Roboto", sans-serif;
+
+    .song-title {
+        font-family: "Roboto", sans-serif;
+        font-weight: 500;
+        font-size:   1.5rem;
+    }
+}
+
+
+</style>
