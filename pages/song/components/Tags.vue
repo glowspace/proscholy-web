@@ -3,7 +3,7 @@
         <div class="d-inline-flex flex-row flex-wrap align-items-start mr-3"
             v-if="song.tags_liturgy_part.length || song.is_approved_for_liturgy">
             <nuxt-link to="/napoveda#schvaleno-cbk" class="tag tag-blue" v-if="song.is_approved_for_liturgy">
-                schváleno ČBK pro liturgii <i class="fas fa-check"></i></nuxt-link>
+                vhodné pro liturgii <i class="fas fa-check"></i></nuxt-link>
             <nuxt-link class="tag tag-blue" v-for="tag in song.tags_liturgy_part" :key="tag.id"
                :to="'/?stitky=' + tag.id">{{ tag.name }}</nuxt-link>
         </div>

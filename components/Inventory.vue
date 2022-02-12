@@ -1,5 +1,5 @@
 <template>
-    <div class="inventory-wrapper">
+    <div class="inventory-wrapper d-md-block d-none">
         <nuxt-link to="/" class="navbar-brand" id="navbar-brand">
             <div class="brand-heading mb-2">
                 <img

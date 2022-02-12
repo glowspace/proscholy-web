@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-lg-9">
             <div class="card card-lyrics" id="cardLyrics">
-                <div class="card-header p-1 song-links">
+                <div class="card-header p-1 song-links d-md-block d-none">
                     <div class="d-inline-block">
                         <a
                             v-if="scores.length"
@@ -187,7 +187,7 @@
                                 ></div>
                                 <span v-if="song_lyric.has_lyrics">
                                     <a
-                                        class="btn btn-secondary bg-transparent p-0 mb-2"
+                                        class="btn btn-secondary bg-transparent p-0 mb-2 d-md-block d-none"
                                         v-if="
                                             chordSharedStore.nChordModes != 1 &&
                                                 chordSharedStore.chordMode == 0
@@ -196,7 +196,7 @@
                                         >Zobrazit akordy</a
                                     >
                                     <a
-                                        class="btn btn-secondary bg-transparent p-0 mb-2"
+                                        class="btn btn-secondary bg-transparent p-0 mb-2 d-md-block d-none"
                                         v-if="chordSharedStore.chordMode != 0"
                                         @click="chordSharedStore.chordMode = 0"
                                         >Skrýt akordy</a
@@ -225,7 +225,7 @@
                     </div>
 
                     <div
-                        class="controls fixed-bottom position-sticky p-1 clearfix"
+                        class="controls fixed-bottom position-sticky p-1 clearfix d-md-block d-none"
                         :class="{ 'card-footer': controlsDisplay }"
                     >
                         <div v-show="bottomMode == 1 && controlsDisplay">

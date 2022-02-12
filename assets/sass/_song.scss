@@ -11,6 +11,13 @@
         //border-bottom: #7f97ab;
         border: 0;
     }
+    @media (max-width: 776px) {
+
+        .card-body{
+            padding: 0!important;
+            background-color: white;
+        }
+    }
 }
 
 .song-title {
@@ -203,6 +210,10 @@ a.tag {
     background: rgb(44 94 177 / 6%);
     border: 0;
 
+    @media (max-width: 776px) {
+        font-size: 80% !important;
+    }
+
 }
 
 .tag-blue {
@@ -381,4 +392,10 @@ a.tag {
 
 .v-skeleton-loader__chip {
     max-width: 100%;
+}
+
+.song-author{
+    @media (max-width: 776px) {
+        font-size: 80% !important;
+    }
 }

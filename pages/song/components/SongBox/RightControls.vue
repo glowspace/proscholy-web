@@ -1,5 +1,5 @@
 <template>
-    <div class="align-self-end align-self-sm-start d-sm-flex flex-column pb-sm-0 mr-n3 position-relative">
+    <div class="align-self-end align-self-sm-start flex-column pb-sm-0 mr-n3 position-relative d-md-flex d-none">
         <a
             class="btn m-0"
             title="Otevřít v Regenschorim"
