@@ -12,7 +12,8 @@ body[data-dark] {
     .card-body,
     .chord-text,
     .card {
-        background-color: #111;
+        //background-color: #111;
+        background-color: #f1f4f94f;
         color: #ccc;
     }
 
@@ -29,7 +30,8 @@ body[data-dark] {
     }
 
     .song-tags .songbook-tag .songbook-number {
-        background-color: rgba(0, 0, 0, 0.5);
+        //background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgb(241 244 249);
     }
 
     .border {

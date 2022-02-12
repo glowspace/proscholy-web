@@ -383,20 +383,20 @@
                         </a>
                     </div>
                 </div>
-                <div class="card-footer p-1 song-links">
-                    <div class="px-3 py-2 d-inline-block">Zpěvník ProScholy.cz <img
-                    src="/img/logo.svg" width="20px" /> {{ new Date().getFullYear() }}</div>
-                    <div class="float-right">
-                        <a
-                            class="btn btn-secondary"
-                            :href="'https://proscholy.atlassian.net/servicedesk/customer/portal/1/group/1/create/19?customfield_10056=' + encodeURIComponent(baseUrl + $route.fullPath)"
-                        >Nahlásit</a>
-                        <a
-                            class="btn btn-secondary"
-                            :href="[song_lyric ? adminUrl + '/song/' + song_lyric.id + '/edit' : '']"
-                        >Upravit</a>
-                    </div>
-                </div>
+<!--                <div class="card-footer p-1 song-links">-->
+<!--&lt;!&ndash;                    <div class="px-3 py-2 d-inline-block">Zpěvník ProScholy.cz <img&ndash;&gt;-->
+<!--&lt;!&ndash;                    src="/img/logo.svg" width="20px" /> {{ new Date().getFullYear() }}</div>&ndash;&gt;-->
+<!--                    <div class="float-right">-->
+<!--                        <a-->
+<!--                            class="btn btn-secondary"-->
+<!--                            :href="'https://proscholy.atlassian.net/servicedesk/customer/portal/1/group/1/create/19?customfield_10056=' + encodeURIComponent(baseUrl + $route.fullPath)"-->
+<!--                        >Nahlásit</a>-->
+<!--                        <a-->
+<!--                            class="btn btn-secondary"-->
+<!--                            :href="[song_lyric ? adminUrl + '/song/' + song_lyric.id + '/edit' : '']"-->
+<!--                        >Upravit</a>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
         </div>
         <div class="col-lg-3">
