@@ -1,5 +1,7 @@
 <template>
     <div class="song-detail">
+        <navbar></navbar>
+
         <div class="mt-4 mb-3">
             <div>
                 <h1 class="song-title">
@@ -18,19 +20,13 @@
         <song-box
             :song_lyric="song"
         ></song-box>
-        <div class="navbar-song d-flex justify-content-between py-1 bg-white border-top fixed-bottom d-block d-md-none">
-            <div class="nav-link  pl-5 mr-auto">
-                <p class="mb-0"><i class="fas fa-headphones"></i></p>
-            </div>
-            <div class="nav-link  mx-auto"><p class="mb-0"><i class="fas fa-music"></i></p></div>
-            <div class="nav-link mx-auto"><p class="mb-0"><i class="fas fa-sliders-h"></i></p></div>
-            <div class="nav-link  pr-5 ml-auto"><p class="mb-0"><i class="fas fa-search"></i></p></div>
 
-        </div>
         <p class="song-author ml-3 mb-5 d-md-none d-block">
             <song-author-label :song="song"/>
             <song-info :song="song"/>
         </p>
+
+        <navbar-song-bottom :song="song"/>
     </div>
 </template>
 <script>
@@ -39,11 +35,15 @@ import SongBox from './components/SongBox/SongBox';
 import Tags from './components/Tags';
 import SongName from '~/components/SongName';
 import SongInfo from '~/components/SongInfo';
+import NavbarSongBottom from "~/pages/song/components/NavbarSongBottom";
+import Navbar from "~/components/Navbar";
 
 export default {
     name: 'SongDetail',
 
     components: {
+        Navbar,
+        NavbarSongBottom,
         SongBox,
         SongAuthorLabel,
         Tags,
@@ -57,7 +57,7 @@ export default {
 
 <style lang="scss">
 .song-detail {
-    //font-family: "Roboto", sans-serif;
+    margin-top: 80px;
 
     .song-title {
         font-family: "Roboto", sans-serif;

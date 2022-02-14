@@ -1,16 +1,12 @@
 <template>
     <div id="app"
          class="container-fluid">
-        <div class="row mr-0">
+        <div class="row">
             <div class="col wrapper-inventory">
                 <inventory/>
             </div>
             <div class="col wrapper-content">
-                <navbar></navbar>
-
-                <div class="wrapper-page">
-                    <nuxt/>
-                </div>
+                <nuxt/>
             </div>
         </div>
     </div>
@@ -54,24 +50,17 @@ export default {
 <style lang="scss">
 #app {
     max-height:    100vh;
-    padding-right: 0;
-    padding-left:  0;
-
 
     .wrapper-inventory {
-        flex: 0 0 240px;
+        flex:          0 0 240px;
         padding-right: 0;
     }
 
     .wrapper-content {
-        height:   100vh;
-        padding: 0;
 
-        .wrapper-page {
-            padding: 0 3em;
-            overflow: scroll;
-            height: calc(100vh - 70px)
-        }
+        padding:       0 3em;
+        margin-bottom: 2em;
+        min-height:    100vh;
     }
 }
 
