@@ -113,7 +113,7 @@ function applyRandomSorting(query, seed) {
 }
 
 function applyAZSorting(sort, is_descending) {
-    sort.push({'name.raw': {order: is_descending ? 'desc' : 'asc'}});
+    sort.push({'name_raw': {order: is_descending ? 'desc' : 'asc'}});
 }
 
 function applySongNumberSorting(sort, is_descending) {
@@ -230,7 +230,8 @@ export default function(params = {
 
     const query_str = JSON.stringify({
         sort: sort,
-        query: query
+        query: query,
+        min_score: cleanSearchString ? 0.5 : 0
     });
 
     return query_str;
