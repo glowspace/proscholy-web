@@ -1,43 +1,67 @@
 /// INTERNAL FUNCTIONS USED FOR BUILDING ELASTIC QUERY
 
 function applyFulltext(query, search_string, options = {
-    must_match: false,
-    phrase_fields: [
-        'name^10',
-        'lyrics^5'
-    ],
-    exact_match_fields: [
-        'name^2',
-        'lyrics',
-        'authors',
+    exact_phrase: false,
+}) {
+    if (options.exact_phrase) {
+        query.bool.must.push({
+            multi_match: {
+                query: search_string,
+                fields: ['name', 'lyrics', 'authors'],
+                type: 'phrase'
+            }
+        })
+    } else {
+        query.bool.should.push({
+            // search-as-you-type
+            multi_match: {
+                query: search_string,
+                fields: ['name^2', 'name_.2gram', 'name._3gram'],
+                type: 'bool_prefix'
+            }
+        }, {
+            // phrase search
+            multi_match: {
+                query: search_string,
+                fields: ['name^2', 'lyrics^3'],
+                type: 'phrase',
+                slop: 2
+            }
+        }, {
+            //fuzzy search, word-by-word
+            multi_match: {
+                query: search_string,
+                fields: ['name'],
+                fuzziness: 1
+            }
+        }, {
+            //fuzzy search, authors more prone to errors
+            multi_match: {
+                query: search_string,
+                fields: ['authors'],
+                fuzziness: 'AUTO'
+            }
+        })
+    }
+
+    const exact_match_fields = [
         'song_number^50',
         'songbook_records.songbook_number',
         'songbook_records.songbook_full_number^50'
     ]
-}) {
-    // if exact match query -> multi_match needs to end in `must` section,
-    // otherwise it is to be in `should` in order only to improve the rating
-    let queryObject = options.must_match ? query.bool.must : query.bool.should;
-    queryObject.push({
-        multi_match: {
-            query: search_string,
-            type: 'phrase',
-            fields: options.phrase_fields
-        }
-    });
 
-    query.bool.must.push({
-        // see multi_match elastic documentation https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html
+    query.bool.should.push({
         multi_match: {
             query: search_string,
-            fields: options.exact_match_fields
+            fields: exact_match_fields
         }
     });
 }
 
 function applyDisableRegenschori(query)
 {
-    query.bool.filter.push({ term: { only_regenschori: { value: false } } });
+    // todo: rewrite to is_for_band
+    // query.bool.filter.push({ term: { only_regenschori: { value: false } } });
 }
 
 function applyDisableArrangements(query)
@@ -89,7 +113,7 @@ function applyRandomSorting(query, seed) {
 }
 
 function applyAZSorting(sort, is_descending) {
-    sort.push({name_keyword: {order: is_descending ? 'desc' : 'asc'}});
+    sort.push({'name_raw': {order: is_descending ? 'desc' : 'asc'}});
 }
 
 function applySongNumberSorting(sort, is_descending) {
@@ -174,7 +198,7 @@ export default function(params = {
 
     if (cleanSearchString) {
         applyFulltext(query, params.searchString, {
-            must_match: isExactMatch
+            exact_phrase: isExactMatch
         });
     } else {
         // if no search string is provided then apply sorting
@@ -206,7 +230,8 @@ export default function(params = {
 
     const query_str = JSON.stringify({
         sort: sort,
-        query: query
+        query: query,
+        min_score: cleanSearchString ? 0.5 : 0
     });
 
     return query_str;
