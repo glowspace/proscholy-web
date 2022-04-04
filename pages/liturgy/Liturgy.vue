@@ -7,8 +7,28 @@
                 korespondence textu písně s&nbsp;mešním čtením.
             </p>
         </div>
+        <div class="row mb-3" :style="`opacity: ${customBibleString.length > 0 ? 0.4 : 1}`">
+            <div class="col-sm-4 col-lg-3" v-for="(lit_day, key) in currentDateReadings" :key='key'>
+                <h5>{{ lit_day.czechName}}</h5>
+                <p v-if="lit_day.firstReading && lit_day.firstReading.length > 0"><i>1. čtení: {{ lit_day.firstReading }}</i></p>
+                <p v-else><i>Nemá vlastní 1. čtení</i></p>
+                <p v-if="lit_day.psalm && lit_day.psalm.length > 0"><i>Žalm: {{ lit_day.psalm }}</i></p>
+                <p v-else><i>Nemá vlastní žalm</i></p>
+                <p v-if="lit_day.secondReading && lit_day.secondReading.length > 0"><i>2. čtení: {{ lit_day.secondReading }}</i></p>
+                <p v-if="lit_day.gospel && lit_day.gospel.length > 0"><i>Evangelium: {{ lit_day.gospel }}</i></p>
+                <p v-else><i>Nemá vlastní evangelium</i></p>
+            </div>
+        </div>
+        <div class="mb-3">
+            <p class="mb-0">Nebo můžete zadat vlastní biblické odkazy:</p>
+            <v-textarea
+                placeholder="Např. Žalm 46 nebo Mt 3, 13-17"
+                v-model="customBibleString"
+                rows="3"
+            ></v-textarea>
+        </div>
 
-        <div class="d-flex mb-3">
+        <div class="d-flex mb-3" :style="`opacity: ${customBibleString.length > 0 ? 0.4 : 1}`">
             <nuxt-link
                 :to="'/liturgie/aktualne/' + getDate(-5)[0]"
                 class="tag tag-blue flex-shrink-0"
@@ -45,7 +65,7 @@
                         ></v-progress-linear>
                     </td>
                 </tr>
-                <tr v-if="$apollo.loading && !(liturgical_references && liturgical_references.length)">
+                <tr v-if="$apollo.loading && !(song_lyrics && song_lyrics.length)">
                     <td style="width:4rem">
                         <div class="d-flex justify-content-end align-items-center">
                             <span>&nbsp;</span>
@@ -67,49 +87,39 @@
                     </td>
                 </tr>
                 <template
-                    v-else-if="liturgical_references && liturgical_references.length"
+                    v-else-if="song_lyrics && song_lyrics.length"
                 >
                     <tr>
                         <th class="text-right border-top-0" title="číslo písně ve Zpěvníku ProScholy.cz">#</th>
                         <th class="align-middle border-top-0">název písně</th>
-                        <th class="align-middle border-top-0">odkaz</th>
-                        <th class="align-middle border-top-0">vazba</th>
+                        <th class="align-middle border-top-0">biblické odkazy</th>
                     </tr>
-                    <template
-                        v-for="litref in  liturgical_references" v-if="litref.song_lyric && litref.readings"
-                    >
-                        <tr v-for="(reading, key) in litref.readings" :key="litref.song_lyric.id + key">
-                            <template v-if="key === 0 && litref.song_lyric">
-                                <td
-                                    class="p-1 align-middle text-right w-min"
-                                    :rowspan="litref.readings.length"
-                                >
-                                    <nuxt-link
-                                        class="p-2 pl-3 text-secondary"
-                                        :to="litref.song_lyric.public_route"
-                                    >{{ litref.song_lyric.song_number }}</nuxt-link>
-                                </td>
-                                <td
-                                    class="p-1 align-middle"
-                                    :rowspan="litref.readings.length"
-                                >
-                                    <nuxt-link
-                                        class="p-2 w-100 d-inline-block"
-                                        :to="litref.song_lyric.public_route"
-                                    ><song-name :song="litref.song_lyric" :multiline="true"></song-name></nuxt-link>
-                                </td>
-                            </template>
-                            <td class="align-middle p-1">
-                                <a
-                                    class="tag tag-blue my-1"
-                                    v-for="(reference, key2) in osisConvert(reading.reading_reference)"
-                                    :key="'ref' + key2"
-                                    :href="`https://www.bibleserver.com/CEP/${reference}`"
-                                >{{ reference }}</a>
-                            </td>
-                            <td class="align-middle">{{ reading.type.toLowerCase() }}</td>
-                        </tr>
-                    </template>
+                    <tr v-for="(sl, key) in song_lyrics" :key='key'>
+                        <td
+                            class="p-1 align-middle text-right w-min"
+                        >
+                            <nuxt-link
+                                class="p-2 pl-3 text-secondary"
+                                :to="sl.public_route"
+                            >{{ sl.song_number }}</nuxt-link>
+                        </td>
+                        <td
+                            class="p-1 align-middle"
+                        >
+                            <nuxt-link
+                                class="p-2 w-100 d-inline-block"
+                                :to="sl.public_route"
+                            ><song-name :song="sl" :multiline="true"></song-name></nuxt-link>
+                        </td>
+                        <td class="align-middle p-1">
+                            <a
+                                class="tag tag-blue my-1"
+                                v-for="(reference, key2) in osisConvert(sl.bible_refs_osis)"
+                                :key="'ref' + key2"
+                                :href="`https://www.bibleserver.com/CEP/${reference}`"
+                            >{{ reference }}</a>
+                        </td>
+                    </tr>
                 </template>
                 <tr v-else-if="!$apollo.loading">
                     <td class="p-1" colspan="7">
@@ -145,28 +155,23 @@
 
 <script>
 import gql from 'graphql-tag';
-import BibleReference from 'bible-reference/bible_reference';
+import bible from 'bible-liturgy-utils/bible/bible'
+import liturgy from 'bible-liturgy-utils/litcal/litcal'
 import SongName from '~/components/SongName';
 
 const FETCH_ITEMS = gql`
-    query($date: Date!) {
-        liturgical_references(date: $date) {
-            song_lyric {
-                id
-                name
-                secondary_name_1
-                secondary_name_2
-                song_number
-                public_route
-            }
-            readings {
-                type
-                reading_reference
-            }
-            date
+    query($bible_reference_osis: String!) {
+        song_lyrics(bible_reference_osis: $bible_reference_osis) {
+            id
+            name
+            secondary_name_1
+            secondary_name_2
+            song_number
+            public_route
+            bible_refs_osis
         }
     }
-`;
+`
 
 export default {
     components: {SongName},
@@ -192,6 +197,9 @@ export default {
             thisDate: this.$route.params.date || new Date().toISOString().split('T')[0],
             seed: null,
             regenschoriUrl: process.env.regenschoriUrl,
+            customBibleString: '',
+            litCalendarLoaded: false,
+            litCalendarDays: null // async loaded in mounted() func
         };
     },
 
@@ -254,8 +262,12 @@ export default {
         },
 
         osisConvert(osisString) {
-            return BibleReference.fromOsis(osisString).toCzechStrings();
-        }
+            return bible.parseOsis(osisString).toCzechStrings()
+        },
+
+        dayString(date) {
+            return date.toISOString().slice(0, 10)
+        },
     },
 
     computed: {
@@ -265,21 +277,59 @@ export default {
 
         todayDate() {
             return this.dateToString(new Date());
+        },
+
+        currentDateReadings() {
+            if (!this.litCalendarLoaded) {
+                return []
+            }
+
+            const day_str = this.dayString(new Date(this.thisDate))
+
+            // get all liturgical events (including workdays)
+            let lit_events = this.litCalendarDays[day_str]
+            for (const event of lit_events) {
+                if (event.weekday && !lit_events.map(e => e.key).includes(event.weekday.key)) {
+                    lit_events.push(event.weekday)
+                }
+            }
+
+            return lit_events.flatMap(liturgy.getReadings).filter(x => x.czechName)
+        },
+
+        currentOsis() {
+            let readings_strs = []
+
+            if (this.customBibleString.length == 0) {
+                readings_strs = this.currentDateReadings
+                    .flatMap(r => [r.firstReading, r.psalm, r.secondReading, r.gospel])
+            } else {
+                readings_strs.push(this.customBibleString)
+            }
+
+            return readings_strs
+                .map(bible.parseEuropean)
+                .map(x => x.toString())
+                .filter(x => x.length > 0)
+                .join(',')
         }
     },
 
     apollo: {
-        liturgical_references: {
+        song_lyrics : {
             query: FETCH_ITEMS,
             variables() {
                 return {
-                    date: this.thisDate
-                };
+                    bible_reference_osis: this.currentOsis
+                }
+            },
+            skip() {
+                return !this.litCalendarLoaded
             }
         }
     },
 
-    mounted() {
+    async mounted() {
         if (window.location.hash) {
             this.seed = parseInt(window.location.hash.replace('#', ''));
         }
@@ -289,6 +339,9 @@ export default {
         if (window.document.title && window.document.title != this.getTitle()) {
             window.document.title = this.getTitle();
         }
+
+        this.litCalendarDays = await liturgy.csRomcal.generateCalendar()
+        this.litCalendarLoaded = true
     }
 };
 </script>

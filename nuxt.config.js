@@ -112,6 +112,10 @@ export default {
             default: '~/plugins/apollo-config-auth.js',
         }
     },
+    helmet: {
+        // was blocking iframes (youtube, darujme)
+        crossOriginEmbedderPolicy: false,
+    },
     proxy: {
         '/api': {
             target: process.env.GRAPHQL_TARGET,
