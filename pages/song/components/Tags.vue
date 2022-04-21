@@ -46,7 +46,6 @@
  * 3) liturgy approval
  * 4) bible reference
  */
-// import BibleReference from 'bible-reference/bible_reference';
 import bible from 'bible-liturgy-utils/bible/bible'
 
 export default {
