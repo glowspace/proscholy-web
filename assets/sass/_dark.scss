@@ -118,4 +118,8 @@ body[data-dark] {
     .nosleep-caption {
         background-color: rgba(0, 0, 0, 0.8) !important;
     }
+
+    .darujme-widget {
+        filter: invert(80%) grayscale(1) contrast(1.4) brightness(1.5);
+    }
 }

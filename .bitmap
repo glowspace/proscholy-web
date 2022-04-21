@@ -13,7 +13,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "proscholy.search/build-elastic-search-params@1.0.3": {
+    "proscholy.search/build-elastic-search-params@1.1.0": {
         "files": [
             {
                 "name": "buildElasticSearchParams.js",

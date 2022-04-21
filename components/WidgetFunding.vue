@@ -1,5 +1,5 @@
 <template>
-    <div data-darujme-widget-token="uzsiey6anqbiywa3" class="mb-2">&nbsp;</div>
+    <div data-darujme-widget-token="uzsiey6anqbiywa3" class="darujme-widget mb-2">&nbsp;</div>
 </template>
 
 <script>
