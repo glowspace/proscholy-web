@@ -11,8 +11,16 @@ jobs:
       - name: SSH in staging server
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: cd /var/www/html/staging/proscholy-web-staging && make staging-deploy --silent
+          command: cd /var/www/html/staging/proscholy-web-staging && make staging-pull --silent && make deploy --silent 
           host: ${{ secrets.HOST }}
           port: ${{ secrets.PORT }}
           username: ${{ secrets.USERNAME }}
           privateKey: ${{ secrets.PRIVATE_KEY}}
+      - name: Discord notification
+        uses: Ilshidur/action-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_DEPLOY_WEBHOOK_URL }}
+          DISCORD_USERNAME: "${{ github.workflow }} - ${{ github.event.repository.name }}"
+          DISCORD_AVATAR: "https://c.tenor.com/kiv30bAOYtEAAAAd/gandalf-yes.gif"
+        with:
+          args: "Proběhlo vývojové nasazení (frontend) na staging.zpevnik.proscholy.cz! :tada:"
