@@ -21,8 +21,7 @@ export default {
         return {
             meta: [
                 {property: 'og:url', content: this.baseUrl + this.$nuxt.$route.path},
-                {property: 'twitter:url', content: this.baseUrl + this.$nuxt.$route.path},
-                {property: 'apple-itunes-app', content: 'app-id=1475375453'}
+                {property: 'twitter:url', content: this.baseUrl + this.$nuxt.$route.path}
             ],
             htmlAttrs: {
                 lang: 'cs'
