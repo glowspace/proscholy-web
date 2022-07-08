@@ -29,7 +29,7 @@ export default {
             // { property: 'twitter:card', content: 'summary_large_image' },
             // { property: 'twitter:image', content: 'https://zpevnik.proscholy.cz/banner.png' }
             
-            { property: 'apple-itunes-app', content: 'app-id=1475375453' }
+            { name: 'apple-itunes-app', content: 'app-id=1475375453' }
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
