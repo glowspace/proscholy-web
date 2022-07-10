@@ -14,4 +14,4 @@ deploy:
 	else \
 		echo 'yarn build was not successful, not restarting the server'; \
 	fi
-	curl localhost -H 'Cache-Purge: true'
+	sudo /var/www/html/nginx_clear_cache.sh
