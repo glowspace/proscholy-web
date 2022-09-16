@@ -145,6 +145,7 @@
                 :src="source"
                 width="100%"
                 :height="external.media_type == 'spotify' ? 80 : 120"
+                :style="external.media_type == 'spotify' ? 'background-color: #282828;' : ''"
                 frameborder="0"
                 scrolling="no"
                 allowtransparency="true"
@@ -220,7 +221,7 @@ export default {
     computed: {
         source() {
             if (this.external.media_type == 'spotify') {
-                return 'https://open.spotify.com/embed/track/' + this.external.media_id;
+                return 'https://open.spotify.com/embed/track/' + this.external.media_id + "?theme=0";
             } else if (this.external.media_type == 'soundcloud') {
                 return (
                     'https://w.soundcloud.com/player/?url=' +
