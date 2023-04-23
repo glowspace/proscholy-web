@@ -5,24 +5,15 @@
                 <div class="card-header p-1">
                     <div class="d-inline-block">
                         <a
-                            v-if="scores.length"
+                            v-if="scores.length || otherExternals.length"
                             class="btn btn-secondary"
                             :class="[{ chosen: topMode == 1 }]"
                             @click="topMode = topMode == 1 ? 0 : 1"
                         >
                             <i class="fas fa-file-alt"></i>
-                            <span class="d-sm-inline">Noty</span>
-                        </a>
-                        <a
-                            v-if="otherExternals.length"
-                            class="btn btn-secondary"
-                            :class="[{ chosen: topMode == 3 }]"
-                            @click="topMode = topMode == 3 ? 0 : 3"
-                        >
-                            <i class="fas fa-link"></i>
-                            <span class="d-none d-sm-inline"
-                                >Další materiály</span
-                            >
+                            <span v-if="scores.length && otherExternals.length">Noty, materiály</span>
+                            <span v-else-if="scores.length">Noty</span>
+                            <span v-else>Materiály</span>
                         </a>
                         <a
                             v-if="renderTranslations"
@@ -31,38 +22,20 @@
                             @click="topMode = topMode == 2 ? 0 : 2"
                         >
                             <i class="fas fa-language"></i>
-                            <span class="d-none d-sm-inline">Překlady</span>
+                            <span>Překlady</span>
                         </a>
-                        <a
-                            v-if="hasArrangements"
-                            class="btn"
-                            :href="regenschoriUrl + song_lyric.public_route"
-                        >
+                        <a v-if="hasArrangements" class="btn" :href="regenschoriUrl + song_lyric.public_route">
                             <i class="fas fa-edit"></i>
-                            <span class="d-none d-sm-inline">Aranže</span>
+                            <span>Aranže</span>
                         </a>
                     </div>
                     <div class="float-right">
-                        <!-- <a class="btn btn-secondary">
-                            <i class="fas fa-folder-plus"></i>
-                            <span class="d-none d-sm-inline">Do seznamu</span>
-                        </a>
-                        <a class="btn btn-secondary">
-                            <i class="fas fa-file-export"></i>
-                            <span class="d-none d-sm-inline">Export</span>
-                        </a>
-                        <a class="btn btn-secondary">
-                            <i class="fas fa-share-alt"></i>
-                            <span class="d-none d-sm-inline">Sdílet</span>
-                        </a> -->
                         <a
                             class="btn"
                             title="Nahlásit"
                             :href="
                                 'https://proscholy.atlassian.net/servicedesk/customer/portal/1/group/1/create/19?customfield_10056=' +
-                                    encodeURIComponent(
-                                        baseUrl + $route.fullPath
-                                    )
+                                    encodeURIComponent(baseUrl + $route.fullPath)
                             "
                         >
                             <i class="fas fa-exclamation-triangle p-0"></i>
@@ -81,6 +54,9 @@
                             <div class="row ml-0" v-if="!$apollo.loading">
                                 <table class="table m-0">
                                     <tbody>
+                                        <tr v-if="scores.length && otherExternals.length">
+                                            <td colspan="3" class="py-2 font-weight-bold">Noty</td>
+                                        </tr>
                                         <external
                                             v-for="(external, index) in scores"
                                             :key="index"
@@ -89,26 +65,11 @@
                                             :external="external"
                                             :song-name="song_lyric.name"
                                         ></external>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- other externals -->
-                    <div v-show="topMode === 3">
-                        <div class="overflow-auto toolbox toolbox-u">
-                            <a
-                                class="btn btn-secondary float-right fixed-top position-sticky cross"
-                                @click="topMode = 0"
-                            >
-                                <i class="fas fa-times pr-0"></i>
-                            </a>
-                            <div class="row ml-0" v-if="!$apollo.loading">
-                                <table class="table m-0">
-                                    <tbody>
+                                        <tr v-if="scores.length && otherExternals.length">
+                                            <td colspan="3" class="pb-2 pt-4 font-weight-bold">Další materiály</td>
+                                        </tr>
                                         <external
-                                            v-for="(external,
-                                            index) in otherExternals"
+                                            v-for="(external, index) in otherExternals"
                                             :key="index"
                                             :line="true"
                                             :index="index"
@@ -129,10 +90,7 @@
                             >
                                 <i class="fas fa-times pr-0"></i>
                             </a>
-                            <div
-                                class="row ml-0"
-                                v-if="!$apollo.loading && renderTranslations"
-                            >
+                            <div class="row ml-0" v-if="!$apollo.loading && renderTranslations">
                                 <table class="table m-0">
                                     <tbody>
                                         <tr>
@@ -142,8 +100,7 @@
                                             <th>Autor (překladu)</th>
                                         </tr>
                                         <translation-line
-                                            v-for="(translation,
-                                            index) in song_lyric.song.song_lyrics.filter(
+                                            v-for="(translation, index) in song_lyric.song.song_lyrics.filter(
                                                 lyric => lyric.type == 0
                                             )"
                                             :translation="translation"
@@ -152,8 +109,7 @@
                                         >
                                         </translation-line>
                                         <translation-line
-                                            v-for="(translation,
-                                            index) in song_lyric.song.song_lyrics.filter(
+                                            v-for="(translation, index) in song_lyric.song.song_lyrics.filter(
                                                 lyric => lyric.type == 2
                                             )"
                                             :translation="translation"
@@ -162,8 +118,7 @@
                                         >
                                         </translation-line>
                                         <translation-line
-                                            v-for="(translation,
-                                            index) in song_lyric.song.song_lyrics.filter(
+                                            v-for="(translation, index) in song_lyric.song.song_lyrics.filter(
                                                 lyric => lyric.type == 1
                                             )"
                                             :translation="translation"
@@ -179,17 +134,14 @@
                 </div>
                 <div>
                     <div class="card-body py-2 pl-3 overflow-hidden">
-                        <div
-                            class="d-flex align-items-start justify-content-between flex-column-reverse flex-sm-row"
-                        >
+                        <div class="d-flex align-items-start justify-content-between flex-column-reverse flex-sm-row">
                             <div
                                 id="song-lyrics"
                                 :class="{
                                     'p-1': true,
                                     'flex-grow-1': true,
                                     'song-lyrics': true,
-                                    'song-lyrics-extended':
-                                        chordSharedStore.chordMode == 2
+                                    'song-lyrics-extended': chordSharedStore.chordMode == 2
                                 }"
                             >
                                 <div
@@ -200,10 +152,7 @@
                                 <span v-if="song_lyric.has_lyrics">
                                     <a
                                         class="btn btn-secondary bg-transparent p-0 mb-2"
-                                        v-if="
-                                            chordSharedStore.nChordModes != 1 &&
-                                                chordSharedStore.chordMode == 0
-                                        "
+                                        v-if="chordSharedStore.nChordModes != 1 && chordSharedStore.chordMode == 0"
                                         @click="chordSharedStore.chordMode = 2"
                                         >Zobrazit akordy</a
                                     >
@@ -215,9 +164,7 @@
                                     >
                                     <div
                                         v-if="
-                                            !$apollo.loading &&
-                                                song_lyric.capo > 0 &&
-                                                chordSharedStore.chordMode != 0
+                                            !$apollo.loading && song_lyric.capo > 0 && chordSharedStore.chordMode != 0
                                         "
                                         class="mb-2"
                                     >
@@ -226,25 +173,19 @@
                                     <!-- here goes the song lyrics -->
                                     <song-lyric-parts
                                         :song-id="song_lyric.id"
-                                        :font-size-percent="
-                                            chordSharedStore.fontSizePercent
-                                        "
+                                        :font-size-percent="chordSharedStore.fontSizePercent"
                                         @loaded="isScrollable(true)"
                                     ></song-lyric-parts>
                                 </span>
                                 <span
                                     v-else
                                     :style="{
-                                        fontSize:
-                                            chordSharedStore.fontSizePercent +
-                                            '%'
+                                        fontSize: chordSharedStore.fontSizePercent + '%'
                                     }"
                                     >Text písně připravujeme.</span
                                 >
                             </div>
-                            <right-controls
-                                :song_lyric="song_lyric"
-                            ></right-controls>
+                            <right-controls :song_lyric="song_lyric"></right-controls>
                         </div>
                     </div>
 
@@ -254,56 +195,38 @@
                     >
                         <div v-show="bottomMode == 1 && controlsDisplay">
                             <div class="overflow-auto toolbox">
-                                <a
-                                    class="btn btn-secondary float-right"
-                                    @click="bottomMode = 0"
-                                >
+                                <a class="btn btn-secondary float-right" @click="bottomMode = 0">
                                     <i class="fas fa-times pr-0"></i>
                                 </a>
                                 <div
                                     class="toolbox-item"
                                     v-if="chordSharedStore.nChordModes != 1"
                                     :class="{
-                                        'hidden-toolbox-item':
-                                            chordSharedStore.chordMode == 0
+                                        'hidden-toolbox-item': chordSharedStore.chordMode == 0
                                     }"
                                 >
-                                    <transposition
-                                        v-model="chordSharedStore.transposition"
-                                    ></transposition>
+                                    <transposition v-model="chordSharedStore.transposition"></transposition>
                                 </div>
 
                                 <div
                                     class="toolbox-item"
                                     v-if="chordSharedStore.nChordModes != 1"
                                     :class="{
-                                        'hidden-toolbox-item':
-                                            chordSharedStore.chordMode == 0
+                                        'hidden-toolbox-item': chordSharedStore.chordMode == 0
                                     }"
                                 >
-                                    <chord-sharp-flat
-                                        v-model="chordSharedStore.useFlatScale"
-                                    ></chord-sharp-flat>
+                                    <chord-sharp-flat v-model="chordSharedStore.useFlatScale"></chord-sharp-flat>
                                 </div>
 
-                                <div
-                                    class="toolbox-item"
-                                    v-if="chordSharedStore.nChordModes != 1"
-                                >
+                                <div class="toolbox-item" v-if="chordSharedStore.nChordModes != 1">
                                     <chord-mode
                                         v-model="chordSharedStore.chordMode"
-                                        :n-chord-modes="
-                                            chordSharedStore.nChordModes
-                                        "
+                                        :n-chord-modes="chordSharedStore.nChordModes"
                                     ></chord-mode>
                                 </div>
 
                                 <div class="toolbox-item">
-                                    <font-sizer
-                                        v-model="
-                                            chordSharedStore.fontSizePercent
-                                        "
-                                    ></font-sizer>
+                                    <font-sizer v-model="chordSharedStore.fontSizePercent"></font-sizer>
                                 </div>
                             </div>
                         </div>
@@ -316,15 +239,8 @@
                                 >
                                     <i class="fas fa-times pr-0"></i>
                                 </a>
-                                <div
-                                    class="row ml-0 pt-2"
-                                    v-if="hasExternals && !$apollo.loading"
-                                >
-                                    <div
-                                        class="col-md-6"
-                                        v-for="(external, index) in recordings"
-                                        :key="index"
-                                    >
+                                <div class="row ml-0 pt-2" v-if="hasExternals && !$apollo.loading">
+                                    <div class="col-md-6" v-for="(external, index) in recordings" :key="index">
                                         <external
                                             :line="false"
                                             :index="index"
@@ -360,23 +276,12 @@
                                 :class="{ chosen: autoscroll }"
                                 v-if="scrollable"
                             >
-                                <a
-                                    class="btn btn-secondary"
-                                    @click="autoscroll = !autoscroll"
-                                >
+                                <a class="btn btn-secondary" @click="autoscroll = !autoscroll">
                                     <i
                                         class="fas"
-                                        :class="[
-                                            autoscroll
-                                                ? 'pr-0 fa-stop-circle'
-                                                : 'fa-arrow-circle-down'
-                                        ]"
+                                        :class="[autoscroll ? 'pr-0 fa-stop-circle' : 'fa-arrow-circle-down']"
                                     ></i>
-                                    <span
-                                        class="d-none d-sm-inline"
-                                        v-if="!autoscroll"
-                                        >Rolovat</span
-                                    > </a
+                                    <span class="d-none d-sm-inline" v-if="!autoscroll">Rolovat</span> </a
                                 ><a
                                     class="btn btn-secondary"
                                     v-if="autoscroll"
@@ -410,10 +315,7 @@
                         "
                         >Nahlásit</a
                     >
-                    <a
-                        class="btn btn-secondary"
-                        v-if="song_lyric"
-                        :href="adminUrl + '/song/' + song_lyric.id + '/edit'"
+                    <a class="btn btn-secondary" v-if="song_lyric" :href="adminUrl + '/song/' + song_lyric.id + '/edit'"
                         >Upravit</a
                     >
                 </div>
@@ -497,46 +399,32 @@ export default {
     computed: {
         hasExternals: {
             get() {
-                return (
-                    this.song_lyric &&
-                    this.song_lyric.externals &&
-                    this.song_lyric.externals.length
-                );
+                return this.song_lyric && this.song_lyric.externals && this.song_lyric.externals.length;
             }
         },
 
         hasArrangements: {
             get() {
-                return (
-                    this.song_lyric &&
-                    this.song_lyric.arrangements &&
-                    this.song_lyric.arrangements.length
-                );
+                return this.song_lyric && this.song_lyric.arrangements && this.song_lyric.arrangements.length;
             }
         },
 
         recordings: {
             get() {
-                return this.song_lyric.externals.filter(
-                    ext => ext.content_type == 'RECORDING'
-                );
+                return this.song_lyric.externals.filter(ext => ext.content_type == 'RECORDING');
             }
         },
 
         scores: {
             get() {
-                return this.song_lyric.externals.filter(
-                    ext => ext.content_type == 'SCORE'
-                );
+                return this.song_lyric.externals.filter(ext => ext.content_type == 'SCORE');
             }
         },
 
         otherExternals: {
             get() {
                 return this.song_lyric.externals.filter(
-                    ext =>
-                        ext.content_type != 'RECORDING' &&
-                        ext.content_type != 'SCORE'
+                    ext => ext.content_type != 'RECORDING' && ext.content_type != 'SCORE'
                 );
             }
         },
@@ -544,10 +432,7 @@ export default {
         renderTranslations: {
             get() {
                 // if SongLyric is an arrangement, then .song property is undefined
-                return (
-                    this.song_lyric.song &&
-                    this.song_lyric.song.song_lyrics.length > 1
-                );
+                return this.song_lyric.song && this.song_lyric.song.song_lyrics.length > 1;
             }
         },
 
@@ -564,9 +449,7 @@ export default {
                 ];
                 var returnArray = [];
                 for (let i = 0; i < arrayOfTypes.length; i++) {
-                    returnArray[i] = this.recordings.filter(
-                        ext => ext.media_type == arrayOfTypes[i]
-                    ).length;
+                    returnArray[i] = this.recordings.filter(ext => ext.media_type == arrayOfTypes[i]).length;
                 }
                 return returnArray;
             }
@@ -577,9 +460,7 @@ export default {
         controlsToggle: function() {
             if (process.client) {
                 this.controlsDisplay = !this.controlsDisplay;
-                document
-                    .querySelector('.navbar.fixed-top')
-                    .classList.toggle('d-none');
+                document.querySelector('.navbar.fixed-top').classList.toggle('d-none');
             }
         },
 
@@ -589,10 +470,7 @@ export default {
                 this.scrolldelay = setInterval(
                     function() {
                         window.scrollBy(0, 1);
-                        if (
-                            window.innerHeight + window.scrollY >=
-                            document.body.scrollHeight
-                        ) {
+                        if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
                             // we're at the bottom of the page
                             this.autoscroll = false;
                         }
@@ -603,10 +481,7 @@ export default {
         },
 
         isScrollable: throttle(function isScrollableTh(initial) {
-            if (
-                process.client &&
-                document.body.scrollHeight == document.body.clientHeight
-            ) {
+            if (process.client && document.body.scrollHeight == document.body.clientHeight) {
                 // the page isn't scrollable
                 this.scrollable = false;
 
@@ -639,11 +514,13 @@ export default {
             if (this.recordings.length) {
                 this.bottomMode = 2;
             }
+
             if (this.scores.length) {
                 this.topMode = 1;
             } else if (this.renderTranslations) {
                 this.topMode = 2;
             }
+
             this.scrollable = false;
         } else {
             window.addEventListener('resize', this.isScrollable);
