@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-lg-9">
             <div class="card card-lyrics" id="cardLyrics">
-                <div class="card-header p-1 song-links">
+                <div class="card-header p-1">
                     <div class="d-inline-block">
                         <a
                             v-if="scores.length"
@@ -393,32 +393,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer p-1 song-links">
-                    <div class="px-3 py-2 d-inline-block">
-                        Zpěvník ProScholy.cz
-                        <img src="/img/logo.svg" width="20px" />
-                        {{ new Date().getFullYear() }}
-                    </div>
-                    <div class="float-right">
-                        <a
-                            class="btn btn-secondary"
-                            :href="
-                                'https://proscholy.atlassian.net/servicedesk/customer/portal/1/group/1/create/19?customfield_10056=' +
-                                    encodeURIComponent(
-                                        baseUrl + $route.fullPath
-                                    )
-                            "
-                            >Nahlásit</a
-                        >
-                        <a
-                            class="btn btn-secondary"
-                            v-if="song_lyric"
-                            :href="
-                                adminUrl + '/song/' + song_lyric.id + '/edit'
-                            "
-                            >Upravit</a
-                        >
-                    </div>
+            </div>
+            <div class="p-1 mb-3 mt-n2">
+                <div class="px-3 py-2 d-inline-block">
+                    Zpěvník ProScholy.cz
+                    <img src="/img/logo.svg" width="20px" />
+                    {{ new Date().getFullYear() }}
+                </div>
+                <div class="float-right">
+                    <a
+                        class="btn btn-secondary"
+                        :href="
+                            'https://proscholy.atlassian.net/servicedesk/customer/portal/1/group/1/create/19?customfield_10056=' +
+                                encodeURIComponent(baseUrl + $route.fullPath)
+                        "
+                        >Nahlásit</a
+                    >
+                    <a
+                        class="btn btn-secondary"
+                        v-if="song_lyric"
+                        :href="adminUrl + '/song/' + song_lyric.id + '/edit'"
+                        >Upravit</a
+                    >
                 </div>
             </div>
         </div>
