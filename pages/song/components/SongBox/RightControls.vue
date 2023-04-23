@@ -14,16 +14,6 @@
         >
             <i class="fas fa-pen p-0"></i>
         </a>
-        <!-- <a
-            class="btn btn-secondary"
-            :title="[
-                !starred
-                    ? 'Označit píseň hvězdičkou'
-                    : 'Zrušit hvězdičku'
-            ]"
-            @click="toggleStar"
-            ><i class="fa-star" :class="[starred ? 'fas' : 'far']"></i
-        ></a> -->
         <a
             class="btn btn-secondary"
             :title="[
@@ -37,25 +27,6 @@
                 :class="[fullscreen ? 'fa-compress' : 'fa-expand']"
             ></i
         ></a>
-        <!-- <nuxt-link
-            class="btn btn-secondary"
-            title="Aktivovat režim promítání"
-            :to="'/promitat' + song_lyric.public_route"
-            ><i class="fas fa-desktop"></i
-        ></nuxt-link>
-        <a
-            class="btn btn-secondary"
-            :title="[
-                !columns
-                    ? 'Zobrazit text ve sloupcích'
-                    : 'Zrušit zobrazení ve sloupcích'
-            ]"
-            @click="toggleColumns"
-            ><i
-                class="fas"
-                :class="[columns ? 'fa-align-justify' : 'fa-columns']"
-            ></i
-        ></a> -->
         <a
             class="btn btn-secondary nosleep"
             :title="[
