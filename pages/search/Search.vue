@@ -297,14 +297,16 @@ export default {
         inputEnter() {
             this.init = false;
             if (this.search_string) {
+                let searchParsedToInt = parseInt(this.search_string, 10);
+
                 if (this.search_string == 'admin') {
                     window.location.href = this.adminUrl;
-                } else if (!isNaN(parseInt(this.search_string, 10))) {
+                } else if (!isNaN(searchParsedToInt)) {
                     this.songLoading = true;
                     this.$apollo.query({
                         query: FETCH_SONG_ROUTE,
                         variables: {
-                            song_number: this.search_string
+                            song_number: searchParsedToInt
                         }
                     }).then((response) => {
                         if (response.data.song_lyric_number) {
