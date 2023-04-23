@@ -11,11 +11,11 @@
                     </p>
                 </div>
             </div>
-            <tags :song="song"></tags>
+            <div class="d-none d-md-block">
+                <tags :song="song"></tags>
+            </div>
         </div>
-        <song-box
-            :song_lyric="song"
-        ></song-box>
+        <song-box :song_lyric="song"></song-box>
     </div>
 </template>
 
