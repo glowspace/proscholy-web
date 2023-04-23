@@ -20,7 +20,9 @@
                             @click="topMode = topMode == 3 ? 0 : 3"
                         >
                             <i class="fas fa-link"></i>
-                            <span class="d-none d-sm-inline">Další materiály</span>
+                            <span class="d-none d-sm-inline"
+                                >Další materiály</span
+                            >
                         </a>
                         <a
                             v-if="renderTranslations"
@@ -56,7 +58,12 @@
                         <a
                             class="btn"
                             title="Nahlásit"
-                            :href="'https://proscholy.atlassian.net/servicedesk/customer/portal/1/group/1/create/19?customfield_10056=' + encodeURIComponent(baseUrl + $route.fullPath)"
+                            :href="
+                                'https://proscholy.atlassian.net/servicedesk/customer/portal/1/group/1/create/19?customfield_10056=' +
+                                    encodeURIComponent(
+                                        baseUrl + $route.fullPath
+                                    )
+                            "
                         >
                             <i class="fas fa-exclamation-triangle p-0"></i>
                         </a>
@@ -100,7 +107,8 @@
                                 <table class="table m-0">
                                     <tbody>
                                         <external
-                                            v-for="(external, index) in otherExternals"
+                                            v-for="(external,
+                                            index) in otherExternals"
                                             :key="index"
                                             :line="true"
                                             :index="index"
@@ -121,7 +129,10 @@
                             >
                                 <i class="fas fa-times pr-0"></i>
                             </a>
-                            <div class="row ml-0" v-if="!$apollo.loading && renderTranslations">
+                            <div
+                                class="row ml-0"
+                                v-if="!$apollo.loading && renderTranslations"
+                            >
                                 <table class="table m-0">
                                     <tbody>
                                         <tr>
@@ -214,13 +225,25 @@
                                     <!-- here goes the song lyrics -->
                                     <song-lyric-parts
                                         :song-id="song_lyric.id"
-                                        :font-size-percent="chordSharedStore.fontSizePercent"
-                                        @loaded="isScrollable(true);"
+                                        :font-size-percent="
+                                            chordSharedStore.fontSizePercent
+                                        "
+                                        @loaded="isScrollable(true)"
                                     ></song-lyric-parts>
                                 </span>
-                                <span v-else :style="{ fontSize: chordSharedStore.fontSizePercent + '%' }">Text písně připravujeme.</span>
+                                <span
+                                    v-else
+                                    :style="{
+                                        fontSize:
+                                            chordSharedStore.fontSizePercent +
+                                            '%'
+                                    }"
+                                    >Text písně připravujeme.</span
+                                >
                             </div>
-                            <right-controls :song_lyric="song_lyric"></right-controls>
+                            <right-controls
+                                :song_lyric="song_lyric"
+                            ></right-controls>
                         </div>
                     </div>
 
@@ -276,7 +299,9 @@
 
                                 <div class="toolbox-item">
                                     <font-sizer
-                                        v-model="chordSharedStore.fontSizePercent"
+                                        v-model="
+                                            chordSharedStore.fontSizePercent
+                                        "
                                     ></font-sizer>
                                 </div>
                             </div>
@@ -369,7 +394,9 @@
                         <a
                             class="btn btn-secondary float-right"
                             :title="[
-                                controlsDisplay ? 'Skrýt lišty' : 'Zobrazit lišty'
+                                controlsDisplay
+                                    ? 'Skrýt lišty'
+                                    : 'Zobrazit lišty'
                             ]"
                             @click="controlsToggle"
                         >
@@ -385,17 +412,34 @@
                     </div>
                 </div>
                 <div class="card-footer p-1 song-links">
-                    <div class="px-3 py-2 d-inline-block">Zpěvník ProScholy.cz <img
-                    src="/img/logo.svg" width="20px" /> {{ new Date().getFullYear() }}</div>
+                    <div class="px-3 py-2 d-inline-block">
+                        Zpěvník ProScholy.cz
+                        <img src="/img/logo.svg" width="20px" />
+                        {{ new Date().getFullYear() }}
+                    </div>
                     <div class="float-right">
                         <a
                             class="btn btn-secondary"
-                            :href="'https://proscholy.atlassian.net/servicedesk/customer/portal/1/group/1/create/19?customfield_10056=' + encodeURIComponent(baseUrl + $route.fullPath)"
-                        >Nahlásit</a>
+                            :href="
+                                'https://proscholy.atlassian.net/servicedesk/customer/portal/1/group/1/create/19?customfield_10056=' +
+                                    encodeURIComponent(
+                                        baseUrl + $route.fullPath
+                                    )
+                            "
+                            >Nahlásit</a
+                        >
                         <a
                             class="btn btn-secondary"
-                            :href="[song_lyric ? adminUrl + '/song/' + song_lyric.id + '/edit' : '']"
-                        >Upravit</a>
+                            :href="[
+                                song_lyric
+                                    ? adminUrl +
+                                      '/song/' +
+                                      song_lyric.id +
+                                      '/edit'
+                                    : ''
+                            ]"
+                            >Upravit</a
+                        >
                     </div>
                 </div>
             </div>
@@ -408,27 +452,49 @@
                 @click="topMode = 1"
                 v-if="scores.length"
             >
-                <div class="card-header media-opener py-2 rounded"><i class="fas fa-file-alt"></i> Zobrazit notové zápisy</div>
+                <div class="card-header media-opener py-2 rounded">
+                    <i class="fas fa-file-alt"></i> Zobrazit notové zápisy
+                </div>
             </div>
             <div
                 class="card card-green mb-3 d-none d-lg-flex"
                 @click="bottomMode = 2"
                 v-if="recordings.length"
             >
-                <div class="card-header media-opener py-2"><i class="fas fa-headphones"></i> Dostupné nahrávky<span class="d-none d-xl-inline"> a videa</span></div>
-                <div class="media-opener" v-if="mediaTypes[0]"><i class="fab fa-spotify text-success"></i> Spotify</div>
-                <div class="media-opener" v-if="mediaTypes[1]"><i class="fab fa-soundcloud" style="color: orangered;"></i> SoundCloud</div>
-                <div class="media-opener" v-if="mediaTypes[3]"><i class="fas fa-music"></i> MP3</div>
-                <div class="media-opener" v-if="mediaTypes[2]"><i class="fab fa-youtube text-danger"></i> YouTube</div>
+                <div class="card-header media-opener py-2">
+                    <i class="fas fa-headphones"></i> Dostupné nahrávky<span
+                        class="d-none d-xl-inline"
+                    >
+                        a videa</span
+                    >
+                </div>
+                <div class="media-opener" v-if="mediaTypes[0]">
+                    <i class="fab fa-spotify text-success"></i> Spotify
+                </div>
+                <div class="media-opener" v-if="mediaTypes[1]">
+                    <i class="fab fa-soundcloud" style="color: orangered;"></i>
+                    SoundCloud
+                </div>
+                <div class="media-opener" v-if="mediaTypes[3]">
+                    <i class="fas fa-music"></i> MP3
+                </div>
+                <div class="media-opener" v-if="mediaTypes[2]">
+                    <i class="fab fa-youtube text-danger"></i> YouTube
+                </div>
             </div>
 
             <div class="card mb-3 d-none d-lg-flex" @click="bottomMode = 1">
-                <div class="card-header media-opener py-2 rounded bg-secondary text-white"><i class="fas fa-sliders-h"></i> Nastavit zobrazení</div>
+                <div
+                    class="card-header media-opener py-2 rounded bg-secondary text-white"
+                >
+                    <i class="fas fa-sliders-h"></i> Nastavit zobrazení
+                </div>
                 <div
                     class="media-opener"
                     v-if="chordSharedStore.nChordModes != 1"
                 >
-                    <i class="fas fa-angle-right"></i> Transpozice: <span class="float-right">{{
+                    <i class="fas fa-angle-right"></i> Transpozice:
+                    <span class="float-right">{{
                         chordSharedStore.transposition
                     }}</span>
                 </div>
@@ -436,7 +502,8 @@
                     class="media-opener"
                     v-if="chordSharedStore.nChordModes != 1"
                 >
-                    <i class="fas fa-angle-right"></i> Posuvky: <span class="float-right">{{
+                    <i class="fas fa-angle-right"></i> Posuvky:
+                    <span class="float-right">{{
                         chordSharedStore.useFlatScale ? '♭' : '#'
                     }}</span>
                 </div>
@@ -444,12 +511,14 @@
                     class="media-opener"
                     v-if="chordSharedStore.nChordModes != 1"
                 >
-                    <i class="fas fa-angle-right"></i> Akordy: <span class="float-right">{{
+                    <i class="fas fa-angle-right"></i> Akordy:
+                    <span class="float-right">{{
                         chordSharedStore.chordMode ? '+' : '–'
                     }}</span>
                 </div>
                 <div class="media-opener">
-                    <i class="fas fa-angle-right"></i> Velikost písma: <span class="float-right">{{
+                    <i class="fas fa-angle-right"></i> Velikost písma:
+                    <span class="float-right">{{
                         (chordSharedStore.fontSizePercent - 100) / 10
                     }}</span>
                 </div>
@@ -471,7 +540,7 @@ import SongLyricParts from '../Renderer/SongLyricParts.vue';
 import TranslationLine from '~/components/TranslationLine.vue';
 import External from '~/components/External.vue';
 import { getFullName } from '~/components/SongName';
-import WidgetFunding from "~/components/WidgetFunding";
+import WidgetFunding from '~/components/WidgetFunding';
 
 /**
  * This component renders white box on song detail page.
@@ -479,9 +548,7 @@ import WidgetFunding from "~/components/WidgetFunding";
  * It contains lyrics and another stuff.
  */
 export default {
-    props: [
-        'song_lyric'
-    ],
+    props: ['song_lyric'],
 
     components: {
         FontSizer,
@@ -532,36 +599,46 @@ export default {
     computed: {
         hasExternals: {
             get() {
-                return this.song_lyric && this.song_lyric.externals && this.song_lyric.externals.length;
+                return (
+                    this.song_lyric &&
+                    this.song_lyric.externals &&
+                    this.song_lyric.externals.length
+                );
             }
         },
 
         hasArrangements: {
             get() {
-                return this.song_lyric && this.song_lyric.arrangements && this.song_lyric.arrangements.length;
+                return (
+                    this.song_lyric &&
+                    this.song_lyric.arrangements &&
+                    this.song_lyric.arrangements.length
+                );
             }
         },
 
         recordings: {
             get() {
-                return this.song_lyric.externals.filter(ext =>
-                    ext.content_type == "RECORDING"
+                return this.song_lyric.externals.filter(
+                    ext => ext.content_type == 'RECORDING'
                 );
             }
         },
 
         scores: {
             get() {
-                return this.song_lyric.externals.filter(ext =>
-                    ext.content_type == "SCORE"
+                return this.song_lyric.externals.filter(
+                    ext => ext.content_type == 'SCORE'
                 );
             }
         },
 
         otherExternals: {
             get() {
-                return this.song_lyric.externals.filter(ext =>
-                    ext.content_type != "RECORDING" && ext.content_type != "SCORE"
+                return this.song_lyric.externals.filter(
+                    ext =>
+                        ext.content_type != 'RECORDING' &&
+                        ext.content_type != 'SCORE'
                 );
             }
         },
@@ -569,16 +646,29 @@ export default {
         renderTranslations: {
             get() {
                 // if SongLyric is an arrangement, then .song property is undefined
-                return (this.song_lyric.song && this.song_lyric.song.song_lyrics.length > 1);
+                return (
+                    this.song_lyric.song &&
+                    this.song_lyric.song.song_lyrics.length > 1
+                );
             }
         },
 
         mediaTypes: {
             get() {
-                var arrayOfTypes = ["spotify", "soundcloud", "youtube", "file/mp3", "file/wav", "file/aac", "file/flac"];
+                var arrayOfTypes = [
+                    'spotify',
+                    'soundcloud',
+                    'youtube',
+                    'file/mp3',
+                    'file/wav',
+                    'file/aac',
+                    'file/flac'
+                ];
                 var returnArray = [];
                 for (let i = 0; i < arrayOfTypes.length; i++) {
-                    returnArray[i] = this.recordings.filter(ext => ext.media_type == arrayOfTypes[i]).length;
+                    returnArray[i] = this.recordings.filter(
+                        ext => ext.media_type == arrayOfTypes[i]
+                    ).length;
                 }
                 return returnArray;
             }
@@ -598,18 +688,27 @@ export default {
         setScroll: function(num, condition) {
             clearInterval(this.scrolldelay);
             if (process.client && num > 0 && num < 21 && condition) {
-                this.scrolldelay = setInterval(function() {
-                    window.scrollBy(0, 1);
-                    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
-                        // we're at the bottom of the page
-                        this.autoscroll = false;
-                    }
-                }.bind(this), (21 - num) * 10);
+                this.scrolldelay = setInterval(
+                    function() {
+                        window.scrollBy(0, 1);
+                        if (
+                            window.innerHeight + window.scrollY >=
+                            document.body.scrollHeight
+                        ) {
+                            // we're at the bottom of the page
+                            this.autoscroll = false;
+                        }
+                    }.bind(this),
+                    (21 - num) * 10
+                );
             }
         },
 
         isScrollable: throttle(function isScrollableTh(initial) {
-            if (process.client && document.body.scrollHeight == document.body.clientHeight) {
+            if (
+                process.client &&
+                document.body.scrollHeight == document.body.clientHeight
+            ) {
                 // the page isn't scrollable
                 this.scrollable = false;
 
@@ -624,7 +723,7 @@ export default {
         keyUp: function(e) {
             if (e.key == '+') {
                 if (this.autoscroll && this.autoscrollNum < 20) {
-                        this.autoscrollNum++;
+                    this.autoscrollNum++;
                 }
                 this.autoscroll = true;
             } else if (e.key == 'Escape') {
