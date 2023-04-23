@@ -119,7 +119,7 @@
                             <i
                                 v-if="song_lyric.scores.length"
                                 class="fas fa-file-alt text-danger"
-                                title="K této písni jsou k dispozici noty."
+                                title="U této písně je k dispozici soubor s notami."
                             ></i>
                             <i
                                 v-else
