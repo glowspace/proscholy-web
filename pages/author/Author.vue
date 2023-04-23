@@ -69,7 +69,7 @@
             </div>
             <div class="float-right">
                 <a
-                    class="btn btn-secondary m-0"
+                    class="btn btn-secondary"
                     :href="
                         'https://proscholy.atlassian.net/servicedesk/customer/portal/1/group/1/create/21?customfield_10056=' +
                             encodeURIComponent(baseUrl + $route.fullPath)
@@ -78,7 +78,7 @@
                 >
                 <a
                     v-if="author"
-                    class="btn btn-secondary m-0"
+                    class="btn btn-secondary"
                     :href="adminUrl + '/author/' + author.id + '/edit'"
                     >Upravit</a
                 >

@@ -79,7 +79,7 @@
                     <td>Načítám...</td>
                     <td class="p-1" colspan="5">
                         <a
-                            class="btn btn-secondary float-right m-0"
+                            class="btn btn-secondary float-right"
                             :href="'https://proscholy.atlassian.net/servicedesk/customer/portal/1/group/6/create/20?customfield_10056=' + encodeURIComponent(baseUrl + $route.fullPath)"
                         >
                             Nahlásit
@@ -127,7 +127,7 @@
                         >Nebyla nalezena žádná vhodná píseň.</span
                         >
                         <a
-                            class="btn btn-secondary float-right m-0"
+                            class="btn btn-secondary float-right"
                             :href="'https://forms.gle/AYXXxkWtDHQQ13856'"
                         >
                             Přidat píseň
@@ -144,7 +144,7 @@
         </a>
 
         <a
-            class="btn btn-secondary mb-0 search-report bg-transparent"
+            class="btn btn-secondary search-report bg-transparent"
             title="Nahlásit"
             :href="'https://proscholy.atlassian.net/servicedesk/customer/portal/1/group/6/create/20?customfield_10056=' + encodeURIComponent(baseUrl + $route.fullPath)"
         >

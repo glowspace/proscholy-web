@@ -45,7 +45,7 @@
                 máme pro vás připravený formulář:
             </span>
             <a
-                class="btn btn-primary btn-outline mb-0"
+                class="btn btn-primary btn-outline"
                 href="https://forms.gle/AYXXxkWtDHQQ13856"
                 >Přidat píseň</a
             >

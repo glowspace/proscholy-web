@@ -14,7 +14,7 @@
                     <td class="p-1"><span class="p-2 pl-3 d-inline-block">Načítám...</span></td>
                     <td class="p-1">
                         <a
-                            class="btn btn-secondary float-right m-0"
+                            class="btn btn-secondary float-right"
                             :href="'https://proscholy.atlassian.net/servicedesk/customer/portal/1/group/6/create/20?customfield_10056=' + encodeURIComponent(baseUrl + $route.fullPath)"
                         >
                             Nahlásit

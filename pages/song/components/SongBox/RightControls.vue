@@ -1,21 +1,21 @@
 <template>
     <div class="align-self-end align-self-sm-start d-sm-flex flex-column pb-sm-0 mr-n3 position-relative">
         <a
-            class="btn m-0"
+            class="btn"
             title="Otevřít v Regenschorim"
             :href="[song_lyric ? regenschoriUrl + song_lyric.public_route : '']"
         >
             <i class="fas fa-church p-0"></i>
         </a>
         <a
-            class="btn m-0"
+            class="btn"
             title="Upravit píseň"
             :href="[song_lyric ? adminUrl + '/song/' + song_lyric.id + '/edit' : '']"
         >
             <i class="fas fa-pen p-0"></i>
         </a>
         <!-- <a
-            class="btn btn-secondary m-0"
+            class="btn btn-secondary"
             :title="[
                 !starred
                     ? 'Označit píseň hvězdičkou'
@@ -25,7 +25,7 @@
             ><i class="fa-star" :class="[starred ? 'fas' : 'far']"></i
         ></a> -->
         <a
-            class="btn btn-secondary m-0"
+            class="btn btn-secondary"
             :title="[
                 !fullscreen
                     ? 'Zobrazit na celou obrazovku'
@@ -38,13 +38,13 @@
             ></i
         ></a>
         <!-- <nuxt-link
-            class="btn btn-secondary m-0"
+            class="btn btn-secondary"
             title="Aktivovat režim promítání"
             :to="'/promitat' + song_lyric.public_route"
             ><i class="fas fa-desktop"></i
         ></nuxt-link>
         <a
-            class="btn btn-secondary m-0"
+            class="btn btn-secondary"
             :title="[
                 !columns
                     ? 'Zobrazit text ve sloupcích'
@@ -57,7 +57,7 @@
             ></i
         ></a> -->
         <a
-            class="btn btn-secondary m-0 nosleep"
+            class="btn btn-secondary nosleep"
             :title="[
                 !nosleep
                     ? 'Blokovat zhasínání displeje'
