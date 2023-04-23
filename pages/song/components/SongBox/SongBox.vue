@@ -187,6 +187,7 @@
                                 :class="{
                                     'p-1': true,
                                     'flex-grow-1': true,
+                                    'song-lyrics': true,
                                     'song-lyrics-extended':
                                         chordSharedStore.chordMode == 2
                                 }"

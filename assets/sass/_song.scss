@@ -137,27 +137,15 @@ span.song-part-tag {
     }
 }
 
-.song-part-hidden {
+.song-lyrics:not(.song-lyrics-extended) .song-part-hidden {
     display: none;
 }
 
-.song-lyrics-extended .song-part-hidden {
-    display: block;
-}
-
-.song-part-hidden-text {
+.song-lyrics:not(.song-lyrics-extended) .song-part-hidden-text {
     margin-bottom: 1em;
 
-    .chord {
+    .song-line:not(:first-child) > *:not(.song-part-tag), .song-line:first-child .chord  {
         display: none;
-    }
-}
-
-.song-lyrics-extended .song-part-hidden-text {
-    margin-bottom: 0;
-
-    .chord {
-        display: inline-block;
     }
 }
 
