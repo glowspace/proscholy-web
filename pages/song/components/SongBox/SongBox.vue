@@ -28,17 +28,16 @@
                             <i class="fas fa-edit"></i>
                             <span>Aranže</span>
                         </a>
-                    </div>
-                    <div class="float-right">
                         <a
-                            class="btn"
-                            title="Nahlásit"
-                            :href="
-                                'https://proscholy.atlassian.net/servicedesk/customer/portal/1/group/1/create/19?customfield_10056=' +
-                                    encodeURIComponent(baseUrl + $route.fullPath)
-                            "
+                            v-if="hasTags || song_lyric.songbook_records.length"
+                            class="btn btn-secondary d-md-none"
+                            :class="{ chosen: topMode == 3 }"
+                            @click="topMode = topMode == 3 ? 0 : 3"
                         >
-                            <i class="fas fa-exclamation-triangle p-0"></i>
+                            <i class="fas fa-tags"></i>
+                            <span v-if="hasTags && song_lyric.songbook_records.length">Štítky, zpěvníky</span>
+                            <span v-else-if="hasTags">Štítky</span>
+                            <span v-else>Zpěvníky</span>
                         </a>
                     </div>
 
@@ -128,6 +127,20 @@
                                         </translation-line>
                                     </tbody>
                                 </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- tags -->
+                    <div v-show="topMode === 3">
+                        <div class="overflow-auto toolbox toolbox-u">
+                            <a
+                                class="btn btn-secondary float-right fixed-top position-sticky cross"
+                                @click="topMode = 0"
+                            >
+                                <i class="fas fa-times pr-0"></i>
+                            </a>
+                            <div class="px-2 pb-1" v-if="!$apollo.loading">
+                                <tags :song="song_lyric"></tags>
                             </div>
                         </div>
                     </div>
@@ -341,6 +354,7 @@ import TranslationLine from '~/components/TranslationLine.vue';
 import External from '~/components/External.vue';
 import { getFullName } from '~/components/SongName';
 import WidgetFunding from '~/components/WidgetFunding';
+import Tags from '../Tags';
 
 /**
  * This component renders white box on song detail page.
@@ -359,7 +373,8 @@ export default {
         Transposition,
         TranslationLine,
         SongLyricParts,
-        WidgetFunding
+        WidgetFunding,
+        Tags
     },
 
     data() {
@@ -433,6 +448,20 @@ export default {
             get() {
                 // if SongLyric is an arrangement, then .song property is undefined
                 return this.song_lyric.song && this.song_lyric.song.song_lyrics.length > 1;
+            }
+        },
+
+        hasTags: {
+            get() {
+                return (
+                    this.song_lyric.is_approved_for_liturgy ||
+                    this.song_lyric.bible_refs_src ||
+                    this.song_lyric.tags_liturgy_part.length +
+                        this.song_lyric.tags_generic.length +
+                        this.song_lyric.tags_liturgy_period.length +
+                        this.song_lyric.tags_saints.length +
+                        this.song_lyric.tags_sacred_occasion.length
+                );
             }
         },
 

@@ -2,6 +2,16 @@
     <div class="align-self-end align-self-sm-start d-sm-flex flex-column pb-sm-0 mr-n3 position-relative">
         <a
             class="btn"
+            title="Nahlásit"
+            :href="
+                'https://proscholy.atlassian.net/servicedesk/customer/portal/1/group/1/create/19?customfield_10056=' +
+                    encodeURIComponent(baseUrl + $route.fullPath)
+            "
+        >
+            <i class="fas fa-exclamation-triangle p-0"></i>
+        </a>
+        <a
+            class="btn"
             title="Otevřít v Regenschorim"
             :href="[song_lyric ? regenschoriUrl + song_lyric.public_route : '']"
         >
@@ -40,7 +50,8 @@ export default {
             nosleep: false,
             noSleeper: process.client ? new NoSleep() : null,
             adminUrl: process.env.adminUrl,
-            regenschoriUrl: process.env.regenschoriUrl
+            regenschoriUrl: process.env.regenschoriUrl,
+            baseUrl: process.env.baseUrl
         };
     },
 
