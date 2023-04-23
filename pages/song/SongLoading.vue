@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-lg-9">
                 <div class="card card-lyrics">
-                    <div class="card-header p-1 song-links">
+                    <div class="card-header p-1">
                         <v-skeleton-loader type="button" width="50" class="d-inline-block float-right" />
                     </div>
                     <div class="card-body py-2 pl-3">
