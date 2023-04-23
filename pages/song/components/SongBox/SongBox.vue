@@ -3,7 +3,7 @@
         <div class="col-lg-9">
             <div class="card card-lyrics" id="cardLyrics">
                 <div class="card-header p-1">
-                    <div class="d-inline-block">
+                    <div>
                         <a
                             v-if="scores.length || otherExternals.length"
                             class="btn btn-secondary"
@@ -38,6 +38,16 @@
                             <span v-if="hasTags && song_lyric.songbook_records.length">Štítky, zpěvníky</span>
                             <span v-else-if="hasTags">Štítky</span>
                             <span v-else>Zpěvníky</span>
+                        </a>
+                        <a
+                            class="btn float-right"
+                            title="Nahlásit"
+                            :href="
+                                'https://proscholy.atlassian.net/servicedesk/customer/portal/1/group/1/create/19?customfield_10056=' +
+                                    encodeURIComponent(baseUrl + $route.fullPath)
+                            "
+                        >
+                            <i class="fas fa-exclamation-triangle p-0"></i>
                         </a>
                     </div>
 

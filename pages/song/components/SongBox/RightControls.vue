@@ -2,16 +2,6 @@
     <div class="align-self-end align-self-sm-start d-sm-flex flex-column pb-sm-0 mr-n3 position-relative">
         <a
             class="btn"
-            title="Nahlásit"
-            :href="
-                'https://proscholy.atlassian.net/servicedesk/customer/portal/1/group/1/create/19?customfield_10056=' +
-                    encodeURIComponent(baseUrl + $route.fullPath)
-            "
-        >
-            <i class="fas fa-exclamation-triangle p-0"></i>
-        </a>
-        <a
-            class="btn"
             title="Otevřít v Regenschorim"
             :href="[song_lyric ? regenschoriUrl + song_lyric.public_route : '']"
         >
@@ -74,6 +64,7 @@ export default {
                     function() {
                         return false;
                     };
+
                 if (isFullscreen) {
                     document.cancelFullScreen();
                 } else {
@@ -93,7 +84,9 @@ export default {
         },
 
         fullscreenChanged() {
-            this.fullscreen = !this.fullscreen;
+            if (process.client) {
+                this.fullscreen = document.webkitIsFullScreen || document.mozFullScreen || false;
+            }
         }
     },
 
@@ -103,6 +96,7 @@ export default {
             document.addEventListener('mozfullscreenchange', this.fullscreenChanged);
             document.addEventListener('webkitfullscreenchange', this.fullscreenChanged);
             document.addEventListener('msfullscreenchange', this.fullscreenChanged);
+            this.fullscreenChanged();
         }
     }
 };
