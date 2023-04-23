@@ -335,7 +335,7 @@
                             </div>
                         </div>
                         <!-- control buttons -->
-                        <span v-show="controlsDisplay">
+                        <div>
                             <a
                                 class="btn btn-secondary"
                                 :class="{ chosen: bottomMode === 1 }"
@@ -354,7 +354,7 @@
                                 <span class="d-none d-sm-inline">Nahrávky</span>
                             </a>
                             <div
-                                class="d-inline-block btn-group m-0"
+                                class="d-inline-block btn-group m-0 float-right"
                                 role="group"
                                 :class="{ chosen: autoscroll }"
                                 v-if="scrollable"
@@ -390,25 +390,7 @@
                                     >&plus;</a
                                 >
                             </div>
-                        </span>
-                        <a
-                            class="btn btn-secondary float-right"
-                            :title="[
-                                controlsDisplay
-                                    ? 'Skrýt lišty'
-                                    : 'Zobrazit lišty'
-                            ]"
-                            @click="controlsToggle"
-                        >
-                            <i
-                                class="fas pr-0"
-                                :class="[
-                                    controlsDisplay
-                                        ? 'fa-chevron-right'
-                                        : 'fa-chevron-left'
-                                ]"
-                            ></i>
-                        </a>
+                        </div>
                     </div>
                 </div>
                 <div class="card-footer p-1 song-links">
@@ -430,14 +412,10 @@
                         >
                         <a
                             class="btn btn-secondary"
-                            :href="[
-                                song_lyric
-                                    ? adminUrl +
-                                      '/song/' +
-                                      song_lyric.id +
-                                      '/edit'
-                                    : ''
-                            ]"
+                            v-if="song_lyric"
+                            :href="
+                                adminUrl + '/song/' + song_lyric.id + '/edit'
+                            "
                             >Upravit</a
                         >
                     </div>
