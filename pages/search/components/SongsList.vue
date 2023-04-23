@@ -24,7 +24,7 @@
                     <td>Načítám...</td>
                     <td class="p-1" colspan="5">
                         <a
-                            class="btn btn-secondary float-right m-0"
+                            class="btn btn-secondary float-right"
                             :href="'https://proscholy.atlassian.net/servicedesk/customer/portal/1/group/6/create/20?customfield_10056=' + encodeURIComponent(baseUrl + $route.fullPath)"
                         >
                             Nahlásit
@@ -154,7 +154,7 @@
                             nalezena.</span
                         >
                         <a
-                            class="btn btn-secondary float-right m-0"
+                            class="btn btn-secondary float-right"
                             :href="'https://forms.gle/AYXXxkWtDHQQ13856'"
                         >
                             Přidat píseň

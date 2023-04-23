@@ -26,7 +26,7 @@
             </div>
         </nav>
 
-        <a class="invisible btn btn-secondary mobile-padding-button mb-0">
+        <a class="invisible btn btn-secondary mobile-padding-button">
             <i class="fas fa-search"></i>
         </a>
 
