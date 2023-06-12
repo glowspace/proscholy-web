@@ -15,3 +15,4 @@ services:
     tty: true
     # try to start the nuxt server, in case of error (after docker-compose down or fresh install) do install yarn and build nuxt files
     entrypoint: "sh -c 'yarn && yarn build && pm2-runtime start ecosystem.config.js'"
+    restart: always
