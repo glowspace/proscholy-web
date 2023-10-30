@@ -113,7 +113,7 @@
                     multiple="true"
                 />
                 <user-card
-                    name="Vít Kološr"
+                    name="Vít Kološ"
                     info="celková koordinace projektu, IT"
                     multiple="true"
                 />
