@@ -36,7 +36,7 @@
             Můžete nám napsat na e-mail
             <a href="mailto:redakce@proscholy.cz">redakce@proscholy.cz</a> nebo
             se na nás obrátit telefonicky na
-            <a href="tel:+420734791909">734 791 909</a>.
+            <a href="tel:+420732119769">732 119 769</a>.
         </p>
 
         <p>
@@ -58,7 +58,7 @@
 
             <div class="d-block d-sm-flex flex-wrap">
                 <user-card
-                    name="Michael Dojčár"
+                    name="Vít Kološ"
                     info="celková koordinace projektu, IT"
                 />
                 <user-card
@@ -82,20 +82,22 @@
                 <user-card name="Jana Stuchlíková" info="vedoucí redakce" multiple="true" />
                 <user-card name="Ondřej Múčka" info="Musica Sacra" multiple="true" />
                 <user-card name="Václav Šablatura" info="odborný konzultant" />
-                <user-card name="Filip Kratoš" info="" />
-                <user-card name="Barbora Dojčárová" info="" />
+                <user-card name="Jan Bernard" info="" />
                 <user-card name="Nikola Burešová" info="" />
+                <user-card name="Barbora Dojčárová" info="" />
+                <user-card name="Tereza Halaštová" info="" />
                 <user-card name="Jiří Hon" info="" />
-                <user-card name="Jan Svojanovský" info="" />
                 <user-card name="Marie Ivičičová" info="" />
                 <user-card name="Ondřej Jakubec" info="" />
-                <user-card name="Tereza Halaštová" info="" />
                 <user-card name="Terezie Kološová" info="" />
-                <user-card name="Matěj Kulišťák" info="" />
-                <user-card name="Lada Radmacherová" info="" />
-                <user-card name="Jakub Soukal" info="" />
+                <user-card name="Filip Kratoš" info="" />
+                <user-card name="Jan Straka" info="" />
+                <user-card name="Terezie Suchlová" info="" />
+                <user-card name="Jan Svojanovský" info="" />
                 <user-card name="Monika Šinclová" info="" />
+                <user-card name="František Šůstek" info="" />
                 <user-card name="Terezie Tichá" info="" />
+                <user-card name="sr. Dolorosa Valášková" info="" />
                 <user-card name="Barbora Viktorinová" info="" />
 
             </div>
@@ -111,14 +113,9 @@
                     multiple="true"
                 />
                 <user-card
-                    name="Michael Dojčár"
+                    name="Vít Kološr"
                     info="celková koordinace projektu, IT"
                     multiple="true"
-                />
-                <user-card name="Vít Kološ" info="vývoj webu, návrh rozhraní" />
-                <user-card
-                    name="Josef Řídký"
-                    info="mobilní aplikace pro Android"
                 />
                 <user-card
                     name="Patrik Dobiáš"
@@ -151,10 +148,14 @@
             <h4>Zástupci z institucí</h4>
 
             <div class="d-block d-sm-flex flex-wrap">
-                <user-card name="P. Jan Šlégr" info="Liturgická komise ČBK" />
+                <user-card name="P. Radek Tichý" info="sekretář Liturgická komise ČBK" />
                 <user-card
-                    name="Veronika Lehrlová"
+                    name="P. Roman Kubín"
                     info="Sekce pro mládež ČBK"
+                />
+                <user-card
+                    name="Pavel Hanych"
+                    info="koordinátor nového evangelického zpěvníku"
                 />
             </div>
         </div>
