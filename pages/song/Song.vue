@@ -156,7 +156,7 @@ export default {
 
         notifySongVisit(visit_type) {
             if (this.$route.params.id) {
-                this.$apollo.mutate({
+                this.$apollo?.mutate({
                     mutation: VISIT_SONG,
                     variables: {
                         // todo: detect desktop/mobile on server side
