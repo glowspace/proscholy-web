@@ -1,0 +1,11 @@
+[
+{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+        "namespace": "android_app",
+        "package_name": "jozkar.mladez",
+        "sha256_cert_fingerprints":
+            ["D1:C7:57:07:BB:E5:3A:0B:6C:EE:AF:0E:77:8E:BF:B3:E6:FC:A9:E4:9C:F3:8D:1A:76:D9:2B:93:E9:FF:04:6B"]
+    }
+}
+]
