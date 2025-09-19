@@ -172,6 +172,11 @@
                                     v-html="song_lyric.lilypond_svg"
                                     class="ml-n3 mr-n3 ml-md-3 mr-md-0 mb-3 lilypond-container"
                                 ></div>
+                                <img
+                                    v-if="song_lyric.external_rendered_scores[0]?.public_url"
+                                    :src="song_lyric.external_rendered_scores[0]?.public_url"
+                                    class="external-score d-block mb-3"
+                                />
                                 <span v-if="song_lyric.has_lyrics">
                                     <a
                                         class="btn btn-secondary bg-transparent p-0 mb-2"

@@ -17,6 +17,14 @@
             ><i class="fas" :class="[fullscreen ? 'fa-compress' : 'fa-expand']"></i
         ></a>
         <a
+            class="btn"
+            title="Exportovat text"
+            :href="'data:text/plain;charset=utf-8,' + encodeURIComponent(song_lyric.lyrics_no_chords)"
+            :download="song_lyric.public_route.split('/').at(-1) + '.txt'"
+        >
+            <i class="fas fa-file-export p-0"></i>
+        </a>
+        <a
             class="btn btn-secondary nosleep"
             :title="[!nosleep ? 'Blokovat zhasínání displeje' : 'Přestat blokovat zhasínání displeje']"
             @click="toggleNosleep"
