@@ -250,6 +250,10 @@ a.tag {
     max-width: 500px;
     height: auto;
 }
+
+body[data-dark] .external-score {
+    filter: invert(0.8);
+}
 /*! purgecss end ignore */
 
 .nosleep-caption {
